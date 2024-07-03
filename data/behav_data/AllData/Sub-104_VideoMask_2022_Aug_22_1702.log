@@ -1,0 +1,2144 @@
+0.8259 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+111.7331 	WARNING 	User requested fullscreen with size [1280  800], but screen is actually [1920, 1080]. Using actual size
+112.3261 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x000001A2D9505940>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x000001A2D9571B70>, multiSample=False, name='window1', numSamples=2, pos=[0.0, 0.0], screen=-1, size=array([1920, 1080]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+112.3269 	EXP 	window1: mouseVisible = True
+112.3270 	EXP 	window1: recordFrameIntervals = False
+112.4082 	EXP 	window1: recordFrameIntervals = True
+112.5003 	EXP 	window1: recordFrameIntervals = False
+112.6653 	EXP 	window1: mouseVisible = False
+112.6989 	EXP 	Created text_wait = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.06, italic=False, languageStyle='LTR', name='text_wait', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='Warten auf Scanner...', units='height', win=Window(...), wrapWidth=1)
+129.5344 	DATA 	Keypress: a
+129.5752 	EXP 	Created text_intro = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.06, italic=False, languageStyle='LTR', name='text_intro', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=500)
+129.5795 	EXP 	Created text_probe = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.06, italic=False, languageStyle='LTR', name='text_probe', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='Es geht los mit einer Proberunde', units='height', win=Window(...), wrapWidth=500)
+129.5811 	EXP 	Created polygon_ISI = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0.0, fillColor=array([0, 0, 0]), fillColorSpace='rgb', fillRGB=UNKNOWN, interpolate=True, lineColor=array([0, 0, 0]), lineColorSpace='rgb', lineRGB=UNKNOWN, lineWidth=1, name='polygon_ISI', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+129.5820 	EXP 	Created polygon = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=UNKNOWN, interpolate=True, lineColor=array([1, 1, 1]), lineColorSpace='rgb', lineRGB=UNKNOWN, lineWidth=1, name='polygon', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+129.5848 	EXP 	Created primerImage = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, autoLog=True, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=-4.0, flipHoriz=False, flipVert=False, image='sin', interpolate=True, mask=None, maskParams=None, name='primerImage', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.4  , 0.484]), texRes=512, units='height', win=Window(...))
+129.5906 	EXP 	Created response = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=-5.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.06, italic=False, languageStyle='LTR', name='response', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=500)
+129.5951 	EXP 	Created slider_Text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.06, italic=False, languageStyle='LTR', name='slider_Text', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+129.5986 	EXP 	window1: mouseVisible = True
+129.6017 	EXP 	Created slider_ex = Slider(__class__=<class 'psychopy.visual.slider.Slider'>, autoDraw=False, autoLog=True, borderColor=None, color=None, colorSpace='rgb', depth=-1, fillColor=None, flip=False, font='HelveticaBold', granularity=0, labelHeight=0.05, labelWrapWidth=None, labels=None, name='slider_ex', opacity=None, pos=(0, -0.4), readOnly=False, self=UNKNOWN, size=(1.0, 0.1), style=method-wrapper(...), styleTweaks=method-wrapper(...), ticks=array([1, 2, 3, 4, 5, 6, 7, 8, 9]), units='height', win=Window(...))
+129.6072 	EXP 	Created text_start = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.06, italic=False, languageStyle='LTR', name='text_start', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='Jetzt geht es los...', units='height', win=Window(...), wrapWidth=1)
+129.6081 	EXP 	Created polygon_ISI = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0.0, fillColor=array([0, 0, 0]), fillColorSpace='rgb', fillRGB=UNKNOWN, interpolate=True, lineColor=array([0, 0, 0]), lineColorSpace='rgb', lineRGB=UNKNOWN, lineWidth=1, name='polygon_ISI', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+129.6090 	EXP 	Created polygon = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=UNKNOWN, interpolate=True, lineColor=array([1, 1, 1]), lineColorSpace='rgb', lineRGB=UNKNOWN, lineWidth=1, name='polygon', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+129.6110 	EXP 	Created primerImage = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, autoLog=True, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=-4.0, flipHoriz=False, flipVert=False, image='sin', interpolate=True, mask=None, maskParams=None, name='primerImage', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.4  , 0.484]), texRes=512, units='height', win=Window(...))
+129.6150 	EXP 	Created response = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=-5.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.06, italic=False, languageStyle='LTR', name='response', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=500)
+129.6195 	EXP 	Created text_slider = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.06, italic=False, languageStyle='LTR', name='text_slider', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+129.6210 	EXP 	window1: mouseVisible = True
+129.6238 	EXP 	Created slider_stud = Slider(__class__=<class 'psychopy.visual.slider.Slider'>, autoDraw=False, autoLog=True, borderColor=None, color=None, colorSpace='rgb', depth=-1, fillColor=None, flip=False, font='HelveticaBold', granularity=0, labelHeight=0.05, labelWrapWidth=None, labels=None, name='slider_stud', opacity=None, pos=(0, -0.4), readOnly=False, self=UNKNOWN, size=(1.0, 0.1), style=method-wrapper(...), styleTweaks=method-wrapper(...), ticks=array([1, 2, 3, 4, 5, 6, 7, 8, 9]), units='height', win=Window(...))
+129.6281 	EXP 	Created text_ende = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoLog=True, bold=False, color=array([1, 1, 1]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.06, italic=False, languageStyle='LTR', name='text_ende', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='Das wars!\nVielen Dank!', units='height', win=Window(...), wrapWidth=1)
+129.6402 	EXP 	slider_ex: autoLog = True
+129.6402 	EXP 	slider_ex: markerPos = None
+129.6402 	EXP 	slider_ex: rating = None
+129.6402 	EXP 	slider_ex: markerPos = None
+129.6402 	EXP 	slider_ex: contrast = 1.0
+129.6402 	EXP 	slider_ex: autoLog = True
+129.6402 	EXP 	slider_ex: styleTweaks = []
+129.6402 	EXP 	slider_ex: styleTweaks = ['w', 'h', 'i', 't', 'e', 'O', 'n', 'B', 'l', 'a', 'c', 'k']
+129.6402 	EXP 	slider_ex: style = ['rating', 'whiteOnBlack']
+129.6402 	EXP 	slider_ex: styleTweaks = ['w', 'h', 'i', 't', 'e', 'O', 'n', 'B', 'l', 'a', 'c', 'k']
+129.6402 	EXP 	slider_stud: autoLog = True
+129.6402 	EXP 	slider_stud: markerPos = None
+129.6402 	EXP 	slider_stud: rating = None
+129.6402 	EXP 	slider_stud: markerPos = None
+129.6402 	EXP 	slider_stud: contrast = 1.0
+129.6402 	EXP 	slider_stud: autoLog = True
+129.6402 	EXP 	slider_stud: styleTweaks = []
+129.6402 	EXP 	slider_stud: styleTweaks = ['w', 'h', 'i', 't', 'e', 'O', 'n', 'B', 'l', 'a', 'c', 'k']
+129.6402 	EXP 	slider_stud: style = ['rating', 'whiteOnBlack']
+129.6402 	EXP 	slider_stud: styleTweaks = ['w', 'h', 'i', 't', 'e', 'O', 'n', 'B', 'l', 'a', 'c', 'k']
+129.6402 	EXP 	text_intro: autoDraw = True
+131.5356 	DATA 	Keypress: a
+131.6403 	EXP 	text_intro: autoDraw = False
+131.6403 	EXP 	text_probe: autoDraw = True
+133.5356 	DATA 	Keypress: a
+133.6673 	EXP 	Imported Datasheet_VideoMask_Example_rand.xlsx as conditions, 2 conditions, 12 params
+133.6677 	EXP 	Created sequence: sequential, trialTypes=2, nReps=1, seed=None
+133.6683 	EXP 	New trial (rep=0, index=0): {'primePerson': 1111, 'primeGender': 'm', 'prime': '1111_m_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9, 'target': 'example_30.4ns.avi', 'targetEmotion': 'neutral', 'corrAnsTar': 7, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 170.0, 'JitterTime': 189.5874364012288}
+133.6818 	EXP 	text_intro: autoDraw = False
+133.6818 	EXP 	text_probe: autoDraw = False
+133.6818 	EXP 	polygon_ISI: autoDraw = True
+135.4613 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='example_30.4ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+135.7736 	EXP 	polygon_ISI: autoDraw = False
+135.7736 	EXP 	polygon_ISI: autoDraw = False
+135.7736 	EXP 	movie: autoLog = True
+135.7736 	EXP 	movie: movie = 'example_30.4ns.avi'
+135.7736 	EXP 	movie: size = array([1280.,  720.])
+135.7736 	EXP 	movie: ori = 0
+135.7736 	EXP 	primerImage: image = '1111_m_m_h_a.jpg'
+135.7736 	EXP 	polygon: autoDraw = True
+136.0982 	EXP 	polygon: autoDraw = False
+136.0982 	EXP 	movie: autoDraw = True
+137.2566 	EXP 	primerImage: autoDraw = True
+137.2733 	EXP 	primerImage: autoDraw = False
+141.5569 	EXP 	Set movie finished
+141.5649 	EXP 	response: autoDraw = True
+143.1147 	EXP 	response: autoDraw = False
+143.1147 	EXP 	polygon: autoDraw = False
+143.1147 	EXP 	movie: autoDraw = False
+143.1147 	EXP 	primerImage: autoDraw = False
+143.1147 	EXP 	response: autoDraw = False
+143.1147 	EXP 	slider_ex: markerPos = None
+143.1147 	EXP 	slider_ex: markerPos = None
+143.1147 	EXP 	slider_ex: rating = None
+143.1147 	EXP 	slider_ex: markerPos = None
+143.1147 	EXP 	slider_ex: markerPos = None
+143.1147 	EXP 	slider_ex: rating = None
+143.1147 	EXP 	slider_ex: markerPos = 5
+143.1147 	EXP 	slider_Text: autoDraw = True
+143.1147 	EXP 	slider_ex: autoDraw = True
+146.1280 	EXP 	New trial (rep=0, index=1): {'primePerson': 1113, 'primeGender': 'f', 'prime': '1113_y_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7, 'target': 'example_30.3ns.avi', 'targetEmotion': 'neutral', 'corrAnsTar': 7, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 170.0, 'JitterTime': 229.02432995836998}
+146.1312 	EXP 	slider_Text: autoDraw = False
+146.1312 	EXP 	slider_ex: autoDraw = False
+146.1312 	EXP 	polygon_ISI: autoDraw = True
+148.0418 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='example_30.3ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+148.2478 	EXP 	polygon_ISI: autoDraw = False
+148.2478 	EXP 	polygon_ISI: autoDraw = False
+148.2478 	EXP 	movie: autoLog = True
+148.2478 	EXP 	movie: movie = 'example_30.3ns.avi'
+148.2478 	EXP 	movie: size = array([1280.,  720.])
+148.2478 	EXP 	movie: ori = 0
+148.2478 	EXP 	primerImage: image = '1113_y_f_s_a.jpg'
+148.2478 	EXP 	polygon: autoDraw = True
+148.5645 	EXP 	polygon: autoDraw = False
+148.5645 	EXP 	movie: autoDraw = True
+149.7062 	EXP 	primerImage: autoDraw = True
+149.7229 	EXP 	primerImage: autoDraw = False
+151.6893 	EXP 	Set movie finished
+151.6979 	EXP 	response: autoDraw = True
+153.2478 	EXP 	response: autoDraw = False
+153.2478 	EXP 	polygon: autoDraw = False
+153.2478 	EXP 	movie: autoDraw = False
+153.2478 	EXP 	primerImage: autoDraw = False
+153.2478 	EXP 	response: autoDraw = False
+153.2478 	EXP 	slider_ex: markerPos = None
+153.2478 	EXP 	slider_ex: markerPos = None
+153.2478 	EXP 	slider_ex: rating = None
+153.2478 	EXP 	slider_ex: markerPos = None
+153.2478 	EXP 	slider_ex: markerPos = None
+153.2478 	EXP 	slider_ex: rating = None
+153.2478 	EXP 	slider_ex: markerPos = 5
+153.2478 	EXP 	slider_Text: autoDraw = True
+153.2478 	EXP 	slider_ex: autoDraw = True
+156.2560 	EXP 	slider_Text: autoDraw = False
+156.2560 	EXP 	slider_ex: autoDraw = False
+156.2560 	EXP 	text_start: autoDraw = True
+157.2747 	EXP 	Imported Datasheet_VideoMask_rand.xlsx as conditions, 60 conditions, 13 params
+157.2750 	EXP 	Created sequence: sequential, trialTypes=60, nReps=1, seed=None
+157.2753 	EXP 	New trial (rep=0, index=0): {'primePerson': 9.0, 'primeGender': 'f', 'prime': '019_m_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_115.1.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 128.09063432376465, 'Condition': 'h_s'}
+157.2810 	EXP 	text_start: autoDraw = False
+157.2810 	EXP 	polygon_ISI: autoDraw = True
+158.3511 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_115.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+158.5641 	EXP 	polygon_ISI: autoDraw = False
+158.5641 	EXP 	polygon_ISI: autoDraw = False
+158.5641 	EXP 	movie: autoLog = True
+158.5641 	EXP 	movie: movie = 'sad_115.1.wmv'
+158.5641 	EXP 	movie: size = array([1280.,  720.])
+158.5641 	EXP 	movie: ori = 0
+158.5641 	EXP 	primerImage: image = '019_m_f_h_a.jpg'
+158.5641 	EXP 	polygon: autoDraw = True
+158.8808 	EXP 	polygon: autoDraw = False
+158.8808 	EXP 	movie: autoDraw = True
+160.0141 	EXP 	primerImage: autoDraw = True
+160.0309 	EXP 	primerImage: autoDraw = False
+162.0058 	EXP 	Set movie finished
+162.0142 	EXP 	response: autoDraw = True
+163.5645 	EXP 	response: autoDraw = False
+163.5645 	EXP 	polygon: autoDraw = False
+163.5645 	EXP 	movie: autoDraw = False
+163.5645 	EXP 	primerImage: autoDraw = False
+163.5645 	EXP 	response: autoDraw = False
+163.5645 	EXP 	slider_stud: markerPos = None
+163.5645 	EXP 	slider_stud: markerPos = None
+163.5645 	EXP 	slider_stud: rating = None
+163.5645 	EXP 	slider_stud: markerPos = None
+163.5645 	EXP 	slider_stud: markerPos = None
+163.5645 	EXP 	slider_stud: rating = None
+163.5645 	EXP 	slider_stud: markerPos = 5
+163.5645 	EXP 	text_slider: autoDraw = True
+163.5645 	EXP 	slider_stud: autoDraw = True
+166.5786 	EXP 	New trial (rep=0, index=1): {'primePerson': 3.0, 'primeGender': 'm', 'prime': '033_o_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_94.2ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 182.29120173647655, 'Condition': 's_s'}
+166.5890 	EXP 	text_slider: autoDraw = False
+166.5890 	EXP 	slider_stud: autoDraw = False
+166.5890 	EXP 	polygon_ISI: autoDraw = True
+168.1080 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_94.2ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+168.3222 	EXP 	polygon_ISI: autoDraw = False
+168.3222 	EXP 	polygon_ISI: autoDraw = False
+168.3222 	EXP 	movie: autoLog = True
+168.3222 	EXP 	movie: movie = 'sad_94.2ns.avi'
+168.3222 	EXP 	movie: size = array([1280.,  720.])
+168.3222 	EXP 	movie: ori = 0
+168.3222 	EXP 	primerImage: image = '033_o_m_s_a.jpg'
+168.3222 	EXP 	polygon: autoDraw = True
+168.6388 	EXP 	polygon: autoDraw = False
+168.6388 	EXP 	movie: autoDraw = True
+169.7972 	EXP 	primerImage: autoDraw = True
+169.8145 	EXP 	primerImage: autoDraw = False
+172.4559 	EXP 	Set movie finished
+172.4638 	EXP 	response: autoDraw = True
+174.0302 	EXP 	response: autoDraw = False
+174.0302 	EXP 	polygon: autoDraw = False
+174.0302 	EXP 	movie: autoDraw = False
+174.0302 	EXP 	primerImage: autoDraw = False
+174.0302 	EXP 	response: autoDraw = False
+174.0302 	EXP 	slider_stud: markerPos = None
+174.0302 	EXP 	slider_stud: markerPos = None
+174.0302 	EXP 	slider_stud: rating = None
+174.0302 	EXP 	slider_stud: markerPos = None
+174.0302 	EXP 	slider_stud: markerPos = None
+174.0302 	EXP 	slider_stud: rating = None
+174.0302 	EXP 	slider_stud: markerPos = 5
+174.0302 	EXP 	text_slider: autoDraw = True
+174.0302 	EXP 	slider_stud: autoDraw = True
+174.0302 	EXP 	slider_stud: markerPos = 4
+177.0160 	EXP 	New trial (rep=0, index=2): {'primePerson': 8.0, 'primeGender': 'm', 'prime': '008_y_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_26.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 155.9437854594882, 'Condition': 'h_h'}
+177.0221 	EXP 	text_slider: autoDraw = False
+177.0221 	EXP 	slider_stud: autoDraw = False
+177.0221 	EXP 	polygon_ISI: autoDraw = True
+178.3167 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_26.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+178.5134 	EXP 	polygon_ISI: autoDraw = False
+178.5134 	EXP 	polygon_ISI: autoDraw = False
+178.5134 	EXP 	movie: autoLog = True
+178.5134 	EXP 	movie: movie = 'happy_26.1ns.avi'
+178.5134 	EXP 	movie: size = array([1280.,  720.])
+178.5134 	EXP 	movie: ori = 0
+178.5134 	EXP 	primerImage: image = '008_y_m_h_a.jpg'
+178.5134 	EXP 	polygon: autoDraw = True
+178.8302 	EXP 	polygon: autoDraw = False
+178.8302 	EXP 	movie: autoDraw = True
+179.9803 	EXP 	primerImage: autoDraw = True
+179.9969 	EXP 	primerImage: autoDraw = False
+181.9468 	EXP 	Set movie finished
+181.9552 	EXP 	response: autoDraw = True
+183.5051 	EXP 	response: autoDraw = False
+183.5051 	EXP 	polygon: autoDraw = False
+183.5051 	EXP 	movie: autoDraw = False
+183.5051 	EXP 	primerImage: autoDraw = False
+183.5051 	EXP 	response: autoDraw = False
+183.5051 	EXP 	slider_stud: markerPos = None
+183.5051 	EXP 	slider_stud: markerPos = None
+183.5051 	EXP 	slider_stud: rating = None
+183.5051 	EXP 	slider_stud: markerPos = None
+183.5051 	EXP 	slider_stud: markerPos = None
+183.5051 	EXP 	slider_stud: rating = None
+183.5051 	EXP 	slider_stud: markerPos = 5
+183.5051 	EXP 	text_slider: autoDraw = True
+183.5051 	EXP 	slider_stud: autoDraw = True
+184.0968 	EXP 	slider_stud: markerPos = 4
+186.4978 	EXP 	New trial (rep=0, index=3): {'primePerson': 0.0, 'primeGender': 'f', 'prime': '040_y_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_138.1.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 133.99071306426532, 'Condition': 'h_s'}
+186.5057 	EXP 	text_slider: autoDraw = False
+186.5057 	EXP 	slider_stud: autoDraw = False
+186.5057 	EXP 	polygon_ISI: autoDraw = True
+187.6164 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_138.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+187.8466 	EXP 	polygon_ISI: autoDraw = False
+187.8466 	EXP 	polygon_ISI: autoDraw = False
+187.8466 	EXP 	movie: autoLog = True
+187.8466 	EXP 	movie: movie = 'sad_138.1.wmv'
+187.8466 	EXP 	movie: size = array([1280.,  720.])
+187.8466 	EXP 	movie: ori = 0
+187.8466 	EXP 	primerImage: image = '040_y_f_h_a.jpg'
+187.8466 	EXP 	polygon: autoDraw = True
+188.1633 	EXP 	polygon: autoDraw = False
+188.1633 	EXP 	movie: autoDraw = True
+189.3298 	EXP 	primerImage: autoDraw = True
+189.3466 	EXP 	primerImage: autoDraw = False
+191.2881 	EXP 	Set movie finished
+191.2965 	EXP 	response: autoDraw = True
+192.8465 	EXP 	response: autoDraw = False
+192.8465 	EXP 	polygon: autoDraw = False
+192.8465 	EXP 	movie: autoDraw = False
+192.8465 	EXP 	primerImage: autoDraw = False
+192.8465 	EXP 	response: autoDraw = False
+192.8465 	EXP 	slider_stud: markerPos = None
+192.8465 	EXP 	slider_stud: markerPos = None
+192.8465 	EXP 	slider_stud: rating = None
+192.8465 	EXP 	slider_stud: markerPos = None
+192.8465 	EXP 	slider_stud: markerPos = None
+192.8465 	EXP 	slider_stud: rating = None
+192.8465 	EXP 	slider_stud: markerPos = 5
+192.8465 	EXP 	text_slider: autoDraw = True
+192.8465 	EXP 	slider_stud: autoDraw = True
+195.8600 	EXP 	New trial (rep=0, index=4): {'primePerson': 8.0, 'primeGender': 'f', 'prime': '028_y_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_64.2ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 229.88540597086478, 'Condition': 's_s'}
+195.8714 	EXP 	text_slider: autoDraw = False
+195.8714 	EXP 	slider_stud: autoDraw = False
+195.8714 	EXP 	polygon_ISI: autoDraw = True
+197.7819 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_64.2ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+198.0880 	EXP 	polygon_ISI: autoDraw = False
+198.0880 	EXP 	polygon_ISI: autoDraw = False
+198.0880 	EXP 	movie: autoLog = True
+198.0880 	EXP 	movie: movie = 'sad_64.2ns.avi'
+198.0880 	EXP 	movie: size = array([1280.,  720.])
+198.0880 	EXP 	movie: ori = 0
+198.0880 	EXP 	primerImage: image = '028_y_f_s_a.jpg'
+198.0880 	EXP 	polygon: autoDraw = True
+198.4046 	EXP 	polygon: autoDraw = False
+198.4046 	EXP 	movie: autoDraw = True
+199.5880 	EXP 	primerImage: autoDraw = True
+199.6046 	EXP 	primerImage: autoDraw = False
+210.5296 	EXP 	Set movie finished
+210.5376 	EXP 	response: autoDraw = True
+212.0875 	EXP 	response: autoDraw = False
+212.0875 	EXP 	polygon: autoDraw = False
+212.0875 	EXP 	movie: autoDraw = False
+212.0875 	EXP 	primerImage: autoDraw = False
+212.0875 	EXP 	response: autoDraw = False
+212.0875 	EXP 	slider_stud: markerPos = None
+212.0875 	EXP 	slider_stud: markerPos = None
+212.0875 	EXP 	slider_stud: rating = None
+212.0875 	EXP 	slider_stud: markerPos = None
+212.0875 	EXP 	slider_stud: markerPos = None
+212.0875 	EXP 	slider_stud: rating = None
+212.0875 	EXP 	slider_stud: markerPos = 5
+212.0875 	EXP 	text_slider: autoDraw = True
+212.0875 	EXP 	slider_stud: autoDraw = True
+215.1008 	EXP 	New trial (rep=0, index=5): {'primePerson': 7.0, 'primeGender': 'm', 'prime': '027_o_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_10.4ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 185.20129417468752, 'Condition': 's_s'}
+215.1039 	EXP 	text_slider: autoDraw = False
+215.1039 	EXP 	slider_stud: autoDraw = False
+215.1039 	EXP 	polygon_ISI: autoDraw = True
+216.6481 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_10.4ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+216.8707 	EXP 	polygon_ISI: autoDraw = False
+216.8707 	EXP 	polygon_ISI: autoDraw = False
+216.8707 	EXP 	movie: autoLog = True
+216.8707 	EXP 	movie: movie = 'sad_10.4ns.avi'
+216.8707 	EXP 	movie: size = array([1280.,  720.])
+216.8707 	EXP 	movie: ori = 0
+216.8707 	EXP 	primerImage: image = '027_o_m_s_a.jpg'
+216.8707 	EXP 	polygon: autoDraw = True
+217.1872 	EXP 	polygon: autoDraw = False
+217.1872 	EXP 	movie: autoDraw = True
+218.3621 	EXP 	primerImage: autoDraw = True
+218.3788 	EXP 	primerImage: autoDraw = False
+221.4788 	EXP 	Set movie finished
+221.4872 	EXP 	response: autoDraw = True
+223.0372 	EXP 	response: autoDraw = False
+223.0372 	EXP 	polygon: autoDraw = False
+223.0372 	EXP 	movie: autoDraw = False
+223.0372 	EXP 	primerImage: autoDraw = False
+223.0372 	EXP 	response: autoDraw = False
+223.0372 	EXP 	slider_stud: markerPos = None
+223.0372 	EXP 	slider_stud: markerPos = None
+223.0372 	EXP 	slider_stud: rating = None
+223.0372 	EXP 	slider_stud: markerPos = None
+223.0372 	EXP 	slider_stud: markerPos = None
+223.0372 	EXP 	slider_stud: rating = None
+223.0372 	EXP 	slider_stud: markerPos = 5
+223.0372 	EXP 	text_slider: autoDraw = True
+223.0372 	EXP 	slider_stud: autoDraw = True
+223.2871 	EXP 	slider_stud: markerPos = 4
+223.5121 	EXP 	slider_stud: markerPos = 3
+223.6871 	EXP 	slider_stud: markerPos = 2
+226.0395 	EXP 	New trial (rep=0, index=6): {'primePerson': 2.0, 'primeGender': 'f', 'prime': '012_o_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_7.5ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 220.27842655424388, 'Condition': 's_s'}
+226.0455 	EXP 	text_slider: autoDraw = False
+226.0455 	EXP 	slider_stud: autoDraw = False
+226.0455 	EXP 	polygon_ISI: autoDraw = True
+227.8817 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_7.5ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+228.0785 	EXP 	polygon_ISI: autoDraw = False
+228.0785 	EXP 	polygon_ISI: autoDraw = False
+228.0785 	EXP 	movie: autoLog = True
+228.0785 	EXP 	movie: movie = 'sad_7.5ns.avi'
+228.0785 	EXP 	movie: size = array([1280.,  720.])
+228.0785 	EXP 	movie: ori = 0
+228.0785 	EXP 	primerImage: image = '012_o_f_s_a.jpg'
+228.0785 	EXP 	polygon: autoDraw = True
+228.3953 	EXP 	polygon: autoDraw = False
+228.3953 	EXP 	movie: autoDraw = True
+229.6293 	EXP 	primerImage: autoDraw = True
+229.6539 	EXP 	primerImage: autoDraw = False
+232.3120 	EXP 	Set movie finished
+232.3204 	EXP 	response: autoDraw = True
+234.2702 	EXP 	response: autoDraw = False
+234.2702 	EXP 	polygon: autoDraw = False
+234.2702 	EXP 	movie: autoDraw = False
+234.2702 	EXP 	primerImage: autoDraw = False
+234.2702 	EXP 	response: autoDraw = False
+234.2702 	EXP 	slider_stud: markerPos = None
+234.2702 	EXP 	slider_stud: markerPos = None
+234.2702 	EXP 	slider_stud: rating = None
+234.2702 	EXP 	slider_stud: markerPos = None
+234.2702 	EXP 	slider_stud: markerPos = None
+234.2702 	EXP 	slider_stud: rating = None
+234.2702 	EXP 	slider_stud: markerPos = 5
+234.2702 	EXP 	text_slider: autoDraw = True
+234.2702 	EXP 	slider_stud: autoDraw = True
+237.2829 	EXP 	New trial (rep=0, index=7): {'primePerson': 2.0, 'primeGender': 'f', 'prime': '012_o_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_27.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 146.44967055810616, 'Condition': 'h_h'}
+237.2866 	EXP 	text_slider: autoDraw = False
+237.2866 	EXP 	slider_stud: autoDraw = False
+237.2866 	EXP 	polygon_ISI: autoDraw = True
+238.5062 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_27.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+238.7115 	EXP 	polygon_ISI: autoDraw = False
+238.7115 	EXP 	polygon_ISI: autoDraw = False
+238.7115 	EXP 	movie: autoLog = True
+238.7115 	EXP 	movie: movie = 'happy_27.1ns.avi'
+238.7115 	EXP 	movie: size = array([1280.,  720.])
+238.7115 	EXP 	movie: ori = 0
+238.7115 	EXP 	primerImage: image = '012_o_f_h_a.jpg'
+238.7115 	EXP 	polygon: autoDraw = True
+239.0282 	EXP 	polygon: autoDraw = False
+239.0282 	EXP 	movie: autoDraw = True
+240.2033 	EXP 	primerImage: autoDraw = True
+240.2200 	EXP 	primerImage: autoDraw = False
+242.6448 	EXP 	Set movie finished
+242.6532 	EXP 	response: autoDraw = True
+244.2115 	EXP 	response: autoDraw = False
+244.2115 	EXP 	polygon: autoDraw = False
+244.2115 	EXP 	movie: autoDraw = False
+244.2115 	EXP 	primerImage: autoDraw = False
+244.2115 	EXP 	response: autoDraw = False
+244.2115 	EXP 	slider_stud: markerPos = None
+244.2115 	EXP 	slider_stud: markerPos = None
+244.2115 	EXP 	slider_stud: rating = None
+244.2115 	EXP 	slider_stud: markerPos = None
+244.2115 	EXP 	slider_stud: markerPos = None
+244.2115 	EXP 	slider_stud: rating = None
+244.2115 	EXP 	slider_stud: markerPos = 5
+244.2115 	EXP 	text_slider: autoDraw = True
+244.2115 	EXP 	slider_stud: autoDraw = True
+244.7615 	EXP 	slider_stud: markerPos = 4
+247.2042 	EXP 	New trial (rep=0, index=8): {'primePerson': 8.0, 'primeGender': 'f', 'prime': '028_y_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_119.1.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 148.71526953572538, 'Condition': 'h_s'}
+247.2115 	EXP 	text_slider: autoDraw = False
+247.2115 	EXP 	slider_stud: autoDraw = False
+247.2115 	EXP 	polygon_ISI: autoDraw = True
+248.4478 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_119.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+248.6617 	EXP 	polygon_ISI: autoDraw = False
+248.6617 	EXP 	polygon_ISI: autoDraw = False
+248.6617 	EXP 	movie: autoLog = True
+248.6617 	EXP 	movie: movie = 'sad_119.1.wmv'
+248.6617 	EXP 	movie: size = array([1280.,  720.])
+248.6617 	EXP 	movie: ori = 0
+248.6617 	EXP 	primerImage: image = '028_y_f_h_a.jpg'
+248.6617 	EXP 	polygon: autoDraw = True
+248.9778 	EXP 	polygon: autoDraw = False
+248.9778 	EXP 	movie: autoDraw = True
+250.1112 	EXP 	primerImage: autoDraw = True
+250.1279 	EXP 	primerImage: autoDraw = False
+252.1695 	EXP 	Set movie finished
+252.1779 	EXP 	response: autoDraw = True
+253.7276 	EXP 	response: autoDraw = False
+253.7276 	EXP 	polygon: autoDraw = False
+253.7276 	EXP 	movie: autoDraw = False
+253.7276 	EXP 	primerImage: autoDraw = False
+253.7276 	EXP 	response: autoDraw = False
+253.7276 	EXP 	slider_stud: markerPos = None
+253.7276 	EXP 	slider_stud: markerPos = None
+253.7276 	EXP 	slider_stud: rating = None
+253.7276 	EXP 	slider_stud: markerPos = None
+253.7276 	EXP 	slider_stud: markerPos = None
+253.7276 	EXP 	slider_stud: rating = None
+253.7276 	EXP 	slider_stud: markerPos = 5
+253.7276 	EXP 	text_slider: autoDraw = True
+253.7276 	EXP 	slider_stud: autoDraw = True
+256.7409 	EXP 	New trial (rep=0, index=9): {'primePerson': 6.0, 'primeGender': 'm', 'prime': '016_y_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_60.4ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 126.02367393611817, 'Condition': 's_h'}
+256.7443 	EXP 	text_slider: autoDraw = False
+256.7443 	EXP 	slider_stud: autoDraw = False
+256.7443 	EXP 	polygon_ISI: autoDraw = True
+257.7972 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_60.4ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+258.0444 	EXP 	polygon_ISI: autoDraw = False
+258.0444 	EXP 	polygon_ISI: autoDraw = False
+258.0444 	EXP 	movie: autoLog = True
+258.0444 	EXP 	movie: movie = 'happy_60.4ns.avi'
+258.0444 	EXP 	movie: size = array([1280.,  720.])
+258.0444 	EXP 	movie: ori = 0
+258.0444 	EXP 	primerImage: image = '016_y_m_s_a.jpg'
+258.0444 	EXP 	polygon: autoDraw = True
+258.3610 	EXP 	polygon: autoDraw = False
+258.3610 	EXP 	movie: autoDraw = True
+259.5693 	EXP 	primerImage: autoDraw = True
+259.5859 	EXP 	primerImage: autoDraw = False
+265.2775 	EXP 	Set movie finished
+265.2857 	EXP 	response: autoDraw = True
+266.8357 	EXP 	response: autoDraw = False
+266.8357 	EXP 	polygon: autoDraw = False
+266.8357 	EXP 	movie: autoDraw = False
+266.8357 	EXP 	primerImage: autoDraw = False
+266.8357 	EXP 	response: autoDraw = False
+266.8357 	EXP 	slider_stud: markerPos = None
+266.8357 	EXP 	slider_stud: markerPos = None
+266.8357 	EXP 	slider_stud: rating = None
+266.8357 	EXP 	slider_stud: markerPos = None
+266.8357 	EXP 	slider_stud: markerPos = None
+266.8357 	EXP 	slider_stud: rating = None
+266.8357 	EXP 	slider_stud: markerPos = 5
+266.8357 	EXP 	text_slider: autoDraw = True
+266.8357 	EXP 	slider_stud: autoDraw = True
+269.8491 	EXP 	New trial (rep=0, index=10): {'primePerson': 9.0, 'primeGender': 'f', 'prime': '019_m_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_8.4ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 171.6633093155257, 'Condition': 's_s'}
+269.8606 	EXP 	text_slider: autoDraw = False
+269.8606 	EXP 	slider_stud: autoDraw = False
+269.8606 	EXP 	polygon_ISI: autoDraw = True
+271.2887 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_8.4ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+271.5439 	EXP 	polygon_ISI: autoDraw = False
+271.5439 	EXP 	polygon_ISI: autoDraw = False
+271.5439 	EXP 	movie: autoLog = True
+271.5439 	EXP 	movie: movie = 'sad_8.4ns.avi'
+271.5439 	EXP 	movie: size = array([1280.,  720.])
+271.5439 	EXP 	movie: ori = 0
+271.5439 	EXP 	primerImage: image = '019_m_f_s_a.jpg'
+271.5439 	EXP 	polygon: autoDraw = True
+271.8605 	EXP 	polygon: autoDraw = False
+271.8605 	EXP 	movie: autoDraw = True
+273.0361 	EXP 	primerImage: autoDraw = True
+273.0605 	EXP 	primerImage: autoDraw = False
+281.1191 	EXP 	Set movie finished
+281.1270 	EXP 	response: autoDraw = True
+282.6769 	EXP 	response: autoDraw = False
+282.6769 	EXP 	polygon: autoDraw = False
+282.6769 	EXP 	movie: autoDraw = False
+282.6769 	EXP 	primerImage: autoDraw = False
+282.6769 	EXP 	response: autoDraw = False
+282.6769 	EXP 	slider_stud: markerPos = None
+282.6769 	EXP 	slider_stud: markerPos = None
+282.6769 	EXP 	slider_stud: rating = None
+282.6769 	EXP 	slider_stud: markerPos = None
+282.6769 	EXP 	slider_stud: markerPos = None
+282.6769 	EXP 	slider_stud: rating = None
+282.6769 	EXP 	slider_stud: markerPos = 5
+282.6769 	EXP 	text_slider: autoDraw = True
+282.6769 	EXP 	slider_stud: autoDraw = True
+283.0602 	EXP 	slider_stud: markerPos = 4
+285.6696 	EXP 	New trial (rep=0, index=11): {'primePerson': 4.0, 'primeGender': 'm', 'prime': '004_o_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_1.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 203.50057144619865, 'Condition': 'h_h'}
+285.6767 	EXP 	text_slider: autoDraw = False
+285.6767 	EXP 	slider_stud: autoDraw = False
+285.6767 	EXP 	polygon_ISI: autoDraw = True
+287.3713 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_1.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+287.6767 	EXP 	polygon_ISI: autoDraw = False
+287.6767 	EXP 	polygon_ISI: autoDraw = False
+287.6767 	EXP 	movie: autoLog = True
+287.6767 	EXP 	movie: movie = 'happy_1.1ns.avi'
+287.6767 	EXP 	movie: size = array([1280.,  720.])
+287.6767 	EXP 	movie: ori = 0
+287.6767 	EXP 	primerImage: image = '004_o_m_h_a.jpg'
+287.6767 	EXP 	polygon: autoDraw = True
+287.9933 	EXP 	polygon: autoDraw = False
+287.9933 	EXP 	movie: autoDraw = True
+289.1931 	EXP 	primerImage: autoDraw = True
+289.2098 	EXP 	primerImage: autoDraw = False
+303.6012 	EXP 	Set movie finished
+303.6095 	EXP 	response: autoDraw = True
+305.1595 	EXP 	response: autoDraw = False
+305.1595 	EXP 	polygon: autoDraw = False
+305.1595 	EXP 	movie: autoDraw = False
+305.1595 	EXP 	primerImage: autoDraw = False
+305.1595 	EXP 	response: autoDraw = False
+305.1595 	EXP 	slider_stud: markerPos = None
+305.1595 	EXP 	slider_stud: markerPos = None
+305.1595 	EXP 	slider_stud: rating = None
+305.1595 	EXP 	slider_stud: markerPos = None
+305.1595 	EXP 	slider_stud: markerPos = None
+305.1595 	EXP 	slider_stud: rating = None
+305.1595 	EXP 	slider_stud: markerPos = 5
+305.1595 	EXP 	text_slider: autoDraw = True
+305.1595 	EXP 	slider_stud: autoDraw = True
+306.1844 	EXP 	slider_stud: markerPos = 6
+308.1535 	EXP 	New trial (rep=0, index=12): {'primePerson': 7.0, 'primeGender': 'm', 'prime': '027_o_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_20.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 152.91127178874285, 'Condition': 'h_h'}
+308.1595 	EXP 	text_slider: autoDraw = False
+308.1595 	EXP 	slider_stud: autoDraw = False
+308.1595 	EXP 	polygon_ISI: autoDraw = True
+309.4288 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_20.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+309.6508 	EXP 	polygon_ISI: autoDraw = False
+309.6508 	EXP 	polygon_ISI: autoDraw = False
+309.6508 	EXP 	movie: autoLog = True
+309.6508 	EXP 	movie: movie = 'happy_20.1ns.avi'
+309.6508 	EXP 	movie: size = array([1280.,  720.])
+309.6508 	EXP 	movie: ori = 0
+309.6508 	EXP 	primerImage: image = '027_o_m_h_a.jpg'
+309.6508 	EXP 	polygon: autoDraw = True
+309.9675 	EXP 	polygon: autoDraw = False
+309.9675 	EXP 	movie: autoDraw = True
+311.1093 	EXP 	primerImage: autoDraw = True
+311.1259 	EXP 	primerImage: autoDraw = False
+314.1175 	EXP 	Set movie finished
+314.1259 	EXP 	response: autoDraw = True
+315.6756 	EXP 	response: autoDraw = False
+315.6756 	EXP 	polygon: autoDraw = False
+315.6756 	EXP 	movie: autoDraw = False
+315.6756 	EXP 	primerImage: autoDraw = False
+315.6756 	EXP 	response: autoDraw = False
+315.6756 	EXP 	slider_stud: markerPos = None
+315.6756 	EXP 	slider_stud: markerPos = None
+315.6756 	EXP 	slider_stud: rating = None
+315.6756 	EXP 	slider_stud: markerPos = None
+315.6756 	EXP 	slider_stud: markerPos = None
+315.6756 	EXP 	slider_stud: rating = None
+315.6756 	EXP 	slider_stud: markerPos = 5
+315.6756 	EXP 	text_slider: autoDraw = True
+315.6756 	EXP 	slider_stud: autoDraw = True
+318.6978 	EXP 	New trial (rep=0, index=13): {'primePerson': 0.0, 'primeGender': 'f', 'prime': '040_y_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_94.3ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 155.27414203894395, 'Condition': 's_s'}
+318.7088 	EXP 	text_slider: autoDraw = False
+318.7088 	EXP 	slider_stud: autoDraw = False
+318.7088 	EXP 	polygon_ISI: autoDraw = True
+320.0031 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_94.3ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+320.2088 	EXP 	polygon_ISI: autoDraw = False
+320.2088 	EXP 	polygon_ISI: autoDraw = False
+320.2088 	EXP 	movie: autoLog = True
+320.2088 	EXP 	movie: movie = 'sad_94.3ns.avi'
+320.2088 	EXP 	movie: size = array([1280.,  720.])
+320.2088 	EXP 	movie: ori = 0
+320.2088 	EXP 	primerImage: image = '040_y_f_s_a.jpg'
+320.2088 	EXP 	polygon: autoDraw = True
+320.5255 	EXP 	polygon: autoDraw = False
+320.5255 	EXP 	movie: autoDraw = True
+321.7337 	EXP 	primerImage: autoDraw = True
+321.7504 	EXP 	primerImage: autoDraw = False
+324.2755 	EXP 	Set movie finished
+324.2839 	EXP 	response: autoDraw = True
+325.8338 	EXP 	response: autoDraw = False
+325.8338 	EXP 	polygon: autoDraw = False
+325.8338 	EXP 	movie: autoDraw = False
+325.8338 	EXP 	primerImage: autoDraw = False
+325.8338 	EXP 	response: autoDraw = False
+325.8338 	EXP 	slider_stud: markerPos = None
+325.8338 	EXP 	slider_stud: markerPos = None
+325.8338 	EXP 	slider_stud: rating = None
+325.8338 	EXP 	slider_stud: markerPos = None
+325.8338 	EXP 	slider_stud: markerPos = None
+325.8338 	EXP 	slider_stud: rating = None
+325.8338 	EXP 	slider_stud: markerPos = 5
+325.8338 	EXP 	text_slider: autoDraw = True
+325.8338 	EXP 	slider_stud: autoDraw = True
+328.8554 	EXP 	New trial (rep=0, index=14): {'primePerson': 0.0, 'primeGender': 'f', 'prime': '030_o_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_68.1ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 158.9411396037211, 'Condition': 's_s'}
+328.8670 	EXP 	text_slider: autoDraw = False
+328.8670 	EXP 	slider_stud: autoDraw = False
+328.8670 	EXP 	polygon_ISI: autoDraw = True
+330.1864 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_68.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+330.4251 	EXP 	polygon_ISI: autoDraw = False
+330.4251 	EXP 	polygon_ISI: autoDraw = False
+330.4251 	EXP 	movie: autoLog = True
+330.4251 	EXP 	movie: movie = 'sad_68.1ns.avi'
+330.4251 	EXP 	movie: size = array([1280.,  720.])
+330.4251 	EXP 	movie: ori = 0
+330.4251 	EXP 	primerImage: image = '030_o_f_s_a.jpg'
+330.4251 	EXP 	polygon: autoDraw = True
+330.7418 	EXP 	polygon: autoDraw = False
+330.7418 	EXP 	movie: autoDraw = True
+331.8833 	EXP 	primerImage: autoDraw = True
+331.9002 	EXP 	primerImage: autoDraw = False
+339.2917 	EXP 	Set movie finished
+339.3000 	EXP 	response: autoDraw = True
+340.8500 	EXP 	response: autoDraw = False
+340.8500 	EXP 	polygon: autoDraw = False
+340.8500 	EXP 	movie: autoDraw = False
+340.8500 	EXP 	primerImage: autoDraw = False
+340.8500 	EXP 	response: autoDraw = False
+340.8500 	EXP 	slider_stud: markerPos = None
+340.8500 	EXP 	slider_stud: markerPos = None
+340.8500 	EXP 	slider_stud: rating = None
+340.8500 	EXP 	slider_stud: markerPos = None
+340.8500 	EXP 	slider_stud: markerPos = None
+340.8500 	EXP 	slider_stud: rating = None
+340.8500 	EXP 	slider_stud: markerPos = 5
+340.8500 	EXP 	text_slider: autoDraw = True
+340.8500 	EXP 	slider_stud: autoDraw = True
+343.8628 	EXP 	New trial (rep=0, index=15): {'primePerson': 0.0, 'primeGender': 'f', 'prime': '030_o_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_127.1.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 180.59976631384873, 'Condition': 'h_s'}
+343.8664 	EXP 	text_slider: autoDraw = False
+343.8664 	EXP 	slider_stud: autoDraw = False
+343.8664 	EXP 	polygon_ISI: autoDraw = True
+345.3698 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_127.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+345.5830 	EXP 	polygon_ISI: autoDraw = False
+345.5830 	EXP 	polygon_ISI: autoDraw = False
+345.5830 	EXP 	movie: autoLog = True
+345.5830 	EXP 	movie: movie = 'sad_127.1.wmv'
+345.5830 	EXP 	movie: size = array([1280.,  720.])
+345.5830 	EXP 	movie: ori = 0
+345.5830 	EXP 	primerImage: image = '030_o_f_h_a.jpg'
+345.5830 	EXP 	polygon: autoDraw = True
+345.8998 	EXP 	polygon: autoDraw = False
+345.8998 	EXP 	movie: autoDraw = True
+347.0248 	EXP 	primerImage: autoDraw = True
+347.0415 	EXP 	primerImage: autoDraw = False
+349.0246 	EXP 	Set movie finished
+349.0330 	EXP 	response: autoDraw = True
+350.5828 	EXP 	response: autoDraw = False
+350.5828 	EXP 	polygon: autoDraw = False
+350.5828 	EXP 	movie: autoDraw = False
+350.5828 	EXP 	primerImage: autoDraw = False
+350.5828 	EXP 	response: autoDraw = False
+350.5828 	EXP 	slider_stud: markerPos = None
+350.5828 	EXP 	slider_stud: markerPos = None
+350.5828 	EXP 	slider_stud: rating = None
+350.5828 	EXP 	slider_stud: markerPos = None
+350.5828 	EXP 	slider_stud: markerPos = None
+350.5828 	EXP 	slider_stud: rating = None
+350.5828 	EXP 	slider_stud: markerPos = 5
+350.5828 	EXP 	text_slider: autoDraw = True
+350.5828 	EXP 	slider_stud: autoDraw = True
+353.5960 	EXP 	New trial (rep=0, index=16): {'primePerson': 8.0, 'primeGender': 'm', 'prime': '008_y_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_133.3.wmv', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 152.577966552593, 'Condition': 's_h'}
+353.5994 	EXP 	text_slider: autoDraw = False
+353.5994 	EXP 	slider_stud: autoDraw = False
+353.5994 	EXP 	polygon_ISI: autoDraw = True
+354.8688 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_133.3.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+355.0827 	EXP 	polygon_ISI: autoDraw = False
+355.0827 	EXP 	polygon_ISI: autoDraw = False
+355.0827 	EXP 	movie: autoLog = True
+355.0827 	EXP 	movie: movie = 'happy_133.3.wmv'
+355.0827 	EXP 	movie: size = array([1280.,  720.])
+355.0827 	EXP 	movie: ori = 0
+355.0827 	EXP 	primerImage: image = '008_y_m_s_a.jpg'
+355.0827 	EXP 	polygon: autoDraw = True
+355.3993 	EXP 	polygon: autoDraw = False
+355.3993 	EXP 	movie: autoDraw = True
+356.5245 	EXP 	primerImage: autoDraw = True
+356.5410 	EXP 	primerImage: autoDraw = False
+358.5244 	EXP 	Set movie finished
+358.5326 	EXP 	response: autoDraw = True
+360.0826 	EXP 	response: autoDraw = False
+360.0826 	EXP 	polygon: autoDraw = False
+360.0826 	EXP 	movie: autoDraw = False
+360.0826 	EXP 	primerImage: autoDraw = False
+360.0826 	EXP 	response: autoDraw = False
+360.0826 	EXP 	slider_stud: markerPos = None
+360.0826 	EXP 	slider_stud: markerPos = None
+360.0826 	EXP 	slider_stud: rating = None
+360.0826 	EXP 	slider_stud: markerPos = None
+360.0826 	EXP 	slider_stud: markerPos = None
+360.0826 	EXP 	slider_stud: rating = None
+360.0826 	EXP 	slider_stud: markerPos = 5
+360.0826 	EXP 	text_slider: autoDraw = True
+360.0826 	EXP 	slider_stud: autoDraw = True
+363.1044 	EXP 	New trial (rep=0, index=17): {'primePerson': 3.0, 'primeGender': 'm', 'prime': '033_o_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_128.1.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 171.0492454518585, 'Condition': 'h_s'}
+363.1074 	EXP 	text_slider: autoDraw = False
+363.1074 	EXP 	slider_stud: autoDraw = False
+363.1074 	EXP 	polygon_ISI: autoDraw = True
+364.5356 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_128.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+364.7574 	EXP 	polygon_ISI: autoDraw = False
+364.7574 	EXP 	polygon_ISI: autoDraw = False
+364.7574 	EXP 	movie: autoLog = True
+364.7574 	EXP 	movie: movie = 'sad_128.1.wmv'
+364.7574 	EXP 	movie: size = array([1280.,  720.])
+364.7574 	EXP 	movie: ori = 0
+364.7574 	EXP 	primerImage: image = '033_o_m_h_a.jpg'
+364.7574 	EXP 	polygon: autoDraw = True
+365.0741 	EXP 	polygon: autoDraw = False
+365.0741 	EXP 	movie: autoDraw = True
+366.2073 	EXP 	primerImage: autoDraw = True
+366.2241 	EXP 	primerImage: autoDraw = False
+368.1991 	EXP 	Set movie finished
+368.2073 	EXP 	response: autoDraw = True
+369.7572 	EXP 	response: autoDraw = False
+369.7572 	EXP 	polygon: autoDraw = False
+369.7572 	EXP 	movie: autoDraw = False
+369.7572 	EXP 	primerImage: autoDraw = False
+369.7572 	EXP 	response: autoDraw = False
+369.7572 	EXP 	slider_stud: markerPos = None
+369.7572 	EXP 	slider_stud: markerPos = None
+369.7572 	EXP 	slider_stud: rating = None
+369.7572 	EXP 	slider_stud: markerPos = None
+369.7572 	EXP 	slider_stud: markerPos = None
+369.7572 	EXP 	slider_stud: rating = None
+369.7572 	EXP 	slider_stud: markerPos = 5
+369.7572 	EXP 	text_slider: autoDraw = True
+369.7572 	EXP 	slider_stud: autoDraw = True
+372.7699 	EXP 	New trial (rep=0, index=18): {'primePerson': 1.0, 'primeGender': 'f', 'prime': '021_o_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_116.1.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 184.06847610053055, 'Condition': 'h_s'}
+372.7738 	EXP 	text_slider: autoDraw = False
+372.7738 	EXP 	slider_stud: autoDraw = False
+372.7738 	EXP 	polygon_ISI: autoDraw = True
+374.3102 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_116.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+374.5237 	EXP 	polygon_ISI: autoDraw = False
+374.5237 	EXP 	polygon_ISI: autoDraw = False
+374.5237 	EXP 	movie: autoLog = True
+374.5237 	EXP 	movie: movie = 'sad_116.1.wmv'
+374.5237 	EXP 	movie: size = array([1280.,  720.])
+374.5237 	EXP 	movie: ori = 0
+374.5237 	EXP 	primerImage: image = '021_o_f_h_a.jpg'
+374.5237 	EXP 	polygon: autoDraw = True
+374.8405 	EXP 	polygon: autoDraw = False
+374.8405 	EXP 	movie: autoDraw = True
+375.9822 	EXP 	primerImage: autoDraw = True
+375.9988 	EXP 	primerImage: autoDraw = False
+377.9659 	EXP 	Set movie finished
+377.9738 	EXP 	response: autoDraw = True
+379.5235 	EXP 	response: autoDraw = False
+379.5235 	EXP 	polygon: autoDraw = False
+379.5235 	EXP 	movie: autoDraw = False
+379.5235 	EXP 	primerImage: autoDraw = False
+379.5235 	EXP 	response: autoDraw = False
+379.5235 	EXP 	slider_stud: markerPos = None
+379.5235 	EXP 	slider_stud: markerPos = None
+379.5235 	EXP 	slider_stud: rating = None
+379.5235 	EXP 	slider_stud: markerPos = None
+379.5235 	EXP 	slider_stud: markerPos = None
+379.5235 	EXP 	slider_stud: rating = None
+379.5235 	EXP 	slider_stud: markerPos = 5
+379.5235 	EXP 	text_slider: autoDraw = True
+379.5235 	EXP 	slider_stud: autoDraw = True
+380.2070 	EXP 	slider_stud: markerPos = 4
+382.5176 	EXP 	New trial (rep=0, index=19): {'primePerson': 4.0, 'primeGender': 'm', 'prime': '004_o_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_28.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 157.40741103039684, 'Condition': 's_h'}
+382.5237 	EXP 	text_slider: autoDraw = False
+382.5237 	EXP 	slider_stud: autoDraw = False
+382.5237 	EXP 	polygon_ISI: autoDraw = True
+383.8349 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_28.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+384.0652 	EXP 	polygon_ISI: autoDraw = False
+384.0652 	EXP 	polygon_ISI: autoDraw = False
+384.0652 	EXP 	movie: autoLog = True
+384.0652 	EXP 	movie: movie = 'happy_28.1ns.avi'
+384.0652 	EXP 	movie: size = array([1280.,  720.])
+384.0652 	EXP 	movie: ori = 0
+384.0652 	EXP 	primerImage: image = '004_o_m_s_a.jpg'
+384.0652 	EXP 	polygon: autoDraw = True
+384.3818 	EXP 	polygon: autoDraw = False
+384.3818 	EXP 	movie: autoDraw = True
+385.5317 	EXP 	primerImage: autoDraw = True
+385.5484 	EXP 	primerImage: autoDraw = False
+389.8983 	EXP 	Set movie finished
+389.9066 	EXP 	response: autoDraw = True
+391.4564 	EXP 	response: autoDraw = False
+391.4564 	EXP 	polygon: autoDraw = False
+391.4564 	EXP 	movie: autoDraw = False
+391.4564 	EXP 	primerImage: autoDraw = False
+391.4564 	EXP 	response: autoDraw = False
+391.4564 	EXP 	slider_stud: markerPos = None
+391.4564 	EXP 	slider_stud: markerPos = None
+391.4564 	EXP 	slider_stud: rating = None
+391.4564 	EXP 	slider_stud: markerPos = None
+391.4564 	EXP 	slider_stud: markerPos = None
+391.4564 	EXP 	slider_stud: rating = None
+391.4564 	EXP 	slider_stud: markerPos = 5
+391.4564 	EXP 	text_slider: autoDraw = True
+391.4564 	EXP 	slider_stud: autoDraw = True
+392.0482 	EXP 	slider_stud: markerPos = 6
+394.4509 	EXP 	New trial (rep=0, index=20): {'primePerson': 8.0, 'primeGender': 'f', 'prime': '028_y_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_122.3.wmv', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 171.8670540936116, 'Condition': 's_h'}
+394.4566 	EXP 	text_slider: autoDraw = False
+394.4566 	EXP 	slider_stud: autoDraw = False
+394.4566 	EXP 	polygon_ISI: autoDraw = True
+395.8839 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_122.3.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+396.1063 	EXP 	polygon_ISI: autoDraw = False
+396.1063 	EXP 	polygon_ISI: autoDraw = False
+396.1063 	EXP 	movie: autoLog = True
+396.1063 	EXP 	movie: movie = 'happy_122.3.wmv'
+396.1063 	EXP 	movie: size = array([1280.,  720.])
+396.1063 	EXP 	movie: ori = 0
+396.1063 	EXP 	primerImage: image = '028_y_f_s_a.jpg'
+396.1063 	EXP 	polygon: autoDraw = True
+396.4229 	EXP 	polygon: autoDraw = False
+396.4229 	EXP 	movie: autoDraw = True
+397.5564 	EXP 	primerImage: autoDraw = True
+397.5731 	EXP 	primerImage: autoDraw = False
+399.5485 	EXP 	Set movie finished
+399.5564 	EXP 	response: autoDraw = True
+401.1063 	EXP 	response: autoDraw = False
+401.1063 	EXP 	polygon: autoDraw = False
+401.1063 	EXP 	movie: autoDraw = False
+401.1063 	EXP 	primerImage: autoDraw = False
+401.1063 	EXP 	response: autoDraw = False
+401.1063 	EXP 	slider_stud: markerPos = None
+401.1063 	EXP 	slider_stud: markerPos = None
+401.1063 	EXP 	slider_stud: rating = None
+401.1063 	EXP 	slider_stud: markerPos = None
+401.1063 	EXP 	slider_stud: markerPos = None
+401.1063 	EXP 	slider_stud: rating = None
+401.1063 	EXP 	slider_stud: markerPos = 5
+401.1063 	EXP 	text_slider: autoDraw = True
+401.1063 	EXP 	slider_stud: autoDraw = True
+401.4313 	EXP 	slider_stud: markerPos = 6
+404.0993 	EXP 	New trial (rep=0, index=21): {'primePerson': 8.0, 'primeGender': 'm', 'prime': '008_y_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_6.5ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 170.39333839271438, 'Condition': 's_s'}
+404.1062 	EXP 	text_slider: autoDraw = False
+404.1062 	EXP 	slider_stud: autoDraw = False
+404.1062 	EXP 	polygon_ISI: autoDraw = True
+405.5258 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_6.5ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+405.7393 	EXP 	polygon_ISI: autoDraw = False
+405.7393 	EXP 	polygon_ISI: autoDraw = False
+405.7393 	EXP 	movie: autoLog = True
+405.7393 	EXP 	movie: movie = 'sad_6.5ns.avi'
+405.7393 	EXP 	movie: size = array([1280.,  720.])
+405.7393 	EXP 	movie: ori = 0
+405.7393 	EXP 	primerImage: image = '008_y_m_s_a.jpg'
+405.7393 	EXP 	polygon: autoDraw = True
+406.0561 	EXP 	polygon: autoDraw = False
+406.0561 	EXP 	movie: autoDraw = True
+407.2060 	EXP 	primerImage: autoDraw = True
+407.2225 	EXP 	primerImage: autoDraw = False
+412.1809 	EXP 	Set movie finished
+412.1893 	EXP 	response: autoDraw = True
+413.7976 	EXP 	response: autoDraw = False
+413.7976 	EXP 	polygon: autoDraw = False
+413.7976 	EXP 	movie: autoDraw = False
+413.7976 	EXP 	primerImage: autoDraw = False
+413.7976 	EXP 	response: autoDraw = False
+413.7976 	EXP 	slider_stud: markerPos = None
+413.7976 	EXP 	slider_stud: markerPos = None
+413.7976 	EXP 	slider_stud: rating = None
+413.7976 	EXP 	slider_stud: markerPos = None
+413.7976 	EXP 	slider_stud: markerPos = None
+413.7976 	EXP 	slider_stud: rating = None
+413.7976 	EXP 	slider_stud: markerPos = 5
+413.7976 	EXP 	text_slider: autoDraw = True
+413.7976 	EXP 	slider_stud: autoDraw = True
+416.8113 	EXP 	New trial (rep=0, index=22): {'primePerson': 8.0, 'primeGender': 'f', 'prime': '028_y_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_23.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 225.70986890587952, 'Condition': 'h_h'}
+416.8225 	EXP 	text_slider: autoDraw = False
+416.8225 	EXP 	slider_stud: autoDraw = False
+416.8225 	EXP 	polygon_ISI: autoDraw = True
+418.7001 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_23.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+418.9140 	EXP 	polygon_ISI: autoDraw = False
+418.9140 	EXP 	polygon_ISI: autoDraw = False
+418.9140 	EXP 	movie: autoLog = True
+418.9140 	EXP 	movie: movie = 'happy_23.1ns.avi'
+418.9140 	EXP 	movie: size = array([1280.,  720.])
+418.9140 	EXP 	movie: ori = 0
+418.9140 	EXP 	primerImage: image = '028_y_f_h_a.jpg'
+418.9140 	EXP 	polygon: autoDraw = True
+419.2306 	EXP 	polygon: autoDraw = False
+419.2306 	EXP 	movie: autoDraw = True
+420.3721 	EXP 	primerImage: autoDraw = True
+420.3890 	EXP 	primerImage: autoDraw = False
+424.9389 	EXP 	Set movie finished
+424.9471 	EXP 	response: autoDraw = True
+426.4971 	EXP 	response: autoDraw = False
+426.4971 	EXP 	polygon: autoDraw = False
+426.4971 	EXP 	movie: autoDraw = False
+426.4971 	EXP 	primerImage: autoDraw = False
+426.4971 	EXP 	response: autoDraw = False
+426.4971 	EXP 	slider_stud: markerPos = None
+426.4971 	EXP 	slider_stud: markerPos = None
+426.4971 	EXP 	slider_stud: rating = None
+426.4971 	EXP 	slider_stud: markerPos = None
+426.4971 	EXP 	slider_stud: markerPos = None
+426.4971 	EXP 	slider_stud: rating = None
+426.4971 	EXP 	slider_stud: markerPos = 5
+426.4971 	EXP 	text_slider: autoDraw = True
+426.4971 	EXP 	slider_stud: autoDraw = True
+426.7890 	EXP 	slider_stud: markerPos = 6
+429.4997 	EXP 	New trial (rep=0, index=23): {'primePerson': 8.0, 'primeGender': 'm', 'prime': '008_y_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_111.1.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 152.63076835312847, 'Condition': 'h_s'}
+429.5056 	EXP 	text_slider: autoDraw = False
+429.5056 	EXP 	slider_stud: autoDraw = False
+429.5056 	EXP 	polygon_ISI: autoDraw = True
+430.7749 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_111.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+430.9802 	EXP 	polygon_ISI: autoDraw = False
+430.9802 	EXP 	polygon_ISI: autoDraw = False
+430.9802 	EXP 	movie: autoLog = True
+430.9802 	EXP 	movie: movie = 'sad_111.1.wmv'
+430.9802 	EXP 	movie: size = array([1280.,  720.])
+430.9802 	EXP 	movie: ori = 0
+430.9802 	EXP 	primerImage: image = '008_y_m_h_a.jpg'
+430.9802 	EXP 	polygon: autoDraw = True
+431.2969 	EXP 	polygon: autoDraw = False
+431.2969 	EXP 	movie: autoDraw = True
+432.4469 	EXP 	primerImage: autoDraw = True
+432.4637 	EXP 	primerImage: autoDraw = False
+434.4219 	EXP 	Set movie finished
+434.4302 	EXP 	response: autoDraw = True
+435.9800 	EXP 	response: autoDraw = False
+435.9800 	EXP 	polygon: autoDraw = False
+435.9800 	EXP 	movie: autoDraw = False
+435.9800 	EXP 	primerImage: autoDraw = False
+435.9800 	EXP 	response: autoDraw = False
+435.9800 	EXP 	slider_stud: markerPos = None
+435.9800 	EXP 	slider_stud: markerPos = None
+435.9800 	EXP 	slider_stud: rating = None
+435.9800 	EXP 	slider_stud: markerPos = None
+435.9800 	EXP 	slider_stud: markerPos = None
+435.9800 	EXP 	slider_stud: rating = None
+435.9800 	EXP 	slider_stud: markerPos = 5
+435.9800 	EXP 	text_slider: autoDraw = True
+435.9800 	EXP 	slider_stud: autoDraw = True
+438.9926 	EXP 	New trial (rep=0, index=24): {'primePerson': 0.0, 'primeGender': 'f', 'prime': '040_y_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_67.2ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 220.9892697323079, 'Condition': 's_s'}
+438.9966 	EXP 	text_slider: autoDraw = False
+438.9966 	EXP 	slider_stud: autoDraw = False
+438.9966 	EXP 	polygon_ISI: autoDraw = True
+440.8331 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_67.2ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+441.0883 	EXP 	polygon_ISI: autoDraw = False
+441.0883 	EXP 	polygon_ISI: autoDraw = False
+441.0883 	EXP 	movie: autoLog = True
+441.0883 	EXP 	movie: movie = 'sad_67.2ns.avi'
+441.0883 	EXP 	movie: size = array([1280.,  720.])
+441.0883 	EXP 	movie: ori = 0
+441.0883 	EXP 	primerImage: image = '040_y_f_s_a.jpg'
+441.0883 	EXP 	polygon: autoDraw = True
+441.4049 	EXP 	polygon: autoDraw = False
+441.4049 	EXP 	movie: autoDraw = True
+442.5966 	EXP 	primerImage: autoDraw = True
+442.6133 	EXP 	primerImage: autoDraw = False
+451.7552 	EXP 	Set movie finished
+451.7630 	EXP 	response: autoDraw = True
+453.3130 	EXP 	response: autoDraw = False
+453.3130 	EXP 	polygon: autoDraw = False
+453.3130 	EXP 	movie: autoDraw = False
+453.3130 	EXP 	primerImage: autoDraw = False
+453.3130 	EXP 	response: autoDraw = False
+453.3130 	EXP 	slider_stud: markerPos = None
+453.3130 	EXP 	slider_stud: markerPos = None
+453.3130 	EXP 	slider_stud: rating = None
+453.3130 	EXP 	slider_stud: markerPos = None
+453.3130 	EXP 	slider_stud: markerPos = None
+453.3130 	EXP 	slider_stud: rating = None
+453.3130 	EXP 	slider_stud: markerPos = 5
+453.3130 	EXP 	text_slider: autoDraw = True
+453.3130 	EXP 	slider_stud: autoDraw = True
+454.0296 	EXP 	slider_stud: markerPos = 4
+456.3070 	EXP 	New trial (rep=0, index=25): {'primePerson': 8.0, 'primeGender': 'm', 'prime': '008_y_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_29.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 120.0316142834122, 'Condition': 's_h'}
+456.3130 	EXP 	text_slider: autoDraw = False
+456.3130 	EXP 	slider_stud: autoDraw = False
+456.3130 	EXP 	polygon_ISI: autoDraw = True
+457.3159 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_29.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+457.5294 	EXP 	polygon_ISI: autoDraw = False
+457.5294 	EXP 	polygon_ISI: autoDraw = False
+457.5294 	EXP 	movie: autoLog = True
+457.5294 	EXP 	movie: movie = 'happy_29.1ns.avi'
+457.5294 	EXP 	movie: size = array([1280.,  720.])
+457.5294 	EXP 	movie: ori = 0
+457.5294 	EXP 	primerImage: image = '008_y_m_s_a.jpg'
+457.5294 	EXP 	polygon: autoDraw = True
+457.8460 	EXP 	polygon: autoDraw = False
+457.8460 	EXP 	movie: autoDraw = True
+458.9888 	EXP 	primerImage: autoDraw = True
+459.0050 	EXP 	primerImage: autoDraw = False
+461.6627 	EXP 	Set movie finished
+461.6712 	EXP 	response: autoDraw = True
+463.2208 	EXP 	response: autoDraw = False
+463.2208 	EXP 	polygon: autoDraw = False
+463.2208 	EXP 	movie: autoDraw = False
+463.2208 	EXP 	primerImage: autoDraw = False
+463.2208 	EXP 	response: autoDraw = False
+463.2208 	EXP 	slider_stud: markerPos = None
+463.2208 	EXP 	slider_stud: markerPos = None
+463.2208 	EXP 	slider_stud: rating = None
+463.2208 	EXP 	slider_stud: markerPos = None
+463.2208 	EXP 	slider_stud: markerPos = None
+463.2208 	EXP 	slider_stud: rating = None
+463.2208 	EXP 	slider_stud: markerPos = 5
+463.2208 	EXP 	text_slider: autoDraw = True
+463.2208 	EXP 	slider_stud: autoDraw = True
+464.0292 	EXP 	slider_stud: markerPos = 6
+466.2231 	EXP 	New trial (rep=0, index=26): {'primePerson': 6.0, 'primeGender': 'm', 'prime': '016_y_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_8.3ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 152.85371098242734, 'Condition': 's_s'}
+466.2292 	EXP 	text_slider: autoDraw = False
+466.2292 	EXP 	slider_stud: autoDraw = False
+466.2292 	EXP 	polygon_ISI: autoDraw = True
+467.4987 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_8.3ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+467.7540 	EXP 	polygon_ISI: autoDraw = False
+467.7540 	EXP 	polygon_ISI: autoDraw = False
+467.7540 	EXP 	movie: autoLog = True
+467.7540 	EXP 	movie: movie = 'sad_8.3ns.avi'
+467.7540 	EXP 	movie: size = array([1280.,  720.])
+467.7540 	EXP 	movie: ori = 0
+467.7540 	EXP 	primerImage: image = '016_y_m_s_a.jpg'
+467.7540 	EXP 	polygon: autoDraw = True
+468.0708 	EXP 	polygon: autoDraw = False
+468.0708 	EXP 	movie: autoDraw = True
+469.2456 	EXP 	primerImage: autoDraw = True
+469.2625 	EXP 	primerImage: autoDraw = False
+476.9538 	EXP 	Set movie finished
+476.9621 	EXP 	response: autoDraw = True
+478.6454 	EXP 	response: autoDraw = False
+478.6454 	EXP 	polygon: autoDraw = False
+478.6454 	EXP 	movie: autoDraw = False
+478.6454 	EXP 	primerImage: autoDraw = False
+478.6454 	EXP 	response: autoDraw = False
+478.6454 	EXP 	slider_stud: markerPos = None
+478.6454 	EXP 	slider_stud: markerPos = None
+478.6454 	EXP 	slider_stud: rating = None
+478.6454 	EXP 	slider_stud: markerPos = None
+478.6454 	EXP 	slider_stud: markerPos = None
+478.6454 	EXP 	slider_stud: rating = None
+478.6454 	EXP 	slider_stud: markerPos = 5
+478.6454 	EXP 	text_slider: autoDraw = True
+478.6454 	EXP 	slider_stud: autoDraw = True
+481.6591 	EXP 	New trial (rep=0, index=27): {'primePerson': 6.0, 'primeGender': 'm', 'prime': '016_y_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_114.1.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 136.20550699298644, 'Condition': 'h_s'}
+481.6704 	EXP 	text_slider: autoDraw = False
+481.6704 	EXP 	slider_stud: autoDraw = False
+481.6704 	EXP 	polygon_ISI: autoDraw = True
+482.8067 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_114.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+483.0202 	EXP 	polygon_ISI: autoDraw = False
+483.0202 	EXP 	polygon_ISI: autoDraw = False
+483.0202 	EXP 	movie: autoLog = True
+483.0202 	EXP 	movie: movie = 'sad_114.1.wmv'
+483.0202 	EXP 	movie: size = array([1280.,  720.])
+483.0202 	EXP 	movie: ori = 0
+483.0202 	EXP 	primerImage: image = '016_y_m_h_a.jpg'
+483.0202 	EXP 	polygon: autoDraw = True
+483.3368 	EXP 	polygon: autoDraw = False
+483.3368 	EXP 	movie: autoDraw = True
+484.4702 	EXP 	primerImage: autoDraw = True
+484.4869 	EXP 	primerImage: autoDraw = False
+486.4618 	EXP 	Set movie finished
+486.4703 	EXP 	response: autoDraw = True
+488.0199 	EXP 	response: autoDraw = False
+488.0199 	EXP 	polygon: autoDraw = False
+488.0199 	EXP 	movie: autoDraw = False
+488.0199 	EXP 	primerImage: autoDraw = False
+488.0199 	EXP 	response: autoDraw = False
+488.0199 	EXP 	slider_stud: markerPos = None
+488.0199 	EXP 	slider_stud: markerPos = None
+488.0199 	EXP 	slider_stud: rating = None
+488.0199 	EXP 	slider_stud: markerPos = None
+488.0199 	EXP 	slider_stud: markerPos = None
+488.0199 	EXP 	slider_stud: rating = None
+488.0199 	EXP 	slider_stud: markerPos = 5
+488.0199 	EXP 	text_slider: autoDraw = True
+488.0199 	EXP 	slider_stud: autoDraw = True
+491.0412 	EXP 	New trial (rep=0, index=28): {'primePerson': 7.0, 'primeGender': 'm', 'prime': '027_o_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_117.3.wmv', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 215.61964028550614, 'Condition': 's_h'}
+491.0449 	EXP 	text_slider: autoDraw = False
+491.0449 	EXP 	slider_stud: autoDraw = False
+491.0449 	EXP 	polygon_ISI: autoDraw = True
+492.8395 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_117.3.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+493.0532 	EXP 	polygon_ISI: autoDraw = False
+493.0532 	EXP 	polygon_ISI: autoDraw = False
+493.0532 	EXP 	movie: autoLog = True
+493.0532 	EXP 	movie: movie = 'happy_117.3.wmv'
+493.0532 	EXP 	movie: size = array([1280.,  720.])
+493.0532 	EXP 	movie: ori = 0
+493.0532 	EXP 	primerImage: image = '027_o_m_s_a.jpg'
+493.0532 	EXP 	polygon: autoDraw = True
+493.3700 	EXP 	polygon: autoDraw = False
+493.3700 	EXP 	movie: autoDraw = True
+494.5032 	EXP 	primerImage: autoDraw = True
+494.5199 	EXP 	primerImage: autoDraw = False
+496.4949 	EXP 	Set movie finished
+496.5032 	EXP 	response: autoDraw = True
+498.0532 	EXP 	response: autoDraw = False
+498.0532 	EXP 	polygon: autoDraw = False
+498.0532 	EXP 	movie: autoDraw = False
+498.0532 	EXP 	primerImage: autoDraw = False
+498.0532 	EXP 	response: autoDraw = False
+498.0532 	EXP 	slider_stud: markerPos = None
+498.0532 	EXP 	slider_stud: markerPos = None
+498.0532 	EXP 	slider_stud: rating = None
+498.0532 	EXP 	slider_stud: markerPos = None
+498.0532 	EXP 	slider_stud: markerPos = None
+498.0532 	EXP 	slider_stud: rating = None
+498.0532 	EXP 	slider_stud: markerPos = 5
+498.0532 	EXP 	text_slider: autoDraw = True
+498.0532 	EXP 	slider_stud: autoDraw = True
+499.5447 	EXP 	slider_stud: markerPos = 4
+501.0465 	EXP 	New trial (rep=0, index=29): {'primePerson': 6.0, 'primeGender': 'm', 'prime': '016_y_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_9.2ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 130.52042428082717, 'Condition': 'h_h'}
+501.0531 	EXP 	text_slider: autoDraw = False
+501.0531 	EXP 	slider_stud: autoDraw = False
+501.0531 	EXP 	polygon_ISI: autoDraw = True
+502.1386 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_9.2ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+502.3695 	EXP 	polygon_ISI: autoDraw = False
+502.3695 	EXP 	polygon_ISI: autoDraw = False
+502.3695 	EXP 	movie: autoLog = True
+502.3695 	EXP 	movie: movie = 'happy_9.2ns.avi'
+502.3695 	EXP 	movie: size = array([1280.,  720.])
+502.3695 	EXP 	movie: ori = 0
+502.3695 	EXP 	primerImage: image = '016_y_m_h_a.jpg'
+502.3695 	EXP 	polygon: autoDraw = True
+502.6862 	EXP 	polygon: autoDraw = False
+502.6862 	EXP 	movie: autoDraw = True
+503.8620 	EXP 	primerImage: autoDraw = True
+503.9030 	EXP 	primerImage: autoDraw = False
+509.7361 	EXP 	Set movie finished
+509.7444 	EXP 	response: autoDraw = True
+511.2944 	EXP 	response: autoDraw = False
+511.2944 	EXP 	polygon: autoDraw = False
+511.2944 	EXP 	movie: autoDraw = False
+511.2944 	EXP 	primerImage: autoDraw = False
+511.2944 	EXP 	response: autoDraw = False
+511.2944 	EXP 	slider_stud: markerPos = None
+511.2944 	EXP 	slider_stud: markerPos = None
+511.2944 	EXP 	slider_stud: rating = None
+511.2944 	EXP 	slider_stud: markerPos = None
+511.2944 	EXP 	slider_stud: markerPos = None
+511.2944 	EXP 	slider_stud: rating = None
+511.2944 	EXP 	slider_stud: markerPos = 5
+511.2944 	EXP 	text_slider: autoDraw = True
+511.2944 	EXP 	slider_stud: autoDraw = True
+514.3154 	EXP 	New trial (rep=0, index=30): {'primePerson': 0.0, 'primeGender': 'f', 'prime': '040_y_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_127.3.wmv', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 131.7195455720239, 'Condition': 's_h'}
+514.3191 	EXP 	text_slider: autoDraw = False
+514.3191 	EXP 	slider_stud: autoDraw = False
+514.3191 	EXP 	polygon_ISI: autoDraw = True
+515.4141 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_127.3.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+515.6190 	EXP 	polygon_ISI: autoDraw = False
+515.6190 	EXP 	polygon_ISI: autoDraw = False
+515.6190 	EXP 	movie: autoLog = True
+515.6190 	EXP 	movie: movie = 'happy_127.3.wmv'
+515.6190 	EXP 	movie: size = array([1280.,  720.])
+515.6190 	EXP 	movie: ori = 0
+515.6190 	EXP 	primerImage: image = '040_y_f_s_a.jpg'
+515.6190 	EXP 	polygon: autoDraw = True
+515.9358 	EXP 	polygon: autoDraw = False
+515.9358 	EXP 	movie: autoDraw = True
+517.0858 	EXP 	primerImage: autoDraw = True
+517.1026 	EXP 	primerImage: autoDraw = False
+519.1275 	EXP 	Set movie finished
+519.1358 	EXP 	response: autoDraw = True
+520.6857 	EXP 	response: autoDraw = False
+520.6857 	EXP 	polygon: autoDraw = False
+520.6857 	EXP 	movie: autoDraw = False
+520.6857 	EXP 	primerImage: autoDraw = False
+520.6857 	EXP 	response: autoDraw = False
+520.6857 	EXP 	slider_stud: markerPos = None
+520.6857 	EXP 	slider_stud: markerPos = None
+520.6857 	EXP 	slider_stud: rating = None
+520.6857 	EXP 	slider_stud: markerPos = None
+520.6857 	EXP 	slider_stud: markerPos = None
+520.6857 	EXP 	slider_stud: rating = None
+520.6857 	EXP 	slider_stud: markerPos = 5
+520.6857 	EXP 	text_slider: autoDraw = True
+520.6857 	EXP 	slider_stud: autoDraw = True
+523.6986 	EXP 	New trial (rep=0, index=31): {'primePerson': 0.0, 'primeGender': 'f', 'prime': '030_o_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_125.3.wmv', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 220.51454909128134, 'Condition': 's_h'}
+523.7107 	EXP 	text_slider: autoDraw = False
+523.7107 	EXP 	slider_stud: autoDraw = False
+523.7107 	EXP 	polygon_ISI: autoDraw = True
+525.5471 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_125.3.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+525.7688 	EXP 	polygon_ISI: autoDraw = False
+525.7688 	EXP 	polygon_ISI: autoDraw = False
+525.7688 	EXP 	movie: autoLog = True
+525.7688 	EXP 	movie: movie = 'happy_125.3.wmv'
+525.7688 	EXP 	movie: size = array([1280.,  720.])
+525.7688 	EXP 	movie: ori = 0
+525.7688 	EXP 	primerImage: image = '030_o_f_s_a.jpg'
+525.7688 	EXP 	polygon: autoDraw = True
+526.0855 	EXP 	polygon: autoDraw = False
+526.0855 	EXP 	movie: autoDraw = True
+527.2286 	EXP 	primerImage: autoDraw = True
+527.2522 	EXP 	primerImage: autoDraw = False
+529.2105 	EXP 	Set movie finished
+529.2188 	EXP 	response: autoDraw = True
+530.8104 	EXP 	response: autoDraw = False
+530.8104 	EXP 	polygon: autoDraw = False
+530.8104 	EXP 	movie: autoDraw = False
+530.8104 	EXP 	primerImage: autoDraw = False
+530.8104 	EXP 	response: autoDraw = False
+530.8104 	EXP 	slider_stud: markerPos = None
+530.8104 	EXP 	slider_stud: markerPos = None
+530.8104 	EXP 	slider_stud: rating = None
+530.8104 	EXP 	slider_stud: markerPos = None
+530.8104 	EXP 	slider_stud: markerPos = None
+530.8104 	EXP 	slider_stud: rating = None
+530.8104 	EXP 	slider_stud: markerPos = 5
+530.8104 	EXP 	text_slider: autoDraw = True
+530.8104 	EXP 	slider_stud: autoDraw = True
+531.1437 	EXP 	slider_stud: markerPos = 4
+533.8123 	EXP 	New trial (rep=0, index=32): {'primePerson': 0.0, 'primeGender': 'f', 'prime': '030_o_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_64.3ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 165.78667874766072, 'Condition': 's_s'}
+533.8187 	EXP 	text_slider: autoDraw = False
+533.8187 	EXP 	slider_stud: autoDraw = False
+533.8187 	EXP 	polygon_ISI: autoDraw = True
+535.1966 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_64.3ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+535.4185 	EXP 	polygon_ISI: autoDraw = False
+535.4185 	EXP 	polygon_ISI: autoDraw = False
+535.4185 	EXP 	movie: autoLog = True
+535.4185 	EXP 	movie: movie = 'sad_64.3ns.avi'
+535.4185 	EXP 	movie: size = array([1280.,  720.])
+535.4185 	EXP 	movie: ori = 0
+535.4185 	EXP 	primerImage: image = '030_o_f_s_a.jpg'
+535.4185 	EXP 	polygon: autoDraw = True
+535.7351 	EXP 	polygon: autoDraw = False
+535.7351 	EXP 	movie: autoDraw = True
+536.8935 	EXP 	primerImage: autoDraw = True
+536.9102 	EXP 	primerImage: autoDraw = False
+541.8600 	EXP 	Set movie finished
+541.8684 	EXP 	response: autoDraw = True
+543.4767 	EXP 	response: autoDraw = False
+543.4767 	EXP 	polygon: autoDraw = False
+543.4767 	EXP 	movie: autoDraw = False
+543.4767 	EXP 	primerImage: autoDraw = False
+543.4767 	EXP 	response: autoDraw = False
+543.4767 	EXP 	slider_stud: markerPos = None
+543.4767 	EXP 	slider_stud: markerPos = None
+543.4767 	EXP 	slider_stud: rating = None
+543.4767 	EXP 	slider_stud: markerPos = None
+543.4767 	EXP 	slider_stud: markerPos = None
+543.4767 	EXP 	slider_stud: rating = None
+543.4767 	EXP 	slider_stud: markerPos = 5
+543.4767 	EXP 	text_slider: autoDraw = True
+543.4767 	EXP 	slider_stud: autoDraw = True
+543.9100 	EXP 	slider_stud: markerPos = 6
+544.5100 	EXP 	slider_stud: markerPos = 5
+546.4790 	EXP 	New trial (rep=0, index=33): {'primePerson': 3.0, 'primeGender': 'm', 'prime': '013_y_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_7.7ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 196.24182255763262, 'Condition': 's_s'}
+546.4849 	EXP 	text_slider: autoDraw = False
+546.4849 	EXP 	slider_stud: autoDraw = False
+546.4849 	EXP 	polygon_ISI: autoDraw = True
+548.1215 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_7.7ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+548.3681 	EXP 	polygon_ISI: autoDraw = False
+548.3681 	EXP 	polygon_ISI: autoDraw = False
+548.3681 	EXP 	movie: autoLog = True
+548.3681 	EXP 	movie: movie = 'sad_7.7ns.avi'
+548.3681 	EXP 	movie: size = array([1280.,  720.])
+548.3681 	EXP 	movie: ori = 0
+548.3681 	EXP 	primerImage: image = '013_y_m_s_a.jpg'
+548.3681 	EXP 	polygon: autoDraw = True
+548.6847 	EXP 	polygon: autoDraw = False
+548.6847 	EXP 	movie: autoDraw = True
+549.9178 	EXP 	primerImage: autoDraw = True
+549.9346 	EXP 	primerImage: autoDraw = False
+555.8101 	EXP 	Set movie finished
+555.8180 	EXP 	response: autoDraw = True
+557.3677 	EXP 	response: autoDraw = False
+557.3677 	EXP 	polygon: autoDraw = False
+557.3677 	EXP 	movie: autoDraw = False
+557.3677 	EXP 	primerImage: autoDraw = False
+557.3677 	EXP 	response: autoDraw = False
+557.3677 	EXP 	slider_stud: markerPos = None
+557.3677 	EXP 	slider_stud: markerPos = None
+557.3677 	EXP 	slider_stud: rating = None
+557.3677 	EXP 	slider_stud: markerPos = None
+557.3677 	EXP 	slider_stud: markerPos = None
+557.3677 	EXP 	slider_stud: rating = None
+557.3677 	EXP 	slider_stud: markerPos = 5
+557.3677 	EXP 	text_slider: autoDraw = True
+557.3677 	EXP 	slider_stud: autoDraw = True
+559.1761 	EXP 	slider_stud: markerPos = 4
+560.3262 	EXP 	slider_stud: markerPos = 5
+560.3603 	EXP 	New trial (rep=0, index=34): {'primePerson': 3.0, 'primeGender': 'm', 'prime': '013_y_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_9.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 165.1890303600433, 'Condition': 'h_h'}
+560.3678 	EXP 	text_slider: autoDraw = False
+560.3678 	EXP 	slider_stud: autoDraw = False
+560.3678 	EXP 	polygon_ISI: autoDraw = True
+561.7456 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_9.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+561.9675 	EXP 	polygon_ISI: autoDraw = False
+561.9675 	EXP 	polygon_ISI: autoDraw = False
+561.9675 	EXP 	movie: autoLog = True
+561.9675 	EXP 	movie: movie = 'happy_9.1ns.avi'
+561.9675 	EXP 	movie: size = array([1280.,  720.])
+561.9675 	EXP 	movie: ori = 0
+561.9675 	EXP 	primerImage: image = '013_y_m_h_a.jpg'
+561.9675 	EXP 	polygon: autoDraw = True
+562.2843 	EXP 	polygon: autoDraw = False
+562.2843 	EXP 	movie: autoDraw = True
+563.4350 	EXP 	primerImage: autoDraw = True
+563.4596 	EXP 	primerImage: autoDraw = False
+566.6342 	EXP 	Set movie finished
+566.6425 	EXP 	response: autoDraw = True
+568.1925 	EXP 	response: autoDraw = False
+568.1925 	EXP 	polygon: autoDraw = False
+568.1925 	EXP 	movie: autoDraw = False
+568.1925 	EXP 	primerImage: autoDraw = False
+568.1925 	EXP 	response: autoDraw = False
+568.1925 	EXP 	slider_stud: markerPos = None
+568.1925 	EXP 	slider_stud: markerPos = None
+568.1925 	EXP 	slider_stud: rating = None
+568.1925 	EXP 	slider_stud: markerPos = None
+568.1925 	EXP 	slider_stud: markerPos = None
+568.1925 	EXP 	slider_stud: rating = None
+568.1925 	EXP 	slider_stud: markerPos = 5
+568.1925 	EXP 	text_slider: autoDraw = True
+568.1925 	EXP 	slider_stud: autoDraw = True
+568.4508 	EXP 	slider_stud: markerPos = 6
+571.1852 	EXP 	New trial (rep=0, index=35): {'primePerson': 4.0, 'primeGender': 'm', 'prime': '004_o_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_95.1ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 152.68270002069931, 'Condition': 'h_s'}
+571.1924 	EXP 	text_slider: autoDraw = False
+571.1924 	EXP 	slider_stud: autoDraw = False
+571.1924 	EXP 	polygon_ISI: autoDraw = True
+572.4624 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_95.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+572.7588 	EXP 	polygon_ISI: autoDraw = False
+572.7588 	EXP 	polygon_ISI: autoDraw = False
+572.7588 	EXP 	movie: autoLog = True
+572.7588 	EXP 	movie: movie = 'sad_95.1ns.avi'
+572.7588 	EXP 	movie: size = array([1280.,  720.])
+572.7588 	EXP 	movie: ori = 0
+572.7588 	EXP 	primerImage: image = '004_o_m_h_a.jpg'
+572.7588 	EXP 	polygon: autoDraw = True
+573.0756 	EXP 	polygon: autoDraw = False
+573.0756 	EXP 	movie: autoDraw = True
+574.2423 	EXP 	primerImage: autoDraw = True
+574.2589 	EXP 	primerImage: autoDraw = False
+582.9926 	EXP 	Set movie finished
+583.0005 	EXP 	response: autoDraw = True
+584.5585 	EXP 	response: autoDraw = False
+584.5585 	EXP 	polygon: autoDraw = False
+584.5585 	EXP 	movie: autoDraw = False
+584.5585 	EXP 	primerImage: autoDraw = False
+584.5585 	EXP 	response: autoDraw = False
+584.5585 	EXP 	slider_stud: markerPos = None
+584.5585 	EXP 	slider_stud: markerPos = None
+584.5585 	EXP 	slider_stud: rating = None
+584.5585 	EXP 	slider_stud: markerPos = None
+584.5585 	EXP 	slider_stud: markerPos = None
+584.5585 	EXP 	slider_stud: rating = None
+584.5585 	EXP 	slider_stud: markerPos = 5
+584.5585 	EXP 	text_slider: autoDraw = True
+584.5585 	EXP 	slider_stud: autoDraw = True
+585.7169 	EXP 	slider_stud: markerPos = 4
+586.1503 	EXP 	slider_stud: markerPos = 3
+587.5523 	EXP 	New trial (rep=0, index=36): {'primePerson': 3.0, 'primeGender': 'm', 'prime': '013_y_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_113.2.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 217.4973891947951, 'Condition': 'h_s'}
+587.5587 	EXP 	text_slider: autoDraw = False
+587.5587 	EXP 	slider_stud: autoDraw = False
+587.5587 	EXP 	polygon_ISI: autoDraw = True
+589.3692 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_113.2.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+589.6002 	EXP 	polygon_ISI: autoDraw = False
+589.6002 	EXP 	polygon_ISI: autoDraw = False
+589.6002 	EXP 	movie: autoLog = True
+589.6002 	EXP 	movie: movie = 'sad_113.2.wmv'
+589.6002 	EXP 	movie: size = array([1280.,  720.])
+589.6002 	EXP 	movie: ori = 0
+589.6002 	EXP 	primerImage: image = '013_y_m_h_a.jpg'
+589.6002 	EXP 	polygon: autoDraw = True
+589.9167 	EXP 	polygon: autoDraw = False
+589.9167 	EXP 	movie: autoDraw = True
+591.0418 	EXP 	primerImage: autoDraw = True
+591.0584 	EXP 	primerImage: autoDraw = False
+593.0417 	EXP 	Set movie finished
+593.0500 	EXP 	response: autoDraw = True
+594.5998 	EXP 	response: autoDraw = False
+594.5998 	EXP 	polygon: autoDraw = False
+594.5998 	EXP 	movie: autoDraw = False
+594.5998 	EXP 	primerImage: autoDraw = False
+594.5998 	EXP 	response: autoDraw = False
+594.5998 	EXP 	slider_stud: markerPos = None
+594.5998 	EXP 	slider_stud: markerPos = None
+594.5998 	EXP 	slider_stud: rating = None
+594.5998 	EXP 	slider_stud: markerPos = None
+594.5998 	EXP 	slider_stud: markerPos = None
+594.5998 	EXP 	slider_stud: rating = None
+594.5998 	EXP 	slider_stud: markerPos = 5
+594.5998 	EXP 	text_slider: autoDraw = True
+594.5998 	EXP 	slider_stud: autoDraw = True
+597.6220 	EXP 	New trial (rep=0, index=37): {'primePerson': 4.0, 'primeGender': 'm', 'prime': '004_o_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_25.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 216.63044503818386, 'Condition': 'h_h'}
+597.6330 	EXP 	text_slider: autoDraw = False
+597.6330 	EXP 	slider_stud: autoDraw = False
+597.6330 	EXP 	polygon_ISI: autoDraw = True
+599.4362 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_25.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+599.6580 	EXP 	polygon_ISI: autoDraw = False
+599.6580 	EXP 	polygon_ISI: autoDraw = False
+599.6580 	EXP 	movie: autoLog = True
+599.6580 	EXP 	movie: movie = 'happy_25.1ns.avi'
+599.6580 	EXP 	movie: size = array([1280.,  720.])
+599.6580 	EXP 	movie: ori = 0
+599.6580 	EXP 	primerImage: image = '004_o_m_h_a.jpg'
+599.6580 	EXP 	polygon: autoDraw = True
+599.9747 	EXP 	polygon: autoDraw = False
+599.9747 	EXP 	movie: autoDraw = True
+601.1663 	EXP 	primerImage: autoDraw = True
+601.1831 	EXP 	primerImage: autoDraw = False
+604.7912 	EXP 	Set movie finished
+604.7996 	EXP 	response: autoDraw = True
+606.3496 	EXP 	response: autoDraw = False
+606.3496 	EXP 	polygon: autoDraw = False
+606.3496 	EXP 	movie: autoDraw = False
+606.3496 	EXP 	primerImage: autoDraw = False
+606.3496 	EXP 	response: autoDraw = False
+606.3496 	EXP 	slider_stud: markerPos = None
+606.3496 	EXP 	slider_stud: markerPos = None
+606.3496 	EXP 	slider_stud: rating = None
+606.3496 	EXP 	slider_stud: markerPos = None
+606.3496 	EXP 	slider_stud: markerPos = None
+606.3496 	EXP 	slider_stud: rating = None
+606.3496 	EXP 	slider_stud: markerPos = 5
+606.3496 	EXP 	text_slider: autoDraw = True
+606.3496 	EXP 	slider_stud: autoDraw = True
+606.6580 	EXP 	slider_stud: markerPos = 4
+607.3162 	EXP 	slider_stud: markerPos = 3
+609.3440 	EXP 	New trial (rep=0, index=38): {'primePerson': 4.0, 'primeGender': 'm', 'prime': '004_o_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_131.2.wmv', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 181.38407540847405, 'Condition': 's_h'}
+609.3497 	EXP 	text_slider: autoDraw = False
+609.3497 	EXP 	slider_stud: autoDraw = False
+609.3497 	EXP 	polygon_ISI: autoDraw = True
+610.8610 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_131.2.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+611.0743 	EXP 	polygon_ISI: autoDraw = False
+611.0743 	EXP 	polygon_ISI: autoDraw = False
+611.0743 	EXP 	movie: autoLog = True
+611.0743 	EXP 	movie: movie = 'happy_131.2.wmv'
+611.0743 	EXP 	movie: size = array([1280.,  720.])
+611.0743 	EXP 	movie: ori = 0
+611.0743 	EXP 	primerImage: image = '004_o_m_s_a.jpg'
+611.0743 	EXP 	polygon: autoDraw = True
+611.3911 	EXP 	polygon: autoDraw = False
+611.3911 	EXP 	movie: autoDraw = True
+612.5331 	EXP 	primerImage: autoDraw = True
+612.5577 	EXP 	primerImage: autoDraw = False
+614.5160 	EXP 	Set movie finished
+614.5242 	EXP 	response: autoDraw = True
+616.0742 	EXP 	response: autoDraw = False
+616.0742 	EXP 	polygon: autoDraw = False
+616.0742 	EXP 	movie: autoDraw = False
+616.0742 	EXP 	primerImage: autoDraw = False
+616.0742 	EXP 	response: autoDraw = False
+616.0742 	EXP 	slider_stud: markerPos = None
+616.0742 	EXP 	slider_stud: markerPos = None
+616.0742 	EXP 	slider_stud: rating = None
+616.0742 	EXP 	slider_stud: markerPos = None
+616.0742 	EXP 	slider_stud: markerPos = None
+616.0742 	EXP 	slider_stud: rating = None
+616.0742 	EXP 	slider_stud: markerPos = 5
+616.0742 	EXP 	text_slider: autoDraw = True
+616.0742 	EXP 	slider_stud: autoDraw = True
+616.8076 	EXP 	slider_stud: markerPos = 4
+619.0668 	EXP 	New trial (rep=0, index=39): {'primePerson': 0.0, 'primeGender': 'f', 'prime': '040_y_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_24.3ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 213.25460698950434, 'Condition': 'h_h'}
+619.0741 	EXP 	text_slider: autoDraw = False
+619.0741 	EXP 	slider_stud: autoDraw = False
+619.0741 	EXP 	polygon_ISI: autoDraw = True
+620.8521 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_24.3ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+621.0490 	EXP 	polygon_ISI: autoDraw = False
+621.0490 	EXP 	polygon_ISI: autoDraw = False
+621.0490 	EXP 	movie: autoLog = True
+621.0490 	EXP 	movie: movie = 'happy_24.3ns.avi'
+621.0490 	EXP 	movie: size = array([1280.,  720.])
+621.0490 	EXP 	movie: ori = 0
+621.0490 	EXP 	primerImage: image = '040_y_f_h_a.jpg'
+621.0490 	EXP 	polygon: autoDraw = True
+621.3657 	EXP 	polygon: autoDraw = False
+621.3657 	EXP 	movie: autoDraw = True
+622.4991 	EXP 	primerImage: autoDraw = True
+622.5157 	EXP 	primerImage: autoDraw = False
+624.4157 	EXP 	Set movie finished
+624.4240 	EXP 	response: autoDraw = True
+625.9738 	EXP 	response: autoDraw = False
+625.9738 	EXP 	polygon: autoDraw = False
+625.9738 	EXP 	movie: autoDraw = False
+625.9738 	EXP 	primerImage: autoDraw = False
+625.9738 	EXP 	response: autoDraw = False
+625.9738 	EXP 	slider_stud: markerPos = None
+625.9738 	EXP 	slider_stud: markerPos = None
+625.9738 	EXP 	slider_stud: rating = None
+625.9738 	EXP 	slider_stud: markerPos = None
+625.9738 	EXP 	slider_stud: markerPos = None
+625.9738 	EXP 	slider_stud: rating = None
+625.9738 	EXP 	slider_stud: markerPos = 5
+625.9738 	EXP 	text_slider: autoDraw = True
+625.9738 	EXP 	slider_stud: autoDraw = True
+628.9868 	EXP 	New trial (rep=0, index=40): {'primePerson': 2.0, 'primeGender': 'f', 'prime': '012_o_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_139.1.wmv', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 162.31500468041804, 'Condition': 's_h'}
+628.9903 	EXP 	text_slider: autoDraw = False
+628.9903 	EXP 	slider_stud: autoDraw = False
+628.9903 	EXP 	polygon_ISI: autoDraw = True
+630.3435 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_139.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+630.5486 	EXP 	polygon_ISI: autoDraw = False
+630.5486 	EXP 	polygon_ISI: autoDraw = False
+630.5486 	EXP 	movie: autoLog = True
+630.5486 	EXP 	movie: movie = 'happy_139.1.wmv'
+630.5486 	EXP 	movie: size = array([1280.,  720.])
+630.5486 	EXP 	movie: ori = 0
+630.5486 	EXP 	primerImage: image = '012_o_f_s_a.jpg'
+630.5486 	EXP 	polygon: autoDraw = True
+630.8654 	EXP 	polygon: autoDraw = False
+630.8654 	EXP 	movie: autoDraw = True
+631.9988 	EXP 	primerImage: autoDraw = True
+632.0152 	EXP 	primerImage: autoDraw = False
+633.9904 	EXP 	Set movie finished
+633.9986 	EXP 	response: autoDraw = True
+635.5486 	EXP 	response: autoDraw = False
+635.5486 	EXP 	polygon: autoDraw = False
+635.5486 	EXP 	movie: autoDraw = False
+635.5486 	EXP 	primerImage: autoDraw = False
+635.5486 	EXP 	response: autoDraw = False
+635.5486 	EXP 	slider_stud: markerPos = None
+635.5486 	EXP 	slider_stud: markerPos = None
+635.5486 	EXP 	slider_stud: rating = None
+635.5486 	EXP 	slider_stud: markerPos = None
+635.5486 	EXP 	slider_stud: markerPos = None
+635.5486 	EXP 	slider_stud: rating = None
+635.5486 	EXP 	slider_stud: markerPos = 5
+635.5486 	EXP 	text_slider: autoDraw = True
+635.5486 	EXP 	slider_stud: autoDraw = True
+636.3736 	EXP 	slider_stud: markerPos = 6
+638.5413 	EXP 	New trial (rep=0, index=41): {'primePerson': 0.0, 'primeGender': 'f', 'prime': '030_o_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_24.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 168.36256624020774, 'Condition': 'h_h'}
+638.5486 	EXP 	text_slider: autoDraw = False
+638.5486 	EXP 	slider_stud: autoDraw = False
+638.5486 	EXP 	polygon_ISI: autoDraw = True
+639.9520 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_24.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+640.1733 	EXP 	polygon_ISI: autoDraw = False
+640.1733 	EXP 	polygon_ISI: autoDraw = False
+640.1733 	EXP 	movie: autoLog = True
+640.1733 	EXP 	movie: movie = 'happy_24.1ns.avi'
+640.1733 	EXP 	movie: size = array([1280.,  720.])
+640.1733 	EXP 	movie: ori = 0
+640.1733 	EXP 	primerImage: image = '030_o_f_h_a.jpg'
+640.1733 	EXP 	polygon: autoDraw = True
+640.4901 	EXP 	polygon: autoDraw = False
+640.4901 	EXP 	movie: autoDraw = True
+641.6666 	EXP 	primerImage: autoDraw = True
+641.6901 	EXP 	primerImage: autoDraw = False
+644.9399 	EXP 	Set movie finished
+644.9483 	EXP 	response: autoDraw = True
+646.4982 	EXP 	response: autoDraw = False
+646.4982 	EXP 	polygon: autoDraw = False
+646.4982 	EXP 	movie: autoDraw = False
+646.4982 	EXP 	primerImage: autoDraw = False
+646.4982 	EXP 	response: autoDraw = False
+646.4982 	EXP 	slider_stud: markerPos = None
+646.4982 	EXP 	slider_stud: markerPos = None
+646.4982 	EXP 	slider_stud: rating = None
+646.4982 	EXP 	slider_stud: markerPos = None
+646.4982 	EXP 	slider_stud: markerPos = None
+646.4982 	EXP 	slider_stud: rating = None
+646.4982 	EXP 	slider_stud: markerPos = 5
+646.4982 	EXP 	text_slider: autoDraw = True
+646.4982 	EXP 	slider_stud: autoDraw = True
+649.5201 	EXP 	New trial (rep=0, index=42): {'primePerson': 2.0, 'primeGender': 'f', 'prime': '012_o_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_113.1.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 177.44551734737394, 'Condition': 'h_s'}
+649.5315 	EXP 	text_slider: autoDraw = False
+649.5315 	EXP 	slider_stud: autoDraw = False
+649.5315 	EXP 	polygon_ISI: autoDraw = True
+651.0092 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_113.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+651.2229 	EXP 	polygon_ISI: autoDraw = False
+651.2229 	EXP 	polygon_ISI: autoDraw = False
+651.2229 	EXP 	movie: autoLog = True
+651.2229 	EXP 	movie: movie = 'sad_113.1.wmv'
+651.2229 	EXP 	movie: size = array([1280.,  720.])
+651.2229 	EXP 	movie: ori = 0
+651.2229 	EXP 	primerImage: image = '012_o_f_h_a.jpg'
+651.2229 	EXP 	polygon: autoDraw = True
+651.5397 	EXP 	polygon: autoDraw = False
+651.5397 	EXP 	movie: autoDraw = True
+652.6812 	EXP 	primerImage: autoDraw = True
+652.6980 	EXP 	primerImage: autoDraw = False
+654.6646 	EXP 	Set movie finished
+654.6730 	EXP 	response: autoDraw = True
+656.2227 	EXP 	response: autoDraw = False
+656.2227 	EXP 	polygon: autoDraw = False
+656.2227 	EXP 	movie: autoDraw = False
+656.2227 	EXP 	primerImage: autoDraw = False
+656.2227 	EXP 	response: autoDraw = False
+656.2227 	EXP 	slider_stud: markerPos = None
+656.2227 	EXP 	slider_stud: markerPos = None
+656.2227 	EXP 	slider_stud: rating = None
+656.2227 	EXP 	slider_stud: markerPos = None
+656.2227 	EXP 	slider_stud: markerPos = None
+656.2227 	EXP 	slider_stud: rating = None
+656.2227 	EXP 	slider_stud: markerPos = 5
+656.2227 	EXP 	text_slider: autoDraw = True
+656.2227 	EXP 	slider_stud: autoDraw = True
+657.0478 	EXP 	slider_stud: markerPos = 4
+659.2166 	EXP 	New trial (rep=0, index=43): {'primePerson': 3.0, 'primeGender': 'm', 'prime': '033_o_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_64.5ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 130.55717223801247, 'Condition': 's_s'}
+659.2229 	EXP 	text_slider: autoDraw = False
+659.2229 	EXP 	slider_stud: autoDraw = False
+659.2229 	EXP 	polygon_ISI: autoDraw = True
+660.3084 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_64.5ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+660.5645 	EXP 	polygon_ISI: autoDraw = False
+660.5645 	EXP 	polygon_ISI: autoDraw = False
+660.5645 	EXP 	movie: autoLog = True
+660.5645 	EXP 	movie: movie = 'sad_64.5ns.avi'
+660.5645 	EXP 	movie: size = array([1280.,  720.])
+660.5645 	EXP 	movie: ori = 0
+660.5645 	EXP 	primerImage: image = '033_o_m_s_a.jpg'
+660.5645 	EXP 	polygon: autoDraw = True
+660.8810 	EXP 	polygon: autoDraw = False
+660.8810 	EXP 	movie: autoDraw = True
+662.0311 	EXP 	primerImage: autoDraw = True
+662.0476 	EXP 	primerImage: autoDraw = False
+668.5973 	EXP 	Set movie finished
+668.6059 	EXP 	response: autoDraw = True
+670.1558 	EXP 	response: autoDraw = False
+670.1558 	EXP 	polygon: autoDraw = False
+670.1558 	EXP 	movie: autoDraw = False
+670.1558 	EXP 	primerImage: autoDraw = False
+670.1558 	EXP 	response: autoDraw = False
+670.1558 	EXP 	slider_stud: markerPos = None
+670.1558 	EXP 	slider_stud: markerPos = None
+670.1558 	EXP 	slider_stud: rating = None
+670.1558 	EXP 	slider_stud: markerPos = None
+670.1558 	EXP 	slider_stud: markerPos = None
+670.1558 	EXP 	slider_stud: rating = None
+670.1558 	EXP 	slider_stud: markerPos = 5
+670.1558 	EXP 	text_slider: autoDraw = True
+670.1558 	EXP 	slider_stud: autoDraw = True
+670.5308 	EXP 	slider_stud: markerPos = 4
+673.1485 	EXP 	New trial (rep=0, index=44): {'primePerson': 7.0, 'primeGender': 'm', 'prime': '027_o_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_117.1.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 181.28665202824095, 'Condition': 'h_s'}
+673.1558 	EXP 	text_slider: autoDraw = False
+673.1558 	EXP 	slider_stud: autoDraw = False
+673.1558 	EXP 	polygon_ISI: autoDraw = True
+674.6670 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_117.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+674.8889 	EXP 	polygon_ISI: autoDraw = False
+674.8889 	EXP 	polygon_ISI: autoDraw = False
+674.8889 	EXP 	movie: autoLog = True
+674.8889 	EXP 	movie: movie = 'sad_117.1.wmv'
+674.8889 	EXP 	movie: size = array([1280.,  720.])
+674.8889 	EXP 	movie: ori = 0
+674.8889 	EXP 	primerImage: image = '027_o_m_h_a.jpg'
+674.8889 	EXP 	polygon: autoDraw = True
+675.2056 	EXP 	polygon: autoDraw = False
+675.2056 	EXP 	movie: autoDraw = True
+676.3471 	EXP 	primerImage: autoDraw = True
+676.3637 	EXP 	primerImage: autoDraw = False
+678.3305 	EXP 	Set movie finished
+678.3389 	EXP 	response: autoDraw = True
+679.8886 	EXP 	response: autoDraw = False
+679.8886 	EXP 	polygon: autoDraw = False
+679.8886 	EXP 	movie: autoDraw = False
+679.8886 	EXP 	primerImage: autoDraw = False
+679.8886 	EXP 	response: autoDraw = False
+679.8886 	EXP 	slider_stud: markerPos = None
+679.8886 	EXP 	slider_stud: markerPos = None
+679.8886 	EXP 	slider_stud: rating = None
+679.8886 	EXP 	slider_stud: markerPos = None
+679.8886 	EXP 	slider_stud: markerPos = None
+679.8886 	EXP 	slider_stud: rating = None
+679.8886 	EXP 	slider_stud: markerPos = 5
+679.8886 	EXP 	text_slider: autoDraw = True
+679.8886 	EXP 	slider_stud: autoDraw = True
+682.9108 	EXP 	New trial (rep=0, index=45): {'primePerson': 3.0, 'primeGender': 'm', 'prime': '033_o_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_126.3.wmv', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 198.85252030535366, 'Condition': 's_h'}
+682.9135 	EXP 	text_slider: autoDraw = False
+682.9135 	EXP 	slider_stud: autoDraw = False
+682.9135 	EXP 	polygon_ISI: autoDraw = True
+684.5666 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_126.3.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+684.7802 	EXP 	polygon_ISI: autoDraw = False
+684.7802 	EXP 	polygon_ISI: autoDraw = False
+684.7802 	EXP 	movie: autoLog = True
+684.7802 	EXP 	movie: movie = 'happy_126.3.wmv'
+684.7802 	EXP 	movie: size = array([1280.,  720.])
+684.7802 	EXP 	movie: ori = 0
+684.7802 	EXP 	primerImage: image = '033_o_m_s_a.jpg'
+684.7802 	EXP 	polygon: autoDraw = True
+685.0970 	EXP 	polygon: autoDraw = False
+685.0970 	EXP 	movie: autoDraw = True
+686.2301 	EXP 	primerImage: autoDraw = True
+686.2469 	EXP 	primerImage: autoDraw = False
+688.2224 	EXP 	Set movie finished
+688.2303 	EXP 	response: autoDraw = True
+689.7802 	EXP 	response: autoDraw = False
+689.7802 	EXP 	polygon: autoDraw = False
+689.7802 	EXP 	movie: autoDraw = False
+689.7802 	EXP 	primerImage: autoDraw = False
+689.7802 	EXP 	response: autoDraw = False
+689.7802 	EXP 	slider_stud: markerPos = None
+689.7802 	EXP 	slider_stud: markerPos = None
+689.7802 	EXP 	slider_stud: rating = None
+689.7802 	EXP 	slider_stud: markerPos = None
+689.7802 	EXP 	slider_stud: markerPos = None
+689.7802 	EXP 	slider_stud: rating = None
+689.7802 	EXP 	slider_stud: markerPos = 5
+689.7802 	EXP 	text_slider: autoDraw = True
+689.7802 	EXP 	slider_stud: autoDraw = True
+692.8014 	EXP 	New trial (rep=0, index=46): {'primePerson': 3.0, 'primeGender': 'm', 'prime': '033_o_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_136.1.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 176.97002883463455, 'Condition': 'h_s'}
+692.8049 	EXP 	text_slider: autoDraw = False
+692.8049 	EXP 	slider_stud: autoDraw = False
+692.8049 	EXP 	polygon_ISI: autoDraw = True
+694.2741 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_136.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+694.4882 	EXP 	polygon_ISI: autoDraw = False
+694.4882 	EXP 	polygon_ISI: autoDraw = False
+694.4882 	EXP 	movie: autoLog = True
+694.4882 	EXP 	movie: movie = 'sad_136.1.wmv'
+694.4882 	EXP 	movie: size = array([1280.,  720.])
+694.4882 	EXP 	movie: ori = 0
+694.4882 	EXP 	primerImage: image = '033_o_m_h_a.jpg'
+694.4882 	EXP 	polygon: autoDraw = True
+694.8049 	EXP 	polygon: autoDraw = False
+694.8049 	EXP 	movie: autoDraw = True
+695.9300 	EXP 	primerImage: autoDraw = True
+695.9466 	EXP 	primerImage: autoDraw = False
+697.9299 	EXP 	Set movie finished
+697.9382 	EXP 	response: autoDraw = True
+699.4883 	EXP 	response: autoDraw = False
+699.4883 	EXP 	polygon: autoDraw = False
+699.4883 	EXP 	movie: autoDraw = False
+699.4883 	EXP 	primerImage: autoDraw = False
+699.4883 	EXP 	response: autoDraw = False
+699.4883 	EXP 	slider_stud: markerPos = None
+699.4883 	EXP 	slider_stud: markerPos = None
+699.4883 	EXP 	slider_stud: rating = None
+699.4883 	EXP 	slider_stud: markerPos = None
+699.4883 	EXP 	slider_stud: markerPos = None
+699.4883 	EXP 	slider_stud: rating = None
+699.4883 	EXP 	slider_stud: markerPos = 5
+699.4883 	EXP 	text_slider: autoDraw = True
+699.4883 	EXP 	slider_stud: autoDraw = True
+702.4812 	EXP 	New trial (rep=0, index=47): {'primePerson': 9.0, 'primeGender': 'f', 'prime': '019_m_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_10.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 157.2463435658512, 'Condition': 'h_h'}
+702.4881 	EXP 	text_slider: autoDraw = False
+702.4881 	EXP 	slider_stud: autoDraw = False
+702.4881 	EXP 	polygon_ISI: autoDraw = True
+703.7992 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_10.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+704.0546 	EXP 	polygon_ISI: autoDraw = False
+704.0546 	EXP 	polygon_ISI: autoDraw = False
+704.0546 	EXP 	movie: autoLog = True
+704.0546 	EXP 	movie: movie = 'happy_10.1ns.avi'
+704.0546 	EXP 	movie: size = array([1280.,  720.])
+704.0546 	EXP 	movie: ori = 0
+704.0546 	EXP 	primerImage: image = '019_m_f_h_a.jpg'
+704.0546 	EXP 	polygon: autoDraw = True
+704.3713 	EXP 	polygon: autoDraw = False
+704.3713 	EXP 	movie: autoDraw = True
+705.4962 	EXP 	primerImage: autoDraw = True
+705.5130 	EXP 	primerImage: autoDraw = False
+712.9377 	EXP 	Set movie finished
+712.9461 	EXP 	response: autoDraw = True
+714.4960 	EXP 	response: autoDraw = False
+714.4960 	EXP 	polygon: autoDraw = False
+714.4960 	EXP 	movie: autoDraw = False
+714.4960 	EXP 	primerImage: autoDraw = False
+714.4960 	EXP 	response: autoDraw = False
+714.4960 	EXP 	slider_stud: markerPos = None
+714.4960 	EXP 	slider_stud: markerPos = None
+714.4960 	EXP 	slider_stud: rating = None
+714.4960 	EXP 	slider_stud: markerPos = None
+714.4960 	EXP 	slider_stud: markerPos = None
+714.4960 	EXP 	slider_stud: rating = None
+714.4960 	EXP 	slider_stud: markerPos = 5
+714.4960 	EXP 	text_slider: autoDraw = True
+714.4960 	EXP 	slider_stud: autoDraw = True
+715.4710 	EXP 	slider_stud: markerPos = 4
+717.4899 	EXP 	New trial (rep=0, index=48): {'primePerson': 2.0, 'primeGender': 'f', 'prime': '012_o_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_2.2ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 206.34800317295262, 'Condition': 'h_h'}
+717.4961 	EXP 	text_slider: autoDraw = False
+717.4961 	EXP 	slider_stud: autoDraw = False
+717.4961 	EXP 	polygon_ISI: autoDraw = True
+719.2157 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_2.2ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+719.4792 	EXP 	polygon_ISI: autoDraw = False
+719.4792 	EXP 	polygon_ISI: autoDraw = False
+719.4792 	EXP 	movie: autoLog = True
+719.4792 	EXP 	movie: movie = 'happy_2.2ns.avi'
+719.4792 	EXP 	movie: size = array([1280.,  720.])
+719.4792 	EXP 	movie: ori = 0
+719.4792 	EXP 	primerImage: image = '012_o_f_h_a.jpg'
+719.4792 	EXP 	polygon: autoDraw = True
+719.7958 	EXP 	polygon: autoDraw = False
+719.7958 	EXP 	movie: autoDraw = True
+720.9374 	EXP 	primerImage: autoDraw = True
+720.9541 	EXP 	primerImage: autoDraw = False
+733.1210 	EXP 	Set movie finished
+733.1291 	EXP 	response: autoDraw = True
+734.6868 	EXP 	response: autoDraw = False
+734.6868 	EXP 	polygon: autoDraw = False
+734.6868 	EXP 	movie: autoDraw = False
+734.6868 	EXP 	primerImage: autoDraw = False
+734.6868 	EXP 	response: autoDraw = False
+734.6868 	EXP 	slider_stud: markerPos = None
+734.6868 	EXP 	slider_stud: markerPos = None
+734.6868 	EXP 	slider_stud: rating = None
+734.6868 	EXP 	slider_stud: markerPos = None
+734.6868 	EXP 	slider_stud: markerPos = None
+734.6868 	EXP 	slider_stud: rating = None
+734.6868 	EXP 	slider_stud: markerPos = 5
+734.6868 	EXP 	text_slider: autoDraw = True
+734.6868 	EXP 	slider_stud: autoDraw = True
+737.7000 	EXP 	New trial (rep=0, index=49): {'primePerson': 3.0, 'primeGender': 'm', 'prime': '033_o_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_24.2ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 167.9423847659953, 'Condition': 'h_h'}
+737.7035 	EXP 	text_slider: autoDraw = False
+737.7035 	EXP 	slider_stud: autoDraw = False
+737.7035 	EXP 	polygon_ISI: autoDraw = True
+739.0980 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_24.2ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+739.3202 	EXP 	polygon_ISI: autoDraw = False
+739.3202 	EXP 	polygon_ISI: autoDraw = False
+739.3202 	EXP 	movie: autoLog = True
+739.3202 	EXP 	movie: movie = 'happy_24.2ns.avi'
+739.3202 	EXP 	movie: size = array([1280.,  720.])
+739.3202 	EXP 	movie: ori = 0
+739.3202 	EXP 	primerImage: image = '033_o_m_h_a.jpg'
+739.3202 	EXP 	polygon: autoDraw = True
+739.6370 	EXP 	polygon: autoDraw = False
+739.6370 	EXP 	movie: autoDraw = True
+740.8036 	EXP 	primerImage: autoDraw = True
+740.8202 	EXP 	primerImage: autoDraw = False
+744.4955 	EXP 	Set movie finished
+744.5034 	EXP 	response: autoDraw = True
+746.0531 	EXP 	response: autoDraw = False
+746.0531 	EXP 	polygon: autoDraw = False
+746.0531 	EXP 	movie: autoDraw = False
+746.0531 	EXP 	primerImage: autoDraw = False
+746.0531 	EXP 	response: autoDraw = False
+746.0531 	EXP 	slider_stud: markerPos = None
+746.0531 	EXP 	slider_stud: markerPos = None
+746.0531 	EXP 	slider_stud: rating = None
+746.0531 	EXP 	slider_stud: markerPos = None
+746.0531 	EXP 	slider_stud: markerPos = None
+746.0531 	EXP 	slider_stud: rating = None
+746.0531 	EXP 	slider_stud: markerPos = 5
+746.0531 	EXP 	text_slider: autoDraw = True
+746.0531 	EXP 	slider_stud: autoDraw = True
+749.0663 	EXP 	New trial (rep=0, index=50): {'primePerson': 1.0, 'primeGender': 'f', 'prime': '021_o_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_61.2ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 210.94664004826666, 'Condition': 's_h'}
+749.0783 	EXP 	text_slider: autoDraw = False
+749.0783 	EXP 	slider_stud: autoDraw = False
+749.0783 	EXP 	polygon_ISI: autoDraw = True
+750.8308 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_61.2ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+751.0613 	EXP 	polygon_ISI: autoDraw = False
+751.0613 	EXP 	polygon_ISI: autoDraw = False
+751.0613 	EXP 	movie: autoLog = True
+751.0613 	EXP 	movie: movie = 'happy_61.2ns.avi'
+751.0613 	EXP 	movie: size = array([1280.,  720.])
+751.0613 	EXP 	movie: ori = 0
+751.0613 	EXP 	primerImage: image = '021_o_f_s_a.jpg'
+751.0613 	EXP 	polygon: autoDraw = True
+751.3781 	EXP 	polygon: autoDraw = False
+751.3781 	EXP 	movie: autoDraw = True
+752.5529 	EXP 	primerImage: autoDraw = True
+752.5698 	EXP 	primerImage: autoDraw = False
+757.0279 	EXP 	Set movie finished
+757.0362 	EXP 	response: autoDraw = True
+758.5860 	EXP 	response: autoDraw = False
+758.5860 	EXP 	polygon: autoDraw = False
+758.5860 	EXP 	movie: autoDraw = False
+758.5860 	EXP 	primerImage: autoDraw = False
+758.5860 	EXP 	response: autoDraw = False
+758.5860 	EXP 	slider_stud: markerPos = None
+758.5860 	EXP 	slider_stud: markerPos = None
+758.5860 	EXP 	slider_stud: rating = None
+758.5860 	EXP 	slider_stud: markerPos = None
+758.5860 	EXP 	slider_stud: markerPos = None
+758.5860 	EXP 	slider_stud: rating = None
+758.5860 	EXP 	slider_stud: markerPos = 5
+758.5860 	EXP 	text_slider: autoDraw = True
+758.5860 	EXP 	slider_stud: autoDraw = True
+761.6008 	EXP 	New trial (rep=0, index=51): {'primePerson': 4.0, 'primeGender': 'm', 'prime': '004_o_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_2.4ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 153.02079367163634, 'Condition': 's_s'}
+761.6111 	EXP 	text_slider: autoDraw = False
+761.6111 	EXP 	slider_stud: autoDraw = False
+761.6111 	EXP 	polygon_ISI: autoDraw = True
+762.8888 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_2.4ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+763.1193 	EXP 	polygon_ISI: autoDraw = False
+763.1193 	EXP 	polygon_ISI: autoDraw = False
+763.1193 	EXP 	movie: autoLog = True
+763.1193 	EXP 	movie: movie = 'sad_2.4ns.avi'
+763.1193 	EXP 	movie: size = array([1280.,  720.])
+763.1193 	EXP 	movie: ori = 0
+763.1193 	EXP 	primerImage: image = '004_o_m_s_a.jpg'
+763.1193 	EXP 	polygon: autoDraw = True
+763.4360 	EXP 	polygon: autoDraw = False
+763.4360 	EXP 	movie: autoDraw = True
+764.5944 	EXP 	primerImage: autoDraw = True
+764.6109 	EXP 	primerImage: autoDraw = False
+772.5198 	EXP 	Set movie finished
+772.5277 	EXP 	response: autoDraw = True
+774.0941 	EXP 	response: autoDraw = False
+774.0941 	EXP 	polygon: autoDraw = False
+774.0941 	EXP 	movie: autoDraw = False
+774.0941 	EXP 	primerImage: autoDraw = False
+774.0941 	EXP 	response: autoDraw = False
+774.0941 	EXP 	slider_stud: markerPos = None
+774.0941 	EXP 	slider_stud: markerPos = None
+774.0941 	EXP 	slider_stud: rating = None
+774.0941 	EXP 	slider_stud: markerPos = None
+774.0941 	EXP 	slider_stud: markerPos = None
+774.0941 	EXP 	slider_stud: rating = None
+774.0941 	EXP 	slider_stud: markerPos = 5
+774.0941 	EXP 	text_slider: autoDraw = True
+774.0941 	EXP 	slider_stud: autoDraw = True
+777.1075 	EXP 	New trial (rep=0, index=52): {'primePerson': 8.0, 'primeGender': 'm', 'prime': '008_y_m_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_1.2ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 210.98946429383824, 'Condition': 'h_h'}
+777.1189 	EXP 	text_slider: autoDraw = False
+777.1189 	EXP 	slider_stud: autoDraw = False
+777.1189 	EXP 	polygon_ISI: autoDraw = True
+778.8717 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_1.2ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+779.1437 	EXP 	polygon_ISI: autoDraw = False
+779.1437 	EXP 	polygon_ISI: autoDraw = False
+779.1437 	EXP 	movie: autoLog = True
+779.1437 	EXP 	movie: movie = 'happy_1.2ns.avi'
+779.1437 	EXP 	movie: size = array([1280.,  720.])
+779.1437 	EXP 	movie: ori = 0
+779.1437 	EXP 	primerImage: image = '008_y_m_h_a.jpg'
+779.1437 	EXP 	polygon: autoDraw = True
+779.4605 	EXP 	polygon: autoDraw = False
+779.4605 	EXP 	movie: autoDraw = True
+780.6022 	EXP 	primerImage: autoDraw = True
+780.6189 	EXP 	primerImage: autoDraw = False
+793.3773 	EXP 	Set movie finished
+793.3852 	EXP 	response: autoDraw = True
+794.9349 	EXP 	response: autoDraw = False
+794.9349 	EXP 	polygon: autoDraw = False
+794.9349 	EXP 	movie: autoDraw = False
+794.9349 	EXP 	primerImage: autoDraw = False
+794.9349 	EXP 	response: autoDraw = False
+794.9349 	EXP 	slider_stud: markerPos = None
+794.9349 	EXP 	slider_stud: markerPos = None
+794.9349 	EXP 	slider_stud: rating = None
+794.9349 	EXP 	slider_stud: markerPos = None
+794.9349 	EXP 	slider_stud: markerPos = None
+794.9349 	EXP 	slider_stud: rating = None
+794.9349 	EXP 	slider_stud: markerPos = 5
+794.9349 	EXP 	text_slider: autoDraw = True
+794.9349 	EXP 	slider_stud: autoDraw = True
+797.9488 	EXP 	New trial (rep=0, index=53): {'primePerson': 2.0, 'primeGender': 'f', 'prime': '012_o_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_52.2ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 172.57202848318138, 'Condition': 's_h'}
+797.9598 	EXP 	text_slider: autoDraw = False
+797.9598 	EXP 	slider_stud: autoDraw = False
+797.9598 	EXP 	polygon_ISI: autoDraw = True
+799.3966 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_52.2ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+799.6348 	EXP 	polygon_ISI: autoDraw = False
+799.6348 	EXP 	polygon_ISI: autoDraw = False
+799.6348 	EXP 	movie: autoLog = True
+799.6348 	EXP 	movie: movie = 'happy_52.2ns.avi'
+799.6348 	EXP 	movie: size = array([1280.,  720.])
+799.6348 	EXP 	movie: ori = 0
+799.6348 	EXP 	primerImage: image = '012_o_f_s_a.jpg'
+799.6348 	EXP 	polygon: autoDraw = True
+799.9515 	EXP 	polygon: autoDraw = False
+799.9515 	EXP 	movie: autoDraw = True
+801.1186 	EXP 	primerImage: autoDraw = True
+801.1433 	EXP 	primerImage: autoDraw = False
+804.6265 	EXP 	Set movie finished
+804.6347 	EXP 	response: autoDraw = True
+806.1847 	EXP 	response: autoDraw = False
+806.1847 	EXP 	polygon: autoDraw = False
+806.1847 	EXP 	movie: autoDraw = False
+806.1847 	EXP 	primerImage: autoDraw = False
+806.1847 	EXP 	response: autoDraw = False
+806.1847 	EXP 	slider_stud: markerPos = None
+806.1847 	EXP 	slider_stud: markerPos = None
+806.1847 	EXP 	slider_stud: rating = None
+806.1847 	EXP 	slider_stud: markerPos = None
+806.1847 	EXP 	slider_stud: markerPos = None
+806.1847 	EXP 	slider_stud: rating = None
+806.1847 	EXP 	slider_stud: markerPos = 5
+806.1847 	EXP 	text_slider: autoDraw = True
+806.1847 	EXP 	slider_stud: autoDraw = True
+806.7764 	EXP 	slider_stud: markerPos = 4
+809.1867 	EXP 	New trial (rep=0, index=54): {'primePerson': 9.0, 'primeGender': 'f', 'prime': '019_m_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_61.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 181.3003220572762, 'Condition': 's_h'}
+809.1930 	EXP 	text_slider: autoDraw = False
+809.1930 	EXP 	slider_stud: autoDraw = False
+809.1930 	EXP 	polygon_ISI: autoDraw = True
+810.7041 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_61.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+810.9679 	EXP 	polygon_ISI: autoDraw = False
+810.9679 	EXP 	polygon_ISI: autoDraw = False
+810.9679 	EXP 	movie: autoLog = True
+810.9679 	EXP 	movie: movie = 'happy_61.1ns.avi'
+810.9679 	EXP 	movie: size = array([1280.,  720.])
+810.9679 	EXP 	movie: ori = 0
+810.9679 	EXP 	primerImage: image = '019_m_f_s_a.jpg'
+810.9679 	EXP 	polygon: autoDraw = True
+811.2845 	EXP 	polygon: autoDraw = False
+811.2845 	EXP 	movie: autoDraw = True
+812.5094 	EXP 	primerImage: autoDraw = True
+812.5260 	EXP 	primerImage: autoDraw = False
+819.8010 	EXP 	Set movie finished
+819.8092 	EXP 	response: autoDraw = True
+821.3592 	EXP 	response: autoDraw = False
+821.3592 	EXP 	polygon: autoDraw = False
+821.3592 	EXP 	movie: autoDraw = False
+821.3592 	EXP 	primerImage: autoDraw = False
+821.3592 	EXP 	response: autoDraw = False
+821.3592 	EXP 	slider_stud: markerPos = None
+821.3592 	EXP 	slider_stud: markerPos = None
+821.3592 	EXP 	slider_stud: rating = None
+821.3592 	EXP 	slider_stud: markerPos = None
+821.3592 	EXP 	slider_stud: markerPos = None
+821.3592 	EXP 	slider_stud: rating = None
+821.3592 	EXP 	slider_stud: markerPos = 5
+821.3592 	EXP 	text_slider: autoDraw = True
+821.3592 	EXP 	slider_stud: autoDraw = True
+821.8092 	EXP 	slider_stud: markerPos = 6
+824.3614 	EXP 	New trial (rep=0, index=55): {'primePerson': 0.0, 'primeGender': 'f', 'prime': '030_o_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_133.1.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 198.86251500867985, 'Condition': 'h_s'}
+824.3675 	EXP 	text_slider: autoDraw = False
+824.3675 	EXP 	slider_stud: autoDraw = False
+824.3675 	EXP 	polygon_ISI: autoDraw = True
+826.0204 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_133.1.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+826.2422 	EXP 	polygon_ISI: autoDraw = False
+826.2422 	EXP 	polygon_ISI: autoDraw = False
+826.2422 	EXP 	movie: autoLog = True
+826.2422 	EXP 	movie: movie = 'sad_133.1.wmv'
+826.2422 	EXP 	movie: size = array([1280.,  720.])
+826.2422 	EXP 	movie: ori = 0
+826.2422 	EXP 	primerImage: image = '030_o_f_h_a.jpg'
+826.2422 	EXP 	polygon: autoDraw = True
+826.5589 	EXP 	polygon: autoDraw = False
+826.5589 	EXP 	movie: autoDraw = True
+827.6924 	EXP 	primerImage: autoDraw = True
+827.7090 	EXP 	primerImage: autoDraw = False
+829.6839 	EXP 	Set movie finished
+829.6922 	EXP 	response: autoDraw = True
+831.3506 	EXP 	response: autoDraw = False
+831.3506 	EXP 	polygon: autoDraw = False
+831.3506 	EXP 	movie: autoDraw = False
+831.3506 	EXP 	primerImage: autoDraw = False
+831.3506 	EXP 	response: autoDraw = False
+831.3506 	EXP 	slider_stud: markerPos = None
+831.3506 	EXP 	slider_stud: markerPos = None
+831.3506 	EXP 	slider_stud: rating = None
+831.3506 	EXP 	slider_stud: markerPos = None
+831.3506 	EXP 	slider_stud: markerPos = None
+831.3506 	EXP 	slider_stud: rating = None
+831.3506 	EXP 	slider_stud: markerPos = 5
+831.3506 	EXP 	text_slider: autoDraw = True
+831.3506 	EXP 	slider_stud: autoDraw = True
+834.3726 	EXP 	New trial (rep=0, index=56): {'primePerson': 0.0, 'primeGender': 'f', 'prime': '040_y_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'sad_128.2.wmv', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'incongruent', 'ID_Primer': 120.0, 'ID_Target': 160.0, 'JitterTime': 206.10005857915363, 'Condition': 'h_s'}
+834.3838 	EXP 	text_slider: autoDraw = False
+834.3838 	EXP 	slider_stud: autoDraw = False
+834.3838 	EXP 	polygon_ISI: autoDraw = True
+836.1039 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_128.2.wmv', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+836.3170 	EXP 	polygon_ISI: autoDraw = False
+836.3170 	EXP 	polygon_ISI: autoDraw = False
+836.3170 	EXP 	movie: autoLog = True
+836.3170 	EXP 	movie: movie = 'sad_128.2.wmv'
+836.3170 	EXP 	movie: size = array([1280.,  720.])
+836.3170 	EXP 	movie: ori = 0
+836.3170 	EXP 	primerImage: image = '040_y_f_h_a.jpg'
+836.3170 	EXP 	polygon: autoDraw = True
+836.6336 	EXP 	polygon: autoDraw = False
+836.6336 	EXP 	movie: autoDraw = True
+837.7669 	EXP 	primerImage: autoDraw = True
+837.7836 	EXP 	primerImage: autoDraw = False
+839.7586 	EXP 	Set movie finished
+839.7668 	EXP 	response: autoDraw = True
+841.3169 	EXP 	response: autoDraw = False
+841.3169 	EXP 	polygon: autoDraw = False
+841.3169 	EXP 	movie: autoDraw = False
+841.3169 	EXP 	primerImage: autoDraw = False
+841.3169 	EXP 	response: autoDraw = False
+841.3169 	EXP 	slider_stud: markerPos = None
+841.3169 	EXP 	slider_stud: markerPos = None
+841.3169 	EXP 	slider_stud: rating = None
+841.3169 	EXP 	slider_stud: markerPos = None
+841.3169 	EXP 	slider_stud: markerPos = None
+841.3169 	EXP 	slider_stud: rating = None
+841.3169 	EXP 	slider_stud: markerPos = 5
+841.3169 	EXP 	text_slider: autoDraw = True
+841.3169 	EXP 	slider_stud: autoDraw = True
+844.3307 	EXP 	New trial (rep=0, index=57): {'primePerson': 1.0, 'primeGender': 'f', 'prime': '021_o_f_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'sad_9.5ns.avi', 'targetEmotion': 'sad', 'corrAnsTar': 7.0, 'Cond': 'congruent', 'ID_Primer': 130.0, 'ID_Target': 160.0, 'JitterTime': 206.16642757875042, 'Condition': 's_s'}
+844.3418 	EXP 	text_slider: autoDraw = False
+844.3418 	EXP 	slider_stud: autoDraw = False
+844.3418 	EXP 	polygon_ISI: autoDraw = True
+846.0614 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='sad_9.5ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+846.2748 	EXP 	polygon_ISI: autoDraw = False
+846.2748 	EXP 	polygon_ISI: autoDraw = False
+846.2748 	EXP 	movie: autoLog = True
+846.2748 	EXP 	movie: movie = 'sad_9.5ns.avi'
+846.2748 	EXP 	movie: size = array([1280.,  720.])
+846.2748 	EXP 	movie: ori = 0
+846.2748 	EXP 	primerImage: image = '021_o_f_s_a.jpg'
+846.2748 	EXP 	polygon: autoDraw = True
+846.5917 	EXP 	polygon: autoDraw = False
+846.5917 	EXP 	movie: autoDraw = True
+847.7586 	EXP 	primerImage: autoDraw = True
+847.7748 	EXP 	primerImage: autoDraw = False
+853.4498 	EXP 	Set movie finished
+853.4582 	EXP 	response: autoDraw = True
+855.0996 	EXP 	response: autoDraw = False
+855.0996 	EXP 	polygon: autoDraw = False
+855.0996 	EXP 	movie: autoDraw = False
+855.0996 	EXP 	primerImage: autoDraw = False
+855.0996 	EXP 	response: autoDraw = False
+855.0996 	EXP 	slider_stud: markerPos = None
+855.0996 	EXP 	slider_stud: markerPos = None
+855.0996 	EXP 	slider_stud: rating = None
+855.0996 	EXP 	slider_stud: markerPos = None
+855.0996 	EXP 	slider_stud: markerPos = None
+855.0996 	EXP 	slider_stud: rating = None
+855.0996 	EXP 	slider_stud: markerPos = 5
+855.0996 	EXP 	text_slider: autoDraw = True
+855.0996 	EXP 	slider_stud: autoDraw = True
+856.1497 	EXP 	slider_stud: markerPos = 4
+858.0929 	EXP 	New trial (rep=0, index=58): {'primePerson': 1.0, 'primeGender': 'f', 'prime': '021_o_f_h_a.jpg', 'primeEmotion': 'happy', 'corrAnsPrime': 9.0, 'target': 'happy_12.1ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'congruent', 'ID_Primer': 120.0, 'ID_Target': 150.0, 'JitterTime': 132.59080005900228, 'Condition': 'h_h'}
+858.0997 	EXP 	text_slider: autoDraw = False
+858.0997 	EXP 	slider_stud: autoDraw = False
+858.0997 	EXP 	polygon_ISI: autoDraw = True
+859.2030 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_12.1ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+859.4579 	EXP 	polygon_ISI: autoDraw = False
+859.4579 	EXP 	polygon_ISI: autoDraw = False
+859.4579 	EXP 	movie: autoLog = True
+859.4579 	EXP 	movie: movie = 'happy_12.1ns.avi'
+859.4579 	EXP 	movie: size = array([1280.,  720.])
+859.4579 	EXP 	movie: ori = 0
+859.4579 	EXP 	primerImage: image = '021_o_f_h_a.jpg'
+859.4579 	EXP 	polygon: autoDraw = True
+859.7745 	EXP 	polygon: autoDraw = False
+859.7745 	EXP 	movie: autoDraw = True
+860.9162 	EXP 	primerImage: autoDraw = True
+860.9328 	EXP 	primerImage: autoDraw = False
+868.5159 	EXP 	Set movie finished
+868.5243 	EXP 	response: autoDraw = True
+870.0658 	EXP 	response: autoDraw = False
+870.0658 	EXP 	polygon: autoDraw = False
+870.0658 	EXP 	movie: autoDraw = False
+870.0658 	EXP 	primerImage: autoDraw = False
+870.0658 	EXP 	response: autoDraw = False
+870.0658 	EXP 	slider_stud: markerPos = None
+870.0658 	EXP 	slider_stud: markerPos = None
+870.0658 	EXP 	slider_stud: rating = None
+870.0658 	EXP 	slider_stud: markerPos = None
+870.0658 	EXP 	slider_stud: markerPos = None
+870.0658 	EXP 	slider_stud: rating = None
+870.0658 	EXP 	slider_stud: markerPos = 5
+870.0658 	EXP 	text_slider: autoDraw = True
+870.0658 	EXP 	slider_stud: autoDraw = True
+870.4243 	EXP 	slider_stud: markerPos = 6
+873.0668 	EXP 	New trial (rep=0, index=59): {'primePerson': 3.0, 'primeGender': 'm', 'prime': '013_y_m_s_a.jpg', 'primeEmotion': 'sad', 'corrAnsPrime': 7.0, 'target': 'happy_56.2ns.avi', 'targetEmotion': 'happy', 'corrAnsTar': 9.0, 'Cond': 'incongruent', 'ID_Primer': 130.0, 'ID_Target': 150.0, 'JitterTime': 163.39234110935848, 'Condition': 's_h'}
+873.0741 	EXP 	text_slider: autoDraw = False
+873.0741 	EXP 	slider_stud: autoDraw = False
+873.0741 	EXP 	polygon_ISI: autoDraw = True
+874.4355 	EXP 	Created movie = MovieStim3(__class__=<class 'psychopy.visual.movie3.MovieStim3'>, autoLog=True, color=UNKNOWN, colorSpace=UNKNOWN, depth=-2.0, filename='happy_56.2ns.avi', flipHoriz=False, flipVert=False, fps=UNKNOWN, interpolate=True, loop=False, name='movie', noAudio=False, opacity=1, ori=method-wrapper(...), pos=array([0., 0.]), size=method-wrapper(...), units='pix', vframe_callback=UNKNOWN, volume=UNKNOWN, win=Window(...))
+874.6658 	EXP 	polygon_ISI: autoDraw = False
+874.6658 	EXP 	polygon_ISI: autoDraw = False
+874.6658 	EXP 	movie: autoLog = True
+874.6658 	EXP 	movie: movie = 'happy_56.2ns.avi'
+874.6658 	EXP 	movie: size = array([1280.,  720.])
+874.6658 	EXP 	movie: ori = 0
+874.6658 	EXP 	primerImage: image = '013_y_m_s_a.jpg'
+874.6658 	EXP 	polygon: autoDraw = True
+874.9824 	EXP 	polygon: autoDraw = False
+874.9824 	EXP 	movie: autoDraw = True
+876.2074 	EXP 	primerImage: autoDraw = True
+876.2241 	EXP 	primerImage: autoDraw = False
+881.1322 	EXP 	Set movie finished
+881.1405 	EXP 	response: autoDraw = True
+882.6906 	EXP 	response: autoDraw = False
+882.6906 	EXP 	polygon: autoDraw = False
+882.6906 	EXP 	movie: autoDraw = False
+882.6906 	EXP 	primerImage: autoDraw = False
+882.6906 	EXP 	response: autoDraw = False
+882.6906 	EXP 	slider_stud: markerPos = None
+882.6906 	EXP 	slider_stud: markerPos = None
+882.6906 	EXP 	slider_stud: rating = None
+882.6906 	EXP 	slider_stud: markerPos = None
+882.6906 	EXP 	slider_stud: markerPos = None
+882.6906 	EXP 	slider_stud: rating = None
+882.6906 	EXP 	slider_stud: markerPos = 5
+882.6906 	EXP 	text_slider: autoDraw = True
+882.6906 	EXP 	slider_stud: autoDraw = True
+885.7154 	EXP 	text_slider: autoDraw = False
+885.7154 	EXP 	slider_stud: autoDraw = False
+885.7154 	EXP 	text_ende: autoDraw = True
+895.6901 	EXP 	text_ende: autoDraw = False
+895.8944 	EXP 	window1: mouseVisible = True
