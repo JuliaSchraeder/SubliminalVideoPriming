@@ -1,0 +1,836 @@
+---
+title: "VideoMask_RT_Exctraction"
+output: html_document
+---
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+install.packages("dplyr")
+library(dplyr)
+
+
+#Import aller Datensätze 
+```{r}
+pfad1<-"C:/Users/Rebecca/Desktop/Datensätze_RT"
+alleDateien<-list.files(path=pfad1,pattern="*.csv",full.names=TRUE)
+alleDaten<-lapply(alleDateien,function(x)read.csv(sep=";",x,stringsAsFactors=FALSE))
+```
+
+#Bereinigen 
+```{r}
+#Entfernen der Probedurchläufe 
+for(i in seq_along(alleDaten)){alleDaten[[i]]<-alleDaten[[i]][-c(1:2),]}
+
+#Entfernen von irrelevanten Spalten 
+relevanteSpalten<-c("primeGender","prime","primeEmotion","corrAnsPrime","targetEmotion","corrAnsTar","Cond","key_resp.keys","key_resp.rt","Rating")
+select_columns<-function(df,columns){return(df[,columns,drop=FALSE])}
+Daten_gesäubert<-lapply(alleDaten,select_columns,columns=relevanteSpalten)
+
+#Ergänzung von Zeilennummern (innerhalb jeden Probandens) und Probandennummern 
+add_row_numbers <- function(df) {
+  df$row_number <- seq_len(nrow(df))
+  return(df)
+}
+Daten_gesäubert<-lapply(Daten_gesäubert,add_row_numbers)
+
+add_subject_id <- function(df, subject_id) {
+  df$Subject <- subject_id
+  return(df)
+}
+subject_ids<-1:length(Daten_gesäubert)
+Daten_gesäubert<-Map(add_subject_id,Daten_gesäubert,subject_ids)
+
+#Entfernen aller Durchläufe, in denen keine Reaktionszeit erhoben wurde
+remove_rows_with_na <- function(df) {
+  df <- df[complete.cases(df$key_resp.rt), ]
+  return(df)
+}
+Daten_gesäubert<-lapply(Daten_gesäubert,remove_rows_with_na)
+```
+
+
+#alle Data Frames zusammenfügen
+```{r}
+combined_df<-do.call(rbind,Daten_gesäubert)
+```
+
+
+#Import der Datensätze je nach Gruppe (Patienten vs. Kontrolle)
+```{r}
+pfad2<-"C:/Users/Rebecca/Desktop/Datensätze_RT/Patienten"
+alleDateienPatienten<-list.files(path=pfad2,pattern="*.csv",full.names=TRUE)
+alleDatenPatienten<-lapply(alleDateienPatienten,function(x)read.csv(sep=";",x,stringsAsFactors=FALSE))
+for(i in seq_along(alleDatenPatienten)){alleDatenPatienten[[i]]<-alleDatenPatienten[[i]][-c(1:2),]}
+DatenPatienten_gesäubert<-lapply(alleDatenPatienten,select_columns,columns=relevanteSpalten)
+
+#Ergänzung von Zeilennummern (innerhalb jeden Probandens) und Probandennummern 
+DatenPatienten_gesäubert<-lapply(DatenPatienten_gesäubert,add_row_numbers)
+
+subject_ids<-1:length(DatenPatienten_gesäubert)
+DatenPatienten_gesäubert<-Map(add_subject_id,DatenPatienten_gesäubert,subject_ids)
+
+#Entfernen aller Durchläufe, in denen keine Reaktionszeit erhoben wurde
+DatenPatienten_gesäubert<-lapply(DatenPatienten_gesäubert,remove_rows_with_na)
+
+combined_Patienten<-do.call(rbind,DatenPatienten_gesäubert)
+
+#Ergänzung der Probandengruppe -> Wert 1 = Patient
+combined_Patienten$Probandengruppe<-1
+```
+
+
+```{r}
+pfad3<-"C:/Users/Rebecca/Desktop/Datensätze_RT/Kontrollgruppe"
+alleDateienKontrolle<-list.files(path=pfad3,pattern="*.csv",full.names=TRUE)
+alleDatenKontrolle<-lapply(alleDateienKontrolle,function(x)read.csv(sep=";",x,stringsAsFactors=FALSE))
+for(i in seq_along(alleDatenKontrolle)){alleDatenKontrolle[[i]]<-alleDatenKontrolle[[i]][-c(1:2),]}
+DatenKontrolle_gesäubert<-lapply(alleDatenKontrolle,select_columns,columns=relevanteSpalten)
+
+#Ergänzung von Zeilennummern (innerhalb jeden Probandens) und Probandennummern -> Achtung: hier ab 58
+DatenKontrolle_gesäubert<-lapply(DatenKontrolle_gesäubert,add_row_numbers)
+
+add_subject_id2 <- function(df, id) {
+  if (nrow(df) > 0) {
+  df <- cbind(df, Subject = id)    
+}
+  return(df)
+}
+ids <- seq(58, 115, length.out = length(DatenKontrolle_gesäubert))
+DatenKontrolle_gesäubert<-Map(add_subject_id2,DatenKontrolle_gesäubert,ids)
+
+#Entfernen aller Durchläufe, in denen keine Reaktionszeit erhoben wurde
+DatenKontrolle_gesäubert<-lapply(DatenKontrolle_gesäubert,remove_rows_with_na)
+
+combined_Kontrolle<-do.call(rbind,DatenKontrolle_gesäubert)
+
+#Ergänzung der Probandengruppe -> Wert 2 = Kontrolle
+combined_Kontrolle$Probandengruppe<-2
+```
+
+
+
+#combined_Kontrolle & combined_Patienten zu einem Data Frame zusammenfügen
+```{r}
+combined_PatKon<-rbind(combined_Patienten,combined_Kontrolle)
+```
+
+
+#Mixed Model Analyse
+
+# Import Packages
+```{r}
+library(Matrix)
+library(lme4)         # mixed model package
+library(lmerTest)     # library providing p-values for mixed models in lme4
+library(readxl)       # read excel
+library(ggplot2)      # graphics
+library(emmeans)      # library for post-hoc tests
+library(pbkrtest)     # needed for post-hoc tests in mixed models
+library(jtools)       # post hoc tests
+library(interactions) 
+library(effects)      # estimate effects
+library(apaTables)
+library(dplyr)
+library(tidyr)
+library(effects)
+library(readxl)
+library(readr)
+```
+
+
+#Überprüfung der Verteilung der Daten
+```{r}
+x <- combined_PatKon$key_resp.rt
+den <- density(x)
+dat <- data.frame(x = den$x, y = den$y) 
+
+
+#Fit distributions
+library(MASS)
+library(survival)
+library(fitdistrplus)
+fit.weibull <- fitdist(x, "weibull")
+fit.normal <- fitdist(x,"norm")
+fit.gamma <- fitdist(x, "gamma", lower = c(0, 0))
+
+# Compare fits graphically
+plot.legend <- c("Weibull", "Gamma","Normal")
+par(mfrow = c(2, 2)) #show 4 pictures
+denscomp(list(fit.weibull, fit.gamma, fit.normal), fitcol = c("red", "blue","green"), legendtext = plot.legend)
+qqcomp(list(fit.weibull, fit.gamma, fit.normal), fitcol = c("red", "blue","green"), legendtext = plot.legend)
+cdfcomp(list(fit.weibull, fit.gamma, fit.normal), fitcol = c("red", "blue","green"), legendtext = plot.legend)
+ppcomp(list(fit.weibull, fit.gamma, fit.normal), fitcol = c("red", "blue","green"), legendtext = plot.legend)
+
+#Da keine Normalverteilung, sondern eine Gamma-Verteilung angenommen wird, wird mit generalisierten linearen Modellen gerechnet 
+```
+
+
+#Faktorisierung von Variablen 
+```{r}
+combined_PatKon$Subject       <- factor(combined_PatKon$Subject, ordered = FALSE)
+combined_PatKon$primeEmotion  <- factor(combined_PatKon$primeEmotion, ordered = FALSE)
+combined_PatKon$primeGender   <- factor(combined_PatKon$primeGender, ordered = FALSE)
+combined_PatKon$targetEmotion <- factor(combined_PatKon$targetEmotion, ordered = FALSE)
+combined_PatKon$Cond          <- factor(combined_PatKon$Cond, ordered = FALSE)
+combined_PatKon$Probandengruppe <- factor(combined_PatKon$Probandengruppe, ordered = FALSE)
+```
+
+#Schätzung des Models 1 
+```{r}
+#relevante Variablen: primeGender, primeEmotion, targetEmotion, congruent/incongruent, Probandengruppe -> alle als Haupteffekte einbauen
+Model1<-glmer(key_resp.rt ~ primeGender
+              + primeEmotion
+              + targetEmotion
+              + Cond
+              + Probandengruppe
+              + (1|Subject),family=Gamma(link='inverse'),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 1 
+```{r}
+sjPlot:: tab_model(Model1)
+#Zusammenfassung -> jeder Haupteffekt zeigt sich signifikant: 
+#     männlicher Prime = langsamere RT als weiblicher Prime 
+#     traurige PrimeEmotion = langsamere RT als glückliche PrimeEmotion 
+#     traurige targetEmotion = langsamere RT als glückliche targetEmotion 
+#     incongruent = langsamere RT als congruent
+#     Kontrollen = langsamere RT als Patienten 
+```
+
+#diagnostische Plots des Models 1
+```{r fig.show="inline"}
+sjPlot::plot_model(Model1, type = "diag")
+```
+#ANOVA-Tabelle des Models 1
+```{r}
+anova1 <-anova(Model1, type = 3, ddf= "Kenward-Roger")
+print(anova1)
+```
+#Zusammenfassung des Models 1
+```{r}
+summary(Model1)    
+```
+
+#Schätzung des Models 2
+```{r}
+#relevante Variablen: primeGender, primeEmotion, targetEmotion, congruent/incongruent, Probandengruppe
+Model2 <- glmer(key_resp.rt ~ primeEmotion*primeGender
+              + targetEmotion
+              + Cond 
+              + Probandengruppe   
+              + (1|Subject),family=Gamma(link="inverse"),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 2 
+```{r}
+sjPlot:: tab_model(Model2)
+``` 
+
+#Model1 & Model2 miteinander vergleichen (Likelihood-Ratio-Test)
+```{r}
+anova(Model1,Model2)
+#hier kein signifikanter Unterschied zwischen Modell 1 und Modell 2 -> einfacheres Modell ist vorzuziehen(?)
+```
+
+#Schätzung des Models 3
+```{r}
+#relevante Variablen: primeGender, primeEmotion, targetEmotion, congruent/incongruent, Probandengruppe
+Model3 <- glmer(key_resp.rt ~ primeEmotion
+              + primeGender
+              + targetEmotion*Probandengruppe
+              + Cond 
+              + (1|Subject),family=Gamma(link="inverse"),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 3 
+```{r}
+sjPlot:: tab_model(Model3)
+``` 
+
+#Schätzung des Models 4
+```{r}
+#relevante Variablen: primeGender, primeEmotion, targetEmotion, congruent/incongruent, Probandengruppe
+Model4 <- glmer(key_resp.rt ~ primeEmotion*Probandengruppe
+              + primeGender
+              + targetEmotion
+              + Cond 
+              + (1|Subject),family=Gamma(link="inverse"),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 4 
+```{r}
+sjPlot:: tab_model(Model4)
+``` 
+
+#Schätzung des Models 5
+```{r}
+#relevante Variablen: primeGender, primeEmotion, targetEmotion, congruent/incongruent, Probandengruppe
+Model5 <- glmer(key_resp.rt ~ primeEmotion
+              + primeGender
+              + targetEmotion
+              + Cond*Probandengruppe   
+              + (1|Subject),family=Gamma(link="inverse"),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 5 
+```{r}
+sjPlot:: tab_model(Model5)
+``` 
+
+
+#Schätzung des Models 6
+```{r}
+#relevante Variablen: primeGender, primeEmotion, targetEmotion, congruent/incongruent, Probandengruppe
+Model6 <- glmer(key_resp.rt ~ primeEmotion*targetEmotion
+              + primeGender
+              + Cond
+              + Probandengruppe   
+              + (1|Subject),family=Gamma(link="inverse"),
+              data = combined_PatKon)
+
+#mögliches Problem: singuläre Modellmatrix? 
+```
+
+#tabellarische Zusammenfassung des Models 6 
+```{r}
+sjPlot:: tab_model(Model6)
+``` 
+
+#Schätzung des Models 7
+```{r}
+#relevante Variablen: primeGender, primeEmotion, targetEmotion, congruent/incongruent, Probandengruppe
+Model7 <- glmer(key_resp.rt ~ primeEmotion
+              + targetEmotion*Cond
+              + primeGender
+              + Probandengruppe   
+              + (1|Subject),family=Gamma(link="inverse"),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 7 
+```{r}
+sjPlot:: tab_model(Model7)
+``` 
+
+#Schätzung des Models 8
+```{r}
+#relevante Variablen: primeGender, primeEmotion, targetEmotion, congruent/incongruent, Probandengruppe
+Model8 <- glmer(key_resp.rt ~ primeEmotion*targetEmotion
+              + primeGender
+              + Probandengruppe   
+              + (1|Subject),family=Gamma(link="inverse"),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 8 
+```{r}
+sjPlot:: tab_model(Model8)
+
+summary(Model8)
+``` 
+
+#Schätzung des Models 9
+```{r}
+#relevante Variablen: primeGender, primeEmotion, targetEmotion, Probandengruppe
+Model9 <- glmer(key_resp.rt ~ primeEmotion*targetEmotion*Probandengruppe
+              + primeGender
+              + (1|Subject),family=Gamma(link="inverse"),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 9 
+```{r}
+sjPlot:: tab_model(Model9)
+``` 
+
+#Schätzung des Models 10
+```{r}
+#relevante Variablen: primeGender, primeEmotion, targetEmotion, Probandengruppe
+Model10 <- glmer(key_resp.rt ~ primeEmotion*Probandengruppe
+              + targetEmotion
+              + primeGender
+              + (1|Subject),family=Gamma(link="inverse"),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 10 
+```{r}
+sjPlot:: tab_model(Model10)
+``` 
+
+#Schätzung des Models 11
+```{r}
+#relevante Variablen: primeGender, primeEmotion, targetEmotion, Probandengruppe
+Model11 <- glmer(key_resp.rt ~ targetEmotion*Probandengruppe
+              + primeEmotion
+              + primeGender
+              + (1|Subject),family=Gamma(link="inverse"),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 11 
+```{r}
+sjPlot:: tab_model(Model11)
+``` 
+
+#Schätzung des Models 12
+```{r}
+#relevante Variablen: primeGender, primeEmotion, targetEmotion, Probandengruppe
+Model12 <- glmer(key_resp.rt ~ targetEmotion*Probandengruppe*primeEmotion
+              + (1|Subject),family=Gamma(link="inverse"),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 12 
+```{r}
+sjPlot:: tab_model(Model12)
+``` 
+
+#Vergleich aller Modelle
+```{r}
+anova_alle<-anova(Model1,Model2,Model3,Model4,Model5,Model6,Model7,Model8,Model9,Model10,Model11)
+anova_alle
+```
+
+#Überprüfung, welche Modelle sich genau signifikant voneinander unterscheiden 
+#Problem: da ich mit GLMM arbeite, kann ich nicht einfach direkte Post-hoc-Tests wie den Tukey-Test anwenden -> Alternativ dazu Betrachtung der Informationskriterien (AIC und BIC) = niedrigere Werte dieser Kriterien deuten normalerweise auf bessere Modelle hin & Vergleich aller Modelle miteinander --> ACHTUNG: Hier noch einmal gucken, gerade nutze ich den Likelihood-Ratio-Test dafür, aber evtl. eher t-test oder f-test? -> habe mich gegen t- oder F-test entschieden, weil hier die Beobachtungen unabhängig voneinander sein müssen 
+
+```{r}
+#Erstellen einer Liste mit allen GLMMs und einer Liste mit den entsprechenden Modellnamen
+glmm_list<-list(Model1,Model2,Model3,Model4,Model5,Model6,Model7,Model8,Model9,Model10,Model11)
+model_names<-paste("Model",seq_along(glmm_list))   
+
+model_combinations<-combn(glmm_list,2,simplify=FALSE)
+num_combinations<-length(model_combinations)
+model_indices <- lapply(model_combinations, function(pair) {
+  sapply(pair, function(model) which(sapply(glmm_list, function(x) identical(x, model))))
+})
+for (i in seq_len(num_combinations)) {
+  model_pair <- model_combinations[[i]]
+  model_indices_pair <- model_indices[[i]]
+  model1 <- model_pair[[1]]
+  model2 <- model_pair[[2]]
+  lr_test <- anova(model1, model2)
+     cat("Vergleich von", model_names[model_indices_pair[1]], "und", model_names[model_indices_pair[2]], ":\n")
+  print(lr_test)
+}
+
+#Model 11 unterscheidet sich signifikant von Model 2,3,4,5,9
+#Model 10 unterscheidet sich signifikant von Model 2,3,4,5,9
+``` 
+#Post hoc Analysen für Model8
+```{r}
+library(emmeans)
+eff.primeEmotion8        <- emmeans(Model8, pairwise ~ primeEmotion)
+eff.targetEmotion8       <- emmeans(Model8, pairwise ~ targetEmotion)
+eff.prime_target_Emotion8 <- emmeans(Model8, pairwise ~ primeEmotion:targetEmotion)
+eff.primeGender8         <- emmeans(Model8, pairwise ~ primeGender)               
+eff.Probandengruppe8     <- emmeans(Model8, pairwise ~ Probandengruppe)
+```
+```{r}
+eff.primeEmotion8
+eff.targetEmotion8
+eff.prime_target_Emotion8
+eff.primeGender8
+eff.Probandengruppe8 
+
+#Erklärung:
+#contrast estimate -> der geschätzte Kontrastkoeffizient, der anzeigt, wie stark sich die Mittelwerte zwischen den Gruppen unterscheiden 
+#primeEmotion ist zwar hier signifikant, allerdings nicht, wenn man sich das gesamte Modell anschaut, d.h. der Effekt ist also evtl. in Bezug auf das Gesamtmodell nicht groß genug, um Varianz der RT erklären zu können 
+ 
+```
+#Abbildungen der Effekte 
+
+```{r}
+effect_plots<-cowplot::plot_grid( 
+     afex_plot(Model8, x = "primeEmotion", 
+               id = "Subject", dodge = 0.8, 
+               data_geom = geom_violin, 
+               mapping = c("linetype", "fill"),
+               error_arg = list(width = 0.2),
+               data_arg = list(width = 0.5)) + 
+         scale_fill_manual(values = c("happy" = "greenyellow", "sad"= "lightblue")) + 
+         theme(legend.position="none") +
+         labs(y = "RT (in s)  ", x = "prime Emotion")+
+         scale_y_continuous(breaks = seq(0.0, 1.25, by = 0.25)),
+     
+     afex_plot(Model8, x = "targetEmotion", 
+               id = "Subject", dodge = 0.8,
+               data_geom = geom_violin, 
+               mapping = c("linetype", "fill"),
+               error_arg = list(width = 0.2),
+               data_arg = list(width = 0.5)) + 
+         scale_fill_manual(values = c("happy" = "greenyellow", "sad"= "lightblue")) +
+         theme(legend.position="none") +
+         labs(y = "RT (in s)  ", x = "target Emotion")+
+         scale_y_continuous(breaks = seq(0.0, 1.25, by = 0.25)),
+     
+     afex_plot(Model8, x = "primeGender", 
+               id = "Subject", dodge = 0.8,
+               data_geom = geom_violin, 
+               mapping = c("linetype", "fill"),
+               error_arg = list(width = 0.2),
+               data_arg = list(width = 0.5)) + 
+         scale_fill_manual(values = c("m" = "lightblue", "f"= "greenyellow")) +
+         theme(legend.position="none") +
+         labs(y = "RT (in s)  ", x = "prime Gender")+
+         scale_y_continuous(breaks = seq(0.0, 1.25, by = 0.25)),
+     
+     afex_plot(Model8, x = "Probandengruppe", 
+               id = "Subject", dodge = 0.8,
+               data_geom = geom_violin, 
+               mapping = c("linetype", "fill"),
+               error_arg = list(width = 0.2),
+               data_arg = list(width = 0.5)) + 
+         scale_fill_manual(values = c("1" = "greenyellow", "2"= "lightblue")) +
+         theme(legend.position="none") +
+         labs(y = "RT (in s)  ", x = "Subject Group")+
+         scale_y_continuous(breaks = seq(0.0, 1.25, by = 0.25)),
+     
+    afex_plot(Model8, x = "primeEmotion", panel = "targetEmotion", 
+            id = "Subject", dodge = 0.8,
+            factor_levels = list(primeEmotion = c("happy(p)", "sad(p)"),
+                                 targetEmotion = c("happy(t)", "sad(t)")),
+            data_geom = geom_violin, 
+            mapping = c("linetype", "fill", "group"), 
+            error_arg = list(width = 0.1),
+            data_arg = list(width = 0.8)) + 
+    scale_fill_manual(values = c("happy(p)" = "greenyellow", "sad(p)"= "lightblue")) +
+    theme(legend.position="none") + 
+    geom_point(size=0.2)+
+    labs(y = "RT (in s)", x = "Interaction prime & target Emotion"),
+    
+   
+     ncol = 3, nrow = 2
+ ) 
+
+effect_plots
+``` 
+
+
+#Berechnung einer neuen Variable für die Antwortgenauigkeit 
+```{r}
+#Umwandlung der Variabeln in numerische Variablen
+combined_PatKon$corrAnsTar<-as.numeric(as.character(combined_PatKon$corrAnsTar))
+combined_PatKon$key_resp.keys<-as.numeric(as.character(combined_PatKon$key_resp.keys))
+
+#neue Variable für Differenz 
+combined_PatKon$Tastendifferenz <- combined_PatKon$corrAnsTar - combined_PatKon$key_resp.keys
+
+#neue Variable für Genauigkeit -> richtige Taste gedrückt = 0; falsche Taste gedrückt = 1 
+combined_PatKon$Genauigkeit <- ifelse(combined_PatKon$Tastendifferenz==0,1,0)
+```
+
+#Faktorisierung der neuen Variablen Antwortgenauigkeit
+```{r}
+combined_PatKon$Genauigkeit       <- factor(combined_PatKon$Genauigkeit, ordered = FALSE)
+```
+
+
+#Schätzung des Models 1b -> Nutzung einer binomialen Verteilung, da meine AV dichotom kategorial ist 
+```{r}
+Model1b<-glmer(Genauigkeit ~ primeGender
+              + primeEmotion
+              + targetEmotion
+              + Cond
+              + Probandengruppe
+              + (1|Subject),family=binomial(link='logit'),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 1b
+```{r}
+sjPlot:: tab_model(Model1b)
+```
+
+
+#Schätzung des Models 2b
+```{r}
+Model2b <- glmer(Genauigkeit ~ primeEmotion*primeGender
+              + targetEmotion
+              + Cond 
+              + Probandengruppe   
+              + (1|Subject),family=binomial(link='logit'),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 2b 
+```{r}
+sjPlot:: tab_model(Model2b)
+anova(Model2b)
+summary(Model2b)
+``` 
+
+#Schätzung des Models 3b
+```{r}
+Model3b <- glmer(Genauigkeit ~ primeEmotion
+              + primeGender
+              + targetEmotion*Probandengruppe
+              + Cond
+              + (1|Subject),family=binomial(link='logit'),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 3b 
+```{r}
+sjPlot:: tab_model(Model3b)
+``` 
+
+#Schätzung des Models 4b
+```{r}
+Model4b <- glmer(Genauigkeit ~ primeEmotion*Probandengruppe
+              + primeGender
+              + targetEmotion
+              + Cond 
+              + (1|Subject),family=binomial(link='logit'),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 4b 
+```{r}
+sjPlot:: tab_model(Model4b)
+``` 
+
+#Schätzung des Models 5b
+```{r}
+Model5b <- glmer(Genauigkeit ~ primeEmotion
+              + primeGender
+              + targetEmotion
+              + Cond*Probandengruppe   
+              + (1|Subject),family=binomial(link='logit'),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 5b 
+```{r}
+sjPlot:: tab_model(Model5b)
+``` 
+
+
+#Schätzung des Models 6b
+```{r}
+Model6b <- glmer(Genauigkeit ~ primeEmotion*targetEmotion
+              + primeGender
+              + Probandengruppe   
+              + (1|Subject),family=binomial(link='logit'),
+              data = combined_PatKon)
+
+```
+
+#tabellarische Zusammenfassung des Models 6b 
+```{r}
+sjPlot:: tab_model(Model6b)
+``` 
+
+#Schätzung des Models 7b
+```{r}
+Model7b <- glmer(Genauigkeit ~ primeEmotion
+              + targetEmotion*Cond
+              + primeGender
+              + Probandengruppe   
+              + (1|Subject),family=binomial(link='logit'),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 7b 
+```{r}
+sjPlot:: tab_model(Model7b)
+``` 
+
+#Schätzung des Models 8b
+```{r}
+Model8b <- glmer(Genauigkeit ~ primeEmotion*targetEmotion
+              + primeGender
+              + Probandengruppe   
+              + (1|Subject),family=binomial(link='logit'),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 8b 
+```{r}
+sjPlot:: tab_model(Model8b)
+``` 
+
+#Schätzung des Models 9b
+```{r}
+Model9b <- glmer(Genauigkeit ~ primeEmotion*targetEmotion*Probandengruppe
+              + primeGender
+              + (1|Subject),family=binomial(link='logit'),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 9b 
+```{r}
+sjPlot:: tab_model(Model9b)
+``` 
+
+#Schätzung des Models 10b
+```{r}
+Model10b <- glmer(Genauigkeit ~ primeEmotion*Probandengruppe
+              + targetEmotion
+              + primeGender
+              + (1|Subject),family=binomial(link='logit'),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 10b 
+```{r}
+sjPlot:: tab_model(Model10b)
+``` 
+
+#Schätzung des Models 11b
+```{r}
+Model11b <- glmer(Genauigkeit ~ targetEmotion*Probandengruppe
+              + primeEmotion
+              + primeGender
+              + (1|Subject),family=binomial(link='logit'),
+              data = combined_PatKon)
+```
+
+#tabellarische Zusammenfassung des Models 11b
+```{r}
+sjPlot:: tab_model(Model11b)
+``` 
+
+#Vergleich aller Modelle
+```{r}
+anova_alle<-anova(Model1b,Model2b,Model3b,Model4b,Model5b,Model6b,Model7b,Model8b,Model9b,Model10b,Model11b)
+anova_alle
+```
+
+#Überprüfung, welche Modelle sich genau signifikant voneinander unterscheiden 
+```{r}
+#Erstellen einer Liste mit allen GLMMs und einer Liste mit den entsprechenden Modellnamen
+glmm_list_b<-list(Model1b,Model2b,Model3b,Model4b,Model5b,Model6b,Model7b,Model8b,Model9b,Model10b,Model11b)
+model_names_b<-paste("Model",seq_along(glmm_list_b))   
+
+model_combinations_b<-combn(glmm_list_b,2,simplify=FALSE)
+num_combinations_b<-length(model_combinations_b)
+model_indices_b <- lapply(model_combinations_b, function(pair) {
+  sapply(pair, function(model) which(sapply(glmm_list_b, function(x) identical(x, model))))
+})
+for (i in seq_len(num_combinations_b)) {
+  model_pair_b <- model_combinations_b[[i]]
+  model_indices_pair_b <- model_indices_b[[i]]
+  model1_b <- model_pair_b[[1]]
+  model2_b <- model_pair_b[[2]]
+  lr_test <- anova(model1_b, model2_b)
+     cat("Vergleich von", model_names_b[model_indices_pair_b[1]],"b und", model_names_b[model_indices_pair_b[2]],"b:\n")
+  print(lr_test)
+}
+
+#Entscheidung für Model 2 
+``` 
+
+#Post hoc Analysen für Model2b
+```{r}
+library(emmeans)
+eff.primeEmotion2b        <- emmeans(Model2b, pairwise ~ primeEmotion)
+eff.targetEmotion2b       <- emmeans(Model2b, pairwise ~ targetEmotion)
+eff.prime_Emotion_Gender2b <- emmeans(Model2b, pairwise ~ primeEmotion:primeGender)
+eff.primeGender2b         <- emmeans(Model2b, pairwise ~ primeGender)               
+eff.Probandengruppe2b     <- emmeans(Model2b, pairwise ~ Probandengruppe)
+eff.Cond2b                <- emmeans(Model2b, pairwise ~ Cond)
+```
+
+```{r}
+eff.primeEmotion2b
+eff.targetEmotion2b
+eff.prime_Emotion_Gender2b
+eff.primeGender2b
+eff.Probandengruppe2b
+eff.Cond2b
+
+# signifikante Effekte post-hoc: targetEmotion, primeGender x primeEmotion (happy f x sad f; happy f x happy m), Condition
+# signifikante Effekte Modell: primeEmotion (sad), primeGender (m), targetEmotion (sad), Cond (incongruent), primeEmotion x primeGender (sad x m)
+
+```
+
+#Abbildungen der Effekte 
+
+```{r}
+effect_plots2b<-cowplot::plot_grid( 
+     afex_plot(Model2b, x = "primeEmotion", 
+               id = "Subject", dodge = 0.8, 
+               data_geom = geom_violin, 
+               mapping = c("linetype", "fill"),
+               error_arg = list(width = 0.2),
+               data_arg = list(width = 0.5)) + 
+         scale_fill_manual(values = c("happy" = "greenyellow", "sad"= "lightblue")) + 
+         theme(legend.position="none") +
+         labs(y = "accuracy", x = "prime Emotion")+
+         scale_y_continuous(breaks = seq(0, 1, by = 0.25)),
+     
+     afex_plot(Model2b, x = "targetEmotion", 
+               id = "Subject", dodge = 0.8,
+               data_geom = geom_violin, 
+               mapping = c("linetype", "fill"),
+               error_arg = list(width = 0.2),
+               data_arg = list(width = 0.5)) + 
+         scale_fill_manual(values = c("happy" = "greenyellow", "sad"= "lightblue")) +
+         theme(legend.position="none") +
+         labs(y = "accuracy", x = "target Emotion")+
+         scale_y_continuous(breaks = seq(0, 1, by = 0.25)),
+     
+     afex_plot(Model2b, x = "Cond", 
+               id = "Subject", dodge = 0.8,
+               data_geom = geom_violin, 
+               mapping = c("linetype", "fill"),
+               error_arg = list(width = 0.2),
+               data_arg = list(width = 0.5)) + 
+         scale_fill_manual(values = c("incongruent" = "lightblue", "congruent"= "greenyellow")) +
+         theme(legend.position="none") +
+         labs(y = "accuracy", x = "Condition")+
+         scale_y_continuous(breaks = seq(0, 1, by = 0.25)),
+     
+     afex_plot(Model2b, x = "primeGender", 
+               id = "Subject", dodge = 0.8,
+               data_geom = geom_violin, 
+               mapping = c("linetype", "fill"),
+               error_arg = list(width = 0.2),
+               data_arg = list(width = 0.5)) + 
+         scale_fill_manual(values = c("m" = "lightblue", "f"= "greenyellow")) +
+         theme(legend.position="none") +
+         labs(y = "accuracy", x = "prime Gender")+
+         scale_y_continuous(breaks = seq(0, 1, by = 0.25)),
+     
+     afex_plot(Model2b, x = "Probandengruppe", 
+               id = "Subject", dodge = 0.8,
+               data_geom = geom_violin, 
+               mapping = c("linetype", "fill"),
+               error_arg = list(width = 0.2),
+               data_arg = list(width = 0.5)) + 
+         scale_fill_manual(values = c("1" = "greenyellow", "2"= "lightblue")) +
+         theme(legend.position="none") +
+         labs(y = "accuracy", x = "Subject Group")+
+         scale_y_continuous(breaks = seq(0, 1, by = 0.25)),
+     
+    afex_plot(Model2b, x = "primeEmotion", panel = "primeGender", 
+            id = "Subject", dodge = 0.8,
+            factor_levels = list(primeEmotion = c("happy", "sad"),
+                                 primeGender = c("f", "m")),
+            data_geom = geom_violin, 
+            mapping = c("linetype", "fill", "group"), 
+            error_arg = list(width = 0.2),
+            data_arg = list(width = 0.8)) + 
+        scale_fill_manual(values = c("happy" = "greenyellow", "sad"= "lightblue")) +
+        theme(legend.position="none") + 
+        geom_point(size=0.2)+
+        labs(y = "accuracy", x = "Interaction prime Emotion & prime Gender")+
+        scale_y_continuous(breaks = seq(0, 1, by = 0.25)),
+    
+  
+     ncol = 3, nrow = 2
+ )
+
+effect_plots2b
+# Abbildung macht nur Sinn, wenn ich für "richtig" den Wert 0 gebe und für "falsch" den Wert 1 
+``` 
