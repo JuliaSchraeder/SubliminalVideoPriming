@@ -1,0 +1,268 @@
+---
+title: "GLMM"
+output: html_notebook
+---
+
+Import modules
+
+```{r}
+library(lme4)         # mixed model package
+library(lmerTest)     # library providing p-values for mixed models in lme4
+library(readxl)       # read excel
+library(ggplot2)      # graphics
+library(emmeans)      # library for post-hoc tests
+library(pbkrtest)     # needed for post-hoc tests in mixed models
+library(jtools)       # post hoc tests
+library(interactions) 
+library(effects)      # estimate effects
+library(apaTables)
+library(dplyr)
+library(tidyr)
+library(effects)
+library(readxl)
+library(readr)
+library(fitdistrplus)
+library(ggplot2)
+library(openxlsx)
+
+```
+
+# Accuracy Analysis
+
+## Read in dataset
+
+```{r}
+df <- read.csv("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/ratings_by_condition_and_participant.csv")
+# Assuming your dataframe is named 'df'
+clean_df <- na.omit(df)
+```
+
+```{r}
+df <- clean_df%>%
+  mutate(sex = as.factor(sex)) %>%
+  mutate(group = as.factor(group)) %>%
+  mutate(condition = as.factor(condition)) %>%
+  mutate(age = as.numeric(age))%>%
+  mutate(rt = as.numeric(key_resp.rt))%>%
+  mutate(accuracy = as.numeric(correct))
+# Ensure that your 'group' variable is a factor with correct labels
+df$group <- factor(df$group, levels = c(1, 2), labels = c("MDD", "HC"))
+
+```
+
+## Select distribution
+
+```{r}
+data <- df
+x<-data$accuracy +100
+
+# Fit different distributions
+fit_gamma <- fitdist(x, "gamma")
+fit_norm <- fitdist(x, "norm")
+
+plot_fits <- function(df, fit_gamma, fit_norm) {
+  ggplot(df, aes(x = x)) +
+    geom_histogram(aes(y = ..density..), bins = 30, fill = "lightblue", color = "black", alpha = 0.6) +
+    stat_function(aes(color = "Gamma"), fun = dgamma, args = list(shape = fit_gamma$estimate["shape"], rate = fit_gamma$estimate["rate"]),
+                  size = 1, linetype = "dashed") +
+    stat_function(aes(color = "Normal"), fun = dnorm, args = list(mean = fit_norm$estimate["mean"], sd = fit_norm$estimate["sd"]),
+                  size = 1, linetype = "solid") +
+    labs(title = "Accuracy Distribution Fit",
+         x = "accuracy",
+         y = "Density",
+         color = "Distribution") +
+    theme_minimal() +
+    scale_color_manual(values = c("Gamma" = "green", "Normal" = "red"))
+}
+
+plot_fits(df, fit_gamma, fit_norm)
+```
+
+```{r}
+gof_stat <- gofstat(list(fit_gamma, fit_norm))
+print(gof_stat)
+```
+
+### Goodness-of-Fit Statistics
+
+1.  **Kolmogorov-Smirnov Statistic**: Measures the maximum difference between the empirical distribution function and the cumulative distribution function of the fitted distribution. Lower values indicate a better fit.
+
+    -   Gamma: 0.2650154
+
+    -   Normal: 0.249860
+
+    -   **Interpretation**: The normal distribution fits the data slightly better than the gamma distribution according to this statistic.
+
+2.  **Cramer-von Mises Statistic**: Measures the squared differences between the empirical and fitted cumulative distribution functions. Lower values indicate a better fit.
+
+    -   Gamma: 9.1876182
+
+    -   Normal: 7.862238
+
+    -   **Interpretation**: The normal distribution fits the data better than the gamma distribution according to this statistic.
+
+3.  **Anderson-Darling Statistic**: Similar to the Cramer-von Mises statistic but gives more weight to the tails of the distribution. Lower values indicate a better fit.
+
+    -   Gamma: 50.5817331
+
+    -   Normal: 44.358003
+
+    -   **Interpretation**: The normal distribution fits the data better than the gamma distribution according to this statistic.
+
+### Goodness-of-Fit Criteria
+
+1.  **Akaike's Information Criterion (AIC)**: Measures the relative quality of statistical models for a given set of data. Lower values indicate a better fit.
+
+    -   Gamma: 4198.028
+
+    -   Normal: 4097.460
+
+    -   **Interpretation**: The normal distribution has a lower AIC, indicating a better fit compared to the gamma distribution.
+
+2.  **Bayesian Information Criterion (BIC)**: Similar to AIC but includes a penalty term for the number of parameters in the model. Lower values indicate a better fit.
+
+    -   Gamma: 4206.334
+
+    -   Normal: 4105.766
+
+    -   **Interpretation**: The normal distribution has a lower BIC, indicating a better fit compared to the gamma distribution.
+
+### Conclusion
+
+Based on the provided statistics and criteria, the normal distribution fits your data better than the gamma distribution.
+
+## Estimate GLMM
+
+```{r}
+
+model <-lmer(df$accuracy~ condition*group + age + sex + (1|participantID),data = df)
+anova_Model<-anova(model, type = 3, ddf= "Kenward-Roger")
+```
+
+```{r}
+anova_Model
+```
+
+```{r}
+#sjPlot::tab_model(model1)
+#sjPlot::plot_model(model1, type = "diag")
+```
+
+```{r}
+# Convert ANOVA results to a data frame
+anova_df <- broom::tidy(anova_Model)
+
+# View the table
+print(anova_df)
+
+# Save the table to a CSV file
+write.csv(anova_df, "glmm_accuracy_anova_results.csv", row.names = FALSE)
+```
+
+### Post Hoc Tests
+
+```{r}
+eff.group_cond  <- emmeans(model, pairwise ~ group*condition, adjust ="bonferroni")
+eff.condition   <- emmeans(model, pairwise ~ condition,adjust ="bonferroni")
+```
+
+```{r}
+print(eff.condition)
+print(eff.group_cond)
+```
+
+```{r}
+# Extract the summary of the emmeans results for group
+group_summary <- summary(eff.group_cond$emmeans)
+group_contrasts <- summary(eff.group_cond$contrasts)
+
+# Convert to data frames
+group_summary_df <- as.data.frame(group_summary)
+group_contrasts_df <- as.data.frame(group_contrasts)
+
+# Add a column to identify the type of results
+group_summary_df$type <- "group_emmeans"
+group_contrasts_df$type <- "group_contrasts"
+
+# Extract the summary of the emmeans results for condition
+condition_summary <- summary(eff.condition$emmeans)
+condition_contrasts <- summary(eff.condition$contrasts)
+
+# Convert to data frames
+condition_summary_df <- as.data.frame(condition_summary)
+condition_contrasts_df <- as.data.frame(condition_contrasts)
+
+# Add a column to identify the type of results
+condition_summary_df$type <- "condition_emmeans"
+condition_contrasts_df$type <- "condition_contrasts"
+
+```
+
+```{r}
+# Combine all data frames into one
+combined_results <- bind_rows(
+  group_summary_df,
+  group_contrasts_df,
+  condition_summary_df,
+  condition_contrasts_df
+)
+
+```
+
+```{r}
+# Write to an Excel file
+write.xlsx(combined_results, "glmm_accuracy_post_hoc_results.xlsx", rowNames = FALSE)
+```
+
+```{r}
+library(afex) 
+library(cowplot)
+# Reorder the levels of the 'condition' variable
+df$condition <- factor(df$condition, levels = c("happy_happy", "sad_happy", "happy_sad", "sad_sad"))
+
+
+
+con_in_group <-   afex_plot(model, x = "condition", panel = "group", 
+            id = "participantID", dodge = 0.8,
+            data_geom = geom_violin, 
+            mapping = c("linetype", "fill", "group"), 
+            error_arg = list(width = 0.2),
+            legend_title = "",
+            data_arg = list(width = 0.5)) + 
+      scale_fill_manual(values = c("happy_happy" = "darkgreen", 
+                                 "sad_happy" = "lightgreen",
+                                 "happy_sad" ="lightblue", 
+                                 "sad_sad" ="darkblue")) +
+    theme_classic() +
+    theme(legend.position = "none",
+          axis.text.x = element_text(angle = 45, hjust = 1)) + 
+    labs(y = "Accuracy", x = "")
+  
+conditions <-  afex_plot(model, x = "condition", 
+            id = "participantID", dodge = 0.8,
+            data_geom = geom_violin, 
+            mapping = "fill",
+            error_arg = list(width = 0.2),
+            data_arg = list(width = 0.5)) + #ggpubr::theme_pubr() + 
+    scale_fill_manual(values = c("happy_happy" = "darkgreen", 
+                                 "sad_happy" = "lightgreen",
+                                 "happy_sad" ="lightblue", 
+                                 "sad_sad" ="darkblue")) +
+    theme_classic() +
+    theme(legend.position = "none",
+          axis.text.x = element_text(angle = 45, hjust = 1)) + 
+    labs(title = "Accuracy for each task condition", y = "Accuracy", x = "")
+
+#colors()
+```
+
+```{r}
+combined_plots <- cowplot::plot_grid(conditions,con_in_group,
+                            labels = c("A", "B"),
+                            ncol = 1)
+combined_plots
+```
+
+```{r}
+ggsave("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/plots/glmm_accuracy.tiff", combined_plots, width = 6, height = 7)
+```
