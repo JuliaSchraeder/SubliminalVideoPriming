@@ -264,5 +264,5 @@ combined_plots
 ```
 
 ```{r}
-ggsave("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/plots/glmm_accuracy.tiff", combined_plots, width = 6, height = 7)
+ggsave("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/plots/glmm_accuracy.tiff", combined_plots, width = 5, height = 7)
 ```
