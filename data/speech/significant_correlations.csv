@@ -1,0 +1,360 @@
+Variable1,Variable2,Correlation,P-Value
+Gender_f1_m2,Factor1,-0.772055984958185,8.283210149116561e-20
+Group_MDD1_HC2,Factor2,0.5790805830849098,9.708421559522068e-10
+Group_MDD1_HC2,Factor5,-0.6016177033858617,1.4297257565225013e-10
+Group_MDD1_HC2,BDI-II Sum score,-0.7872127172286265,5.076805501039994e-21
+Group_MDD1_HC2,STAI2,-0.8542408198441445,7.054807286619056e-28
+Group_MDD1_HC2,STAI1,-0.6662701765749993,2.323086923736034e-13
+Group_MDD1_HC2,DERS_Total Score,-0.7697808130015118,1.2364680259207254e-19
+Group_MDD1_HC2,DERS_Total Score Norm,-0.7682185646601022,1.6236780149011334e-19
+Group_MDD1_HC2,DERS_Non-Acceptance of Emotional Reactions Norm,-0.5558119136064924,6.056867268655917e-09
+Group_MDD1_HC2,DERS_Problems with Goal-Oriented Behavior Norm,-0.7054384524848725,2.0531281743912816e-15
+Group_MDD1_HC2,DERS_Impulse Control Problems Norm,-0.4610575143108132,2.9177243655416837e-06
+Group_MDD1_HC2,DERS_Limited Access to Emotion Regulation Strategies Norm,-0.7907743079313053,2.5483373033679227e-21
+Group_MDD1_HC2,DERS_Lack of Emotional Clarity Norm,-0.5804377581840353,8.686312201435749e-10
+Group_MDD1_HC2,DERS_Non-Acceptance of Emotional Reactions,-0.5537789804382107,7.060618788421714e-09
+Group_MDD1_HC2,DERS_Problems with Goal-Oriented Behavior,-0.7079609425312732,1.4744842561938196e-15
+Group_MDD1_HC2,DERS_Impulse Control Problems,-0.4726098601095964,1.512339951821577e-06
+Group_MDD1_HC2,DERS_Limited Access to Emotion Regulation Strategies,-0.7915775609688241,2.177432289379905e-21
+Group_MDD1_HC2,DERS_Lack of Emotional Clarity,-0.5805770726152805,8.587436583613346e-10
+Group_MDD1_HC2,CERQ_Positive Refocusing Norm,0.4525624265406168,4.659828480019259e-06
+Group_MDD1_HC2,CERQ_Positive Reappraisal Norm,0.6381769195715739,4.558931057783312e-12
+Group_MDD1_HC2,CERQ_Putting into Perspective Norm,0.49912547417177633,3.0462227552293266e-07
+Group_MDD1_HC2,CERQ_Catastrophizing Norm,-0.5145198230033904,1.1271589425056084e-07
+Group_MDD1_HC2,CERQ_Positive Refocusing,0.4525603240855065,4.660361234766712e-06
+Group_MDD1_HC2,CERQ_Positive Reappraisal,0.6381769195715734,4.558931057783376e-12
+Group_MDD1_HC2,CERQ_Putting into Perspective,0.4991228738126895,3.046721907133347e-07
+Group_MDD1_HC2,CERQ_Catastrophizing,-0.5145231258415378,1.1269125730649615e-07
+Factor2,Factor5,-0.6369584186527815,5.151719320315934e-12
+Factor2,BDI-II Sum score,-0.4395934427181663,9.299389778057998e-06
+Factor2,STAI2,-0.4539176812242477,4.3280952648301625e-06
+Factor2,DERS_Total Score,-0.4466267399645339,6.41561317770436e-06
+Factor2,DERS_Total Score Norm,-0.4523934470370758,4.702830784677589e-06
+Factor2,DERS_Limited Access to Emotion Regulation Strategies Norm,-0.47548922820956624,1.27902691535887e-06
+Factor2,DERS_Limited Access to Emotion Regulation Strategies,-0.47417438467440404,1.3809936193749171e-06
+Factor5,BDI-II Sum score,0.47266660317026543,1.5073765565543403e-06
+Factor5,STAI2,0.4437119060507558,7.490071665277216e-06
+Factor5,DERS_Total Score,0.4411203148147992,8.585371786549484e-06
+Factor5,DERS_Total Score Norm,0.42999476428392003,1.5232732164021037e-05
+Factor5,DERS_Limited Access to Emotion Regulation Strategies Norm,0.4753325327905623,1.2907938448030407e-06
+Factor5,DERS_Limited Access to Emotion Regulation Strategies,0.47718754333467284,1.1578353759749674e-06
+Factor5,CERQ_Self-Blame Norm,0.44113651983910784,8.578077791434506e-06
+Factor5,CERQ_Self-Blame,0.4411365198391076,8.578077791434481e-06
+BVAQ_New,DERS_Total Score,0.4819744053532864,8.720336031404406e-07
+BVAQ_New,DERS_Total Score Norm,0.47772731822165787,1.1216501522927727e-06
+BVAQ_New,DERS_Lack of Emotional Awareness Norm,0.6035918684284739,1.2002507829015538e-10
+BVAQ_New,DERS_Lack of Emotional Clarity Norm,0.5619149608815246,3.7985667484779205e-09
+BVAQ_New,DERS_Lack of Emotional Awareness,0.6707236582447361,1.4068200407178625e-13
+BVAQ_New,DERS_Lack of Emotional Clarity,0.5644420337370137,3.1225695557234092e-09
+BDI-II Sum score,STAI2,0.8705338084383989,4.4383854849027886e-30
+BDI-II Sum score,STAI1,0.739541870247494,1.6986497754436317e-17
+BDI-II Sum score,DERS_Total Score,0.7864020521523389,5.928217065550675e-21
+BDI-II Sum score,DERS_Total Score Norm,0.7851640968612894,7.502164935479402e-21
+BDI-II Sum score,DERS_Non-Acceptance of Emotional Reactions Norm,0.6453396239337936,2.197670915781381e-12
+BDI-II Sum score,DERS_Problems with Goal-Oriented Behavior Norm,0.6984055630133308,5.07469252993398e-15
+BDI-II Sum score,DERS_Impulse Control Problems Norm,0.4712479465945897,1.636209019990104e-06
+BDI-II Sum score,DERS_Limited Access to Emotion Regulation Strategies Norm,0.8168342386289373,1.0563272407380307e-23
+BDI-II Sum score,DERS_Lack of Emotional Clarity Norm,0.535964371766653,2.593100380470749e-08
+BDI-II Sum score,DERS_Non-Acceptance of Emotional Reactions,0.6475341087086596,1.7506104995612845e-12
+BDI-II Sum score,DERS_Problems with Goal-Oriented Behavior,0.6988554673965839,4.793018801347467e-15
+BDI-II Sum score,DERS_Impulse Control Problems,0.474951474572771,1.3198378733926833e-06
+BDI-II Sum score,DERS_Limited Access to Emotion Regulation Strategies,0.8167912735778496,1.0666789895772637e-23
+BDI-II Sum score,DERS_Lack of Emotional Clarity,0.5349862762968541,2.7790663841383193e-08
+BDI-II Sum score,CERQ_Self-Blame Norm,0.5114349562567958,1.3810809065603704e-07
+BDI-II Sum score,CERQ_Positive Refocusing Norm,-0.42958180996276446,1.5554406506813203e-05
+BDI-II Sum score,CERQ_Positive Reappraisal Norm,-0.5736121069113141,1.5121579787000898e-09
+BDI-II Sum score,CERQ_Catastrophizing Norm,0.5486416209629625,1.0355277335679228e-08
+BDI-II Sum score,CERQ_Self-Blame,0.5114349562567958,1.3810809065603704e-07
+BDI-II Sum score,CERQ_Positive Refocusing,-0.4295807067377405,1.5555274340300507e-05
+BDI-II Sum score,CERQ_Positive Reappraisal,-0.573612106911314,1.512157978700052e-09
+BDI-II Sum score,CERQ_Catastrophizing,0.5486430874403558,1.0354154887350279e-08
+STAI2,STAI1,0.7716028283105862,8.974530927739149e-20
+STAI2,DERS_Total Score,0.8649130941841302,2.746984593181058e-29
+STAI2,DERS_Total Score Norm,0.8625095771783287,5.842381834587318e-29
+STAI2,DERS_Non-Acceptance of Emotional Reactions Norm,0.6487747799785564,1.5381243132504792e-12
+STAI2,DERS_Problems with Goal-Oriented Behavior Norm,0.7818322184572611,1.4031453260706855e-20
+STAI2,DERS_Impulse Control Problems Norm,0.5801002576901383,8.93039277010002e-10
+STAI2,DERS_Lack of Emotional Awareness Norm,0.44300437079356947,7.775286021049668e-06
+STAI2,DERS_Limited Access to Emotion Regulation Strategies Norm,0.8654401204822822,2.3235464942343811e-29
+STAI2,DERS_Lack of Emotional Clarity Norm,0.6286581462166501,1.1679355940631844e-11
+STAI2,DERS_Non-Acceptance of Emotional Reactions,0.6514693865485486,1.1588838474152504e-12
+STAI2,DERS_Problems with Goal-Oriented Behavior,0.7832175566058707,1.082994841683469e-20
+STAI2,DERS_Impulse Control Problems,0.5866571532712596,5.182960246089668e-10
+STAI2,DERS_Lack of Emotional Awareness,0.4505202170202446,5.205256082918206e-06
+STAI2,DERS_Limited Access to Emotion Regulation Strategies,0.865347546594682,2.3930095772481283e-29
+STAI2,DERS_Lack of Emotional Clarity,0.6285371371648072,1.1817427609583339e-11
+STAI2,CERQ_Self-Blame Norm,0.5071845967160599,1.8212544674225476e-07
+STAI2,CERQ_Rumination Norm,0.507777819751153,1.7526651140318282e-07
+STAI2,CERQ_Positive Refocusing Norm,-0.5331361081944727,3.1661917423630776e-08
+STAI2,CERQ_Refocusing on Planning Norm,-0.47391784588433417,1.401764431569472e-06
+STAI2,CERQ_Positive Reappraisal Norm,-0.6954225847053422,7.390846129831857e-15
+STAI2,CERQ_Putting into Perspective Norm,-0.45551269167706326,3.966190877109426e-06
+STAI2,CERQ_Catastrophizing Norm,0.6022475570833947,1.3522830731425705e-10
+STAI2,CERQ_Self-Blame,0.5071845967160596,1.821254467422539e-07
+STAI2,CERQ_Rumination,0.5077791979121196,1.7525086663182022e-07
+STAI2,CERQ_Positive Refocusing,-0.533134392671813,3.166573484589133e-08
+STAI2,CERQ_Refocusing on Planning,-0.4739172471598088,1.4018132513887157e-06
+STAI2,CERQ_Positive Reappraisal,-0.6954225847053415,7.390846129831778e-15
+STAI2,CERQ_Putting into Perspective,-0.4555091568970558,3.966960406208694e-06
+STAI2,CERQ_Catastrophizing,0.6022507921546391,1.3518959142187346e-10
+STAI1,DERS_Total Score,0.7543326337886567,1.6711019865630284e-18
+STAI1,DERS_Total Score Norm,0.751601828026833,2.5956271112062744e-18
+STAI1,DERS_Non-Acceptance of Emotional Reactions Norm,0.5858393519817664,5.550556730105581e-10
+STAI1,DERS_Problems with Goal-Oriented Behavior Norm,0.6199663467670772,2.6820881380315682e-11
+STAI1,DERS_Impulse Control Problems Norm,0.5828219302326972,7.135510371556235e-10
+STAI1,DERS_Limited Access to Emotion Regulation Strategies Norm,0.707538175578819,1.5589881792863006e-15
+STAI1,DERS_Lack of Emotional Clarity Norm,0.5599090118327127,4.432728775943964e-09
+STAI1,DERS_Non-Acceptance of Emotional Reactions,0.5898297616218879,3.9659256903528236e-10
+STAI1,DERS_Problems with Goal-Oriented Behavior,0.6221861159401039,2.1743285696737843e-11
+STAI1,DERS_Impulse Control Problems,0.5894849330517846,4.083558635010812e-10
+STAI1,DERS_Limited Access to Emotion Regulation Strategies,0.7076834040460129,1.529443990703572e-15
+STAI1,DERS_Lack of Emotional Clarity,0.5602729086375795,4.3106273525975415e-09
+STAI1,CERQ_Positive Reappraisal Norm,-0.5637965233123184,3.2833694841473994e-09
+STAI1,CERQ_Putting into Perspective Norm,-0.42529301247242235,1.9293577932131066e-05
+STAI1,CERQ_Catastrophizing Norm,0.5070885991414049,1.8325909440796792e-07
+STAI1,CERQ_Positive Reappraisal,-0.5637965233123184,3.2833694841473597e-09
+STAI1,CERQ_Putting into Perspective,-0.4252920081636741,1.9294544672366964e-05
+STAI1,CERQ_Catastrophizing,0.5070904012168616,1.832377518271757e-07
+WMS Correct Norm,WMS Correct,0.9345111699657483,4.716106198979073e-43
+DigitSpan_Forwards_Span,DigitSpan_ForwardsTotal Score,0.955427885009933,1.5568981407070893e-50
+DigitSpan_Forwards_Span,DigitSpan_Backwards_Span,0.613623227886962,4.841979225361161e-11
+DigitSpan_Forwards_Span,DigitSpan_Backwards_Total Score,0.6156103889098072,4.0296552509904734e-11
+DigitSpan_ForwardsTotal Score,DigitSpan_Backwards_Span,0.6434462864466824,2.6701841017766286e-12
+DigitSpan_ForwardsTotal Score,DigitSpan_Backwards_Total Score,0.6461064474818999,2.0302013723637713e-12
+DigitSpan_Backwards_Span,DigitSpan_Backwards_Total Score,0.9327200938814637,1.56648541396794e-42
+DERS_Total Score,DERS_Total Score Norm,0.9982644217928498,5.808620312731223e-115
+DERS_Total Score,DERS_Non-Acceptance of Emotional Reactions Norm,0.80259421901016,2.3426856024035074e-22
+DERS_Total Score,DERS_Problems with Goal-Oriented Behavior Norm,0.7960185657196971,9.011100237642918e-22
+DERS_Total Score,DERS_Impulse Control Problems Norm,0.7250481751487989,1.422605282118941e-16
+DERS_Total Score,DERS_Lack of Emotional Awareness Norm,0.5933876437588503,2.9274637166964e-10
+DERS_Total Score,DERS_Limited Access to Emotion Regulation Strategies Norm,0.9241944395438948,3.1190186551163713e-40
+DERS_Total Score,DERS_Lack of Emotional Clarity Norm,0.7748043094051613,5.0738162198439044e-20
+DERS_Total Score,DERS_Non-Acceptance of Emotional Reactions,0.8016496312579485,2.851690510297434e-22
+DERS_Total Score,DERS_Problems with Goal-Oriented Behavior,0.7981674331257336,5.833925675949249e-22
+DERS_Total Score,DERS_Impulse Control Problems,0.7341055394283665,3.831247425819103e-17
+DERS_Total Score,DERS_Lack of Emotional Awareness,0.6052470362422474,1.0355396526757334e-10
+DERS_Total Score,DERS_Limited Access to Emotion Regulation Strategies,0.9244681696941407,2.6574541818231793e-40
+DERS_Total Score,DERS_Lack of Emotional Clarity,0.7747217488956956,5.149592304025312e-20
+DERS_Total Score,CERQ_Self-Blame Norm,0.4558055760439708,3.90291585992367e-06
+DERS_Total Score,CERQ_Rumination Norm,0.4625391389051112,2.6854728480459216e-06
+DERS_Total Score,CERQ_Positive Refocusing Norm,-0.4904732423787857,5.215525277529471e-07
+DERS_Total Score,CERQ_Refocusing on Planning Norm,-0.552895687977653,7.54464869572073e-09
+DERS_Total Score,CERQ_Positive Reappraisal Norm,-0.7049303915780449,2.1937723893910567e-15
+DERS_Total Score,CERQ_Putting into Perspective Norm,-0.5282690762808063,4.4454819439039135e-08
+DERS_Total Score,CERQ_Catastrophizing Norm,0.6309148181504695,9.37187770438238e-12
+DERS_Total Score,CERQ_Self-Blame,0.4558055760439707,3.9029158599236305e-06
+DERS_Total Score,CERQ_Rumination,0.46254045250673137,2.6852749015818454e-06
+DERS_Total Score,CERQ_Positive Refocusing,-0.4904711934599752,5.216180377441889e-07
+DERS_Total Score,CERQ_Refocusing on Planning,-0.5528938340520299,7.54569721499343e-09
+DERS_Total Score,CERQ_Positive Reappraisal,-0.7049303915780444,2.1937723893909924e-15
+DERS_Total Score,CERQ_Putting into Perspective,-0.5282678549304933,4.445857564451448e-08
+DERS_Total Score,CERQ_Catastrophizing,0.6309156057092261,9.371154891901412e-12
+DERS_Total Score Norm,DERS_Non-Acceptance of Emotional Reactions Norm,0.8090489106212929,5.937698908925457e-23
+DERS_Total Score Norm,DERS_Problems with Goal-Oriented Behavior Norm,0.7917502752767118,2.1048303768565164e-21
+DERS_Total Score Norm,DERS_Impulse Control Problems Norm,0.7245214860370803,1.5329186256217654e-16
+DERS_Total Score Norm,DERS_Lack of Emotional Awareness Norm,0.5955051927757602,2.4392200320223157e-10
+DERS_Total Score Norm,DERS_Limited Access to Emotion Regulation Strategies Norm,0.922094753140102,1.0446950722166622e-39
+DERS_Total Score Norm,DERS_Lack of Emotional Clarity Norm,0.773494270449704,6.414640095707556e-20
+DERS_Total Score Norm,DERS_Non-Acceptance of Emotional Reactions,0.8069668603719976,9.297023697665073e-23
+DERS_Total Score Norm,DERS_Problems with Goal-Oriented Behavior,0.7948531848388355,1.138247341644143e-21
+DERS_Total Score Norm,DERS_Impulse Control Problems,0.7319289415129112,5.276662313825595e-17
+DERS_Total Score Norm,DERS_Lack of Emotional Awareness,0.6010298485508345,1.505836151116795e-10
+DERS_Total Score Norm,DERS_Limited Access to Emotion Regulation Strategies,0.9224209950223907,8.677510321072003e-40
+DERS_Total Score Norm,DERS_Lack of Emotional Clarity,0.7724527562558213,7.72060865191439e-20
+DERS_Total Score Norm,CERQ_Self-Blame Norm,0.4537407860157608,4.370095768327334e-06
+DERS_Total Score Norm,CERQ_Rumination Norm,0.4608358864372045,2.9540534262589384e-06
+DERS_Total Score Norm,CERQ_Positive Refocusing Norm,-0.4879337408840702,6.090225342043331e-07
+DERS_Total Score Norm,CERQ_Refocusing on Planning Norm,-0.5518547970475906,8.155789032820359e-09
+DERS_Total Score Norm,CERQ_Positive Reappraisal Norm,-0.6996899263381345,4.310114906633245e-15
+DERS_Total Score Norm,CERQ_Putting into Perspective Norm,-0.5217776445286094,6.932965768173453e-08
+DERS_Total Score Norm,CERQ_Catastrophizing Norm,0.6296325677289359,1.0622767858928417e-11
+DERS_Total Score Norm,CERQ_Self-Blame,0.45374078601576057,4.370095768327334e-06
+DERS_Total Score Norm,CERQ_Rumination,0.4608371223416057,2.953849659695977e-06
+DERS_Total Score Norm,CERQ_Positive Refocusing,-0.48793174334621264,6.090965139325772e-07
+DERS_Total Score Norm,CERQ_Refocusing on Planning,-0.5518529630134643,8.156906493580153e-09
+DERS_Total Score Norm,CERQ_Positive Reappraisal,-0.6996899263381342,4.310114906633171e-15
+DERS_Total Score Norm,CERQ_Putting into Perspective,-0.5217764862669877,6.933509800969043e-08
+DERS_Total Score Norm,CERQ_Catastrophizing,0.6296332274694711,1.0622084694198882e-11
+DERS_Non-Acceptance of Emotional Reactions Norm,DERS_Problems with Goal-Oriented Behavior Norm,0.5482297222663427,1.0675192335628077e-08
+DERS_Non-Acceptance of Emotional Reactions Norm,DERS_Impulse Control Problems Norm,0.46575131646788415,2.2404769382726162e-06
+DERS_Non-Acceptance of Emotional Reactions Norm,DERS_Lack of Emotional Awareness Norm,0.4861759137019481,6.775257144139318e-07
+DERS_Non-Acceptance of Emotional Reactions Norm,DERS_Limited Access to Emotion Regulation Strategies Norm,0.6586526830842462,5.372313431739603e-13
+DERS_Non-Acceptance of Emotional Reactions Norm,DERS_Lack of Emotional Clarity Norm,0.585421691169698,5.747815358896321e-10
+DERS_Non-Acceptance of Emotional Reactions Norm,DERS_Non-Acceptance of Emotional Reactions,0.9976944695688407,2.7017408555320107e-109
+DERS_Non-Acceptance of Emotional Reactions Norm,DERS_Problems with Goal-Oriented Behavior,0.5510425632010112,8.665263768157426e-09
+DERS_Non-Acceptance of Emotional Reactions Norm,DERS_Impulse Control Problems,0.467367566260642,2.0438483422847158e-06
+DERS_Non-Acceptance of Emotional Reactions Norm,DERS_Lack of Emotional Awareness,0.4786865767731893,1.0599697509229286e-06
+DERS_Non-Acceptance of Emotional Reactions Norm,DERS_Limited Access to Emotion Regulation Strategies,0.6587052251507686,5.341777961261924e-13
+DERS_Non-Acceptance of Emotional Reactions Norm,DERS_Lack of Emotional Clarity,0.5828913352271048,7.094607233061488e-10
+DERS_Non-Acceptance of Emotional Reactions Norm,CERQ_Self-Blame Norm,0.42723013269075466,1.7511037990429632e-05
+DERS_Non-Acceptance of Emotional Reactions Norm,CERQ_Rumination Norm,0.45221692064873703,4.748152691562946e-06
+DERS_Non-Acceptance of Emotional Reactions Norm,CERQ_Positive Reappraisal Norm,-0.513799547050377,1.1821286237004656e-07
+DERS_Non-Acceptance of Emotional Reactions Norm,CERQ_Catastrophizing Norm,0.5176634363274905,9.144685314645687e-08
+DERS_Non-Acceptance of Emotional Reactions Norm,CERQ_Self-Blame,0.42723013269075466,1.7511037990429632e-05
+DERS_Non-Acceptance of Emotional Reactions Norm,CERQ_Rumination,0.45221784496492407,4.747914312066463e-06
+DERS_Non-Acceptance of Emotional Reactions Norm,CERQ_Positive Reappraisal,-0.5137995470503769,1.1821286237004656e-07
+DERS_Non-Acceptance of Emotional Reactions Norm,CERQ_Catastrophizing,0.5176653833358411,9.143495034237667e-08
+DERS_Problems with Goal-Oriented Behavior Norm,DERS_Impulse Control Problems Norm,0.5987617295565446,1.837631789007001e-10
+DERS_Problems with Goal-Oriented Behavior Norm,DERS_Limited Access to Emotion Regulation Strategies Norm,0.7564533160070871,1.1823902330353882e-18
+DERS_Problems with Goal-Oriented Behavior Norm,DERS_Lack of Emotional Clarity Norm,0.4940534898888187,4.18254171254226e-07
+DERS_Problems with Goal-Oriented Behavior Norm,DERS_Non-Acceptance of Emotional Reactions,0.545550442491035,1.2998557073268097e-08
+DERS_Problems with Goal-Oriented Behavior Norm,DERS_Problems with Goal-Oriented Behavior,0.9997843202122175,1.316490114734252e-156
+DERS_Problems with Goal-Oriented Behavior Norm,DERS_Impulse Control Problems,0.612903099040603,5.173544174087157e-11
+DERS_Problems with Goal-Oriented Behavior Norm,DERS_Limited Access to Emotion Regulation Strategies,0.7571951240377057,1.0467529775721871e-18
+DERS_Problems with Goal-Oriented Behavior Norm,DERS_Lack of Emotional Clarity,0.4931555995584341,4.421635767819439e-07
+DERS_Problems with Goal-Oriented Behavior Norm,CERQ_Rumination Norm,0.45501461916682595,4.076020433656577e-06
+DERS_Problems with Goal-Oriented Behavior Norm,CERQ_Positive Reappraisal Norm,-0.5715521480715146,1.7831234483599215e-09
+DERS_Problems with Goal-Oriented Behavior Norm,CERQ_Catastrophizing Norm,0.490534323670259,5.196031573756946e-07
+DERS_Problems with Goal-Oriented Behavior Norm,CERQ_Rumination,0.45501447290981323,4.076053101586412e-06
+DERS_Problems with Goal-Oriented Behavior Norm,CERQ_Positive Reappraisal,-0.5715521480715142,1.783123448359878e-09
+DERS_Problems with Goal-Oriented Behavior Norm,CERQ_Catastrophizing,0.49053478422038804,5.195884854892331e-07
+DERS_Impulse Control Problems Norm,DERS_Limited Access to Emotion Regulation Strategies Norm,0.6949780357827449,7.8137323480144e-15
+DERS_Impulse Control Problems Norm,DERS_Non-Acceptance of Emotional Reactions,0.474138848405104,1.383853365866365e-06
+DERS_Impulse Control Problems Norm,DERS_Problems with Goal-Oriented Behavior,0.5997795611631945,1.6808673723943178e-10
+DERS_Impulse Control Problems Norm,DERS_Impulse Control Problems,0.9973385074568939,1.9794177894616887e-106
+DERS_Impulse Control Problems Norm,DERS_Limited Access to Emotion Regulation Strategies,0.6934193277168647,9.489454891435972e-15
+DERS_Impulse Control Problems Norm,CERQ_Rumination Norm,0.4737210657721051,1.4178966927100271e-06
+DERS_Impulse Control Problems Norm,CERQ_Positive Refocusing Norm,-0.44605873014730557,6.612888775268663e-06
+DERS_Impulse Control Problems Norm,CERQ_Positive Reappraisal Norm,-0.5342607875104542,2.9251521473322066e-08
+DERS_Impulse Control Problems Norm,CERQ_Catastrophizing Norm,0.5089009408120984,1.6294781286870123e-07
+DERS_Impulse Control Problems Norm,CERQ_Rumination,0.47372224933598345,1.4177991400906034e-06
+DERS_Impulse Control Problems Norm,CERQ_Positive Refocusing,-0.44605756192333934,6.6133003295317365e-06
+DERS_Impulse Control Problems Norm,CERQ_Positive Reappraisal,-0.5342607875104538,2.92515214733224e-08
+DERS_Impulse Control Problems Norm,CERQ_Catastrophizing,0.5088972042051582,1.6298739724751196e-07
+DERS_Lack of Emotional Awareness Norm,DERS_Lack of Emotional Clarity Norm,0.5386845510941587,2.1362932568310396e-08
+DERS_Lack of Emotional Awareness Norm,DERS_Non-Acceptance of Emotional Reactions,0.4906079890198671,5.172613649568938e-07
+DERS_Lack of Emotional Awareness Norm,DERS_Lack of Emotional Awareness,0.9813837894425396,1.0055535788896568e-67
+DERS_Lack of Emotional Awareness Norm,DERS_Lack of Emotional Clarity,0.5394187905135928,2.0268270725150974e-08
+DERS_Lack of Emotional Awareness Norm,CERQ_Refocusing on Planning Norm,-0.47842909460306154,1.076202996636557e-06
+DERS_Lack of Emotional Awareness Norm,CERQ_Refocusing on Planning,-0.47842828345950167,1.0762545058617194e-06
+DERS_Limited Access to Emotion Regulation Strategies Norm,DERS_Lack of Emotional Clarity Norm,0.6425263998156441,2.933742437919617e-12
+DERS_Limited Access to Emotion Regulation Strategies Norm,DERS_Non-Acceptance of Emotional Reactions,0.660439142563592,4.4229926712433016e-13
+DERS_Limited Access to Emotion Regulation Strategies Norm,DERS_Problems with Goal-Oriented Behavior,0.7580748781863238,9.054016990087151e-19
+DERS_Limited Access to Emotion Regulation Strategies Norm,DERS_Impulse Control Problems,0.701229482172429,3.5398220588878943e-15
+DERS_Limited Access to Emotion Regulation Strategies Norm,DERS_Limited Access to Emotion Regulation Strategies,0.9999661042163368,1.4210942831260143e-193
+DERS_Limited Access to Emotion Regulation Strategies Norm,DERS_Lack of Emotional Clarity,0.6424117944060079,2.9682843885021274e-12
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Self-Blame Norm,0.4548064963395007,4.122757180436789e-06
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Rumination Norm,0.5165077900082782,9.8778164889769e-08
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Positive Refocusing Norm,-0.5377421755916221,2.2850772512483204e-08
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Refocusing on Planning Norm,-0.5165634637135733,9.841250830837638e-08
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Positive Reappraisal Norm,-0.6843636694169897,2.8650483504109834e-14
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Putting into Perspective Norm,-0.5173646725747374,9.329089367414325e-08
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Catastrophizing Norm,0.6454009552526869,2.183800758639174e-12
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Self-Blame,0.4548064963395008,4.122757180436751e-06
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Rumination,0.5165100870064113,9.876305300718694e-08
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Positive Refocusing,-0.5377395646140314,2.285502895190468e-08
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Refocusing on Planning,-0.5165610409909943,9.842839353936861e-08
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Positive Reappraisal,-0.6843636694169892,2.8650483504109834e-14
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Putting into Perspective,-0.5173630619510197,9.330093008917548e-08
+DERS_Limited Access to Emotion Regulation Strategies Norm,CERQ_Catastrophizing,0.6454009072641589,2.1838115782367834e-12
+DERS_Lack of Emotional Clarity Norm,DERS_Non-Acceptance of Emotional Reactions,0.5745461626727215,1.4027339429481378e-09
+DERS_Lack of Emotional Clarity Norm,DERS_Problems with Goal-Oriented Behavior,0.49793940718779933,3.282136583075713e-07
+DERS_Lack of Emotional Clarity Norm,DERS_Lack of Emotional Awareness,0.5738031735222339,1.4891295399645824e-09
+DERS_Lack of Emotional Clarity Norm,DERS_Limited Access to Emotion Regulation Strategies,0.6440412033775106,2.5120527406307004e-12
+DERS_Lack of Emotional Clarity Norm,DERS_Lack of Emotional Clarity,0.9998108443398646,3.148664655905042e-159
+DERS_Lack of Emotional Clarity Norm,CERQ_Refocusing on Planning Norm,-0.48421671190854043,7.624622126544393e-07
+DERS_Lack of Emotional Clarity Norm,CERQ_Positive Reappraisal Norm,-0.4889001873605763,5.742113895177123e-07
+DERS_Lack of Emotional Clarity Norm,CERQ_Putting into Perspective Norm,-0.47010110212076367,1.7478943149063745e-06
+DERS_Lack of Emotional Clarity Norm,CERQ_Refocusing on Planning,-0.4842150803479901,7.625369750975138e-07
+DERS_Lack of Emotional Clarity Norm,CERQ_Positive Reappraisal,-0.4889001873605755,5.742113895177123e-07
+DERS_Lack of Emotional Clarity Norm,CERQ_Putting into Perspective,-0.47009990747196595,1.7480143250798538e-06
+DERS_Non-Acceptance of Emotional Reactions,DERS_Problems with Goal-Oriented Behavior,0.5478578983792738,1.0972074654913308e-08
+DERS_Non-Acceptance of Emotional Reactions,DERS_Impulse Control Problems,0.47278620675382305,1.496965060929373e-06
+DERS_Non-Acceptance of Emotional Reactions,DERS_Lack of Emotional Awareness,0.4762948836712047,1.2201117309469004e-06
+DERS_Non-Acceptance of Emotional Reactions,DERS_Limited Access to Emotion Regulation Strategies,0.6600624563437948,4.608605249428379e-13
+DERS_Non-Acceptance of Emotional Reactions,DERS_Lack of Emotional Clarity,0.5722870456484553,1.6815124649738192e-09
+DERS_Non-Acceptance of Emotional Reactions,CERQ_Self-Blame Norm,0.425252940562385,1.9332186087606937e-05
+DERS_Non-Acceptance of Emotional Reactions,CERQ_Rumination Norm,0.45494894777617007,4.090713623725964e-06
+DERS_Non-Acceptance of Emotional Reactions,CERQ_Positive Reappraisal Norm,-0.5098380845583633,1.5330347539709453e-07
+DERS_Non-Acceptance of Emotional Reactions,CERQ_Catastrophizing Norm,0.519200976449052,8.24927275806802e-08
+DERS_Non-Acceptance of Emotional Reactions,CERQ_Self-Blame,0.42525294056238494,1.9332186087606937e-05
+DERS_Non-Acceptance of Emotional Reactions,CERQ_Rumination,0.4549496484769938,4.090556587158291e-06
+DERS_Non-Acceptance of Emotional Reactions,CERQ_Positive Reappraisal,-0.5098380845583631,1.5330347539709453e-07
+DERS_Non-Acceptance of Emotional Reactions,CERQ_Catastrophizing,0.5192029510807723,8.248178401415104e-08
+DERS_Problems with Goal-Oriented Behavior,DERS_Impulse Control Problems,0.6138542153210048,4.7400268877656336e-11
+DERS_Problems with Goal-Oriented Behavior,DERS_Limited Access to Emotion Regulation Strategies,0.7588760668153687,7.929231907451949e-19
+DERS_Problems with Goal-Oriented Behavior,DERS_Lack of Emotional Clarity,0.49681862740957233,3.520921094282987e-07
+DERS_Problems with Goal-Oriented Behavior,CERQ_Rumination Norm,0.4540985826474265,4.285537114477291e-06
+DERS_Problems with Goal-Oriented Behavior,CERQ_Positive Reappraisal Norm,-0.5723508282583517,1.6729600942551796e-09
+DERS_Problems with Goal-Oriented Behavior,CERQ_Catastrophizing Norm,0.49077423009968685,5.120133491635128e-07
+DERS_Problems with Goal-Oriented Behavior,CERQ_Rumination,0.45409835486079025,4.2855904538524956e-06
+DERS_Problems with Goal-Oriented Behavior,CERQ_Positive Reappraisal,-0.5723508282583513,1.6729600942552003e-09
+DERS_Problems with Goal-Oriented Behavior,CERQ_Catastrophizing,0.4907746548893057,5.120000040079425e-07
+DERS_Impulse Control Problems,DERS_Limited Access to Emotion Regulation Strategies,0.7001632553840506,4.057492233402764e-15
+DERS_Impulse Control Problems,CERQ_Rumination Norm,0.47488562582335586,1.3249190432709412e-06
+DERS_Impulse Control Problems,CERQ_Positive Refocusing Norm,-0.46015483447387306,3.0683800275717534e-06
+DERS_Impulse Control Problems,CERQ_Positive Reappraisal Norm,-0.5484073880443292,1.0536060690373368e-08
+DERS_Impulse Control Problems,CERQ_Putting into Perspective Norm,-0.43804496007476534,1.0080231654424862e-05
+DERS_Impulse Control Problems,CERQ_Catastrophizing Norm,0.5114773125646285,1.3772523761098772e-07
+DERS_Impulse Control Problems,CERQ_Rumination,0.47488703012382455,1.3248104886550095e-06
+DERS_Impulse Control Problems,CERQ_Positive Refocusing,-0.4601537018858836,3.068573582595204e-06
+DERS_Impulse Control Problems,CERQ_Positive Reappraisal,-0.548407388044329,1.0536060690373425e-08
+DERS_Impulse Control Problems,CERQ_Putting into Perspective,-0.43804544377479543,1.0079978400367476e-05
+DERS_Impulse Control Problems,CERQ_Catastrophizing,0.5114735824636687,1.3775891292063157e-07
+DERS_Lack of Emotional Awareness,DERS_Lack of Emotional Clarity,0.5763079657533396,1.2166494365002265e-09
+DERS_Lack of Emotional Awareness,CERQ_Refocusing on Planning Norm,-0.5055594675903332,2.0224653782598948e-07
+DERS_Lack of Emotional Awareness,CERQ_Positive Reappraisal Norm,-0.44395227997039194,7.395434588647466e-06
+DERS_Lack of Emotional Awareness,CERQ_Refocusing on Planning,-0.5055576408951572,2.0227029984075055e-07
+DERS_Lack of Emotional Awareness,CERQ_Positive Reappraisal,-0.44395227997039144,7.395434588647466e-06
+DERS_Limited Access to Emotion Regulation Strategies,DERS_Lack of Emotional Clarity,0.6439197628975496,2.5435803266270075e-12
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Self-Blame Norm,0.454833631524696,4.116635110912463e-06
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Rumination Norm,0.5155950471148116,1.0496048347814197e-07
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Positive Refocusing Norm,-0.5384737514967771,2.1687492384465686e-08
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Refocusing on Planning Norm,-0.5177785985890725,9.074535302463743e-08
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Positive Reappraisal Norm,-0.6852114056289201,2.587865046883744e-14
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Putting into Perspective Norm,-0.5188234816743807,8.461042302197775e-08
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Catastrophizing Norm,0.6450254164588357,2.2700722510122044e-12
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Self-Blame,0.4548336315246954,4.116635110912463e-06
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Rumination,0.5155973576443382,1.0494437841180979e-07
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Positive Refocusing,-0.5384711325745696,2.1691554082374308e-08
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Refocusing on Planning,-0.5177761250856361,9.076036615719313e-08
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Positive Reappraisal,-0.6852114056289192,2.5878650468837005e-14
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Putting into Perspective,-0.5188218440544169,8.461972161987404e-08
+DERS_Limited Access to Emotion Regulation Strategies,CERQ_Catastrophizing,0.6450253637936885,2.2700845770208945e-12
+DERS_Lack of Emotional Clarity,CERQ_Refocusing on Planning Norm,-0.4856937072942592,6.975569483781114e-07
+DERS_Lack of Emotional Clarity,CERQ_Positive Reappraisal Norm,-0.4896936824381496,5.470486676614048e-07
+DERS_Lack of Emotional Clarity,CERQ_Putting into Perspective Norm,-0.4721323641288084,1.554723623185363e-06
+DERS_Lack of Emotional Clarity,CERQ_Refocusing on Planning,-0.4856920742664791,6.976257293326444e-07
+DERS_Lack of Emotional Clarity,CERQ_Positive Reappraisal,-0.48969368243814926,5.470486676614048e-07
+DERS_Lack of Emotional Clarity,CERQ_Putting into Perspective,-0.4721311471052809,1.5548330698697935e-06
+CERQ_Self-Blame Norm,CERQ_Self-Blame,1.0000000000000002,0.0
+CERQ_Acceptance Norm,CERQ_Acceptance,0.9999999995905381,0.0
+CERQ_Rumination Norm,CERQ_Rumination,0.999999999693628,0.0
+CERQ_Positive Refocusing Norm,CERQ_Refocusing on Planning Norm,0.4761233595891739,1.232435461496496e-06
+CERQ_Positive Refocusing Norm,CERQ_Positive Reappraisal Norm,0.4864124580378311,6.678999276258862e-07
+CERQ_Positive Refocusing Norm,CERQ_Putting into Perspective Norm,0.5464551644552196,1.216469688541147e-08
+CERQ_Positive Refocusing Norm,CERQ_Positive Refocusing,0.9999999997584234,0.0
+CERQ_Positive Refocusing Norm,CERQ_Refocusing on Planning,0.47612453687425904,1.2323504755277556e-06
+CERQ_Positive Refocusing Norm,CERQ_Positive Reappraisal,0.4864124580378309,6.678999276258927e-07
+CERQ_Positive Refocusing Norm,CERQ_Putting into Perspective,0.5464534348524018,1.2166241132314375e-08
+CERQ_Refocusing on Planning Norm,CERQ_Positive Reappraisal Norm,0.6493080638364442,1.4546415253444836e-12
+CERQ_Refocusing on Planning Norm,CERQ_Positive Refocusing,0.4761213349515695,1.2325816291968056e-06
+CERQ_Refocusing on Planning Norm,CERQ_Refocusing on Planning,0.9999999998250715,0.0
+CERQ_Refocusing on Planning Norm,CERQ_Positive Reappraisal,0.6493080638364439,1.454641525344443e-12
+CERQ_Positive Reappraisal Norm,CERQ_Putting into Perspective Norm,0.5138206518703817,1.1804822991694976e-07
+CERQ_Positive Reappraisal Norm,CERQ_Catastrophizing Norm,-0.5084961797344689,1.6728927847367225e-07
+CERQ_Positive Reappraisal Norm,CERQ_Positive Refocusing,0.48640962198776994,6.680145646308006e-07
+CERQ_Positive Reappraisal Norm,CERQ_Refocusing on Planning,0.6493084757270818,1.4545787676427886e-12
+CERQ_Positive Reappraisal Norm,CERQ_Positive Reappraisal,1.0000000000000004,0.0
+CERQ_Positive Reappraisal Norm,CERQ_Putting into Perspective,0.5138199755961236,1.1805350194732993e-07
+CERQ_Positive Reappraisal Norm,CERQ_Catastrophizing,-0.508497470779107,1.6727525750999872e-07
+CERQ_Putting into Perspective Norm,CERQ_Catastrophizing Norm,-0.4793474747805751,1.0193569212991977e-06
+CERQ_Putting into Perspective Norm,CERQ_Positive Refocusing,0.5464534858905737,1.2166195561055624e-08
+CERQ_Putting into Perspective Norm,CERQ_Positive Reappraisal,0.5138206518703812,1.1804822991694923e-07
+CERQ_Putting into Perspective Norm,CERQ_Putting into Perspective,0.9999999997332311,0.0
+CERQ_Putting into Perspective Norm,CERQ_Catastrophizing,-0.4793446722445894,1.0195259875637475e-06
+CERQ_Catastrophizing Norm,CERQ_Other-Blame Norm,0.478146024075986,1.0943208995249283e-06
+CERQ_Catastrophizing Norm,CERQ_Positive Reappraisal,-0.508496179734469,1.6728927847366872e-07
+CERQ_Catastrophizing Norm,CERQ_Putting into Perspective,-0.4793475278151572,1.0193537221817671e-06
+CERQ_Catastrophizing Norm,CERQ_Catastrophizing,0.9999999997403015,0.0
+CERQ_Catastrophizing Norm,CERQ_Other-Blame,0.4781478094099168,1.0942057302028827e-06
+CERQ_Other-Blame Norm,CERQ_Catastrophizing,0.47814575144263183,1.0943384877197836e-06
+CERQ_Other-Blame Norm,CERQ_Other-Blame,0.9999999998684977,0.0
+CERQ_Positive Refocusing,CERQ_Refocusing on Planning,0.4761225123232293,1.2324966274427507e-06
+CERQ_Positive Refocusing,CERQ_Positive Reappraisal,0.4864096219877696,6.680145646308006e-07
+CERQ_Positive Refocusing,CERQ_Putting into Perspective,0.5464517563286164,1.2167739953238443e-08
+CERQ_Refocusing on Planning,CERQ_Positive Reappraisal,0.6493084757270815,1.4545787676427759e-12
+CERQ_Positive Reappraisal,CERQ_Putting into Perspective,0.5138199755961232,1.1805350194732993e-07
+CERQ_Positive Reappraisal,CERQ_Catastrophizing,-0.5084974707791065,1.6727525751000044e-07
+CERQ_Putting into Perspective,CERQ_Catastrophizing,-0.4793447252639165,1.0195227888644575e-06
+CERQ_Catastrophizing,CERQ_Other-Blame,0.47814753675570015,1.0942233179918235e-06
