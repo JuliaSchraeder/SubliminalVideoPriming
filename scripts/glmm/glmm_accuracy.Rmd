@@ -249,7 +249,7 @@ conditions <-  afex_plot(model, x = "condition",
                                  "happy_sad" ="lightblue", 
                                  "sad_sad" ="darkblue")) +
     theme_classic() +
-    theme(legend.position = "none",
+    theme(legend.position = "right",
           axis.text.x = element_text(angle = 45, hjust = 1)) + 
     labs(title = "Accuracy for each task condition", y = "Accuracy", x = "")
 
@@ -265,4 +265,14 @@ combined_plots
 
 ```{r}
 ggsave("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/plots/glmm_accuracy.tiff", combined_plots, width = 5, height = 7)
+```
+
+```{r}
+library(dplyr)
+
+# Count unique participants in each group
+df %>% 
+  group_by(group) %>% 
+  summarise(Num_Participants = n_distinct(participantID))
+
 ```

@@ -280,8 +280,7 @@ conditions <-  afex_plot(model1, x = "condition",
 age <- ggplot(df, aes(x = age, y = key_resp.rt)) +
   geom_point(alpha = 0.6, color = "#1f77b4") + 
   geom_smooth(method = "lm", se = TRUE, color = "darkred", linetype = "dashed") +  
-  labs(title = "Reaction Time vs Age",
-       x = "Age",
+  labs(x = "Age",
        y = "Reaction Time") +
   theme_classic()+
   ylim(0,1.5)
@@ -289,13 +288,23 @@ age <- ggplot(df, aes(x = age, y = key_resp.rt)) +
 ```
 
 ```{r}
-combined_plots <- cowplot::plot_grid(group, conditions, age,
+combined_plots <- cowplot::plot_grid(group,age,conditions,
                             labels = c("A", "B", "C"),
-                            ncol = 2,nrow = 2)
+                            ncol = 2,nrow = 2,
+                            rel_heights = c(1,1))
 print(combined_plots)
 ```
 
 ```{r}
 ggsave("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/plots/glmm_rt.tiff", combined_plots, width = 6, height = 7)
 
+```
+
+```{r}
+library(dplyr)
+
+# Count unique participants in each group
+df %>% 
+  group_by(group) %>% 
+  summarise(Num_Participants = n_distinct(participantID))
 ```
