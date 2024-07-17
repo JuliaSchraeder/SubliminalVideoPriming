@@ -1,0 +1,47 @@
+Table 1
+Significant Correlations (Bonferroni-corrected) involving Categories
+----------------------------------------
+Number of comparisons corrected for Bonferroni: 1936
+Bonferroni correction threshold: 0.00003
+----------------------------------------
+Variable 1                     Variable 2                     Correlation     P-Value        
+----------------------------------------
+pos_frequency_related          pos_frequency_related          1.000           0.000e+00      
+pos_energy_related             pos_energy_related             1.000           0.000e+00      
+pos_energy_related             neg_energy_related             0.474           1.387e-06      
+pos_spectral_balance           Group                          -0.567          2.605e-09      
+pos_spectral_balance           pos_spectral_balance           1.000           0.000e+00      
+pos_spectral_balance           neg_spectral_balance           0.902           2.499e-35      
+pos_spectral_balance           STAI2                          0.456           3.758e-06      
+pos_spectral_balance           DERS Total Score               0.463           2.644e-06      
+pos_spectral_balance           DERS Limited Access to Emotion Regulation Strategies 0.465           2.307e-06      
+pos_spectral_balance           DERS Lack of Emotional Clarity 0.519           8.645e-08      
+pos_spectral_balance           CERQ Positive Reappraisal      -0.424          2.073e-05      
+pos_spectral_balance           CERQ Putting into Perspective  -0.435          1.153e-05      
+pos_temporal                   pos_temporal                   1.000           0.000e+00      
+pos_temporal                   neg_temporal                   0.721           2.669e-16      
+pos_lexical_richness           pos_lexical_richness           1.000           0.000e+00      
+pos_sentiment                  pos_sentiment                  1.000           0.000e+00      
+pos_word_types                 pos_word_types                 1.000           0.000e+00      
+pos_syntactic_complexity       pos_syntactic_complexity       1.000           0.000e+00      
+neg_frequency_related          neg_frequency_related          1.000           0.000e+00      
+neg_energy_related             pos_energy_related             0.474           1.387e-06      
+neg_energy_related             neg_energy_related             1.000           0.000e+00      
+neg_spectral_balance           Group                          -0.567          2.541e-09      
+neg_spectral_balance           pos_spectral_balance           0.902           2.499e-35      
+neg_spectral_balance           neg_spectral_balance           1.000           0.000e+00      
+neg_spectral_balance           STAI2                          0.486           6.981e-07      
+neg_spectral_balance           STAI1                          0.436           1.107e-05      
+neg_spectral_balance           DERS Total Score               0.466           2.168e-06      
+neg_spectral_balance           DERS Limited Access to Emotion Regulation Strategies 0.468           2.015e-06      
+neg_spectral_balance           DERS Lack of Emotional Clarity 0.495           3.973e-07      
+neg_spectral_balance           CERQ Refocusing on Planning    -0.440          8.890e-06      
+neg_spectral_balance           CERQ Positive Reappraisal      -0.495          3.937e-07      
+neg_temporal                   pos_temporal                   0.721           2.669e-16      
+neg_temporal                   neg_temporal                   1.000           0.000e+00      
+neg_temporal                   neg_sentiment                  0.425           1.976e-05      
+neg_lexical_richness           neg_lexical_richness           1.000           0.000e+00      
+neg_sentiment                  neg_temporal                   0.425           1.976e-05      
+neg_sentiment                  neg_sentiment                  1.000           0.000e+00      
+neg_word_types                 neg_word_types                 1.000           0.000e+00      
+neg_syntactic_complexity       neg_syntactic_complexity       1.000           0.000e+00      
