@@ -1,0 +1,20 @@
+Variable1,Variable2,Correlation,P-Value
+pos_energy_related,neg_energy_related,0.6290575735027815,1.6795842214135596e-06
+pos_spectral_balance,neg_spectral_balance,0.9011515798358536,2.5883433801321724e-18
+pos_temporal,neg_temporal,0.6834889478946162,8.619041296873025e-08
+BVAQ,DERS Lack of Emotional Awareness,0.65549571302879,4.277100827444354e-07
+BDI-II,STAI2,0.7118569055902951,1.40647562673718e-08
+BDI-II,DERS Limited Access to Emotion Regulation Strategies,0.5817995476277646,1.443885454472365e-05
+STAI2,DERS Total Score,0.5885568502061624,1.0836737214918466e-05
+STAI2,DERS Limited Access to Emotion Regulation Strategies,0.571682724195524,2.1929081814641694e-05
+DigitSpan Forwards Span,DigitSpan Forwards Total Score,0.9513780180217419,3.6635986486280306e-25
+DigitSpan Forwards Span,DigitSpan Backwards Span,0.5894734602201064,1.0417799052860718e-05
+DigitSpan Forwards Span,DigitSpan Backwards Total Score,0.5948243321123164,8.255970846646512e-06
+DigitSpan Forwards Total Score,DigitSpan Backwards Span,0.6471791405895866,6.67078870086623e-07
+DigitSpan Forwards Total Score,DigitSpan Backwards Total Score,0.6335609301004844,1.3426205687638528e-06
+DigitSpan Backwards Span,DigitSpan Backwards Total Score,0.9143928560544485,1.0958632713729302e-19
+DERS Total Score,DERS Non-Acceptance of Emotional Reactions,0.7019771554679641,2.708164075493859e-08
+DERS Total Score,DERS Impulse Control Problems,0.5929787249343942,8.94976775434052e-06
+DERS Total Score,DERS Limited Access to Emotion Regulation Strategies,0.7815273078965767,5.54657863535361e-11
+DERS Total Score,DERS Lack of Emotional Clarity,0.6850937339009869,7.821053300239134e-08
+CERQ Refocusing on Planning,CERQ Positive Reappraisal,0.5931320082164089,8.890158925572458e-06
