@@ -1,0 +1,476 @@
+---
+title: "Subjective Rating"
+output: html_notebook
+---
+
+## Import Libraries
+
+```{r}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(writexl)
+library(tidyr)
+library(purrr)  # Load the purrr package for the reduce function
+library(stringr)
+library(grid)
+library(cowplot)
+library(ggprism)
+library(lme4)
+library(lmerTest)
+library(lm.beta)
+#The car package can provide Type III ANOVA tables with p-values for mixed models. 
+library(car)
+library(emmeans)
+# Create APA Style Tables
+library(knitr)
+# To export to office
+library(officer)
+
+```
+
+## Slider Rating Analysis
+
+```{r}
+df <- read_csv("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/slider_rating.csv",
+                          col_types = cols(Rating = col_number(), 
+                                           Count = col_number()))
+```
+
+```{r}
+df$group <- as.factor(df$group)
+df$condition <- as.factor(df$condition)
+df$participantID <- as.factor(df$participantID)
+```
+
+```{r}
+# Recalculate mean and standard deviation for each participant
+participant_aggregates <- df %>%
+    dplyr::mutate(condition = dplyr::recode_factor(condition,
+                            "happy_happy" = "Happy Video, Happy Primer",
+                            "happy_sad" = "Sad Video, Happy Primer",
+                            "sad_happy" = "Happy Video, Sad Primer",
+                            "sad_sad" = "Sad Video, Sad Primer")) %>%
+  group_by(participantID, group, condition) %>%
+  summarize(
+    mean_rating = sum(Rating * Count) / sum(Count),
+    sd_rating = sqrt(sum(Count * (Rating - mean_rating)^2) / sum(Count)),
+    n_trials = sum(Count),
+    .groups = 'drop'
+  )
+
+print(participant_aggregates)
+
+
+```
+
+### Descriptive Statistics
+
+```{r}
+# Calculate descriptive statistics at group and condition level
+summary_stats <- participant_aggregates %>%
+  group_by(group, condition) %>%
+  summarize(
+    mean_rating = mean(mean_rating, na.rm = TRUE),
+    sd_rating = mean(sd_rating, na.rm = TRUE),
+    n = n()
+  )
+
+print(summary_stats)
+
+```
+
+```{r}
+knitr::opts_chunk$set(fig.width = 8, fig.height = 6)
+
+```
+
+```{r, fig.width=10, fig.height=7}
+ggplot(participant_aggregates,
+       aes(x = condition,
+           y = mean_rating,
+           fill = group,
+           color = group)) +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), 
+              position = position_dodge(0.8), 
+              alpha = 0.7) +  # Draw quantiles and separate groups
+  stat_summary(fun = mean, 
+               geom = "point",  
+               position = position_dodge(0.8), 
+               size = 3, 
+               shape = 23, 
+               fill = "white") +  # Add mean as a point
+  labs(title = "Slider Ratings by Condition and Group",
+       x = "",
+       y = "Rating from sad to happy") +
+  theme_prism() +
+  theme(axis.text.x = element_text(angle = 45, 
+                                     hjust = 1,
+                                     vjust = 1,
+                                     # Move x-axis labels 
+                                     margin = margin(t = 0, b = 0)),
+          axis.title.x = element_text(margin = margin(t = 10)), # Move x-axis title
+          plot.title = element_text(margin = margin(b = 30)),  # Move plot title up
+          plot.margin = unit(c(0.5, 0.5, 0.5, 2),"cm"))  # Adjust the plot
+```
+
+### Group differences
+
+#### Visual Data Inspection
+
+```{r}
+# Histogram of the dependent variable
+ggplot(participant_aggregates, aes(x = mean_rating)) +
+  geom_histogram(binwidth = 0.5, fill = "blue", color = "black") +
+  labs(title = "Histogram of Mean Rating", x = "Mean Rating", y = "Count")
+
+# Scatterplot of independent variables vs. dependent variable
+ggplot(participant_aggregates, aes(x = group, y = mean_rating)) +
+  geom_jitter(width = 0.2, height = 0.2) +
+  labs(title = "Scatterplot of Group vs. Mean Rating", x = "Group", y = "Mean Rating")
+
+```
+
+**Two Peaks**: A bimodal distribution has two distinct peaks or clusters. For example, in your case, one peak might be around a rating of 3, and another around 6.
+
+But if we dont separate our data into two categories, we can still use gaussian distribution
+
+#### Estimate GLMM
+
+```{r}
+model_glmm <- glmer(mean_rating ~ group * condition + (1 | participantID), 
+                    family = gaussian, data = participant_aggregates)
+
+# Summary of the model
+Anova(model_glmm, type = 3)
+```
+
+#### Post Hoc Tests
+
+```{r}
+eff.group      <- emmeans(model_glmm, 
+                             pairwise ~ group,
+                            adjust ="bonferroni")
+eff.condition  <- emmeans(model_glmm, 
+                          pairwise ~ condition,
+                          adjust ="bonferroni")
+eff.interaction <- emmeans(model_glmm, 
+                           pairwise ~ condition:group,
+                           adjust ="bonferroni")
+```
+
+```{r}
+# Extract the estimated marginal means
+emm_group <- as.data.frame(eff.group$emmeans)
+emm_condition <- as.data.frame(eff.condition$emmeans)
+emm_interaction <- as.data.frame(eff.interaction$emmeans)
+
+# Extract the pairwise comparisons with p-values
+pairs_group <- as.data.frame(eff.group$contrasts)
+pairs_condition <- as.data.frame(eff.condition$contrasts)
+pairs_interaction <- as.data.frame(eff.interaction$contrasts)
+```
+
+##### Export Results
+
+###### Group
+
+```{r}
+significant_comparisons <- pairs_group %>%
+  filter(p.value < 0.05) %>%
+  mutate(asterisks = case_when(
+    p.value < 0.001 ~ "***",
+    p.value < 0.01  ~ "**",
+    p.value < 0.05  ~ "*",
+    TRUE ~ ""
+  ),
+  group1 = sub(" - .*", "", contrast),  # Extract first condition
+  group2 = sub(".* - ", "", contrast)   # Extract second condition
+  )
+
+apa_table <- significant_comparisons %>%
+  select(contrast, estimate, SE, df, t.ratio, p.value, asterisks) %>%
+  rename(
+    `Comparison` = contrast,
+    `Mean Difference` = estimate,
+    `Standard Error` = SE,
+    `Degrees of Freedom` = df,
+    `t-Value` = t.ratio,
+    `p-Value` = p.value,
+    `Significance` = asterisks
+  )
+
+# Format the p-values for APA style (e.g., scientific notation to standard format)
+apa_table$p.Value <- format(apa_table$p.Value, scientific = FALSE)
+# Create the APA-style table using knitr::kable
+#kable(apa_table, format = "html", digits = 3, caption = "Rating Conditions Post-Hoc Comparisons Between Conditions")
+
+# Create a new Word document
+doc <- read_docx()
+
+# Add a title
+doc <- doc %>%
+  body_add_par("Post-Hoc Comparisons Between Conditions", style = "heading 1")
+
+# Add the table
+doc <- doc %>%
+  body_add_table(value = apa_table, style = "table_template")
+
+# Save the document
+print(doc, target = "Rating_Group_Post_Hoc_Comparisons.docx")
+
+```
+
+###### Condition
+
+```{r}
+significant_comparisons <- pairs_condition %>%
+  filter(p.value < 0.05) %>%
+  mutate(asterisks = case_when(
+    p.value < 0.001 ~ "***",
+    p.value < 0.01  ~ "**",
+    p.value < 0.05  ~ "*",
+    TRUE ~ ""
+  ),
+  condition1 = sub(" - .*", "", contrast),  # Extract first condition
+  condition2 = sub(".* - ", "", contrast)   # Extract second condition
+  )
+
+apa_table <- significant_comparisons %>%
+  select(contrast, estimate, SE, df, t.ratio, p.value, asterisks) %>%
+  rename(
+    `Comparison` = contrast,
+    `Mean Difference` = estimate,
+    `Standard Error` = SE,
+    `Degrees of Freedom` = df,
+    `t-Value` = t.ratio,
+    `p-Value` = p.value,
+    `Significance` = asterisks
+  )
+
+# Format the p-values for APA style (e.g., scientific notation to standard format)
+apa_table$p.Value <- format(apa_table$p.Value, scientific = FALSE)
+# Create the APA-style table using knitr::kable
+#kable(apa_table, format = "html", digits = 3, caption = "Rating Conditions Post-Hoc Comparisons Between Conditions")
+
+# Create a new Word document
+doc <- read_docx()
+
+# Add a title
+doc <- doc %>%
+  body_add_par("Post-Hoc Comparisons Between Conditions", style = "heading 1")
+
+# Add the table
+doc <- doc %>%
+  body_add_table(value = apa_table, style = "table_template")
+
+# Save the document
+print(doc, target = "Rating_Conditions_Post_Hoc_Comparisons.docx")
+
+```
+
+###### Interaction Group\*Condition
+
+```{r}
+# Prepare significant comparisons for annotation
+significant_comparisons <- pairs_interaction %>%
+  filter(p.value < 0.05) %>%
+  mutate(
+    asterisks = case_when(
+      p.value < 0.001 ~ "***",
+      p.value < 0.01  ~ "**",
+      p.value < 0.05  ~ "*",
+      TRUE ~ ""
+    ),
+    condition1 = sub(" - .*", "", contrast),  # Extract first condition
+    condition2 = sub(".* - ", "", contrast)   # Extract second condition
+  )
+
+apa_table <- significant_comparisons %>%
+  select(contrast, estimate, SE, df, t.ratio, p.value, asterisks) %>%
+  rename(
+    `Comparison` = contrast,
+    `Mean Difference` = estimate,
+    `Standard Error` = SE,
+    `Degrees of Freedom` = df,
+    `t-Value` = t.ratio,
+    `p-Value` = p.value,
+    `Significance` = asterisks
+  )
+
+# Format the p-values for APA style (e.g., scientific notation to standard format)
+apa_table$p.Value <- format(apa_table$p.Value, scientific = FALSE)
+# Create the APA-style table using knitr::kable
+#kable(apa_table, format = "html", digits = 3, caption = "Rating Conditions Post-Hoc Comparisons Between Conditions")
+
+# Create a new Word document
+doc <- read_docx()
+
+# Add a title
+doc <- doc %>%
+  body_add_par("Post-Hoc Comparisons Between Conditions", style = "heading 1")
+
+# Add the table
+doc <- doc %>%
+  body_add_table(value = apa_table, style = "table_template")
+
+# Save the document
+print(doc, target = "Rating_Interaction_Post_Hoc_Comparisons.docx")
+
+```
+
+#### Plot Results
+
+##### Plot Group
+
+```{r}
+significant_comparisons <- pairs_group %>%
+  filter(p.value < 0.05) %>%
+  mutate(asterisks = case_when(
+    p.value < 0.001 ~ "***",
+    p.value < 0.01  ~ "**",
+    p.value < 0.05  ~ "*",
+    TRUE ~ ""
+  ),
+  group1 = sub(" - .*", "", contrast),  # Extract first condition
+  group2 = sub(".* - ", "", contrast)   # Extract second condition
+  )
+```
+
+```{r, fig.width=5, fig.height=5}
+ggplot(emm_group, 
+       aes(x = group, y = emmean, fill = group, color = group)) +
+  geom_violin(data = participant_aggregates, 
+              aes(x = group, y = mean_rating, fill = group), 
+              draw_quantiles = c(0.25, 0.5, 0.75), 
+              position = position_dodge(0.8), 
+              alpha = 0.7) +  # Draw quantiles and separate groups
+  geom_point(stat = "identity", position = position_dodge(0.8), 
+             size = 3, shape = 23, fill = "white") +  # Add mean as a point
+  #geom_errorbar(aes(ymin = emmean - SE, ymax = emmean + SE), 
+                #width = 0.2, position = position_dodge(0.8)) +  # Error bars
+  labs(title = "Slider Ratings by Group",
+       x = "",
+       y = "Rating from sad to happy") +
+  theme_prism() +
+  theme(axis.text.x = element_text(angle = 45, 
+                                   hjust = 1,
+                                   vjust = 1,
+                                   margin = margin(t = 0, b = 0)),
+        axis.title.x = element_text(margin = margin(t = 10)), 
+        plot.title = element_text(margin = margin(b = 30)),  
+        plot.margin = unit(c(0.5, 0.5, 0.5, 2), "cm"))  #+  # Adjust the plot
+
+  ## Adding significance annotations (asterisks)
+  #geom_text(data = significant_comparisons, 
+            #aes(x = as.numeric(factor(group1)) + 0.5,  
+                #y = max(emm_group$emmean + emm_group$SE) + 3.3, 
+                #label = asterisks), 
+            ## Position the asterisks
+            #vjust = -0.5, size = 7, inherit.aes = FALSE) +  
+
+  ## Adding lines to show significant comparisons
+  #geom_segment(data = significant_comparisons,
+               #aes(x = group1, xend = group2,
+                   #y = max(emm_group$emmean + emm_group$SE) +3.7, 
+                   #yend = max(emm_group$emmean + emm_group$SE) + 3.7),
+               #color = "black", size = 0.8, inherit.aes = FALSE)
+ggsave("Rating_Group.tiff")
+```
+
+##### Plot Conditions
+
+Align conditions
+
+```{r}
+# Define the correct order of conditions
+condition_levels <- c("Happy Video, Happy Primer", "Happy Video, Sad Primer", 
+                      "Sad Video, Happy Primer", "Sad Video, Sad Primer")
+
+# Apply the factor levels to both data frames
+emm_condition$condition <- factor(emm_condition$condition, levels = condition_levels)
+participant_aggregates$condition <- factor(participant_aggregates$condition, levels = condition_levels)
+```
+
+```{r, fig.width=7, fig.height=5}
+significant_comparisons <- pairs_condition %>%
+  filter(p.value < 0.05) %>%
+  mutate(asterisks = case_when(
+    p.value < 0.001 ~ "***",
+    p.value < 0.01  ~ "**",
+    p.value < 0.05  ~ "*",
+    TRUE ~ ""
+  ),
+  condition1 = sub(" - .*", "", contrast),  # Extract first condition
+  condition2 = sub(".* - ", "", contrast)   # Extract second condition
+  )
+
+# Plot all four conditions
+ggplot(emm_condition, 
+       aes(x = condition, y = emmean, fill = condition, color = condition)) +
+  geom_violin(data = participant_aggregates, 
+              aes(x = condition, y = mean_rating, fill = condition), 
+              draw_quantiles = c(0.25, 0.5, 0.75), 
+              position = position_dodge(0.8), 
+              alpha = 0.7) +  # Draw quantiles and separate conditions
+  geom_point(stat = "identity", position = position_dodge(0.8), 
+             size = 3, shape = 23, fill = "white") +  # Add mean as a point
+  #geom_errorbar(aes(ymin = emmean - SE, ymax = emmean + SE), 
+                #width = 0.2, position = position_dodge(0.8)) +  # Error bars
+  labs(title = "Slider Ratings by Condition",
+       x = "",
+       y = "Rating from sad to happy") +
+  theme_prism() +
+  theme(axis.text.x = element_text(angle = 45, 
+                                   hjust = 1,
+                                   vjust = 1,
+                                   margin = margin(t = 0, b = 0)),
+        axis.title.x = element_text(margin = margin(t = 10)), 
+        plot.title = element_text(margin = margin(b = 30)),  
+        plot.margin = unit(c(0.5, 0.5, 0.5, 2), "cm"))
+ggsave("Rating_Conditions.tiff")
+ggplot
+```
+
+##### Plot Interaction
+
+```{r}
+# Define the correct order of conditions
+condition_levels <- c("Happy Video, Happy Primer", "Happy Video, Sad Primer", 
+                      "Sad Video, Happy Primer", "Sad Video, Sad Primer")
+
+# Apply the factor levels to both data frames
+emm_interaction$condition <- factor(emm_interaction$condition, levels = condition_levels)
+participant_aggregates$condition <- factor(participant_aggregates$condition, levels = condition_levels)
+pairs_condition$condition <-factor(pairs_condition$condition, levels = condition_levels)
+```
+
+```{r, fig.width=7, fig.height=5}
+interaction_plot <- ggplot(emm_interaction, 
+       aes(x = condition, y = emmean, fill = group, color = group)) +
+  geom_violin(data = participant_aggregates, 
+              aes(x = condition, y = mean_rating, fill = group), 
+              draw_quantiles = c(0.25, 0.5, 0.75), 
+              position = position_dodge(0.8), 
+              alpha = 0.7) +  # Draw quantiles and separate groups within conditions
+  geom_point(stat = "identity", position = position_dodge(0.8), 
+             size = 3, shape = 23, fill = "white") +  # Add means as points
+  labs(title = "Interaction Effects: Condition and Group",
+       x = "",
+       y = "Rating from sad to happy") +
+  theme_prism() +
+  theme(axis.text.x = element_text(angle = 45, 
+                                   hjust = 1,
+                                   vjust = 1,
+                                   margin = margin(t = 0, b = 0)),
+        axis.title.x = element_text(margin = margin(t = 10)), 
+        plot.title = element_text(margin = margin(b = 30)),  
+        plot.margin = unit(c(0.5, 0.5, 0.5, 2), "cm"))
+
+# Save the interaction plot
+ggsave("Rating_Interaction.tiff", plot = interaction_plot, width = 10, height = 6, dpi = 300)
+
+# Display the plot
+interaction_plot
+
+```
