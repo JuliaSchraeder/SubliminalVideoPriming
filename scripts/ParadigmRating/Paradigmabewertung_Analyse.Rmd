@@ -18,12 +18,23 @@ library(readxl)
 library(dplyr)
 library(ggplot2)
 library(writexl)
-library(tidyr)
 library(purrr)  # Load the purrr package for the reduce function
 library(stringr)
 library(grid)
-library(cowplot)
 library(ggprism)
+library(afex)
+library(tidyr)
+#The car package can provide Type III ANOVA tables with p-values for mixed models. 
+library(car)
+library(emmeans)
+# Create APA Style Tables
+library(knitr)
+# To export to office
+library(officer)
+# save as apa
+library(sjPlot)
+
+
 ```
 
 ### Import Dataset
@@ -60,7 +71,7 @@ df$Group_MDD1_HC2 <- factor(df$Group_MDD1_HC2, labels = c("MDD", "HC"))
 
 ### Find duplicates
 
--   searching for duplicates in "EmoCon_ID" column
+searching for duplicates in "EmoCon_ID" column
 
 ```{r}
 # Find duplicates in the EmoCon_ID column
@@ -412,136 +423,196 @@ cowplot::save_plot("combined_plot_3.png", plot = combined_plot_3, base_height = 
 
 ## Statistics
 
+#### Run RM ANOVA
+
 ```{r}
-library(afex)
+# Take important columns and reshape in long format
+selected_df <- df_unique %>% 
+  select("EmoCon_ID","Group_MDD1_HC2","Alter","Gender_f1_m2",
+         "Haben Sie die Bilder, die wärend der Filmszenen gezeigt wurden, bemerkt?",
+         "Wenn ja, wissen Sie, welche Emotionen auf diesen Bildern gezeigt wurden?",
+         "Wie schwierig war die objektive Beurteilung der Videos für Sie (nach traurig, neutral glücklich)?","Wie schwierig war die subjektive Beurteilung der Videos für Sie? (von traurig bis glücklich)","Wie emotional berührt waren Sie von den Videos?","Welche Strategie haben Sie bei den Bewertungen der Videos angewandt?")%>%
+  pivot_longer(cols = -c(EmoCon_ID, Group_MDD1_HC2, Alter, Gender_f1_m2), # All columns except these
+               names_to = "Question",values_to = "Response")#%>% 
 
-# Reshape the data to long format
-df_long <- df_unique %>%
-  pivot_longer(cols = starts_with("Gab"), # Adjust this to include all question columns
-               names_to = "Question",
-               values_to = "Response")
+selected_df <- na.omit(selected_df)
+head(selected_df)
+```
 
+`EmoCon_ID` is the subject identifier.
+
+`Group_MDD1_HC2` is a between-subjects factor.
+
+`Question` represents the within-subjects factor (e.g., different conditions).
+
+`Response` is the dependent variable.
+
+**`Response ~ Group_MDD1_HC2 * Question`**: This formula indicates that you're interested in the effects of `Group_MDD1_HC2` (between-subjects factor), `Question` (within-subjects factor), and their interaction on `Response`.
+
+**`Error(EmoCon_ID/Question)`**: This part specifies that `Question` is a within-subjects factor, and the error term should account for the repeated measures within each subject (`EmoCon_ID`).
+
+```{r}
 # Run repeated measures ANOVA
-anova_results <- aov_ez(id = "EmoCon_ID",  # Use the participant ID column
-                        dv = "Response",
-                        within = "Question",
-                        between = "Group_MDD1_HC2",
-                        data = df_long)
+repeated_measures_anova <- aov(Response ~ Group_MDD1_HC2 * Question + 
+                                 Error(EmoCon_ID/Question), data = selected_df)
 
-# View the results
-summary(anova_results)
+# Display the summary of the ANOVA
+summary(repeated_measures_anova)
+```
+
+### Run Mixed Model
+
+```{r}
+model <- lmer(Response ~ Question*Group_MDD1_HC2 + Alter + Gender_f1_m2 + (1|EmoCon_ID),
+              data = selected_df)
+results <- anova(model)
+results
+```
+
+Post hoc
+
+```{r}
+eff.question      <- emmeans(model,pairwise ~ Question,adjust ="bonferroni")
+eff.group         <- emmeans(model,pairwise ~ Group_MDD1_HC2,adjust ="bonferroni")
+eff.interaction   <- emmeans(model,pairwise ~ Question:Group_MDD1_HC2,adjust ="bonferroni")
 ```
 
 ```{r}
-df_long
+# Extract the estimated marginal means
+emm_group <- as.data.frame(eff.group$emmeans)
+emm_question <- as.data.frame(eff.question$emmeans)
+emm_interaction <- as.data.frame(eff.interaction$emmeans)
 
+# Extract the pairwise comparisons with p-values
+pairs_group <- as.data.frame(eff.group$contrasts)
+pairs_question <- as.data.frame(eff.question$contrasts)
+pairs_interaction <- as.data.frame(eff.interaction$contrasts)
 ```
 
-## add p values to plot
+#### Save Results
+
+Save ANOVA Results
 
 ```{r}
-p_vals <- tibble::tribble(
-  ~group1, ~group2, ~p.adj,   ~y.position,
-  "0.5",   "1",     8.80e-14, 35,
-  "0.5",   "2",     1.27e-7,  39
-)
-add_pvalue(p_vals, label = "p = {p.adj}", tip.length = 0, label.size = 4)
+# Assuming your ANOVA results are stored in 'results' and it's a data frame
+anova_df <- as.data.frame(results)
+
+# Add asterisks for significance levels
+anova_df <- anova_df %>%
+  mutate(asterisks = case_when(
+    `Pr(>F)` < 0.001 ~ "***",
+    `Pr(>F)` < 0.01  ~ "**",
+    `Pr(>F)` < 0.05  ~ "*",
+    TRUE ~ ""
+  ))
+
+anova_df
+# Select and rename the columns for APA style
+apa_table <- anova_df %>%
+  select(`Sum Sq`, `Mean Sq`, `F value`, `Pr(>F)`, asterisks, NumDF, DenDF) %>%
+  rename(
+    `Num df` = NumDF, # Numerator dr, number of independent comparisons or groups being tested
+    `Den df` = DenDF, # amount of independent information in the data, df of the error term
+    `Sum of Squares` = `Sum Sq`,
+    `Mean Square` = `Mean Sq`,
+    `F-Value` = `F value`,
+    `p-Value` = `Pr(>F)`,
+    `Significance` = asterisks
+    ) %>% 
+  mutate(
+    `Sum of Squares` = round(`Sum of Squares`, 2),
+    `Mean Square` = round(`Mean Square`, 2),
+    `F-Value` = round(`F-Value`, 2),
+    `p-Value` = round(`p-Value`, 2),    # Round p-values to 2 decimal places
+    `Num df` = round(`Num df`, 2),      # Round Num df to 2 decimal places
+    `Den df` = round(`Den df`, 2)       # Round Den df to 2 decimal places
+  )
+
+# Format the p-values for APA style
+apa_table$`p-Value` <- format(apa_table$`p-Value`, scientific = FALSE)
+
+# Create a new Word document
+doc <- read_docx()
+# Add a title to the document
+doc <- doc %>%
+  body_add_table(value = apa_table, style = "table_template")  
+# Save the document
+print(doc, target = "Paradigmrating_Anova.docx")
 ```
 
-## Tests
+Save Post Hoc Tests
 
 ```{r}
-{r}
-plot_question <- function(question_number, width = 8, height = 6) {
-  # Filter the data for the specific question
-  data <- counts_long %>% filter(question == question_number)
-  
-  # Get the title for the specific question
-  question_title <- question_titles[which(question_titles == question_number)]
-  
-  # Get the response legend for the specific question
-  response_legend <- response_legends[[question_number]]
-  legend_text <- paste(names(response_legend), 
-                       response_legend, sep = ": ",
-                       collapse = "\n")
-  
-  # Determine the maximum count and add 5 for the y-axis limit
-  max_count <- max(data$count)
-  y_limits <- c(0, max_count + 5)
-  
-  # Create the plot
-  p <- ggplot(data, aes(x = response, y = count, fill = Group_MDD1_HC2)) +
-    geom_bar(stat = "identity", position = "dodge") +
-    labs(title = question_title,
-         x = "",
-         y = "Count") +
-    scale_fill_manual(values = c("MDD" = "#FF9999", "HC" = "#9999FF"), 
-                      name = "Group") +
-    scale_y_continuous(limits = y_limits) +  # Apply the y-axis limits
-    theme_prism()
-  
-  # Create the legend as a separate text grob
-  legend_grob <- grid::textGrob(legend_text, x = 0, hjust = 0, vjust = 1, 
-                                gp = grid::gpar(fontsize = 12, fontface = "italic"))
-  
-  # Combine the plot and legend using cowplot
-  combined_plot <- cowplot::plot_grid(p, legend_grob, ncol = 1, rel_heights = c(1, 0.6), align = "v", axis = "lt")
-  
-  return(combined_plot)
-}
+# Round the values in each pairwise comparison table to two decimal places
+pairs_group <- pairs_group %>%
+  mutate(across(where(is.numeric), ~ round(.x, 2)))
 
-# Get a list of unique questions
-questions <- unique(counts_long$question)
+pairs_question <- pairs_question %>%
+  mutate(across(where(is.numeric), ~ round(.x, 2)))
 
-plots <- list()
-# Plot and save each question
-for (q in questions) {
-  p <- plot_question(q)
-  print(p)  # Display the plot
-  plots[[q]] <- p
-}
+pairs_interaction <- pairs_interaction %>%
+  mutate(across(where(is.numeric), ~ round(.x, 2)))
+
+# Create a new Word document
+doc <- read_docx()
+# Add a title for Group pairwise comparisons
+doc <- doc %>%
+  body_add_table(value = pairs_group, style = "table_template")%>%
+  body_add_table(value = pairs_question, style = "table_template")%>%
+  body_add_table(value = pairs_interaction, style = "table_template")
+# Save the document
+print(doc, target = "Post_Hoc_Pairwise_Comparisons.docx")
 ```
 
+save pairwise and estimated marginal means
+
 ```{r}
-plot_question <- function(question_number) {
-  # Filter the data for the specific question
-  data <- counts_long %>% filter(question == question_number)
-  
-  # Get the title for the specific question
-  question_title <- question_titles[which(question_titles == question_number)]
-  
-  # Get the response legend for the specific question
-  response_legend <- response_legends[[question_number]]
-  legend_text <- paste(names(response_legend), response_legend, sep = ": ", collapse = "\n")
-  
-  # Create the plot
-  p <- ggplot(data, aes(x = response, y = count, fill = Group_MDD1_HC2)) +
-    geom_bar(stat = "identity", position = "dodge") +
-    labs(title = question_title,
-         x = "",
-         y = "Count") +
-    scale_fill_manual(values = c("MDD" = "#FF9999", "HC" = "#9999FF"), 
-                      name = "Group") +
-    theme_prism()
-  
-  # Create the legend as a separate text grob
-  legend_grob <- grid::textGrob(legend_text, x = 0, hjust = 0, vjust = 1, 
-                                gp = grid::gpar(fontsize = 12, fontface = "italic"))
-  
-  # Combine the plot and legend using cowplot
-  combined_plot <- cowplot::plot_grid(p, legend_grob, ncol = 1, rel_heights = c(1, 0.6), align = "h", axis = "lt")
-  
-  return(combined_plot)
-}
 
-# Get a list of unique questions
-questions <- unique(counts_long$question)
+# Create a new Word document
+doc <- read_docx()
 
-plots <- list()
-# Plot and save each question
-for (q in questions) {
-  p <- plot_question(q)
-  print(p)  # Display the plot
-  plots[[q]] <- p
-}
+# Add a title for Group results
+doc <- doc %>%
+  body_add_par("Post Hoc Comparisons - Group", style = "heading 2")
+
+# Add Group emmeans table
+doc <- doc %>%
+  body_add_par("Estimated Marginal Means", style = "heading 3") %>%
+  body_add_table(value = emm_group, style = "table_template")
+
+# Add Group pairwise comparisons table
+doc <- doc %>%
+  body_add_par("Pairwise Comparisons", style = "heading 3") %>%
+  body_add_table(value = pairs_group, style = "table_template")
+
+# Add a title for Question results
+doc <- doc %>%
+  body_add_par("Post Hoc Comparisons - Question", style = "heading 2")
+
+# Add Question emmeans table
+doc <- doc %>%
+  body_add_par("Estimated Marginal Means", style = "heading 3") %>%
+  body_add_table(value = emm_question, style = "table_template")
+
+# Add Question pairwise comparisons table
+doc <- doc %>%
+  body_add_par("Pairwise Comparisons", style = "heading 3") %>%
+  body_add_table(value = pairs_question, style = "table_template")
+
+# Add a title for Interaction results
+doc <- doc %>%
+  body_add_par("Post Hoc Comparisons - Interaction", style = "heading 2")
+
+# Add Interaction emmeans table
+doc <- doc %>%
+  body_add_par("Estimated Marginal Means", style = "heading 3") %>%
+  body_add_table(value = emm_interaction, style = "table_template")
+
+# Add Interaction pairwise comparisons table
+doc <- doc %>%
+  body_add_par("Pairwise Comparisons", style = "heading 3") %>%
+  body_add_table(value = pairs_interaction, style = "table_template")
+
+# Save the document
+print(doc, target = "Post_Hoc_Results.docx")
 ```

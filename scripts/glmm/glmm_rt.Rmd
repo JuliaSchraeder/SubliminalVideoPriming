@@ -114,7 +114,8 @@ Based on the provided goodness-of-fit statistics and criteria, we can interpret 
 
 ### Overall Conclusion
 
-Based on all the provided goodness-of-fit statistics and criteria (KS statistic, Cramer-von Mises statistic, Anderson-Darling statistic, AIC, and BIC), the gamma distribution fits your data better than the normal distribution. This conclusion is drawn from the fact that all the metrics show lower values for the gamma distribution, indicating a closer match to your observed data.
+Based on all the provided goodness-of-fit statistics and criteria (KS statistic, Cramer-von Mises statistic, Anderson-Darling statistic, AIC, and BIC), the gamma distribution fits your data better than the normal distribution.
+This conclusion is drawn from the fact that all the metrics show lower values for the gamma distribution, indicating a closer match to your observed data.
 
 ## Estimate GLMM
 

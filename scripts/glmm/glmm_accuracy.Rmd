@@ -85,7 +85,8 @@ print(gof_stat)
 
 ### Goodness-of-Fit Statistics
 
-1.  **Kolmogorov-Smirnov Statistic**: Measures the maximum difference between the empirical distribution function and the cumulative distribution function of the fitted distribution. Lower values indicate a better fit.
+1.  **Kolmogorov-Smirnov Statistic**: Measures the maximum difference between the empirical distribution function and the cumulative distribution function of the fitted distribution.
+    Lower values indicate a better fit.
 
     -   Gamma: 0.2650154
 
@@ -93,7 +94,8 @@ print(gof_stat)
 
     -   **Interpretation**: The normal distribution fits the data slightly better than the gamma distribution according to this statistic.
 
-2.  **Cramer-von Mises Statistic**: Measures the squared differences between the empirical and fitted cumulative distribution functions. Lower values indicate a better fit.
+2.  **Cramer-von Mises Statistic**: Measures the squared differences between the empirical and fitted cumulative distribution functions.
+    Lower values indicate a better fit.
 
     -   Gamma: 9.1876182
 
@@ -101,7 +103,8 @@ print(gof_stat)
 
     -   **Interpretation**: The normal distribution fits the data better than the gamma distribution according to this statistic.
 
-3.  **Anderson-Darling Statistic**: Similar to the Cramer-von Mises statistic but gives more weight to the tails of the distribution. Lower values indicate a better fit.
+3.  **Anderson-Darling Statistic**: Similar to the Cramer-von Mises statistic but gives more weight to the tails of the distribution.
+    Lower values indicate a better fit.
 
     -   Gamma: 50.5817331
 
@@ -111,7 +114,8 @@ print(gof_stat)
 
 ### Goodness-of-Fit Criteria
 
-1.  **Akaike's Information Criterion (AIC)**: Measures the relative quality of statistical models for a given set of data. Lower values indicate a better fit.
+1.  **Akaike's Information Criterion (AIC)**: Measures the relative quality of statistical models for a given set of data.
+    Lower values indicate a better fit.
 
     -   Gamma: 4198.028
 
@@ -119,7 +123,8 @@ print(gof_stat)
 
     -   **Interpretation**: The normal distribution has a lower AIC, indicating a better fit compared to the gamma distribution.
 
-2.  **Bayesian Information Criterion (BIC)**: Similar to AIC but includes a penalty term for the number of parameters in the model. Lower values indicate a better fit.
+2.  **Bayesian Information Criterion (BIC)**: Similar to AIC but includes a penalty term for the number of parameters in the model.
+    Lower values indicate a better fit.
 
     -   Gamma: 4206.334
 

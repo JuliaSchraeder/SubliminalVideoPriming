@@ -131,7 +131,8 @@ ggplot(participant_aggregates, aes(x = group, y = mean_rating)) +
 
 ```
 
-**Two Peaks**: A bimodal distribution has two distinct peaks or clusters. For example, in your case, one peak might be around a rating of 3, and another around 6.
+**Two Peaks**: A bimodal distribution has two distinct peaks or clusters.
+For example, in your case, one peak might be around a rating of 3, and another around 6.
 
 But if we dont separate our data into two categories, we can still use gaussian distribution
 
