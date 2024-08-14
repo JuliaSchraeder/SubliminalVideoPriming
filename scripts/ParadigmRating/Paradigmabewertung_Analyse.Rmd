@@ -33,8 +33,7 @@ library(knitr)
 library(officer)
 # save as apa
 library(sjPlot)
-
-
+library(lme4)
 ```
 
 ### Import Dataset
@@ -54,8 +53,6 @@ df <- read_excel("C:/Users/juhoffmann/OneDrive - Uniklinik RWTH Aachen/Auswertun
         "numeric", "numeric", "numeric", 
         "numeric", "numeric", "numeric", 
         "numeric", "numeric", "text"), na = "NA")
-#View(df)
-output_dir = "C:/Users/juhoffmann/Desktop/paradigmafragebogen/"
 ```
 
 ### Convert the group and gender variables to factors for easier analysis
@@ -423,21 +420,70 @@ cowplot::save_plot("combined_plot_3.png", plot = combined_plot_3, base_height = 
 
 ## Statistics
 
-#### Run RM ANOVA
+translate header in english
+
+```{r}
+# Remove duplicates based on the EmoCon_ID column
+df_unique <- df %>%
+  distinct(EmoCon_ID, .keep_all = TRUE)
+df_unique
+```
+
+```{r}
+# Original German column names
+german_titles <- c("EmoCon_ID","Bids-Number","Alter","Gender_f1_m2","Group_MDD1_HC2",
+  "Gab es nach Ihrer Auffassung jede gezeigte Emotion gleich oft?",
+  "Wie schätzen Sie Ihre Beurteilung der Emotionen ein?",
+  "Wie fanden Sie die Länge des Experimentes?",
+  "Haben Sie die Bilder, die wärend der Filmszenen gezeigt wurden, bemerkt?",
+  "Wenn ja, wissen Sie, welche Emotionen auf diesen Bildern gezeigt wurden?",
+  "Wie schwierig war die objektive Beurteilung der Videos für Sie (nach traurig, neutral glücklich)?",
+  "Wie schwierig war die subjektive Beurteilung der Videos für Sie? (von traurig bis glücklich)",
+  "Wie emotional berührt waren Sie von den Videos?",
+  "Welche Strategie haben Sie bei den Bewertungen der Videos angewandt?"
+)
+
+# English translations
+english_titles <- c("ID","Bids-Number","age","sex","group",
+  "Did you think each displayed emotion appeared equally often?",
+  "How would you rate your judgment of the emotions?",
+  "How did you find the length of the experiment?",
+  "Did you notice the pictures shown during the film scenes?",
+  "If yes, do you know which emotions were shown in these pictures?",
+  "How difficult was the objective assessment of the videos for you (based on sad, neutral, happy)?",
+  "How difficult was the subjective assessment of the videos for you? (from sad to happy)",
+  "How emotionally affected were you by the videos?",
+  "What strategy did you use when evaluating the videos?"
+)
+
+# Assuming your DataFrame is named 'df'
+colnames(df_unique) <- english_titles
+head(df_unique)
+```
 
 ```{r}
 # Take important columns and reshape in long format
 selected_df <- df_unique %>% 
-  select("EmoCon_ID","Group_MDD1_HC2","Alter","Gender_f1_m2",
-         "Haben Sie die Bilder, die wärend der Filmszenen gezeigt wurden, bemerkt?",
-         "Wenn ja, wissen Sie, welche Emotionen auf diesen Bildern gezeigt wurden?",
-         "Wie schwierig war die objektive Beurteilung der Videos für Sie (nach traurig, neutral glücklich)?","Wie schwierig war die subjektive Beurteilung der Videos für Sie? (von traurig bis glücklich)","Wie emotional berührt waren Sie von den Videos?","Welche Strategie haben Sie bei den Bewertungen der Videos angewandt?")%>%
-  pivot_longer(cols = -c(EmoCon_ID, Group_MDD1_HC2, Alter, Gender_f1_m2), # All columns except these
+  select("ID","age","sex","group",
+         "Did you notice the pictures shown during the film scenes?",
+         "If yes, do you know which emotions were shown in these pictures?",
+         "How difficult was the objective assessment of the videos for you (based on sad, neutral, happy)?","How difficult was the subjective assessment of the videos for you? (from sad to happy)","How emotionally affected were you by the videos?","What strategy did you use when evaluating the videos?") %>% 
+  pivot_longer(cols = -c(ID, group, age, sex), 
                names_to = "Question",values_to = "Response")#%>% 
 
 selected_df <- na.omit(selected_df)
 head(selected_df)
 ```
+
+```{r}
+selected_df$group     <- as.factor(selected_df$group)
+selected_df$Question  <- as.factor(selected_df$Question)
+selected_df$ID        <- as.factor(selected_df$ID)
+selected_df$sex       <- as.factor(selected_df$sex)
+#summary(selected_df)
+```
+
+#### Run RM ANOVA
 
 `EmoCon_ID` is the subject identifier.
 
@@ -453,8 +499,7 @@ head(selected_df)
 
 ```{r}
 # Run repeated measures ANOVA
-repeated_measures_anova <- aov(Response ~ Group_MDD1_HC2 * Question + 
-                                 Error(EmoCon_ID/Question), data = selected_df)
+repeated_measures_anova <- aov(Response ~ group * Question + age + sex + Error(ID/Question), data = selected_df)
 
 # Display the summary of the ANOVA
 summary(repeated_measures_anova)
@@ -463,7 +508,7 @@ summary(repeated_measures_anova)
 ### Run Mixed Model
 
 ```{r}
-model <- lmer(Response ~ Question*Group_MDD1_HC2 + Alter + Gender_f1_m2 + (1|EmoCon_ID),
+model <- lmer(Response ~ Question*group + age + sex + (1|ID),
               data = selected_df)
 results <- anova(model)
 results
@@ -473,8 +518,8 @@ Post hoc
 
 ```{r}
 eff.question      <- emmeans(model,pairwise ~ Question,adjust ="bonferroni")
-eff.group         <- emmeans(model,pairwise ~ Group_MDD1_HC2,adjust ="bonferroni")
-eff.interaction   <- emmeans(model,pairwise ~ Question:Group_MDD1_HC2,adjust ="bonferroni")
+eff.group         <- emmeans(model,pairwise ~ group,adjust ="bonferroni")
+eff.interaction   <- emmeans(model,pairwise ~ Question:group,adjust ="bonferroni")
 ```
 
 ```{r}
@@ -522,10 +567,10 @@ apa_table <- anova_df %>%
   mutate(
     `Sum of Squares` = round(`Sum of Squares`, 2),
     `Mean Square` = round(`Mean Square`, 2),
-    `F-Value` = round(`F-Value`, 2),
-    `p-Value` = round(`p-Value`, 2),    # Round p-values to 2 decimal places
     `Num df` = round(`Num df`, 2),      # Round Num df to 2 decimal places
-    `Den df` = round(`Den df`, 2)       # Round Den df to 2 decimal places
+    `Den df` = round(`Den df`, 2),       # Round Den df to 2 decimal places
+    `F-Value` = round(`F-Value`, 2),
+    `p-Value` = round(`p-Value`, 2)    # Round p-values to 2 decimal places
   )
 
 # Format the p-values for APA style
