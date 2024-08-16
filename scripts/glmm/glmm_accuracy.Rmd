@@ -24,7 +24,10 @@ library(readr)
 library(fitdistrplus)
 library(ggplot2)
 library(openxlsx)
-
+library(ggplot2)
+library(afex) 
+library(cowplot)
+library(prism)
 ```
 
 # Accuracy Analysis
@@ -219,29 +222,32 @@ combined_results <- bind_rows(
 write.xlsx(combined_results, "glmm_accuracy_post_hoc_results.xlsx", rowNames = FALSE)
 ```
 
+### Plot
+
 ```{r}
-library(afex) 
-library(cowplot)
 # Reorder the levels of the 'condition' variable
 df$condition <- factor(df$condition, levels = c("happy_happy", "sad_happy", "happy_sad", "sad_sad"))
 
 
 
-con_in_group <-   afex_plot(model, x = "condition", panel = "group", 
-            id = "participantID", dodge = 0.8,
-            data_geom = geom_violin, 
-            mapping = c("linetype", "fill", "group"), 
-            error_arg = list(width = 0.2),
-            legend_title = "",
-            data_arg = list(width = 0.5)) + 
-      scale_fill_manual(values = c("happy_happy" = "darkgreen", 
-                                 "sad_happy" = "lightgreen",
-                                 "happy_sad" ="lightblue", 
-                                 "sad_sad" ="darkblue")) +
-    theme_classic() +
-    theme(legend.position = "none",
-          axis.text.x = element_text(angle = 45, hjust = 1)) + 
-    labs(y = "Accuracy", x = "")
+con_in_group <- afex_plot(model, x = "condition", panel = "group", 
+                          id = "participantID", dodge = 0.8,
+                          data_geom = geom_violin, 
+                          mapping = c("linetype", "fill", "group"), 
+                          error_arg = list(width = 0.2),
+                          legend_title = "",
+                          data_arg = list(width = 0.5)) + 
+  theme_prism() +
+  theme(legend.position = "none")+
+  scale_fill_manual(values = c("happy_happy" = "darkgreen",
+                               "sad_happy" = "lightgreen",
+                               "happy_sad" ="lightblue", 
+                               "sad_sad" ="darkblue")) +
+  theme(axis.text.x = element_text(angle = 45, 
+                                   hjust = 1,
+                                   vjust = 1,
+                                   margin = margin(t = 0, b = 0),size = 10))+
+  labs(y = "Accuracy", x = "")
   
 conditions <-  afex_plot(model, x = "condition", 
             id = "participantID", dodge = 0.8,
@@ -253,23 +259,25 @@ conditions <-  afex_plot(model, x = "condition",
                                  "sad_happy" = "lightgreen",
                                  "happy_sad" ="lightblue", 
                                  "sad_sad" ="darkblue")) +
-    theme_classic() +
-    theme(legend.position = "right",
-          axis.text.x = element_text(angle = 45, hjust = 1)) + 
-    labs(title = "Accuracy for each task condition", y = "Accuracy", x = "")
+    theme_prism() +
+    theme(axis.text.x = element_text(angle = 45, 
+                                   hjust = 1,
+                                   vjust = 1,
+                                   margin = margin(t = 0, b = 0),size = 10))+
+    labs(title = "", y = "Accuracy", x = "")
 
 #colors()
 ```
 
-```{r}
+```{r, fig.width=10, fig.height=4}
 combined_plots <- cowplot::plot_grid(conditions,con_in_group,
                             labels = c("A", "B"),
-                            ncol = 1)
+                            ncol = 2)
 combined_plots
 ```
 
 ```{r}
-ggsave("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/plots/glmm_accuracy.tiff", combined_plots, width = 5, height = 7)
+ggsave("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/plots/glmm_accuracy.tiff", combined_plots, width = 10, height = 4)
 ```
 
 ```{r}

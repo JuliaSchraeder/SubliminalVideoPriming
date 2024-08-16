@@ -84,7 +84,7 @@ duplicates <- df[duplicated(df$EmoCon_ID), ]
 print(duplicates)
 ```
 
-## Use only the subjects that do not have duplicates
+### Use only the subjects that do not have duplicates
 
 ```{r}
 # Remove duplicates based on the EmoCon_ID column
@@ -97,7 +97,7 @@ print(paste("Number of rows after removing duplicates:", nrow(df_unique)))
 
 ```
 
-### Descriptive Statistics
+#### Descriptive Statistics
 
 -   **`group_by(Group_MDD1_HC2)`**: Groups the data by the `Group_MDD1_HC2` factor (MDD and HC groups).
 
@@ -134,7 +134,7 @@ print(summary_stats_long)
 write_xlsx(summary_stats_long, "C:/Users/juhoffmann/OneDrive - Uniklinik RWTH Aachen/Auswertung/FB/Paradigma_FB_Descriptives.xlsx")
 ```
 
-### Count answers
+#### Count answers
 
 -   **Grouping the Data**:
 
@@ -471,7 +471,7 @@ head(df_unique)
 # Take important columns and reshape in long format
 selected_df <- df_unique %>% 
   select("ID","age","sex","group",
-         "Objective assessment difficulties","Subjective assessment difficulties","Emotionally affected level") %>% 
+         "Objective assessment difficulties","Subjective assessment difficulties") %>% #,"Emotionally affected level") %>% 
   pivot_longer(cols = -c(ID, group, age, sex), 
                names_to = "Question",values_to = "Response")
 
@@ -514,7 +514,7 @@ summary(repeated_measures_anova)
 ### Run Mixed Model
 
 ```{r}
-model <- lmer(Response ~ Question:group + group + age + sex + (1|ID),
+model <- lmer(Response ~ Question*group + age + sex + (1|ID),
               data = selected_df)
 results <- anova(model)
 results
@@ -573,21 +573,21 @@ print(doc, target = "glmm_Paradigmrating_Anova.docx")
 ##### Post hoc
 
 ```{r}
-eff.sex           <- emmeans(model,pairwise ~ sex,adjust ="bonferroni")
+#eff.sex           <- emmeans(model,pairwise ~ sex,adjust ="bonferroni")
 eff.group         <- emmeans(model,pairwise ~ group,adjust ="bonferroni")
-eff.interaction   <- emmeans(model,pairwise ~ Question:group,adjust ="bonferroni")
+#eff.interaction   <- emmeans(model,pairwise ~ Question:group,adjust ="bonferroni")
 ```
 
 ```{r}
 # Extract the estimated marginal means
 emm_group <- as.data.frame(eff.group$emmeans)
-emm_sex <- as.data.frame(eff.sex$emmeans)
-emm_interaction <- as.data.frame(eff.interaction$emmeans)
+#emm_sex <- as.data.frame(eff.sex$emmeans)
+#emm_interaction <- as.data.frame(eff.interaction$emmeans)
 
 # Extract the pairwise comparisons with p-values
 pairs_group <- as.data.frame(eff.group$contrasts)
-pairs_sex <- as.data.frame(eff.sex$contrasts)
-pairs_interaction <- as.data.frame(eff.interaction$contrasts)
+#pairs_sex <- as.data.frame(eff.sex$contrasts)
+#pairs_interaction <- as.data.frame(eff.interaction$contrasts)
 ```
 
 Save Post Hoc Tests
@@ -597,19 +597,19 @@ Save Post Hoc Tests
 pairs_group <- pairs_group %>%
   mutate(across(where(is.numeric), ~ round(.x, 3)))
 
-pairs_sex <- pairs_sex %>%
-  mutate(across(where(is.numeric), ~ round(.x, 3)))
+#pairs_sex <- pairs_sex %>%
+  #mutate(across(where(is.numeric), ~ round(.x, 3)))
 
-pairs_interaction <- pairs_interaction %>%
-  mutate(across(where(is.numeric), ~ round(.x, 3)))
+#pairs_interaction <- pairs_interaction %>%
+  #mutate(across(where(is.numeric), ~ round(.x, 3)))
 
 # Create a new Word document
 doc <- read_docx()
 # Add a title for Group pairwise comparisons
 doc <- doc %>%
   body_add_table(value = pairs_group, style = "table_template")%>%
-  body_add_table(value = pairs_sex, style = "table_template")%>%
-  body_add_table(value = pairs_interaction, style = "table_template")
+  body_add_table(value = pairs_sex, style = "table_template")#%>%
+  #body_add_table(value = pairs_interaction, style = "table_template")
 # Save the document
 print(doc, target = "glmm_Post_Hoc_Pairwise_Comparisons.docx")
 ```

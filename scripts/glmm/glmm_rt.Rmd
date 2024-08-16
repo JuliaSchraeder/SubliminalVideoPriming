@@ -24,7 +24,9 @@ library(readr)
 library(fitdistrplus)
 library(ggplot2)
 library(openxlsx)
-
+library(afex) 
+library(cowplot)
+library(prism)
 ```
 
 # RT Analysis
@@ -241,8 +243,7 @@ write.xlsx(combined_results, "glmm_rt_post_hoc_results.xlsx", rowNames = FALSE)
 # Plot results
 
 ```{r}
-library(afex) 
-library(cowplot)
+
 # Reorder the levels of the 'condition' variable
 df$condition <- factor(df$condition, levels = c("happy_happy", "sad_happy", "happy_sad", "sad_sad"))
 group <-  afex_plot(model1, x = "group", 
@@ -255,7 +256,7 @@ group <-  afex_plot(model1, x = "group",
     #ggpubr::theme_pubr() + 
     scale_fill_manual(values = c("HC" = "turquoise", 
                                  "MDD" = "violet")) + 
-    theme_classic() +
+    theme_prism() +
     theme(legend.position = "none")+
     labs(y = "Reaction Time", x = "")+
   ylim(0,1.5)
@@ -270,9 +271,12 @@ conditions <-  afex_plot(model1, x = "condition",
                                  "sad_happy" = "lightgreen",
                                  "happy_sad" ="lightblue", 
                                  "sad_sad" ="darkblue")) +
-    theme_classic() +
-    theme(legend.position = "none",
-          axis.text.x = element_text(angle = 45, hjust = 1)) + 
+    theme_prism() +
+  theme(legend.position = "none")+
+    theme(axis.text.x = element_text(angle = 45, 
+                                   hjust = 1,
+                                   vjust = 1,
+                                   margin = margin(t = 0, b = 0),size = 10))+
     labs(y = "Reaction Time", x = "")+
   ylim(0,1.5)
 
@@ -283,21 +287,22 @@ age <- ggplot(df, aes(x = age, y = key_resp.rt)) +
   geom_smooth(method = "lm", se = TRUE, color = "darkred", linetype = "dashed") +  
   labs(x = "Age",
        y = "Reaction Time") +
-  theme_classic()+
+  theme_prism()+
   ylim(0,1.5)
 
 ```
 
-```{r}
+```{r, fig.width=10, fig.height=5}
 combined_plots <- cowplot::plot_grid(group,age,conditions,
                             labels = c("A", "B", "C"),
-                            ncol = 2,nrow = 2,
-                            rel_heights = c(1,1))
+                            ncol = 3,nrow = 1,
+                            rel_heights = c(1,1),
+                            align = "h")
 print(combined_plots)
 ```
 
 ```{r}
-ggsave("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/plots/glmm_rt.tiff", combined_plots, width = 6, height = 7)
+ggsave("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/plots/glmm_rt.tiff", combined_plots, width = 10, height = 5)
 
 ```
 

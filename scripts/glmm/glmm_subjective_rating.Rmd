@@ -27,7 +27,7 @@ library(emmeans)
 library(knitr)
 # To export to office
 library(officer)
-
+library(prism)
 ```
 
 ## Slider Rating Analysis
@@ -81,29 +81,25 @@ print(summary_stats)
 
 ```
 
-```{r}
-knitr::opts_chunk$set(fig.width = 8, fig.height = 6)
-
-```
-
 ```{r, fig.width=10, fig.height=7}
 ggplot(participant_aggregates,
        aes(x = condition,
            y = mean_rating,
-           fill = group,
-           color = group)) +
+           fill = group)) +
   geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), 
               position = position_dodge(0.8), 
               alpha = 0.7) +  # Draw quantiles and separate groups
-  stat_summary(fun = mean, 
-               geom = "point",  
-               position = position_dodge(0.8), 
-               size = 3, 
-               shape = 23, 
-               fill = "white") +  # Add mean as a point
+  #stat_summary(fun = mean, 
+               #geom = "point",  
+               #position = position_dodge(0.8), 
+               #size = 3, 
+               #shape = 23, 
+               #fill = "white") +  # Add mean as a point
   labs(title = "Slider Ratings by Condition and Group",
        x = "",
        y = "Rating from sad to happy") +
+  scale_fill_manual(values = c("HC" = "turquoise", 
+                                 "MDD" = "violet")) + 
   theme_prism() +
   theme(axis.text.x = element_text(angle = 45, 
                                      hjust = 1,
@@ -140,11 +136,11 @@ But if we dont separate our data into two categories, we can still use gaussian 
 ### Estimate GLMM
 
 ```{r}
-model_glmm <- glmer(mean_rating ~ group * condition + (1 | participantID), 
-                    family = gaussian, data = participant_aggregates)
+model_glmm <- lmer(mean_rating ~ group * condition + (1|participantID),
+                   data = participant_aggregates)
 
 # Summary of the model
-Anova(model_glmm, type = 3)
+model_anova <- anova(model_glmm, type = 3)
 ```
 
 #### Post Hoc Tests
@@ -175,32 +171,69 @@ pairs_interaction <- as.data.frame(eff.interaction$contrasts)
 
 ##### Export Results
 
+##### Anova
+
+```{r}
+# Assuming your ANOVA results are stored in 'results' and it's a data frame
+anova_df <- as.data.frame(model_anova)
+
+# Add asterisks for significance levels
+anova_df <- anova_df %>%
+  mutate(asterisks = case_when(
+    `Pr(>F)` < 0.001 ~ "***",
+    `Pr(>F)` < 0.01  ~ "**",
+    `Pr(>F)` < 0.05  ~ "*",
+    TRUE ~ ""
+  ))
+
+anova_df
+# Select and rename the columns for APA style
+apa_table <- anova_df %>%
+  select(`Sum Sq`, `Mean Sq`, `F value`, `Pr(>F)`, asterisks, NumDF, DenDF) %>%
+  rename(
+    `Num df` = NumDF, # Numerator dr, number of independent comparisons or groups being tested
+    `Den df` = DenDF, # amount of independent information in the data, df of the error term
+    `Sum of Squares` = `Sum Sq`,
+    `Mean Square` = `Mean Sq`,
+    `F-Value` = `F value`,
+    `p-Value` = `Pr(>F)`,
+    `Significance` = asterisks
+    ) %>% 
+  mutate(
+    `Sum of Squares` = round(`Sum of Squares`, 2),
+    `Mean Square` = round(`Mean Square`, 2),
+    `Num df` = round(`Num df`, 2),      # Round Num df to 2 decimal places
+    `Den df` = round(`Den df`, 2),       # Round Den df to 2 decimal places
+    `F-Value` = round(`F-Value`, 2),
+    `p-Value` = round(`p-Value`, 3)    # Round p-values to 2 decimal places
+
+  )
+
+# Format the p-values for APA style
+apa_table$`p-Value` <- format(apa_table$`p-Value`, scientific = FALSE)
+
+# Create a new Word document
+doc <- read_docx()
+# Add a title to the document
+doc <- doc %>%
+  body_add_table(value = apa_table, style = "table_template")  
+# Save the document
+print(doc, target = "glmm_Paradigmrating_Anova.docx")
+```
+
 ###### Group
 
 ```{r}
-significant_comparisons <- pairs_group %>%
-  filter(p.value < 0.05) %>%
-  mutate(asterisks = case_when(
-    p.value < 0.001 ~ "***",
-    p.value < 0.01  ~ "**",
-    p.value < 0.05  ~ "*",
-    TRUE ~ ""
-  ),
-  group1 = sub(" - .*", "", contrast),  # Extract first condition
-  group2 = sub(".* - ", "", contrast)   # Extract second condition
-  )
-
-apa_table <- significant_comparisons %>%
-  select(contrast, estimate, SE, df, t.ratio, p.value, asterisks) %>%
+pairs_group_df <- as.data.frame(pairs_group)
+apa_table <- pairs_group_df %>%
+  select(contrast, estimate, SE, df, t.ratio, p.value) %>%
   rename(
     `Comparison` = contrast,
     `Mean Difference` = estimate,
     `Standard Error` = SE,
     `Degrees of Freedom` = df,
     `t-Value` = t.ratio,
-    `p-Value` = p.value,
-    `Significance` = asterisks
-  )
+    `p-Value` = p.value)
 
 # Format the p-values for APA style (e.g., scientific notation to standard format)
 apa_table$p.Value <- format(apa_table$p.Value, scientific = FALSE)
