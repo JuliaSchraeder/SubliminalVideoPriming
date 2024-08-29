@@ -354,9 +354,7 @@ head(Y_canonical)
 
 ### **Number of Canonical Correlations**:
 
--   The number of canonical correlations is equal to the minimum number of variables in the `X` and `Y` datasets.
-    Since you have 16 canonical correlations, it suggests that either `X` or `Y` (or both) have at least 16 variables.
-    If one set had fewer than 16 variables, the number of canonical correlations would be limited to that smaller number.
+-   The number of canonical correlations is equal to the minimum number of variables in the `X` and `Y` datasets. Since you have 16 canonical correlations, it suggests that either `X` or `Y` (or both) have at least 16 variables. If one set had fewer than 16 variables, the number of canonical correlations would be limited to that smaller number.
 
 1.  **Canonical Variates**:
 
@@ -393,8 +391,7 @@ head(Y_canonical)
 
 3.  **Ignore Non-Significant Correlations**:
 
-    -   If some of the canonical correlations are not significant, they can generally be ignored in the interpretation.
-        These correlations might represent noise rather than meaningful relationships.
+    -   If some of the canonical correlations are not significant, they can generally be ignored in the interpretation. These correlations might represent noise rather than meaningful relationships.
 
 ## Test which correlations are significant
 
