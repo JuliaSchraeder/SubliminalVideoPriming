@@ -1,0 +1,171 @@
+---
+title: "BDI Mediation on Speech and Brain Correlation"
+output: html_notebook
+---
+
+```{r}
+library(CCA) #perform canonical correlation
+library(psych)
+library(lavaan)
+library(R.matlab) #read in matlab variable
+library(CCP) #test which correlations are significant
+library(ggplot2)# Load ggplot2 for advanced visualization
+library(afex) 
+library(cowplot)
+library(prism)
+library(dplyr) # to use %>% 
+#install.packages("tidyverse")
+library(tidyverse) # to transform data 
+library(reshape2)
+library(mediation) # to test mediation effect of BDI
+```
+
+```{r}
+df <- read.csv("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/mri_speech/speech_and_ROI.csv")
+X <- df[, c(
+  "pos_frequency_related", "pos_energy_related", "pos_spectral_balance", 
+  "pos_temporal", "pos_lexical_richness", "pos_sentiment", 
+  "pos_word_types", "pos_syntactic_complexity", 
+  "neg_frequency_related", "neg_energy_related", "neg_spectral_balance", 
+  "neg_temporal", "neg_lexical_richness", "neg_sentiment", 
+  "neg_word_types", "neg_syntactic_complexity"
+)]
+
+Y <- df[, c(
+  "Affective_Amygdala", "Affective_Caudate_nucleus", "Affective_Cerebellum_VI_VIIB", 
+  "Affective_Claustrum", "Affective_Cuneus_BA17", "Affective_Heschls_gyrus_BA41", 
+  "Affective_IFG_pars_opercularis_BA44_pOp", "Affective_IFG_pars_orbitalis_BA47_pOrb", 
+  "Affective_IFG_pars_orbitalis_BA47_pOrb_2", "Affective_IFG_pars_triangularis_BA45_pTri", 
+  "Affective_Insula_BA13", "Affective_Insula_BA13_2", "Affective_MFG_BA10", 
+  "Affective_MFG_BA9", "Affective_MTGp_BA21", "Affective_Putamen", "Affective_SMA_BA6", 
+  "Affective_SMA_BA6_3", "Affective_SMG_BA40", "Affective_SMG_BA40_7_SMGv", 
+  "Affective_Subcallosal_gyrus_BA34", "Affective_Thalamus_vl", "Affective_aSTG_BA22", 
+  "Affective_pSTG_BA22", "Affective_pSTG_BA22_2", "Linguistic_Caudate_nucleus", 
+  "Linguistic_Cerebellum_VI_VIIB", "Linguistic_IFG_pars_opercularis_BA44_pOp", 
+  "Linguistic_IFG_pars_orbitalis_BA47_pOrb", "Linguistic_IFG_pars_orbitalis_BA47_pOrb_2", 
+  "Linguistic_IFG_pars_triangularis_BA45_pTri", "Linguistic_Insula_BA13", 
+  "Linguistic_MFG_BA9", "Linguistic_SMA_BA6", "Linguistic_SMA_BA6_2", 
+  "Linguistic_SMG_BA40_7_SMGv", "Linguistic_aSTG_BA22", "Linguistic_pSTG_BA22", 
+  "Linguistic_pSTG_BA22_2"
+)]
+```
+
+```{r}
+X_scaled <- scale(X) #speech
+Y_scaled <- scale(Y) #brain
+cca_result <- cc(X_scaled, Y_scaled)
+```
+
+## Test for Mediation of Correlations thru BDI
+
+Data preparation
+
+```{r}
+# Compute canonical scores
+X_scores <- X_scaled %*% cca_result$xcoef
+Y_scores <- Y_scaled %*% cca_result$ycoef
+
+# Convert to data frames for easier manipulation
+X_scores_df <- as.data.frame(X_scores)
+Y_scores_df <- as.data.frame(Y_scores)
+
+# Name the canonical scores for clarity (e.g., Canonical1, Canonical2, ...)
+colnames(X_scores_df) <- paste0("Canonical_Speech", 1:ncol(X_scores_df))
+colnames(Y_scores_df) <- paste0("Canonical_Brain", 1:ncol(Y_scores_df))
+
+# Combine the canonical scores with BDI scores
+mediation_data <- cbind(X_scores_df, Y_scores_df, BDI = df$BDI)
+```
+
+Mediation Models
+
+This step is modeling how the **BDI** (mediator) is influenced by the **Canonical_Speech1**.
+The idea is to understand if and how the speech features, as captured by the first canonical variate, impact the BDI scores.
+If **Canonical_Speech1** significantly predicts **BDI**, it indicates that the speech features might influence the depression scores.
+
+```{r}
+# Mediator model: BDI as a function of Canonical_Speech1
+model_m <- lm(BDI ~ Canonical_Speech1, data = mediation_data)
+```
+
+```{r}
+# Outcome model: Canonical_Brain1 as a function of Canonical_Speech1 and BDI
+model_y <- lm(Canonical_Brain1 ~ Canonical_Speech1 + BDI, data = mediation_data)
+```
+
+This model is designed to assess the relationship between the brain activity (captured by **Canonical_Brain1**) and the speech features (through **Canonical_Speech1**), while also including **BDI** as a potential mediator.
+
+-   **Direct Effect**: The effect of **Canonical_Speech1** on **Canonical_Brain1**, controlling for **BDI**.
+
+-   **Indirect Effect**: The effect of **Canonical_Speech1** on **Canonical_Brain1** that is mediated by **BDI**.
+
+### Now test for existing BDI mediation for the first 4 canonicals
+
+```{r}
+print(colnames(mediation_data))
+
+```
+
+```{r}
+if (!(treat %in% colnames(mediation_data))) {
+    stop(paste("The treatment column", treat, "does not exist in the data."))
+}
+
+```
+
+```{r}
+# Initialize an empty list to store results
+mediation_results_list <- list()
+
+# Perform mediation analysis for the first 4 canonical variates
+for (i in 1:4) {
+    canonical_speech <- paste0("Canonical_Speech", i)
+    canonical_brain <- paste0("Canonical_Brain", i)
+
+    # Fit the mediator model
+    model_m <- lm(as.formula(paste("BDI ~", canonical_speech)), data = mediation_data)
+    
+    # Fit the outcome model
+    model_y <- lm(as.formula(paste(canonical_brain, "~", canonical_speech, "+ BDI")), data = mediation_data)
+    
+    # Perform mediation analysis
+    med_fit <- mediate(model_m, model_y, treat = canonical_speech, mediator = "BDI", boot = TRUE, sims = 1000)
+
+    # Store results
+    mediation_results_list[[i]] <- data.frame(
+        Canonical_Variate = paste0("Canonical_", i),
+        ACME = med_fit$d0,
+        ADE = med_fit$z0,
+        Total_Effect = med_fit$tau.coef,
+        Proportion_Mediated = med_fit$n0,
+        CI_Lower = med_fit$d0.ci[1],
+        CI_Upper = med_fit$d0.ci[2],
+        p_value = med_fit$d0.p
+    )
+}
+
+# Combine all mediation results into one data frame
+mediation_results_df <- do.call(rbind, mediation_results_list)
+
+# Write the results to a CSV file
+write.csv(mediation_results_df, "mediation_results.csv", row.names = FALSE)
+
+# Inform the user that the process is complete
+cat("Mediation analysis results have been saved to 'mediation_results.csv'.\n")
+```
+
+-   **ACME (Average Causal Mediation Effect)**: This tells you how much of the effect of `Canonical_Speech1` on `Canonical_Brain1` is mediated by the BDI scores.
+
+-   **ADE (Average Direct Effect)**: This measures the effect of `Canonical_Speech1` on `Canonical_Brain1` that is not mediated by BDI.
+
+-   **Total Effect**: This is the sum of the ACME and ADE, representing the overall effect of `Canonical_Speech1` on `Canonical_Brain1`.
+
+-   **Proportion Mediated**: This gives the proportion of the total effect that is mediated by BDI.
+
+<!-- -->
+
+-   **Significant Mediation**: The mediation effect (ACME) is small but significant, suggesting that BDI does mediate part of the relationship between the speech and brain canonical variates, albeit a small portion.
+
+-   **Strong Direct Effect**: The direct effect (ADE) is very strong and highly significant, indicating that the majority of the relationship between the second canonical speech and brain variates is direct, independent of BDI scores.
+
+-   **Implications**: While BDI has a small mediation effect, the primary driver of the association between the speech and brain canonical variates in this dimension seems to be direct rather than mediated by BDI.
