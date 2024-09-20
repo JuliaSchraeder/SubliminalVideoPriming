@@ -11,32 +11,57 @@ spm_jobman('initcfg');
 
 % Define your ROIs with their coordinates, categories, and functions
 rois = {
-    'Amygdala', [], [-18, -6, -12], 'Emotion processing';
-    'Caudate_nucleus', [-16, 16, 8], [-12, -4, 14], 'Motor execution (suppressing unintended motor activity)';
-    'Subcallosal_gyrus_BA34', [], [26, 6, -10], 'Emotion and autonomic function';
-    'IFG_pars_opercularis_BA44_pOp', [-44, 14, 10], [54, 8, 6], 'Short-term memory and integrating inputs, sequencing motor activity';
-    'IFG_pars_triangularis_BA45_pTri', [-46, 22, 12], [46, 22, 16], 'Semantic decisions/semantic reading';
-    'IFG_pars_orbitalis_BA47_pOrb', [-50, 20, 0], [48, 14, 0], 'Selection/retrieval of semantic concepts/words';
-    'IFG_pars_orbitalis_BA47_pOrb_2', [-44, 34, -2], [38, 26, 0], 'Selection/retrieval of semantic concepts/words';
-    'Insula_BA13', [-32, 18, 6], [54, -36, 20], 'Control of breathing during production of speech';
-    'Insula_BA13_2', [], [42, 8, 12], 'Control of breathing during production of speech';
-    'aSTG_BA22', [-50, 10, 2], [54, 0, 4], 'Early auditory processing of complex sounds';
-    'pSTG_BA22', [46, -24, 0], [48, -24, 4], 'Auditory processing/word retrieval with minimal semantics';
-    'pSTG_BA22_2', [56, -44, 4], [46, -32, 4], 'Auditory processing/word retrieval with minimal semantics';
+    'Amygdala', [-18, -6, -12], [], 'Emotion processing';
+    'Caudate_nucleus',[-12, -4, 14], [-16, 16, 8],'Motor execution (suppressing unintended motor activity)';
+    'Subcallosal_gyrus_BA34', [26, 6, -10], [], 'Emotion and autonomic function';
+    'IFG_pOp_BA44', [54, 8, 6], [48, 8, 15], 'Short-term memory and integrating inputs, sequencing motor activity';
+    'IFG_pOp_BA44_2', [-42, 2, 6], [-44, 14, 10], 'Short-term memory and integrating inputs, sequencing motor activity';
+
+    'IFG_pTri_BA45', [-46, 22, 12], [], 'Semantic decisions/semantic reading';
+
+    'IFG_pOrb_BA47', [48,14, 0], [46,20,2], 'Selection/retrieval of semantic concepts/words';
+    'IFG_pOrb_BA47_2', [38,26,0], [], 'Selection/retrieval of semantic concepts/words';
+    'IFG_pOrb_BA47_3', [40,22,-2], [], 'Selection/retrieval of semantic concepts/words';
+
+    'Insula_BA13', [], [54, -36, 20], 'Control of breathing during production of speech';
+    'aInsula_BA13', [-32,22,2], [-32,18,6], 'Control of breathing during production of speech';
+    'aInsula_BA13_2', [], [42,8,12], 'Control of breathing during production of speech';
+
+    'aSTG_BA22', [54,0,4], [], 'Early auditory processing of complex sounds';
+    'aSTG_BA22_2', [-50, 10, 2], [], 'Early auditory processing of complex sounds';
+    
+    'pSTG_BA22', [46, -24, 0], [-48, -46, 12], 'Auditory processing/word retrieval with minimal semantics';
+    'pSTG_BA22_2', [46, -32, 4], [46, -24, 0], 'Auditory processing/word retrieval with minimal semantics';
+    'pSTG_BA22_3', [56,-44,4], [], 'Auditory processing/word retrieval with minimal semantics';
+
     'Heschls_gyrus_BA41', [], [48, -32, 8], 'Early auditory processing';
-    'MTGp_BA21', [], [44, -4, -16], 'Accessing semantics during word production tasks';
-    'MFG_BA9', [46, 14, 30], [48, 16, 28], 'Retrieving words for speech production';
-    'MFG_BA10', [], [34, 36, 10], 'Retrieving words for speech production';
-    'SMA_BA6', [4, 16, 48], [8, 18, 50], 'Sequencing execution of motor movements (speech and fingers)';
-    'SMA_BA6_2', [8, 26, 42], [], 'Sequencing execution of motor movements (speech and fingers)';
-    'SMA_BA6_3', [], [0, 14, 48], 'Sequencing execution of motor movements (speech and fingers)';
+
+    'MTG_BA21', [44, -4, -16], [], 'Accessing semantics during word production tasks';
+
+    'MFG_BA9', [48, 16, 28], [46, 14, 30], 'Retrieving words for speech production';
+    'MFG_BA9_2', [], [-40, 6, 34], 'Retrieving words for speech production';
+
+    'MFG_BA10', [34, 36, 10], [], 'Retrieving words for speech production';
+
+    'SMA_BA6',[8, 18, 50], [4, 16, 48], 'Sequencing execution of motor movements (speech and fingers)';
+    'SMA_BA6_2', [], [8, 26, 42], 'Sequencing execution of motor movements (speech and fingers)';
+    'SMA_BA6_3', [0, 14, 48], [], 'Sequencing execution of motor movements (speech and fingers)';
+
     'Claustrum', [], [26, 16, 4], 'Sensory integration';
-    'Thalamus_vl', [], [-8, -6, 10], 'Control of breathing during speech production';
-    'Putamen', [], [-22, 14, -12], 'Timing of motor output';
-    'SMG_BA40_7_SMGv', [36, -58, 48], [36, -54, 46], 'Articulatory loop, auditory expectations';
-    'SMG_BA40', [], [-30, -50, 40], 'Articulatory loop, auditory expectations';
-    'Cerebellum_VI_VIIB', [2, -70, -10], [18, -64, -16], 'Retrieving words for speech production';
-    'Cerebellum_VI_VIIB', [], [-6, -74, -18], 'Retrieving words for speech production';
+    'Thalamus', [-8, -6, 10], [], 'Control of breathing during speech production';
+    'Putamen', [-22, 14, -12], [], 'Timing of motor output';
+    'Parahippocampal_gyrus_BA28', [16,-10,-12], [], 'Timing of motor output';
+
+    'SMG_BA40_7', [36, -54, 46], [36, -58, 48], 'Articulatory loop, auditory expectations';
+    'SMG_BA40_7_2', [-46,-56, 42], [], 'Articulatory loop, auditory expectations';
+
+    'SMG_BA40', [-30, -50, 38], [-30, -50, 40], 'Articulatory loop, auditory expectations';
+    'SMG_BA40_2', [], [-36, -44, 38], 'Articulatory loop, auditory expectations';
+
+    'Cerebellum', [18, -64, -16], [2, -70, -10], 'Retrieving words for speech production';
+    'Cerebellum_2', [], [-22, -60, -21], 'Retrieving words for speech production';
+    'Cerebellum_3', [], [-6, -74, -18], 'Retrieving words for speech production';
+    
     'Cuneus_BA17', [], [0, -82, 8], 'Visual processing';
 };
 
@@ -47,19 +72,19 @@ radius = 6;  % Radius of the sphere in mm
 for i = 1:size(rois, 1)
     roi_name = rois{i, 1};
     
-    % Process Linguistic Prosody coordinates (choose only rois that have
+    % Process Affective Prosody coordinates (AP) (choose only rois that have
     % coordinates in the second column
     if ~isempty(rois{i, 2})
         coords = rois{i, 2};
-        save_name = sprintf('Linguistic_%s.nii', roi_name);
+        save_name = sprintf('AP_%s.nii', roi_name);
         create_sphere_and_save(coords, radius, save_name);
     end
     
-    % Process Affective Prosody coordinates (choose only rois that have
+    % Process Lingustic Prosody coordinates (LP) (choose only rois that have
     % coordinates in the third column
     if ~isempty(rois{i, 3})
         coords = rois{i, 3};
-        save_name = sprintf('Affective_%s.nii', roi_name);
+        save_name = sprintf('LP_%s.nii', roi_name);
         create_sphere_and_save(coords, radius, save_name);
     end
 end
