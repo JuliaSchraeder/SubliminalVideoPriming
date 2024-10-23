@@ -138,7 +138,6 @@ Based on the provided statistics and criteria, the normal distribution fits your
 ## Estimate Model
 
 ```{r}
-
 model <-lmer(df$accuracy~ condition*group + age + sex + (1|participantID),data = df)
 anova_Model<-anova(model, type = 3, ddf= "Kenward-Roger")
 ```
@@ -220,6 +219,7 @@ write.xlsx(combined_results, "glmm_accuracy_post_hoc_results.xlsx", rowNames = F
 ### Plot
 
 ```{r}
+
 # Reorder the levels of the 'condition' variable
 df$condition <- factor(df$condition, levels = c("happy_happy", "sad_happy", "happy_sad", "sad_sad"))
 
@@ -265,7 +265,6 @@ conditions <-  afex_plot(model, x = "condition",
 #colors()
 ```
 
-
 ```{r, fig.width=10, fig.height=4}
 combined_plots <- cowplot::plot_grid(conditions,con_in_group,
                             labels = c("A", "B"),
@@ -276,7 +275,6 @@ combined_plots
 ```{r}
 #ggsave("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/plots/glmm_accuracy_1.tiff", conditions, width = 4, height = 4)
 ```
-
 
 ```{r}
 ggsave("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/plots/glmm_accuracy_2.tiff", combined_plots, width = 10, height = 4)
@@ -289,5 +287,106 @@ library(dplyr)
 df %>% 
   group_by(group) %>% 
   summarise(Num_Participants = n_distinct(participantID))
+
+```
+
+## Test Lennard
+
+plot effects from model
+
+```{r}
+# Assuming 'model' is your fitted GLMM model and 'df' is your original dataset
+
+# Generate predictions from the model
+df$predicted_values <- predict(model, type = "response")
+
+# Plot the predicted values using ggplot
+plot1 <- ggplot(df, 
+       aes(x = condition, 
+           y = predicted_values, 
+           fill = condition)) +
+  geom_boxplot(width = 0.5, 
+               outlier.shape = NA) +  # Boxplot of predicted values
+  geom_jitter(aes(y = predicted_values), # Jitter points of predicted values 
+              position = position_jitter(width = 0.1), 
+              size = 1.5, 
+              alpha = 0.3) +  # adjust transparency
+  scale_fill_manual(values = c("happy_happy" = "darkgreen",
+                               "sad_happy" = "lightgreen",
+                               "happy_sad" = "lightblue", 
+                               "sad_sad" = "darkblue")) +
+  theme_prism() +
+  theme(legend.position = "none", # auskommentieren, wenn du Legende haben willst
+        axis.text.x = element_text(angle = 45, 
+                                   hjust = 1, 
+                                   vjust = 1, 
+                                   size = 10)) +
+  labs(title = "Predicted Values", y = "Predicted Accuracy", x = "") # titel anpassen
+
+
+
+plot2 <- ggplot(df, 
+       aes(x = condition, 
+           y = predicted_values, 
+           fill = condition)) +
+  geom_boxplot(width = 0.5, 
+               outlier.shape = NA) +  
+  geom_jitter(aes(y = predicted_values), 
+              position = position_jitter(width = 0.1), 
+              size = 1.5, 
+              alpha = 0.3) +  
+  scale_fill_manual(values = c("happy_happy" = "darkgreen",
+                               "sad_happy" = "lightgreen",
+                               "happy_sad" = "lightblue", 
+                               "sad_sad" = "darkblue")) +
+  theme_prism() +
+  theme(legend.position = "none", 
+        axis.text.x = element_text(angle = 45, 
+                                   hjust = 1, 
+                                   vjust = 1, 
+                                   size = 10)) +
+  labs(title = "Predicted Values", y = "Predicted Accuracy", x = "") 
+
+
+
+
+plot3 <- ggplot(df, 
+       aes(x = condition, 
+           y = predicted_values, 
+           fill = condition)) +
+  geom_boxplot(width = 0.5, 
+               outlier.shape = NA) +  
+  geom_jitter(aes(y = predicted_values), 
+              position = position_jitter(width = 0.1), 
+              size = 1.5, 
+              alpha = 0.3) + 
+  scale_fill_manual(values = c("happy_happy" = "darkgreen",
+                               "sad_happy" = "lightgreen",
+                               "happy_sad" = "lightblue", 
+                               "sad_sad" = "darkblue")) +
+  theme_prism() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 45, 
+                                   hjust = 1, 
+                                   vjust = 1, 
+                                   size = 10)) +
+  labs(title = "Predicted Values", y = "Predicted Accuracy", x = "") 
+
+
+```
+
+Kombiniere Plots
+
+ändere figure size am anfang fig.width=10, fig.height=4
+
+```{r, fig.width=10, fig.height=4}
+#install.packages("gridExtra")
+#library(gridExtra)
+
+# Assuming you have three plots: plot1, plot2, plot3
+combined_plot <- grid.arrange(plot1, plot2, plot3, ncol = 3)
+
+# Display the combined plot
+combined_plot
 
 ```
