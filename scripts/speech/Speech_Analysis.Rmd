@@ -11,6 +11,9 @@ library(readxl)
 library(tidyr) #for %<% use
 library(dplyr) #for "groub_by" use
 library(lme4)
+library(broom)
+library(officer)
+library(apaTables)
 ```
 
 ```{r}
@@ -26,7 +29,7 @@ df$Age <- df$Alter
 
 ```{r}
 df_clean <- df %>% 
-  select("bids_number","Age","Gender_f1_m2","Group_MDD1_HC2",
+  select("Group_MDD1_HC2",
          "duration_pos", "loudness_mean_pos", 
          "pause_durations_sum_pos", "pause_durations_mean_pos", "number_of_pauses_pos",
          "word_frequency_mean_pos", "word_count_pos", 
@@ -45,7 +48,7 @@ write.csv(df_clean, "W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPri
 Descriptive Statistics
 ```{r}
 summary_stats <- df_clean %>%
-  select(, -bids_number) %>%
+  #select(, -bids_number) %>%
   summary()
 #print(summary_stats)
 ```
@@ -63,37 +66,114 @@ print(group_stats)
 write.csv(group_stats, "W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/speech/descriptive_statistics.csv", sep = ";")
 ```
 ```{r}
-ancova_results <- lapply(df_clean %>% select(where(is.numeric)), function(var) {
-  summary(aov(var ~ Group_MDD1_HC2 + Age + Gender_f1_m2, data = df_clean))
+# Run Wilcoxon test for each numeric variable and collect results, including effect size
+wilcoxon_results <- lapply(dplyr::select(df_clean, where(is.numeric)), function(var) {
+  result <- wilcox.test(var ~ Group_MDD1_HC2, data = df_clean)
+  result_df <- tidy(result)
+  n <- nrow(df_clean)
+  # z-score from the Wilcoxon statistic
+  result_df$z <- qnorm(result_df$p.value / 2) * -sign(result_df$statistic)
+  # Calculate effect size r
+  result_df$r <- abs(result_df$z) / sqrt(n)
+  # Add variable name and return
+  result_df
 })
-print(ancova_results)
-```
 
-```{r}
-#library(apaTables)
-library(broom)
-library(officer)
-
-```
-
-
-```{r}
-names(ancova_results) <- names(data %>% select(where(is.numeric)))  # Name each list item by variable
-ancova_results_df <- do.call(rbind, lapply(names(ancova_results), function(var_name) {
-  result <- ancova_results[[var_name]]
+# Combine all Wilcoxon test results into one data frame
+names(wilcoxon_results) <- names(dplyr::select(df_clean, where(is.numeric)))  # Name each list item by variable
+wilcoxon_results_df <- do.call(rbind, lapply(names(wilcoxon_results), function(var_name) {
+  result <- wilcoxon_results[[var_name]]
   result$Variable <- var_name  # Add variable name as a column
   return(result)
 }))
 
-# Reorder columns to place Variable at the front
-ancova_results_df <- ancova_results_df %>% select(Variable, everything())
+# Apply Bonferroni correction to the Wilcoxon p-values
+wilcoxon_results_df <- wilcoxon_results_df %>%
+  mutate(p_adj = p.adjust(p.value, method = "bonferroni"))
 
-# Save as a nicely formatted Word table
-# Use flextable to create a presentable table and save as .docx
-ft <- flextable(ancova_results_df)
-save_as_docx(ft, path = "ancova_results_table.docx")
-
-# For a CSV format
-write.csv(ancova_results_df, "ancova_results_table.csv", row.names = FALSE)
+write.csv(wilcoxon_results_df, "W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/speech/wilcoxon_results_with_bonferroni.csv", row.names = FALSE)
 ```
+
+
+## Plot significant results
+
+```{r}
+library(ggplot2)
+library(ggpubr)
+library(ggprism)
+```
+
+```{r}
+# Filter for significant results (e.g., p < 0.05)
+significant_results <- ancova_results_df %>%
+  filter(term == "Group_MDD1_HC2" & p.value < 0.05)%>%
+  mutate(p_adj = p.adjust(p.value, method = "bonferroni"))
+```
+
+
+```{r}
+# Subset the original data to only include significant variables
+significant_vars <- significant_results$Variable
+df_significant <- df_clean %>%
+  select(Group_MDD1_HC2, all_of(significant_vars)) %>%
+  pivot_longer(cols = all_of(significant_vars), names_to = "Variable", values_to = "Value")
+
+# Plot all significant variables in a single plot with facets
+combined_plot <- ggplot(df_significant, aes(x = Group_MDD1_HC2, y = Value, fill = Group_MDD1_HC2)) +
+  geom_violin(trim = FALSE, width = 0.8) +
+  geom_jitter(width = 0.2, alpha = 0.5) +
+  facet_wrap(~ Variable, scales = "free_y") +  # Creates a separate plot for each variable
+  scale_fill_manual(values = c("HC" = "turquoise", "MDD" = "violet")) +
+  theme_prism() +
+  theme(legend.position = "none") +
+  labs(y = "Measured Value", x = "Group") #+
+  #ylim(0, 1.5)  # Adjust the limit as appropriate for each variable's range
+
+# Display the plot
+print(combined_plot)
+
+#ggsave(filename = "violin_plot.png", plot = combined_plot, width = 7, height = 7)
+```
+
+
+
+```{r}
+# Separate significant variables into _pos and _neg
+significant_pos_vars <- significant_results %>% filter(grepl("_pos$", Variable)) %>% pull(Variable)
+significant_neg_vars <- significant_results %>% filter(grepl("_neg$", Variable)) %>% pull(Variable)
+
+# Prepare data for plotting
+df_significant <- df_clean %>%
+  select(Group_MDD1_HC2, all_of(c(significant_pos_vars, significant_neg_vars))) %>%
+  pivot_longer(cols = all_of(c(significant_pos_vars, significant_neg_vars)), 
+               names_to = "Variable", values_to = "Value")
+
+
+# Plot for _pos variables
+plot_pos <- ggplot(df_significant %>% filter(Variable %in% significant_pos_vars), 
+                   aes(x = Group_MDD1_HC2, y = Value, fill = Group_MDD1_HC2)) +
+  geom_violin(trim = FALSE, width = 0.8) +
+  geom_jitter(width = 0.2, alpha = 0.3) +
+  facet_wrap(~ Variable, scales = "free_y") +  # Facet by each _pos variable
+  scale_fill_manual(values = c("HC" = "turquoise", "MDD" = "violet")) +
+  theme_prism() +
+  theme(legend.position = "none") +
+  labs(y = "Measured Value", x = "Group")
+
+# Plot for _neg variables
+plot_neg <- ggplot(df_significant %>% filter(Variable %in% significant_neg_vars), 
+                   aes(x = Group_MDD1_HC2, y = Value, fill = Group_MDD1_HC2)) +
+  geom_violin(trim = FALSE, width = 0.8) +
+  geom_jitter(width = 0.2, alpha = 0.3) +
+  facet_wrap(~ Variable, scales = "free_y") +  # Facet by each _neg variable
+  scale_fill_manual(values = c("HC" = "turquoise", "MDD" = "violet")) +
+  theme_prism() +
+  theme(legend.position = "none") +
+  labs(y = "Measured Value", x = "Group")
+```
+```{r}
+ggsave(filename = "violin_plot_negative.png", plot = plot_neg, width = 7, height = 7)
+ggsave(filename = "violin_plot_positive.png", plot = plot_pos, width = 7, height = 7)
+```
+
 
