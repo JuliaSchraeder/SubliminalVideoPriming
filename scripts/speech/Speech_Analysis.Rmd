@@ -1,0 +1,99 @@
+---
+title: "Speech Analysis"
+output: html_notebook
+---
+
+Speech Analysis
+
+```{r}
+library(psych)
+library(readxl)
+library(tidyr) #for %<% use
+library(dplyr) #for "groub_by" use
+library(lme4)
+```
+
+```{r}
+df <- read.csv("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/combined_speech_demographic_info.csv", sep=";")
+#view(df)
+```
+
+```{r}
+df$Gender_f1_m2 <- factor(df$Gender_f1_m2, labels = c("Female", "Male"))
+df$Group_MDD1_HC2 <- factor(df$Group_MDD1_HC2, labels = c("MDD", "HC"))
+df$Age <- df$Alter
+```
+
+```{r}
+df_clean <- df %>% 
+  select("bids_number","Age","Gender_f1_m2","Group_MDD1_HC2",
+         "duration_pos", "loudness_mean_pos", 
+         "pause_durations_sum_pos", "pause_durations_mean_pos", "number_of_pauses_pos",
+         "word_frequency_mean_pos", "word_count_pos", 
+         "negative_sentence_ratio_pos", "neutral_sentence_ratio_pos", "positive_sentence_ratio_pos",
+         
+         "duration_neg", "loudness_mean_neg",
+         "pause_durations_sum_neg", "pause_durations_mean_neg","number_of_pauses_neg", 
+         "word_frequency_mean_neg", "word_count_neg", 
+         "negative_sentence_ratio_neg", "neutral_sentence_ratio_neg", "positive_sentence_ratio_neg") 
+```
+
+```{r}
+write.csv(df_clean, "W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/speech/speech_features_selected.csv")
+```
+
+Descriptive Statistics
+```{r}
+summary_stats <- df_clean %>%
+  select(, -bids_number) %>%
+  summary()
+#print(summary_stats)
+```
+
+Group-wise Descriptive Statistics
+```{r}
+group_stats <- df_clean%>%
+  group_by(Group_MDD1_HC2) %>%
+  summarize(across(where(is.numeric), list(mean = mean, sd = sd), na.rm = TRUE))
+print(group_stats)
+```
+
+
+```{r}
+write.csv(group_stats, "W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/speech/descriptive_statistics.csv", sep = ";")
+```
+```{r}
+ancova_results <- lapply(df_clean %>% select(where(is.numeric)), function(var) {
+  summary(aov(var ~ Group_MDD1_HC2 + Age + Gender_f1_m2, data = df_clean))
+})
+print(ancova_results)
+```
+
+```{r}
+#library(apaTables)
+library(broom)
+library(officer)
+
+```
+
+
+```{r}
+names(ancova_results) <- names(data %>% select(where(is.numeric)))  # Name each list item by variable
+ancova_results_df <- do.call(rbind, lapply(names(ancova_results), function(var_name) {
+  result <- ancova_results[[var_name]]
+  result$Variable <- var_name  # Add variable name as a column
+  return(result)
+}))
+
+# Reorder columns to place Variable at the front
+ancova_results_df <- ancova_results_df %>% select(Variable, everything())
+
+# Save as a nicely formatted Word table
+# Use flextable to create a presentable table and save as .docx
+ft <- flextable(ancova_results_df)
+save_as_docx(ft, path = "ancova_results_table.docx")
+
+# For a CSV format
+write.csv(ancova_results_df, "ancova_results_table.csv", row.names = FALSE)
+```
+
