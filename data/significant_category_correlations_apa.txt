@@ -1,45 +1,100 @@
 Table 1
 Significant Correlations (Bonferroni-corrected) involving Categories
 ----------------------------------------
-Number of comparisons corrected for Bonferroni: 1849
-Bonferroni correction threshold: 0.00003
+Number of comparisons corrected for Bonferroni: 2209
+Bonferroni correction threshold: 0.00002
 ----------------------------------------
 Variable 1                     Variable 2                     Correlation     P-Value        
 ----------------------------------------
-pos_frequency_related          pos_frequency_related          1.000           0.000e+00      
-pos_energy_related             pos_energy_related             1.000           0.000e+00      
-pos_energy_related             neg_energy_related             0.474           1.387e-06      
-pos_spectral_balance           pos_spectral_balance           1.000           0.000e+00      
-pos_spectral_balance           neg_spectral_balance           0.902           2.499e-35      
-pos_spectral_balance           STAI2                          0.456           3.758e-06      
-pos_spectral_balance           DERS Total Score               0.463           2.644e-06      
-pos_spectral_balance           DERS Limited Access to Emotion Regulation Strategies 0.465           2.307e-06      
-pos_spectral_balance           DERS Lack of Emotional Clarity 0.519           8.645e-08      
-pos_spectral_balance           CERQ Positive Reappraisal      -0.424          2.073e-05      
-pos_spectral_balance           CERQ Putting into Perspective  -0.435          1.153e-05      
-pos_temporal                   pos_temporal                   1.000           0.000e+00      
-pos_temporal                   neg_temporal                   0.721           2.669e-16      
-pos_lexical_richness           pos_lexical_richness           1.000           0.000e+00      
-pos_sentiment                  pos_sentiment                  1.000           0.000e+00      
-pos_word_types                 pos_word_types                 1.000           0.000e+00      
-pos_syntactic_complexity       pos_syntactic_complexity       1.000           0.000e+00      
-neg_frequency_related          neg_frequency_related          1.000           0.000e+00      
-neg_energy_related             pos_energy_related             0.474           1.387e-06      
-neg_energy_related             neg_energy_related             1.000           0.000e+00      
-neg_spectral_balance           pos_spectral_balance           0.902           2.499e-35      
-neg_spectral_balance           neg_spectral_balance           1.000           0.000e+00      
-neg_spectral_balance           STAI2                          0.486           6.981e-07      
-neg_spectral_balance           STAI1                          0.436           1.107e-05      
-neg_spectral_balance           DERS Total Score               0.466           2.168e-06      
-neg_spectral_balance           DERS Limited Access to Emotion Regulation Strategies 0.468           2.015e-06      
-neg_spectral_balance           DERS Lack of Emotional Clarity 0.495           3.973e-07      
-neg_spectral_balance           CERQ Refocusing on Planning    -0.440          8.890e-06      
-neg_spectral_balance           CERQ Positive Reappraisal      -0.495          3.937e-07      
-neg_temporal                   pos_temporal                   0.721           2.669e-16      
-neg_temporal                   neg_temporal                   1.000           0.000e+00      
-neg_temporal                   neg_sentiment                  0.425           1.976e-05      
-neg_lexical_richness           neg_lexical_richness           1.000           0.000e+00      
-neg_sentiment                  neg_temporal                   0.425           1.976e-05      
-neg_sentiment                  neg_sentiment                  1.000           0.000e+00      
-neg_word_types                 neg_word_types                 1.000           0.000e+00      
-neg_syntactic_complexity       neg_syntactic_complexity       1.000           0.000e+00      
+duration_pos                   duration_pos                   1.000           0.000e+00      
+duration_pos                   pause_durations_sum_pos        0.915           4.541e-38      
+duration_pos                   number_of_pauses_pos           0.963           5.162e-54      
+duration_pos                   word_count_pos                 0.952           3.836e-49      
+duration_pos                   duration_neg                   0.693           1.017e-14      
+duration_pos                   pause_durations_sum_neg        0.646           2.092e-12      
+duration_pos                   number_of_pauses_neg           0.745           7.926e-18      
+duration_pos                   word_count_neg                 0.751           3.069e-18      
+loudness_mean_pos              loudness_mean_pos              1.000           0.000e+00      
+loudness_mean_pos              loudness_mean_neg              0.789           3.772e-21      
+pause_durations_sum_pos        duration_pos                   0.915           4.541e-38      
+pause_durations_sum_pos        pause_durations_sum_pos        1.000           0.000e+00      
+pause_durations_sum_pos        number_of_pauses_pos           0.850           2.409e-27      
+pause_durations_sum_pos        word_count_pos                 0.801           3.540e-22      
+pause_durations_sum_pos        duration_neg                   0.712           8.262e-16      
+pause_durations_sum_pos        pause_durations_sum_neg        0.752           2.329e-18      
+pause_durations_sum_pos        number_of_pauses_neg           0.697           6.084e-15      
+pause_durations_sum_pos        word_count_neg                 0.708           1.439e-15      
+pause_durations_mean_pos       pause_durations_mean_pos       1.000           0.000e+00      
+number_of_pauses_pos           duration_pos                   0.963           5.162e-54      
+number_of_pauses_pos           pause_durations_sum_pos        0.850           2.409e-27      
+number_of_pauses_pos           number_of_pauses_pos           1.000           0.000e+00      
+number_of_pauses_pos           word_count_pos                 0.947           4.409e-47      
+number_of_pauses_pos           duration_neg                   0.641           3.387e-12      
+number_of_pauses_pos           pause_durations_sum_neg        0.556           6.013e-09      
+number_of_pauses_pos           number_of_pauses_neg           0.763           3.779e-19      
+number_of_pauses_pos           word_count_neg                 0.716           4.782e-16      
+word_frequency_mean_pos        word_frequency_mean_pos        1.000           0.000e+00      
+word_count_pos                 duration_pos                   0.952           3.836e-49      
+word_count_pos                 pause_durations_sum_pos        0.801           3.540e-22      
+word_count_pos                 number_of_pauses_pos           0.947           4.409e-47      
+word_count_pos                 word_count_pos                 1.000           0.000e+00      
+word_count_pos                 duration_neg                   0.687           1.992e-14      
+word_count_pos                 pause_durations_sum_neg        0.580           8.725e-10      
+word_count_pos                 number_of_pauses_neg           0.772           8.722e-20      
+word_count_pos                 word_count_neg                 0.789           3.671e-21      
+negative_sentence_ratio_pos    negative_sentence_ratio_pos    1.000           0.000e+00      
+neutral_sentence_ratio_pos     neutral_sentence_ratio_pos     1.000           0.000e+00      
+neutral_sentence_ratio_pos     positive_sentence_ratio_pos    -0.861          9.136e-29      
+positive_sentence_ratio_pos    neutral_sentence_ratio_pos     -0.861          9.136e-29      
+positive_sentence_ratio_pos    positive_sentence_ratio_pos    1.000           0.000e+00      
+duration_neg                   duration_pos                   0.693           1.017e-14      
+duration_neg                   pause_durations_sum_pos        0.712           8.262e-16      
+duration_neg                   number_of_pauses_pos           0.641           3.387e-12      
+duration_neg                   word_count_pos                 0.687           1.992e-14      
+duration_neg                   duration_neg                   1.000           0.000e+00      
+duration_neg                   pause_durations_sum_neg        0.939           2.142e-44      
+duration_neg                   number_of_pauses_neg           0.936           1.253e-43      
+duration_neg                   word_count_neg                 0.969           8.796e-58      
+duration_neg                   positive_sentence_ratio_neg    0.472           1.583e-06      
+loudness_mean_neg              loudness_mean_pos              0.789           3.772e-21      
+loudness_mean_neg              loudness_mean_neg              1.000           0.000e+00      
+pause_durations_sum_neg        duration_pos                   0.646           2.092e-12      
+pause_durations_sum_neg        pause_durations_sum_pos        0.752           2.329e-18      
+pause_durations_sum_neg        number_of_pauses_pos           0.556           6.013e-09      
+pause_durations_sum_neg        word_count_pos                 0.580           8.725e-10      
+pause_durations_sum_neg        duration_neg                   0.939           2.142e-44      
+pause_durations_sum_neg        pause_durations_sum_neg        1.000           0.000e+00      
+pause_durations_sum_neg        number_of_pauses_neg           0.806           1.223e-22      
+pause_durations_sum_neg        word_count_neg                 0.882           7.603e-32      
+pause_durations_sum_neg        positive_sentence_ratio_neg    0.433           1.277e-05      
+pause_durations_mean_neg       pause_durations_mean_neg       1.000           0.000e+00      
+number_of_pauses_neg           duration_pos                   0.745           7.926e-18      
+number_of_pauses_neg           pause_durations_sum_pos        0.697           6.084e-15      
+number_of_pauses_neg           number_of_pauses_pos           0.763           3.779e-19      
+number_of_pauses_neg           word_count_pos                 0.772           8.722e-20      
+number_of_pauses_neg           duration_neg                   0.936           1.253e-43      
+number_of_pauses_neg           pause_durations_sum_neg        0.806           1.223e-22      
+number_of_pauses_neg           number_of_pauses_neg           1.000           0.000e+00      
+number_of_pauses_neg           word_count_neg                 0.948           1.340e-47      
+number_of_pauses_neg           positive_sentence_ratio_neg    0.488           6.174e-07      
+word_frequency_mean_neg        word_frequency_mean_neg        1.000           0.000e+00      
+word_count_neg                 duration_pos                   0.751           3.069e-18      
+word_count_neg                 pause_durations_sum_pos        0.708           1.439e-15      
+word_count_neg                 number_of_pauses_pos           0.716           4.782e-16      
+word_count_neg                 word_count_pos                 0.789           3.671e-21      
+word_count_neg                 duration_neg                   0.969           8.796e-58      
+word_count_neg                 pause_durations_sum_neg        0.882           7.603e-32      
+word_count_neg                 number_of_pauses_neg           0.948           1.340e-47      
+word_count_neg                 word_count_neg                 1.000           0.000e+00      
+word_count_neg                 positive_sentence_ratio_neg    0.468           2.015e-06      
+negative_sentence_ratio_neg    negative_sentence_ratio_neg    1.000           0.000e+00      
+negative_sentence_ratio_neg    positive_sentence_ratio_neg    -0.477          1.137e-06      
+neutral_sentence_ratio_neg     neutral_sentence_ratio_neg     1.000           0.000e+00      
+neutral_sentence_ratio_neg     positive_sentence_ratio_neg    -0.659          5.281e-13      
+positive_sentence_ratio_neg    duration_neg                   0.472           1.583e-06      
+positive_sentence_ratio_neg    pause_durations_sum_neg        0.433           1.277e-05      
+positive_sentence_ratio_neg    number_of_pauses_neg           0.488           6.174e-07      
+positive_sentence_ratio_neg    word_count_neg                 0.468           2.015e-06      
+positive_sentence_ratio_neg    negative_sentence_ratio_neg    -0.477          1.137e-06      
+positive_sentence_ratio_neg    neutral_sentence_ratio_neg     -0.659          5.281e-13      
+positive_sentence_ratio_neg    positive_sentence_ratio_neg    1.000           0.000e+00      

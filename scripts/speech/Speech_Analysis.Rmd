@@ -14,6 +14,8 @@ library(lme4)
 library(broom)
 library(officer)
 library(apaTables)
+library(ggplot2)
+library(ggprism)
 ```
 
 ```{r}
@@ -97,17 +99,10 @@ write.csv(wilcoxon_results_df, "W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/Sublimi
 
 ## Plot significant results
 
-```{r}
-library(ggplot2)
-library(ggpubr)
-library(ggprism)
-```
 
 ```{r}
 # Filter for significant results (e.g., p < 0.05)
-significant_results <- ancova_results_df %>%
-  filter(term == "Group_MDD1_HC2" & p.value < 0.05)%>%
-  mutate(p_adj = p.adjust(p.value, method = "bonferroni"))
+significant_results <- filter(wilcoxon_results_df, p_adj < 0.05)
 ```
 
 
@@ -123,6 +118,7 @@ combined_plot <- ggplot(df_significant, aes(x = Group_MDD1_HC2, y = Value, fill 
   geom_violin(trim = FALSE, width = 0.8) +
   geom_jitter(width = 0.2, alpha = 0.5) +
   facet_wrap(~ Variable, scales = "free_y") +  # Creates a separate plot for each variable
+  stat_summary(fun = "mean", geom = "point", shape = 18, color = "black", size = 2, show.legend = FALSE) + # Show mean
   scale_fill_manual(values = c("HC" = "turquoise", "MDD" = "violet")) +
   theme_prism() +
   theme(legend.position = "none") +
@@ -134,6 +130,48 @@ print(combined_plot)
 
 #ggsave(filename = "violin_plot.png", plot = combined_plot, width = 7, height = 7)
 ```
+
+
+```{r}
+
+# Define a function to set y-axis limits based on variable names
+set_y_limits <- function(variable) {
+  if (variable %in% c("duration_pos", "duration_neg", "pause_durations_sum_pos", "pause_durations_sum_neg")) {
+    return(c(0, 500))  # Example limits for duration
+  } else {
+    return(NA)  # No specific limit, use default scaling
+  }
+}
+
+# Add y-axis limits to each facet using a custom function
+df_significant <- df_significant %>%
+  group_by(Variable) %>%
+  mutate(y_limits = list(set_y_limits(Variable))) %>%
+  ungroup()
+
+# Plot all significant variables in a single plot with facets
+combined_plot <- ggplot(df_significant, aes(x = Group_MDD1_HC2, y = Value, fill = Group_MDD1_HC2)) +
+  geom_violin(trim = FALSE, width = 0.8) +
+  geom_jitter(width = 0.2, alpha = 0.5) +
+  stat_summary(fun = "mean", geom = "point", shape = 18, color = "black", size = 2, show.legend = FALSE) + # Show mean
+  stat_summary(fun = "median", geom = "point", shape = 95, color = "red", size = 5, show.legend = FALSE) + # Show median
+  facet_wrap(~ Variable, scales = "free_y", ncol = 3) +  # Customize number of columns for layout
+  scale_fill_manual(values = c("HC" = "turquoise", "MDD" = "violet")) +
+  theme_prism() +
+  theme(legend.position = "none") +
+  labs(y = "Measured Value", x = "Group")
+
+# Apply variable-specific y-axis limits
+combined_plot <- combined_plot +
+  facet_wrap(~ Variable, scales = "free_y") +
+  coord_cartesian(ylim = unlist(df_significant$y_limits[1])) # Adjust y-limits based on custom function
+
+# Display the plot
+print(combined_plot)
+```
+
+
+
 
 
 
