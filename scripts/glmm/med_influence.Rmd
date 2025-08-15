@@ -1,0 +1,137 @@
+---
+title: "medication_influence"
+output: html_notebook
+---
+
+1.   Merge the two datasets on the participant ID
+
+2.   Filter to MDD participants
+
+3.  Add medication status as a fixed factor in your mixed model
+
+4.  Test the interaction between medication status and condition
+
+```{r}
+library(lme4)         # mixed model package
+library(lmerTest)     # library providing p-values for mixed models in lme4
+library(readxl)       # read excel
+library(ggplot2)      # graphics
+library(emmeans)      # library for post-hoc tests
+library(pbkrtest)     # needed for post-hoc tests in mixed models
+library(jtools)       # post hoc tests
+library(interactions) 
+library(effects)      # estimate effects
+library(apaTables)
+library(dplyr)
+library(tidyr)
+library(effects)
+library(readxl)
+library(readr)
+library(fitdistrplus)
+library(ggplot2)
+library(openxlsx)
+library(afex) 
+library(cowplot)
+library(prism)
+```
+
+# Reaction Time
+
+```{r}
+afex::set_sum_contrasts() # Type-3 SS with sum coding
+
+# Load behavioral data
+beh <- read_csv("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/demographics/medication/ratings_by_condition_and_participant.csv")
+
+# Load medication info
+med <- read_excel("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/demographics/medication/medication_analysis_combined.xlsx")
+
+
+df <- beh %>%
+  left_join(med, by = "participantID")
+
+
+df <- df %>%
+  mutate(
+    group = factor(group, levels = c(1, 2), labels = c("MDD", "HC")),
+    sex = factor(sex),
+    condition = factor(condition),
+    age = as.numeric(age),
+    rt = as.numeric(key_resp.rt),
+    accuracy = as.numeric(correct),
+    med_status = factor(Antidepressants) 
+  )
+
+# Filter only MDD participants for this analysis
+mdd_df <- df %>% filter(group == "MDD")
+```
+
+```{r}
+# Mixed model: medication status effect within MDD
+model_med <- lmer(rt ~ condition * med_status + age + sex + (1|participantID),
+                  data = mdd_df)
+
+anova_med <- anova(model_med, type = 3, ddf = "Kenward-Roger")
+print(anova_med)
+```
+
+```{r}
+write.csv(anova_med, "glmm_med_rt_anova_results.csv", row.names = TRUE)
+```
+
+# Accuracy
+
+```{r}
+# Mixed model: medication status effect within MDD
+model_med_corr <- lmer(correct ~ condition * med_status + age + sex + (1|participantID),
+                  data = mdd_df)
+
+anova_med_corr <- anova(model_med_corr, type = 3, ddf = "Kenward-Roger")
+print(anova_med_corr)
+```
+
+```{r}
+write.csv(anova_med_corr, "glmm_med_accuracy_anova_results.csv", row.names = TRUE)
+```
+
+# Subjective Rating
+
+```{r}
+sub <- read_csv("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/demographics/medication/slider_rating.csv",col_types = cols(Rating = col_number(),Count = col_number()))
+
+df_sub <- sub %>%
+  left_join(med, by = "participantID")
+
+# Recalculate mean and standard deviation for each participant
+df_sub <- df_sub %>%
+  group_by(participantID, group, condition, Age, Gender, Antidepressants) %>%
+  summarize(
+    mean_rating = sum(Rating * Count) / sum(Count),
+    sd_rating = sqrt(sum(Count * (Rating - mean_rating)^2) / sum(Count)),
+    n_trials = sum(Count),
+    .groups = 'drop'
+  )
+
+```
+
+```{r}
+df_sub <- df_sub %>%
+  mutate(
+    group = factor(group),#, levels = c(1, 2), labels = c("MDD", "HC")),
+    condition = factor(condition),
+    sex = factor(Gender),
+    med_status = factor(Antidepressants),
+    mean_rating = as.numeric(mean_rating),
+  )
+# Filter only MDD participants for this analysis
+mdd_df_sub <- df_sub %>% filter(group == "MDD")
+```
+
+```{r}
+model <- lmer(mean_rating ~ condition * med_status + Age + sex + (1|participantID),
+                   data = mdd_df_sub)
+```
+
+--\> not enough trials to estimate med_status effect!
+
+![](images/clipboard-9133593.png)
