@@ -1,0 +1,217 @@
+---
+title: "Speech Analysis"
+output: html_notebook
+---
+
+Speech Analysis
+
+```{r}
+library(psych)
+library(readxl)
+library(tidyr) #for %<% use
+library(dplyr) #for "groub_by" use
+library(lme4)
+library(broom)
+library(officer)
+library(apaTables)
+library(ggplot2)
+library(ggprism)
+```
+
+```{r}
+df <- read.csv("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/combined_speech_demographic_info.csv", sep=";")
+#view(df)
+```
+
+```{r}
+df$Gender_f1_m2 <- factor(df$Gender_f1_m2, labels = c("Female", "Male"))
+df$Group_MDD1_HC2 <- factor(df$Group_MDD1_HC2, labels = c("MDD", "HC"))
+df$Age <- df$Alter
+```
+
+```{r}
+df_clean <- df %>% 
+  select("Group_MDD1_HC2",
+         "duration_pos", "loudness_mean_pos", 
+         "pause_durations_sum_pos", "pause_durations_mean_pos", "number_of_pauses_pos",
+         "word_frequency_mean_pos", "word_count_pos", 
+         "negative_sentence_ratio_pos", "neutral_sentence_ratio_pos", "positive_sentence_ratio_pos",
+         
+         "duration_neg", "loudness_mean_neg",
+         "pause_durations_sum_neg", "pause_durations_mean_neg","number_of_pauses_neg", 
+         "word_frequency_mean_neg", "word_count_neg", 
+         "negative_sentence_ratio_neg", "neutral_sentence_ratio_neg", "positive_sentence_ratio_neg") 
+```
+
+```{r}
+write.csv(df_clean, "W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/speech/speech_features_selected.csv")
+```
+
+Descriptive Statistics
+```{r}
+summary_stats <- df_clean %>%
+  #select(, -bids_number) %>%
+  summary()
+#print(summary_stats)
+```
+
+Group-wise Descriptive Statistics
+```{r}
+group_stats <- df_clean%>%
+  group_by(Group_MDD1_HC2) %>%
+  summarize(across(where(is.numeric), list(mean = mean, sd = sd), na.rm = TRUE))
+print(group_stats)
+```
+
+
+```{r}
+write.csv(group_stats, "W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/speech/descriptive_statistics.csv", sep = ";")
+```
+```{r}
+# Run Wilcoxon test for each numeric variable and collect results, including effect size
+wilcoxon_results <- lapply(dplyr::select(df_clean, where(is.numeric)), function(var) {
+  result <- wilcox.test(var ~ Group_MDD1_HC2, data = df_clean)
+  result_df <- tidy(result)
+  n <- nrow(df_clean)
+  # z-score from the Wilcoxon statistic
+  result_df$z <- qnorm(result_df$p.value / 2) * -sign(result_df$statistic)
+  # Calculate effect size r
+  result_df$r <- abs(result_df$z) / sqrt(n)
+  # Add variable name and return
+  result_df
+})
+
+# Combine all Wilcoxon test results into one data frame
+names(wilcoxon_results) <- names(dplyr::select(df_clean, where(is.numeric)))  # Name each list item by variable
+wilcoxon_results_df <- do.call(rbind, lapply(names(wilcoxon_results), function(var_name) {
+  result <- wilcoxon_results[[var_name]]
+  result$Variable <- var_name  # Add variable name as a column
+  return(result)
+}))
+
+# Apply Bonferroni correction to the Wilcoxon p-values
+wilcoxon_results_df <- wilcoxon_results_df %>%
+  mutate(p_adj = p.adjust(p.value, method = "bonferroni"))
+
+write.csv(wilcoxon_results_df, "W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/speech/wilcoxon_results_with_bonferroni.csv", row.names = FALSE)
+```
+
+
+## Plot significant results
+
+
+```{r}
+# Filter for significant results (e.g., p < 0.05)
+significant_results <- filter(wilcoxon_results_df, p_adj < 0.05)
+```
+
+
+```{r}
+# Subset the original data to only include significant variables
+significant_vars <- significant_results$Variable
+df_significant <- df_clean %>%
+  select(Group_MDD1_HC2, all_of(significant_vars)) %>%
+  pivot_longer(cols = all_of(significant_vars), names_to = "Variable", values_to = "Value")
+
+# Plot all significant variables in a single plot with facets
+combined_plot <- ggplot(df_significant, aes(x = Group_MDD1_HC2, y = Value, fill = Group_MDD1_HC2)) +
+  geom_violin(trim = FALSE, width = 0.8) +
+  geom_jitter(width = 0.2, alpha = 0.5) +
+  facet_wrap(~ Variable, scales = "free_y") +  # Creates a separate plot for each variable
+  stat_summary(fun = "mean", geom = "point", shape = 18, color = "black", size = 2, show.legend = FALSE) + # Show mean
+  scale_fill_manual(values = c("HC" = "turquoise", "MDD" = "violet")) +
+  theme_prism() +
+  theme(legend.position = "none") +
+  labs(y = "Measured Value", x = "Group") #+
+  #ylim(0, 1.5)  # Adjust the limit as appropriate for each variable's range
+
+# Display the plot
+print(combined_plot)
+
+#ggsave(filename = "violin_plot.png", plot = combined_plot, width = 7, height = 7)
+```
+
+
+```{r}
+
+# Define a function to set y-axis limits based on variable names
+set_y_limits <- function(variable) {
+  if (variable %in% c("duration_pos", "duration_neg", "pause_durations_sum_pos", "pause_durations_sum_neg")) {
+    return(c(0, 500))  # Example limits for duration
+  } else {
+    return(NA)  # No specific limit, use default scaling
+  }
+}
+
+# Add y-axis limits to each facet using a custom function
+df_significant <- df_significant %>%
+  group_by(Variable) %>%
+  mutate(y_limits = list(set_y_limits(Variable))) %>%
+  ungroup()
+
+# Plot all significant variables in a single plot with facets
+combined_plot <- ggplot(df_significant, aes(x = Group_MDD1_HC2, y = Value, fill = Group_MDD1_HC2)) +
+  geom_violin(trim = FALSE, width = 0.8) +
+  geom_jitter(width = 0.2, alpha = 0.5) +
+  stat_summary(fun = "mean", geom = "point", shape = 18, color = "black", size = 2, show.legend = FALSE) + # Show mean
+  stat_summary(fun = "median", geom = "point", shape = 95, color = "red", size = 5, show.legend = FALSE) + # Show median
+  facet_wrap(~ Variable, scales = "free_y", ncol = 3) +  # Customize number of columns for layout
+  scale_fill_manual(values = c("HC" = "turquoise", "MDD" = "violet")) +
+  theme_prism() +
+  theme(legend.position = "none") +
+  labs(y = "Measured Value", x = "Group")
+
+# Apply variable-specific y-axis limits
+combined_plot <- combined_plot +
+  facet_wrap(~ Variable, scales = "free_y") +
+  coord_cartesian(ylim = unlist(df_significant$y_limits[1])) # Adjust y-limits based on custom function
+
+# Display the plot
+print(combined_plot)
+```
+
+
+
+
+
+
+```{r}
+# Separate significant variables into _pos and _neg
+significant_pos_vars <- significant_results %>% filter(grepl("_pos$", Variable)) %>% pull(Variable)
+significant_neg_vars <- significant_results %>% filter(grepl("_neg$", Variable)) %>% pull(Variable)
+
+# Prepare data for plotting
+df_significant <- df_clean %>%
+  select(Group_MDD1_HC2, all_of(c(significant_pos_vars, significant_neg_vars))) %>%
+  pivot_longer(cols = all_of(c(significant_pos_vars, significant_neg_vars)), 
+               names_to = "Variable", values_to = "Value")
+
+
+# Plot for _pos variables
+plot_pos <- ggplot(df_significant %>% filter(Variable %in% significant_pos_vars), 
+                   aes(x = Group_MDD1_HC2, y = Value, fill = Group_MDD1_HC2)) +
+  geom_violin(trim = FALSE, width = 0.8) +
+  geom_jitter(width = 0.2, alpha = 0.3) +
+  facet_wrap(~ Variable, scales = "free_y") +  # Facet by each _pos variable
+  scale_fill_manual(values = c("HC" = "turquoise", "MDD" = "violet")) +
+  theme_prism() +
+  theme(legend.position = "none") +
+  labs(y = "Measured Value", x = "Group")
+
+# Plot for _neg variables
+plot_neg <- ggplot(df_significant %>% filter(Variable %in% significant_neg_vars), 
+                   aes(x = Group_MDD1_HC2, y = Value, fill = Group_MDD1_HC2)) +
+  geom_violin(trim = FALSE, width = 0.8) +
+  geom_jitter(width = 0.2, alpha = 0.3) +
+  facet_wrap(~ Variable, scales = "free_y") +  # Facet by each _neg variable
+  scale_fill_manual(values = c("HC" = "turquoise", "MDD" = "violet")) +
+  theme_prism() +
+  theme(legend.position = "none") +
+  labs(y = "Measured Value", x = "Group")
+```
+```{r}
+ggsave(filename = "violin_plot_negative.png", plot = plot_neg, width = 7, height = 7)
+ggsave(filename = "violin_plot_positive.png", plot = plot_pos, width = 7, height = 7)
+```
+
+

@@ -1,0 +1,446 @@
+
+  There are binary versions available but the source versions are later:
+            binary source needs_compilation
+systemfonts  1.0.4  1.1.0              TRUE
+gdtools      0.2.4  0.4.1              TRUE
+officer      0.4.2  0.6.7             FALSE
+flextable    0.7.0  0.9.7             FALSE
+
+Warning in install.packages :
+  installation of package ‘systemfonts’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘gdtools’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘flextable’ had non-zero exit status
+
+  There are binary versions available but the source versions are later:
+
+package ‘systemfonts’ successfully unpacked and MD5 sums checked
+package ‘gdtools’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\juhoffmann\AppData\Local\Temp\RtmpAVjZVq\downloaded_packages
+Warning in install.packages :
+  installation of package ‘flextable’ had non-zero exit status
+
+  There are binary versions available but the source versions are later:
+
+Warning in install.packages :
+  installation of package ‘systemfonts’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘gdtools’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘flextable’ had non-zero exit status
+$Age
+               Df Sum Sq Mean Sq   F value Pr(>F)    
+Group_MDD1_HC2  1     12      12 3.461e+30 <2e-16 ***
+Age             1   4107    4107 1.203e+33 <2e-16 ***
+Gender_f1_m2    1      0       0 5.440e-01  0.463    
+Residuals      90      0       0                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$duration_pos
+               Df Sum Sq Mean Sq F value   Pr(>F)    
+Group_MDD1_HC2  1   7741    7741  12.680 0.000593 ***
+Age             1    224     224   0.368 0.545811    
+Gender_f1_m2    1     28      28   0.046 0.830086    
+Residuals      90  54944     610                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$loudness_mean_pos
+               Df Sum Sq Mean Sq F value   Pr(>F)    
+Group_MDD1_HC2  1   1605  1605.1  31.529 2.16e-07 ***
+Age             1    180   180.4   3.544    0.063 .  
+Gender_f1_m2    1      0     0.1   0.002    0.965    
+Residuals      90   4582    50.9                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$pause_durations_sum_pos
+               Df Sum Sq Mean Sq F value  Pr(>F)   
+Group_MDD1_HC2  1   1184  1184.5   8.649 0.00416 **
+Age             1     36    36.5   0.266 0.60712   
+Gender_f1_m2    1     13    12.8   0.093 0.76053   
+Residuals      90  12325   136.9                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$pause_durations_mean_pos
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.009 0.00903   0.077  0.782
+Age             1  0.222 0.22152   1.894  0.172
+Gender_f1_m2    1  0.004 0.00433   0.037  0.848
+Residuals      90 10.526 0.11696               
+
+$number_of_pauses_pos
+               Df Sum Sq Mean Sq F value  Pr(>F)   
+Group_MDD1_HC2  1  18223   18223   7.797 0.00639 **
+Age             1   1710    1710   0.732 0.39457   
+Gender_f1_m2    1   1760    1760   0.753 0.38778   
+Residuals      90 210357    2337                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$word_frequency_mean_pos
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.048 0.04790   0.530  0.468
+Age             1  0.087 0.08720   0.965  0.328
+Gender_f1_m2    1  0.000 0.00035   0.004  0.951
+Residuals      90  8.130 0.09034               
+
+$word_count_pos
+               Df Sum Sq Mean Sq F value  Pr(>F)   
+Group_MDD1_HC2  1  42419   42419   8.880 0.00371 **
+Age             1     56      56   0.012 0.91371   
+Gender_f1_m2    1   3303    3303   0.691 0.40788   
+Residuals      90 429936    4777                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$negative_sentence_ratio_pos
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1 0.0294 0.02942   1.001  0.320
+Age             1 0.0037 0.00368   0.125  0.724
+Gender_f1_m2    1 0.0367 0.03672   1.250  0.267
+Residuals      90 2.6442 0.02938               
+
+$neutral_sentence_ratio_pos
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.005 0.00486   0.044  0.835
+Age             1  0.014 0.01434   0.129  0.720
+Gender_f1_m2    1  0.075 0.07524   0.679  0.412
+Residuals      90  9.979 0.11087               
+
+$positive_sentence_ratio_pos
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.010 0.01037   0.100  0.753
+Age             1  0.033 0.03256   0.314  0.577
+Gender_f1_m2    1  0.007 0.00683   0.066  0.798
+Residuals      90  9.336 0.10373               
+
+$duration_neg
+               Df Sum Sq Mean Sq F value Pr(>F)    
+Group_MDD1_HC2  1  53314   53314  13.524 0.0004 ***
+Age             1    882     882   0.224 0.6374    
+Gender_f1_m2    1    460     460   0.117 0.7334    
+Residuals      90 354810    3942                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$loudness_mean_neg
+               Df Sum Sq Mean Sq F value   Pr(>F)    
+Group_MDD1_HC2  1   2238  2238.3  30.161 3.65e-07 ***
+Age             1      7     7.1   0.096    0.758    
+Gender_f1_m2    1     40    40.0   0.539    0.465    
+Residuals      90   6679    74.2                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$pause_durations_sum_neg
+               Df Sum Sq Mean Sq F value  Pr(>F)   
+Group_MDD1_HC2  1  15154   15154  10.391 0.00176 **
+Age             1    556     556   0.382 0.53835   
+Gender_f1_m2    1    535     535   0.367 0.54643   
+Residuals      90 131258    1458                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$pause_durations_mean_neg
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.102 0.10163   1.353  0.248
+Age             1  0.016 0.01556   0.207  0.650
+Gender_f1_m2    1  0.016 0.01596   0.213  0.646
+Residuals      90  6.760 0.07511               
+
+$number_of_pauses_neg
+               Df Sum Sq Mean Sq F value  Pr(>F)   
+Group_MDD1_HC2  1 102713  102713  11.125 0.00124 **
+Age             1   6739    6739   0.730 0.39518   
+Gender_f1_m2    1   1163    1163   0.126 0.72346   
+Residuals      90 830953    9233                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$word_frequency_mean_neg
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.029 0.02858   0.660  0.419
+Age             1  0.111 0.11122   2.568  0.113
+Gender_f1_m2    1  0.005 0.00495   0.114  0.736
+Residuals      90  3.898 0.04331               
+
+$word_count_neg
+               Df  Sum Sq Mean Sq F value  Pr(>F)    
+Group_MDD1_HC2  1  257427  257427  12.765 0.00057 ***
+Age             1    2496    2496   0.124 0.72579    
+Gender_f1_m2    1    2371    2371   0.118 0.73248    
+Residuals      90 1815057   20167                    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$negative_sentence_ratio_neg
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.124 0.12425   2.580  0.112
+Age             1  0.083 0.08290   1.722  0.193
+Gender_f1_m2    1  0.002 0.00244   0.051  0.823
+Residuals      90  4.334 0.04816               
+
+$neutral_sentence_ratio_neg
+               Df Sum Sq Mean Sq F value  Pr(>F)   
+Group_MDD1_HC2  1  0.499  0.4985   7.949 0.00592 **
+Age             1  0.010  0.0103   0.165 0.68575   
+Gender_f1_m2    1  0.044  0.0443   0.707 0.40283   
+Residuals      90  5.645  0.0627                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$positive_sentence_ratio_neg
+               Df Sum Sq Mean Sq F value  Pr(>F)    
+Group_MDD1_HC2  1  1.121  1.1206  17.142 7.8e-05 ***
+Age             1  0.035  0.0347   0.531   0.468    
+Gender_f1_m2    1  0.026  0.0260   0.397   0.530    
+Residuals      90  5.883  0.0654                    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$Age
+               Df Sum Sq Mean Sq   F value Pr(>F)    
+Group_MDD1_HC2  1     12      12 3.461e+30 <2e-16 ***
+Age             1   4107    4107 1.203e+33 <2e-16 ***
+Gender_f1_m2    1      0       0 5.440e-01  0.463    
+Residuals      90      0       0                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$duration_pos
+               Df Sum Sq Mean Sq F value   Pr(>F)    
+Group_MDD1_HC2  1   7741    7741  12.680 0.000593 ***
+Age             1    224     224   0.368 0.545811    
+Gender_f1_m2    1     28      28   0.046 0.830086    
+Residuals      90  54944     610                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$loudness_mean_pos
+               Df Sum Sq Mean Sq F value   Pr(>F)    
+Group_MDD1_HC2  1   1605  1605.1  31.529 2.16e-07 ***
+Age             1    180   180.4   3.544    0.063 .  
+Gender_f1_m2    1      0     0.1   0.002    0.965    
+Residuals      90   4582    50.9                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$pause_durations_sum_pos
+               Df Sum Sq Mean Sq F value  Pr(>F)   
+Group_MDD1_HC2  1   1184  1184.5   8.649 0.00416 **
+Age             1     36    36.5   0.266 0.60712   
+Gender_f1_m2    1     13    12.8   0.093 0.76053   
+Residuals      90  12325   136.9                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$pause_durations_mean_pos
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.009 0.00903   0.077  0.782
+Age             1  0.222 0.22152   1.894  0.172
+Gender_f1_m2    1  0.004 0.00433   0.037  0.848
+Residuals      90 10.526 0.11696               
+
+$number_of_pauses_pos
+               Df Sum Sq Mean Sq F value  Pr(>F)   
+Group_MDD1_HC2  1  18223   18223   7.797 0.00639 **
+Age             1   1710    1710   0.732 0.39457   
+Gender_f1_m2    1   1760    1760   0.753 0.38778   
+Residuals      90 210357    2337                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$word_frequency_mean_pos
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.048 0.04790   0.530  0.468
+Age             1  0.087 0.08720   0.965  0.328
+Gender_f1_m2    1  0.000 0.00035   0.004  0.951
+Residuals      90  8.130 0.09034               
+
+$word_count_pos
+               Df Sum Sq Mean Sq F value  Pr(>F)   
+Group_MDD1_HC2  1  42419   42419   8.880 0.00371 **
+Age             1     56      56   0.012 0.91371   
+Gender_f1_m2    1   3303    3303   0.691 0.40788   
+Residuals      90 429936    4777                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$negative_sentence_ratio_pos
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1 0.0294 0.02942   1.001  0.320
+Age             1 0.0037 0.00368   0.125  0.724
+Gender_f1_m2    1 0.0367 0.03672   1.250  0.267
+Residuals      90 2.6442 0.02938               
+
+$neutral_sentence_ratio_pos
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.005 0.00486   0.044  0.835
+Age             1  0.014 0.01434   0.129  0.720
+Gender_f1_m2    1  0.075 0.07524   0.679  0.412
+Residuals      90  9.979 0.11087               
+
+$positive_sentence_ratio_pos
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.010 0.01037   0.100  0.753
+Age             1  0.033 0.03256   0.314  0.577
+Gender_f1_m2    1  0.007 0.00683   0.066  0.798
+Residuals      90  9.336 0.10373               
+
+$duration_neg
+               Df Sum Sq Mean Sq F value Pr(>F)    
+Group_MDD1_HC2  1  53314   53314  13.524 0.0004 ***
+Age             1    882     882   0.224 0.6374    
+Gender_f1_m2    1    460     460   0.117 0.7334    
+Residuals      90 354810    3942                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$loudness_mean_neg
+               Df Sum Sq Mean Sq F value   Pr(>F)    
+Group_MDD1_HC2  1   2238  2238.3  30.161 3.65e-07 ***
+Age             1      7     7.1   0.096    0.758    
+Gender_f1_m2    1     40    40.0   0.539    0.465    
+Residuals      90   6679    74.2                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$pause_durations_sum_neg
+               Df Sum Sq Mean Sq F value  Pr(>F)   
+Group_MDD1_HC2  1  15154   15154  10.391 0.00176 **
+Age             1    556     556   0.382 0.53835   
+Gender_f1_m2    1    535     535   0.367 0.54643   
+Residuals      90 131258    1458                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$pause_durations_mean_neg
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.102 0.10163   1.353  0.248
+Age             1  0.016 0.01556   0.207  0.650
+Gender_f1_m2    1  0.016 0.01596   0.213  0.646
+Residuals      90  6.760 0.07511               
+
+$number_of_pauses_neg
+               Df Sum Sq Mean Sq F value  Pr(>F)   
+Group_MDD1_HC2  1 102713  102713  11.125 0.00124 **
+Age             1   6739    6739   0.730 0.39518   
+Gender_f1_m2    1   1163    1163   0.126 0.72346   
+Residuals      90 830953    9233                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$word_frequency_mean_neg
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.029 0.02858   0.660  0.419
+Age             1  0.111 0.11122   2.568  0.113
+Gender_f1_m2    1  0.005 0.00495   0.114  0.736
+Residuals      90  3.898 0.04331               
+
+$word_count_neg
+               Df  Sum Sq Mean Sq F value  Pr(>F)    
+Group_MDD1_HC2  1  257427  257427  12.765 0.00057 ***
+Age             1    2496    2496   0.124 0.72579    
+Gender_f1_m2    1    2371    2371   0.118 0.73248    
+Residuals      90 1815057   20167                    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$negative_sentence_ratio_neg
+               Df Sum Sq Mean Sq F value Pr(>F)
+Group_MDD1_HC2  1  0.124 0.12425   2.580  0.112
+Age             1  0.083 0.08290   1.722  0.193
+Gender_f1_m2    1  0.002 0.00244   0.051  0.823
+Residuals      90  4.334 0.04816               
+
+$neutral_sentence_ratio_neg
+               Df Sum Sq Mean Sq F value  Pr(>F)   
+Group_MDD1_HC2  1  0.499  0.4985   7.949 0.00592 **
+Age             1  0.010  0.0103   0.165 0.68575   
+Gender_f1_m2    1  0.044  0.0443   0.707 0.40283   
+Residuals      90  5.645  0.0627                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$positive_sentence_ratio_neg
+               Df Sum Sq Mean Sq F value  Pr(>F)    
+Group_MDD1_HC2  1  1.121  1.1206  17.142 7.8e-05 ***
+Age             1  0.035  0.0347   0.531   0.468    
+Gender_f1_m2    1  0.026  0.0260   0.397   0.530    
+Residuals      90  5.883  0.0654                    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+  There are binary versions available but the source versions are later:
+           binary source needs_compilation
+pillar      1.7.0  1.9.0             FALSE
+tibble      3.1.6  3.2.1              TRUE
+rlang       1.0.2  1.1.4              TRUE
+vctrs       0.4.1  0.6.5              TRUE
+cli         3.2.0  3.6.3              TRUE
+dplyr       1.0.8  1.1.4              TRUE
+lifecycle   1.0.1  1.0.4             FALSE
+purrr       0.3.4  1.0.2              TRUE
+stringr     1.4.0  1.5.1             FALSE
+tidyselect  1.1.2  1.2.1              TRUE
+ggplot2     3.3.5  3.5.1             FALSE
+ggrepel     0.9.1  0.9.6              TRUE
+tidyr       1.2.0  1.3.1              TRUE
+ggpubr      0.4.0  0.6.0             FALSE
+
+Warning in install.packages :
+  installation of package ‘rlang’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘cli’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘lifecycle’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘vctrs’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘pillar’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘purrr’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘stringr’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘tidyselect’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘tibble’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘dplyr’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘ggplot2’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘ggrepel’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘tidyr’ had non-zero exit status
+Warning in install.packages :
+  installation of package ‘ggpubr’ had non-zero exit status
+               Df Sum Sq Mean Sq F value  Pr(>F)    
+Group_MDD1_HC2  1  1.121  1.1206  17.142 7.8e-05 ***
+Age             1  0.035  0.0347   0.531   0.468    
+Gender_f1_m2    1  0.026  0.0260   0.397   0.530    
+Residuals      90  5.883  0.0654                    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+               Df Sum Sq Mean Sq F value  Pr(>F)    
+Group_MDD1_HC2  1  1.121  1.1206  17.142 7.8e-05 ***
+Age             1  0.035  0.0347   0.531   0.468    
+Gender_f1_m2    1  0.026  0.0260   0.397   0.530    
+Residuals      90  5.883  0.0654                    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+               Df Sum Sq Mean Sq F value  Pr(>F)    
+Group_MDD1_HC2  1  1.121  1.1206  17.142 7.8e-05 ***
+Age             1  0.035  0.0347   0.531   0.468    
+Gender_f1_m2    1  0.026  0.0260   0.397   0.530    
+Residuals      90  5.883  0.0654                    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

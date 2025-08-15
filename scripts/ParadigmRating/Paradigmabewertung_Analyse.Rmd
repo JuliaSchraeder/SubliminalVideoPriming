@@ -1,0 +1,663 @@
+---
+title: "Paradigma Questionnaire Analysis"
+output: html_notebook
+---
+
+### Import Libraries
+
+-   **`readxl`**: This package is used to read Excel files into R.
+
+-   **`dplyr`**: A package for data manipulation, providing functions to filter, summarize, and transform data.
+
+-   **`ggplot2`**: A powerful package for creating visualizations in R, allowing for complex and customizable plots.
+
+install.packages("ggprism")
+
+```{r}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(writexl)
+library(purrr)  # Load the purrr package for the reduce function
+library(stringr)
+library(grid)
+library(ggprism)
+library(afex)
+library(tidyr)
+#The car package can provide Type III ANOVA tables with p-values for mixed models. 
+library(car)
+library(emmeans)
+# Create APA Style Tables
+library(knitr)
+# To export to office
+library(officer)
+# save as apa
+library(sjPlot)
+library(lme4)
+```
+
+### Import Dataset
+
+-   **`read_excel()`**: This function reads the Excel file into a data frame `df`.
+
+-   **`col_types`**: Specifies the data types for each column, ensuring the data is imported correctly.
+
+-   **`na = "NA"`**: Ensures that any "NA" text in the Excel file is treated as `NA` (missing data) in R.
+
+-   **`writeexl`**: to write the results in excel sheets\
+
+```{r}
+df <- read_excel("C:/Users/juhoffmann/OneDrive - Uniklinik RWTH Aachen/Auswertung/FB/Paradigmabewertungen_with_Demographics.xlsx", 
+    col_types = c("text", "text", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "text"), na = "NA")
+```
+
+### Convert the group and gender variables to factors for easier analysis
+
+-   **`factor()`**: Converts the `Gender_f1_m2` and `Group_MDD1_HC2` columns into factors, which are categorical variables.
+
+-   **`labels`**: Assigns human-readable labels ("Female", "Male" for gender; "MDD", "HC" for group) to the factor levels.
+
+```{r}
+df$Gender_f1_m2 <- factor(df$Gender_f1_m2, labels = c("Female", "Male"))
+df$Group_MDD1_HC2 <- factor(df$Group_MDD1_HC2, labels = c("MDD", "HC"))
+```
+
+### Find duplicates
+
+searching for duplicates in "EmoCon_ID" column
+
+```{r}
+# Find duplicates in the EmoCon_ID column
+duplicates <- df[duplicated(df$EmoCon_ID), ]
+
+# Print the rows with duplicated EmoCon_IDs
+print(duplicates)
+```
+
+## Use only the subjects that do not have duplicates
+
+```{r}
+# Remove duplicates based on the EmoCon_ID column
+df_unique <- df %>%
+  distinct(EmoCon_ID, .keep_all = TRUE)
+
+# Check the number of rows before and after removing duplicates
+print(paste("Original number of rows:", nrow(df)))
+print(paste("Number of rows after removing duplicates:", nrow(df_unique)))
+
+```
+
+### Descriptive Statistics
+
+-   **`group_by(Group_MDD1_HC2)`**: Groups the data by the `Group_MDD1_HC2` factor (MDD and HC groups).
+
+-   **`summarise(across(...))`**: Calculates summary statistics (mean and standard deviation) across all columns 6 til11 (which are the survey questions).
+
+-   **`na.rm = TRUE`**: Ensures that `NA` values are ignored in the calculations.
+
+```{r}
+summary_stats <- df_unique %>%
+  group_by(Group_MDD1_HC2) %>%
+  summarise(across(5:13,
+                   list(mean = ~mean(., na.rm = TRUE), 
+                        sd = ~sd(., na.rm = TRUE))))
+```
+
+```{r}
+print(summary_stats)
+```
+
+#### Pivot the table
+
+```{r}
+# Pivot the summary_stats table to a long format
+summary_stats_long <- summary_stats %>%
+  pivot_longer(
+    cols = -Group_MDD1_HC2, # Pivot all columns except the grouping variable
+    names_to = "variable",  # Put all column names into a single 'variable' column
+    values_to = "value"      # Put all corresponding values into a 'value' column
+  )
+print(summary_stats_long)
+```
+
+```{r}
+write_xlsx(summary_stats_long, "C:/Users/juhoffmann/OneDrive - Uniklinik RWTH Aachen/Auswertung/FB/Paradigma_FB_Descriptives.xlsx")
+```
+
+### Count answers
+
+-   **Grouping the Data**:
+
+    `group_by(Group_MDD1_HC2, !!sym(question_col))`
+
+    -   **Purpose**: This line groups the data by the `Group_MDD1_HC2` column (which indicates whether the respondent is in the MDD or HC group) and by the specific question column (`question_col`) passed to the function.
+
+    -   **`!!sym(question_col)`**:
+
+        -   This part converts the `question_col` (which is passed as a string, e.g., "1.") into a symbol that `dplyr` can use to refer to a column in the data frame. The `!!` (bang-bang) operator is used to unquote the symbol so that `dplyr` recognizes it as a column name.
+
+    -   **`group_by()`**: Groups the data so that any subsequent operations (like summarizing) are done separately for each combination of `Group_MDD1_HC2` and the answers in `question_col`.
+
+-   **Counting the Occurrences**:
+
+    `summarise(count = n(), .groups = 'drop')`
+
+    -   **Purpose**: This line counts how many times each combination of `Group_MDD1_HC2` and answer (e.g., "1", "2", etc.) occurs in the data.
+
+    -   **`count = n()`**:
+
+        -   `n()` is a function that counts the number of rows in each group. The result is stored in a new column named `count`.
+
+    -   **`.groups = 'drop'`**:
+
+        -   This option is used to drop the grouping structure after the summary is calculated, which simplifies further operations. Without this, the result would still be grouped, which might cause issues with the next steps.
+
+-   **Pivoting the Data**:
+
+    `pivot_wider(names_from = !!sym(question_col),              names_prefix = paste0(question_col, "_"),             values_from = count,              values_fill = 0)`
+
+-   pivot_wider(names_from = !!sym(question_col), names_prefix = paste0(question_col, "\_"), values_from = count, values_fill = 0)
+
+    -   **Purpose**: This line reshapes the data so that each unique answer (e.g., "1", "2", "3", etc.) for the question becomes a separate column.
+
+    -   **`names_from = !!sym(question_col)`**:
+
+        -   This specifies that the new columns will be named based on the unique values in `question_col` (i.e., the possible answers to the question).
+
+    -   **`names_prefix = paste0(question_col, "_")`**:
+
+        -   Adds a prefix to each new column's name, where the prefix is the question column name followed by an underscore (`_`). This helps to distinguish between the columns belonging to different questions.
+
+    -   **`values_from = count`**:
+
+        -   This indicates that the values in the newly created columns should come from the `count` column, which was generated in the previous step.
+
+    -   **`values_fill = 0`**:
+
+        -   If there are any missing combinations (e.g., a group didn't choose a particular answer), this fills those missing values with `0` instead of `NA`.
+
+```{r}
+# Function to calculate counts for each possible answer in a specific question column
+count_answers <- function(data, question_col) {
+  data %>%
+    group_by(Group_MDD1_HC2, !!sym(question_col)) %>%  # Group by group and the specific question column
+    summarise(count = n(), .groups = 'drop') %>%  # Count occurrences of each answer
+    pivot_wider(names_from = !!sym(question_col), 
+                names_prefix = paste0(question_col, "_"),
+                values_from = count, 
+                values_fill = 0)  # Pivot the table so each answer is a column with a clear prefix
+}
+
+# Apply the function to each question column (6 to 13)
+count_list <- lapply(colnames(df_unique)[6:14], function(col) count_answers(df, col))
+
+# Combine all count data frames into one
+counts_combined <- reduce(count_list, full_join, by = "Group_MDD1_HC2")
+
+# Print the combined counts table to verify
+print(counts_combined)
+```
+
+```{r}
+write_xlsx(counts_combined,'C:/Users/juhoffmann/OneDrive - Uniklinik RWTH Aachen/Auswertung/FB/Paradigma_FB_Counts.xlsx')
+```
+
+#### Plot counted data
+
+```{r}
+# Pivot the combined counts data to a long format for easier plotting
+counts_long <- counts_combined %>%
+  pivot_longer(
+    cols = -Group_MDD1_HC2,  # Keep Group_MDD1_HC2 as is, pivot the rest
+    names_to = c("question", "response"),  # Split the column names into 'question' and 'response'
+    names_sep = "_",  # The separator used in the column names
+    values_to = "count"  # The values in these columns will be moved to a column named 'count'
+  )
+
+# Print the first few rows to verify
+print(head(counts_long))
+```
+
+```{r}
+# Full question titles
+question_titles <- c(
+  "Gab es nach Ihrer Auffassung jede gezeigte Emotion gleich oft?",
+  "Wie schätzen Sie Ihre Beurteilung der Emotionen ein?",
+  "Wie fanden Sie die Länge des Experimentes?",
+  "Haben Sie die Bilder, die wärend der Filmszenen gezeigt wurden, bemerkt?",
+  "Wenn ja, wissen Sie, welche Emotionen auf diesen Bildern gezeigt wurden?",
+  "Wie schwierig war die objektive Beurteilung der Videos für Sie (nach traurig, neutral glücklich)?",
+  "Wie schwierig war die subjektive Beurteilung der Videos für Sie? (von traurig bis glücklich)",
+  "Wie emotional berührt waren Sie von den Videos?",
+  "Welche Strategie haben Sie bei den Bewertungen der Videos angewandt?"
+)
+```
+
+```{r}
+response_legends <- list(
+  "Gab es nach Ihrer Auffassung jede gezeigte Emotion gleich oft?" = c(
+    "1" = "1. More happy pictures",
+    "2" = "2. More sad pictures",
+    "3" = "3. More neutral pictures",
+    "4" = "4. All equally often"
+  ),
+  "Wie schätzen Sie Ihre Beurteilung der Emotionen ein?" = c(
+    "1" = "1. Easy",
+    "2" = "2. Rather easy",
+    "3" = "3. Medium",
+    "4" = "4. Rather difficult",
+    "5" = "5. Difficult",
+    "6" = "6. I'm not sure"
+  ),
+  "Wie fanden Sie die Länge des Experimentes?" = c(
+    "1" = "1. Too long",
+    "2" = "2. Too short",
+    "3" = "3. Appropriately long"
+  ),
+  "Haben Sie die Bilder, die wärend der Filmszenen gezeigt wurden, bemerkt?" = c(
+    "1" = "1. Yes ",
+    "2" = "2. No "
+  ),
+  "Wenn ja, wissen Sie, welche Emotionen auf diesen Bildern gezeigt wurden?" = c(
+    "1" = "1. Mostly sad faces ",
+    "2" = "2. Mostly happy faces ",
+    "3" = "3. Mostly neutral faces ",
+    "4" = "4. Equal",
+    "5" = "5. I don't know "
+  ),
+  "Wie schwierig war die objektive Beurteilung der Videos für Sie (nach traurig, neutral glücklich)?" = c(
+    "1" = "1. Easy ",
+    "2" = "2. Rather easy ",
+    "3" = "3. Medium ",
+    "4" = "4. Rather difficult ",
+    "5" = "5. Difficult ",
+    "6" = "6. I'm not sure "
+  ),
+  "Wie schwierig war die subjektive Beurteilung der Videos für Sie? (von traurig bis glücklich)" = c(
+    "1" = "1. Easy ",
+    "2" = "2. Rather easy ",
+    "3" = "3. Medium ",
+    "4" = "4. Rather difficult ",
+    "5" = "5. Difficult ",
+    "6" = "6. I'm not sure "
+  ),
+  "Wie emotional berührt waren Sie von den Videos?" = c(
+    "1" = "1. Not at all ",
+    "2" = "2. Rather not ",
+    "3" = "3. Medium ",
+    "4" = "4. Somewhat ",
+    "5" = "5. Very "
+  ),
+  "Welche Strategie haben Sie bei den Bewertungen der Videos angewandt?" = c(
+    "1" = "1. Always same \n(objective and subjective) ",
+    "2" = "2. Mostly same \n(objective and subjective) ",
+    "3" = "3. Independant \n(objective and subjective) ",
+    "4" = "4. Other "
+  )
+)
+```
+
+```{r}
+# English translations of the question titles
+question_titles <- c(
+  "Did you think each displayed emotion appeared equally often?",
+  "How would you rate your judgment of the emotions?",
+  "How did you find the length of the experiment?",
+  "Did you notice the pictures \nshown during the film scenes?",
+  "If yes, do you know which emotions \nwere shown in these pictures?",
+  "How difficult was the objective \nassessment of the videos for you \n(based on sad, neutral, happy)?",
+  "How difficult was the subjective \nassessment of the videos for you? \n(from sad to happy)",
+  "How emotionally affected \nwere you by the videos?",
+  "What strategy did you use \nwhen evaluating the videos?"
+)
+# Function to plot a specific question with its title and response legend
+plot_question <- function(question_number) {
+  # Filter the data for the specific question
+  data <- counts_long %>% 
+    filter(question == question_number) %>%
+    mutate(response_text = recode(response,
+                                  !!!response_legends[[question_number]]))
+  # Map numeric responses to text
+  
+  # Get the translated title for the specific question
+  question_title <- question_titles[which(questions == question_number)]
+  
+  # Calculate the maximum count and set y-axis limits from 0 to max_count + 5
+  max_count <- max(data$count, na.rm = TRUE)
+  y_limits <- c(0, max_count + 5)
+  
+  # Create the plot
+  p <- ggplot(data, aes(x = response_text, 
+                        y = count, 
+                        fill = Group_MDD1_HC2)) +
+    geom_bar(stat = "identity", position = "dodge") +
+    geom_text(aes(label = count), 
+              position = position_dodge(width = 0.9),
+              size = 4,
+              vjust = 0) + # Adjust the position of the text
+    labs(title = question_title,
+         x = "",
+         y = "Count") +
+    scale_fill_manual(values = c("MDD" = "#FF9999", "HC" = "#9999FF"), 
+                      name = "Group") +
+    scale_y_continuous(limits = y_limits) + # Set y-axis to max_count + 5
+    theme_prism() +
+    theme(axis.text.x = element_text(angle = 45, 
+                                     hjust = 1,
+                                     vjust = 1,
+                                     # Move x-axis labels 
+                                     margin = margin(t = 0, b = 0)),
+          axis.title.x = element_text(margin = margin(t = 10)), # Move x-axis title
+          plot.title = element_text(margin = margin(b = 30)),  # Move plot title up
+          plot.margin = unit(c(0.5, 0.5, 0.5, 2),"cm"))  # Adjust the plot marginsangle
+  
+  return(p)
+}
+
+# Get a list of unique questions
+questions <- unique(counts_long$question)
+
+plots <- list()
+# Plot and save each question
+for (q in questions) {
+  p <- plot_question(q)
+  print(p)  # Display the plot
+  plots[[q]] <- p
+}
+```
+
+## Save plots
+
+```{r}
+one <- plots[[1]]
+two<- plots[[2]]
+three<- plots[[3]]
+four<- plots[[4]]
+five<- plots[[5]]
+six<- plots[[6]]
+seven<- plots[[7]]
+eight<- plots[[8]]
+nine<- plots[[9]]
+  
+cowplot::save_plot(filename = "Q1.png", plot = one, base_height = 5, base_width = 5)
+cowplot::save_plot(filename = "Q2.png", plot = two, base_height = 5, base_width = 5)
+cowplot::save_plot(filename = "Q3.png", plot = three, base_height = 5, base_width = 5)
+cowplot::save_plot(filename = "Q4.png", plot = four, base_height = 5, base_width = 5)
+cowplot::save_plot(filename = "Q5.png", plot = five, base_height = 5, base_width = 5)
+cowplot::save_plot(filename = "Q6.png", plot = six, base_height = 5, base_width = 5)
+cowplot::save_plot(filename = "Q7.png", plot = seven, base_height = 5, base_width = 5)
+cowplot::save_plot(filename = "Q8.png", plot = eight, base_height = 5, base_width = 5)
+cowplot::save_plot(filename = "Q9.png", plot = nine, base_height = 5, base_width = 6)
+
+```
+
+```{r}
+# Combine the first three plots into one
+combined_plot_1 <- cowplot::plot_grid(plotlist = plots[4:5], ncol = 1)
+
+combined_plot_2 <- cowplot::plot_grid(plotlist = plots[6:7], ncol = 1)
+
+combined_plot_3 <- cowplot::plot_grid(plotlist = plots[8:9], 
+                                      ncol = 2, nrow = 1,
+                                      vjust = 1, hjust = 1)
+#print(combined_plot_1)
+print(combined_plot_2)
+print(combined_plot_3)
+
+
+```
+
+```{r}
+# Save the combined plots
+cowplot::save_plot("combined_plot_1.png", plot = combined_plot_1, base_height = 9, base_width = 5)
+cowplot::save_plot("combined_plot_2.png", plot = combined_plot_2, base_height = 10, base_width = 7)
+cowplot::save_plot("combined_plot_3.png", plot = combined_plot_3, base_height = 7, base_width = 10)
+```
+
+## Statistics
+
+translate header in english
+
+```{r}
+# Remove duplicates based on the EmoCon_ID column
+df_unique <- df %>%
+  distinct(EmoCon_ID, .keep_all = TRUE)
+df_unique
+```
+
+```{r}
+# Original German column names
+german_titles <- c("EmoCon_ID","Bids-Number","Alter","Gender_f1_m2","Group_MDD1_HC2",
+  "Gab es nach Ihrer Auffassung jede gezeigte Emotion gleich oft?",
+  "Wie schätzen Sie Ihre Beurteilung der Emotionen ein?",
+  "Wie fanden Sie die Länge des Experimentes?",
+  "Haben Sie die Bilder, die wärend der Filmszenen gezeigt wurden, bemerkt?",
+  "Wenn ja, wissen Sie, welche Emotionen auf diesen Bildern gezeigt wurden?",
+  "Wie schwierig war die objektive Beurteilung der Videos für Sie (nach traurig, neutral glücklich)?",
+  "Wie schwierig war die subjektive Beurteilung der Videos für Sie? (von traurig bis glücklich)",
+  "Wie emotional berührt waren Sie von den Videos?",
+  "Welche Strategie haben Sie bei den Bewertungen der Videos angewandt?"
+)
+
+# English translations
+english_titles <- c("ID","Bids-Number","age","sex","group",
+  "Did you think each displayed emotion appeared equally often?",
+  "How would you rate your judgment of the emotions?",
+  "How did you find the length of the experiment?",
+  "Did you notice the pictures shown during the film scenes?",
+  "If yes, do you know which emotions were shown in these pictures?",
+  "How difficult was the objective assessment of the videos for you (based on sad, neutral, happy)?",
+  "How difficult was the subjective assessment of the videos for you? (from sad to happy)",
+  "How emotionally affected were you by the videos?",
+  "What strategy did you use when evaluating the videos?"
+)
+
+# Assuming your DataFrame is named 'df'
+colnames(df_unique) <- english_titles
+head(df_unique)
+```
+
+```{r}
+# Take important columns and reshape in long format
+selected_df <- df_unique %>% 
+  select("ID","age","sex","group",
+         "Did you notice the pictures shown during the film scenes?",
+         "If yes, do you know which emotions were shown in these pictures?",
+         "How difficult was the objective assessment of the videos for you (based on sad, neutral, happy)?","How difficult was the subjective assessment of the videos for you? (from sad to happy)","How emotionally affected were you by the videos?","What strategy did you use when evaluating the videos?") %>% 
+  pivot_longer(cols = -c(ID, group, age, sex), 
+               names_to = "Question",values_to = "Response")#%>% 
+
+selected_df <- na.omit(selected_df)
+head(selected_df)
+```
+
+```{r}
+selected_df$group     <- as.factor(selected_df$group)
+selected_df$Question  <- as.factor(selected_df$Question)
+selected_df$ID        <- as.factor(selected_df$ID)
+selected_df$sex       <- as.factor(selected_df$sex)
+#summary(selected_df)
+```
+
+#### Run RM ANOVA
+
+`EmoCon_ID` is the subject identifier.
+
+`Group_MDD1_HC2` is a between-subjects factor.
+
+`Question` represents the within-subjects factor (e.g., different conditions).
+
+`Response` is the dependent variable.
+
+**`Response ~ Group_MDD1_HC2 * Question`**: This formula indicates that you're interested in the effects of `Group_MDD1_HC2` (between-subjects factor), `Question` (within-subjects factor), and their interaction on `Response`.
+
+**`Error(EmoCon_ID/Question)`**: This part specifies that `Question` is a within-subjects factor, and the error term should account for the repeated measures within each subject (`EmoCon_ID`).
+
+```{r}
+# Run repeated measures ANOVA
+repeated_measures_anova <- aov(Response ~ group * Question + age + sex + Error(ID/Question), data = selected_df)
+
+# Display the summary of the ANOVA
+summary(repeated_measures_anova)
+```
+
+### Run Mixed Model
+
+```{r}
+model <- lmer(Response ~ Question*group + age + sex + (1|ID),
+              data = selected_df)
+results <- anova(model)
+results
+```
+
+Post hoc
+
+```{r}
+eff.question      <- emmeans(model,pairwise ~ Question,adjust ="bonferroni")
+eff.group         <- emmeans(model,pairwise ~ group,adjust ="bonferroni")
+eff.interaction   <- emmeans(model,pairwise ~ Question:group,adjust ="bonferroni")
+```
+
+```{r}
+# Extract the estimated marginal means
+emm_group <- as.data.frame(eff.group$emmeans)
+emm_question <- as.data.frame(eff.question$emmeans)
+emm_interaction <- as.data.frame(eff.interaction$emmeans)
+
+# Extract the pairwise comparisons with p-values
+pairs_group <- as.data.frame(eff.group$contrasts)
+pairs_question <- as.data.frame(eff.question$contrasts)
+pairs_interaction <- as.data.frame(eff.interaction$contrasts)
+```
+
+#### Save Results
+
+Save ANOVA Results
+
+```{r}
+# Assuming your ANOVA results are stored in 'results' and it's a data frame
+anova_df <- as.data.frame(results)
+
+# Add asterisks for significance levels
+anova_df <- anova_df %>%
+  mutate(asterisks = case_when(
+    `Pr(>F)` < 0.001 ~ "***",
+    `Pr(>F)` < 0.01  ~ "**",
+    `Pr(>F)` < 0.05  ~ "*",
+    TRUE ~ ""
+  ))
+
+anova_df
+# Select and rename the columns for APA style
+apa_table <- anova_df %>%
+  select(`Sum Sq`, `Mean Sq`, `F value`, `Pr(>F)`, asterisks, NumDF, DenDF) %>%
+  rename(
+    `Num df` = NumDF, # Numerator dr, number of independent comparisons or groups being tested
+    `Den df` = DenDF, # amount of independent information in the data, df of the error term
+    `Sum of Squares` = `Sum Sq`,
+    `Mean Square` = `Mean Sq`,
+    `F-Value` = `F value`,
+    `p-Value` = `Pr(>F)`,
+    `Significance` = asterisks
+    ) %>% 
+  mutate(
+    `Sum of Squares` = round(`Sum of Squares`, 2),
+    `Mean Square` = round(`Mean Square`, 2),
+    `Num df` = round(`Num df`, 2),      # Round Num df to 2 decimal places
+    `Den df` = round(`Den df`, 2),       # Round Den df to 2 decimal places
+    `F-Value` = round(`F-Value`, 2),
+    `p-Value` = round(`p-Value`, 2)    # Round p-values to 2 decimal places
+  )
+
+# Format the p-values for APA style
+apa_table$`p-Value` <- format(apa_table$`p-Value`, scientific = FALSE)
+
+# Create a new Word document
+doc <- read_docx()
+# Add a title to the document
+doc <- doc %>%
+  body_add_table(value = apa_table, style = "table_template")  
+# Save the document
+print(doc, target = "Paradigmrating_Anova.docx")
+```
+
+Save Post Hoc Tests
+
+```{r}
+# Round the values in each pairwise comparison table to two decimal places
+pairs_group <- pairs_group %>%
+  mutate(across(where(is.numeric), ~ round(.x, 2)))
+
+pairs_question <- pairs_question %>%
+  mutate(across(where(is.numeric), ~ round(.x, 2)))
+
+pairs_interaction <- pairs_interaction %>%
+  mutate(across(where(is.numeric), ~ round(.x, 2)))
+
+# Create a new Word document
+doc <- read_docx()
+# Add a title for Group pairwise comparisons
+doc <- doc %>%
+  body_add_table(value = pairs_group, style = "table_template")%>%
+  body_add_table(value = pairs_question, style = "table_template")%>%
+  body_add_table(value = pairs_interaction, style = "table_template")
+# Save the document
+print(doc, target = "Post_Hoc_Pairwise_Comparisons.docx")
+```
+
+save pairwise and estimated marginal means
+
+```{r}
+
+# Create a new Word document
+doc <- read_docx()
+
+# Add a title for Group results
+doc <- doc %>%
+  body_add_par("Post Hoc Comparisons - Group", style = "heading 2")
+
+# Add Group emmeans table
+doc <- doc %>%
+  body_add_par("Estimated Marginal Means", style = "heading 3") %>%
+  body_add_table(value = emm_group, style = "table_template")
+
+# Add Group pairwise comparisons table
+doc <- doc %>%
+  body_add_par("Pairwise Comparisons", style = "heading 3") %>%
+  body_add_table(value = pairs_group, style = "table_template")
+
+# Add a title for Question results
+doc <- doc %>%
+  body_add_par("Post Hoc Comparisons - Question", style = "heading 2")
+
+# Add Question emmeans table
+doc <- doc %>%
+  body_add_par("Estimated Marginal Means", style = "heading 3") %>%
+  body_add_table(value = emm_question, style = "table_template")
+
+# Add Question pairwise comparisons table
+doc <- doc %>%
+  body_add_par("Pairwise Comparisons", style = "heading 3") %>%
+  body_add_table(value = pairs_question, style = "table_template")
+
+# Add a title for Interaction results
+doc <- doc %>%
+  body_add_par("Post Hoc Comparisons - Interaction", style = "heading 2")
+
+# Add Interaction emmeans table
+doc <- doc %>%
+  body_add_par("Estimated Marginal Means", style = "heading 3") %>%
+  body_add_table(value = emm_interaction, style = "table_template")
+
+# Add Interaction pairwise comparisons table
+doc <- doc %>%
+  body_add_par("Pairwise Comparisons", style = "heading 3") %>%
+  body_add_table(value = pairs_interaction, style = "table_template")
+
+# Save the document
+print(doc, target = "Post_Hoc_Results.docx")
+```

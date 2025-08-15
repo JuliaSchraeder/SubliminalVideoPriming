@@ -1,0 +1,350 @@
+---
+title: "Subjective Rating"
+output: html_notebook
+---
+
+## Import Libraries
+
+```{r}
+library(readxl)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(writexl)
+library(tidyr)
+library(purrr)  # Load the purrr package for the reduce function
+library(stringr)
+library(grid)
+library(cowplot)
+library(ggprism)
+library(lme4)
+library(lmerTest)
+library(lm.beta)
+#The car package can provide Type III ANOVA tables with p-values for mixed models. 
+library(car)
+library(emmeans)
+# Create APA Style Tables
+library(knitr)
+# To export to office
+library(officer)
+library(prism)
+library(afex) 
+```
+
+## Slider Rating Analysis
+
+```{r}
+df <- read_csv("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/slider_rating.csv",col_types = cols(Rating = col_number(),Count = col_number()))
+```
+
+Include information about age and sex
+
+```{r}
+Demographics <- read_excel("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/data/Demographics.xlsx",col_types = c("text", "numeric", "numeric"))
+```
+
+```{r}
+# Rename the 'bids_number' column in df_age_sex to match 'participantID' in df_ratings
+colnames(Demographics)[which(names(Demographics) == "Bids-Nummer")] <- "participantID"
+# Merge the data frames by 'participantID'
+df <- merge(df, Demographics, by = "participantID")
+head(df)
+```
+
+```{r}
+df$group <- as.factor(df$group)
+df$condition <- as.factor(df$condition)
+df$participantID <- as.factor(df$participantID)
+df$sex <- as.factor(df$Gender_f1_m2)
+df$age <- as.numeric(df$Alter)
+```
+
+```{r}
+# Recalculate mean and standard deviation for each participant
+participant_aggregates <- df %>%
+  group_by(participantID, group, condition, age, sex) %>%
+  summarize(
+    mean_rating = sum(Rating * Count) / sum(Count),
+    sd_rating = sqrt(sum(Count * (Rating - mean_rating)^2) / sum(Count)),
+    n_trials = sum(Count),
+    .groups = 'drop'
+  )
+print(participant_aggregates)
+```
+
+### Descriptive Statistics
+
+```{r}
+summary_stats <- participant_aggregates %>%
+  group_by(group, condition) %>%
+  summarize(
+    mean_rating = mean(mean_rating, na.rm = TRUE),
+    sd_rating = mean(sd_rating, na.rm = TRUE),
+    n = n()
+  )
+print(summary_stats)
+```
+
+### Group differences
+
+#### Visual Data Inspection
+
+```{r}
+# Histogram of the dependent variable
+ggplot(participant_aggregates, aes(x = mean_rating)) +
+  geom_histogram(binwidth = 0.5, fill = "blue", color = "black") +
+  labs(title = "Histogram of Mean Rating", x = "Mean Rating", y = "Count")
+
+# Scatterplot of independent variables vs. dependent variable
+ggplot(participant_aggregates, aes(x = group, y = mean_rating)) +
+  geom_jitter(width = 0.2, height = 0.2) +
+  labs(title = "Scatterplot of Group vs. Mean Rating", x = "Group", y = "Mean Rating")
+```
+
+**Two Peaks**: A bimodal distribution has two distinct peaks or clusters.
+For example, in your case, one peak might be around a rating of 3, and another around 6.
+
+But if we dont separate our data into two categories, we can still use gaussian distribution
+
+## Estimate Model
+
+```{r}
+model <- lmer(mean_rating ~ group*condition + age + sex + (1|participantID),
+                   data = participant_aggregates)
+
+# Summary of the model
+model_anova <- anova(model, type = 3)
+model_anova
+```
+
+#### Post Hoc Tests
+
+```{r}
+eff.group       <- emmeans(model,pairwise ~ group,adjust ="bonferroni")
+eff.condition   <- emmeans(model,pairwise ~ condition,adjust ="bonferroni")
+eff.interaction <- emmeans(model,pairwise ~ condition:group,adjust ="bonferroni")
+```
+
+```{r}
+# Extract the estimated marginal means
+emm_group       <- as.data.frame(eff.group$emmeans)
+emm_condition   <- as.data.frame(eff.condition$emmeans)
+emm_interaction <- as.data.frame(eff.interaction$emmeans)
+
+# Extract the pairwise comparisons with p-values
+pairs_group       <- as.data.frame(eff.group$contrasts)
+pairs_condition   <- as.data.frame(eff.condition$contrasts)
+pairs_interaction <- as.data.frame(eff.interaction$contrasts)
+```
+
+### Export Results
+
+#### Anova
+
+```{r}
+# Assuming your ANOVA results are stored in 'results' and it's a data frame
+anova_df <- as.data.frame(model_anova)
+
+# Add asterisks for significance levels
+anova_df <- anova_df %>%
+  mutate(asterisks = case_when(
+    `Pr(>F)` < 0.001 ~ "***",
+    `Pr(>F)` < 0.01  ~ "**",
+    `Pr(>F)` < 0.05  ~ "*",
+    TRUE ~ ""
+  ))
+
+anova_df
+# Select and rename the columns for APA style
+apa_table <- anova_df %>%
+  select(`Sum Sq`, `Mean Sq`, `F value`, `Pr(>F)`, `asterisks`, NumDF, DenDF) %>%
+  rename(
+    `Num df` = NumDF, # Numerator dr, number of independent comparisons or groups being tested
+    `Den df` = DenDF, # amount of independent information in the data, df of the error term
+    `Sum of Squares` = `Sum Sq`,
+    `Mean Square` = `Mean Sq`,
+    `F` = `F value`,
+    `p` = `Pr(>F)`,
+    `Significance` = asterisks
+    ) %>% 
+  mutate(
+    `Sum of Squares` = round(`Sum of Squares`, 2),
+    `Mean Square` = round(`Mean Square`, 2),
+    `Num df` = round(`Num df`, 2),      # Round Num df to 2 decimal places
+    `Den df` = round(`Den df`, 2),       # Round Den df to 2 decimal places
+    `F` = round(`F`, 2),
+    `p` = round(`p`, 3)    # Round p-values to 2 decimal places
+
+  )
+
+# Create a new Word document
+doc <- read_docx()
+# Add a title to the document
+doc <- doc %>%
+  body_add_table(value = apa_table, style = "table_template")  
+# Save the document
+print(doc, target = "glmm_subjective_rating_Anova.docx")
+```
+
+#### Group
+
+```{r}
+pairs_group_df <- as.data.frame(pairs_group)
+apa_table <- pairs_group_df %>%
+  select(contrast, estimate, SE, df, t.ratio, p.value) %>%
+  rename(
+    `Comparison` = contrast,
+    `Mean Difference` = estimate,
+    `Standard Error` = SE,
+    `Degrees of Freedom` = df,
+    `t-Value` = t.ratio,
+    `p-Value` = p.value)
+
+
+apa_table$p.Value <- format(apa_table$p.Value, scientific = FALSE)
+
+doc <- read_docx()
+doc <- doc %>%
+  body_add_par("Post-Hoc Comparisons Between Conditions", style = "heading 1") %>% 
+  body_add_table(value = apa_table, style = "table_template")
+
+print(doc, target = "subjective_rating_Group_Post_Hoc.docx")
+```
+
+#### Condition
+
+```{r}
+str(pairs_condition_df)
+```
+
+```{r}
+pairs_condition_df <- as.data.frame(pairs_condition)
+apa_table <- pairs_condition_df %>%
+  select(contrast, estimate, SE, df, t.ratio, p.value) %>%
+  rename(
+    `Comparison` = contrast,
+    `Mean Difference` = estimate,
+    `t` = t.ratio,
+    `p` = p.value
+  ) %>% 
+  mutate(
+    `SE` = round(SE, 2),
+    `df` = round(df, 2),
+    `Mean Difference` = round(`Mean Difference`, 2),
+    `t` = round(`t`, 2),
+    `p` = round(`p`, 3)
+  )
+
+
+doc <- read_docx()
+doc <- doc %>%
+  body_add_par("Post-Hoc Comparisons Between Conditions", style = "heading 1") %>% 
+  body_add_table(value = apa_table, style = "table_template")
+print(doc, target = "subjective_rating_Condition_Post_Hoc.docx")
+
+```
+
+#### Interaction Group\*Condition
+
+```{r}
+pairs_interaction_df <- as.data.frame(pairs_interaction)
+apa_table <- pairs_interaction_df %>%
+  select(contrast, estimate, SE, df, t.ratio, p.value) %>%
+  rename(
+    `Comparison` = contrast,
+    `Mean Difference` = estimate,
+    `t` = t.ratio,
+    `p` = p.value
+  ) %>% 
+  mutate(
+    `SE` = round(`SE`, 2),
+    `df` = round(`df`, 2),
+    `Mean Difference` = round(`Mean Difference`, 2),
+    `t` = round(`t`, 2),
+    `p` = round(`p`, 3)
+  )
+
+doc <- read_docx()
+doc <- doc %>%
+  body_add_par("Post-Hoc Comparisons Between Conditions", style = "heading 1") %>% 
+  body_add_table(value = apa_table, style = "table_template")
+
+print(doc, target = "subjective_rating_Interaction_Post_Hoc.docx")
+```
+
+### Plot Results
+
+```{r}
+participant_aggregates$condition <- factor(participant_aggregates$condition, 
+                                           levels = c("happy_happy", 
+                                                      "sad_happy", 
+                                                      "happy_sad", 
+                                                      "sad_sad"))
+```
+
+```{r}
+group <- afex_plot(model, x = "group", 
+            id = "participantID", dodge = 0.8, 
+            data_geom = geom_violin, 
+            mapping = c("linetype", "fill"),
+            error_arg = list(width = 0.2),
+            legend_title = "cluster number",
+            data_arg = list(width = 0.5)) + 
+    scale_fill_manual(values = c("HC" = "turquoise", 
+                                 "MDD" = "violet")) + 
+    theme_prism() +
+    theme(legend.position = "none")+
+    labs(y = "Rating from sad (0) to happy (9)", x = "")+
+  ylim(0,9)
+  
+conditions <-  afex_plot(model, x = "condition", 
+                         id = "participantID", dodge = 0.8,
+                         data_geom = geom_violin, 
+                         mapping = "fill",
+                         error_arg = list(width = 0.2),
+                         data_arg = list(width = 0.5)) +
+  scale_fill_manual(values = c("happy_happy" = "darkgreen", 
+                               "sad_happy" = "lightgreen",
+                               "happy_sad" ="lightblue", 
+                               "sad_sad" ="darkblue")) +
+  theme_prism() +
+  theme(legend.position = "none")+
+  theme(axis.text.x = element_text(angle = 45, 
+                                   hjust = 1,
+                                   vjust = 1,
+                                   margin = margin(t = 0, b = 0),size = 10))+
+  labs(title = "", y = "Rating from sad (0) to happy (9)", x = "")+
+  ylim(0,9)
+
+con_in_group <- afex_plot(model, x = "condition", panel = "group", 
+                          id = "participantID", dodge = 0.8,
+                          data_geom = geom_violin, 
+                          mapping = c("linetype", "fill", "group"), 
+                          error_arg = list(width = 0.2),
+                          legend_title = "",
+                          data_arg = list(width = 0.5)) + 
+  theme_prism() +
+  theme(legend.position = "none")+
+  scale_fill_manual(values = c("happy_happy" = "darkgreen",
+                               "sad_happy" = "lightgreen",
+                               "happy_sad" ="lightblue", 
+                               "sad_sad" ="darkblue")) +
+  theme(axis.text.x = element_text(angle = 45, 
+                                   hjust = 1,
+                                   vjust = 1,
+                                   margin = margin(t = 0, b = 0),size = 10))+
+  labs(y = "Rating from sad (0) to happy (9)", x = "")+
+  ylim(0,9)
+```
+
+```{r, fig.width=12, fig.height=4.5}
+combined_plots <- cowplot::plot_grid(group,conditions,con_in_group,
+                                     labels = c("A", "B", "C"),
+                                     ncol = 3,nrow = 1,
+                                     rel_heights = c(1,1,1),
+                                     rel_widths = c(0.7,1,2),
+                                     axis = "tb",# top and bottom axes should be aligned.
+                                     align = "h")
+print(combined_plots)
+ggsave("W:/Fmri_Forschung/Allerlei/JuliaS/GitHub/SubliminalVideoPriming/plots/glmm_subjective_rating1.tiff", combined_plots, width = 12, height = 4.5)
+```
