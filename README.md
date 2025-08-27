@@ -2,53 +2,53 @@
 
 [![DOI](https://img.shields.io/badge/DOI-10.23668/psycharchives.16330-blue)](https://doi.org/10.23668/psycharchives.16330)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC--BY--4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![Status: Preprint](https://img.shields.io/badge/Status-Preprint-orange.svg)](https://doi.org/10.23668/psycharchives.16330)
-
----
-
-## 📖 About
-
-This repository accompanies the preprint:
-
-**Neural, Behavioral, and Speech Indicators of Mood-Congruent Bias in Major Depressive Disorder**  
-Authors: *Julia Schräder¹²\**, Thilo Kellermann¹², Damin Kühn³, Lennard Rompelberg³, Michael T. Schaub³, Lisa Wagels¹²*  
-
-¹ Department of Psychiatry, Psychotherapy and Psychosomatics, Faculty of Medicine, RWTH Aachen, Aachen, Germany  
-² JARA-Translational Brain Medicine, Aachen, Germany  
-³ Department of Computer Science, RWTH Aachen University, Germany  
-
-Published as a preprint in *PsychArchives*.  
-DOI: [10.23668/psycharchives.16330](https://doi.org/10.23668/psycharchives.16330)
-
-The repository contains code, documentation, and supplementary material to reproduce parts of the analyses presented in the manuscript.
-
----
-
-## ✨ Abstract
-
-**Introduction:** MRI compatible EEG systems enable simultaneous EEG-fMRI data assessment, which provides high spatial and high temporal resolution of neural signaling data. Functional connectivity analyses suggest altered fronto-limbic emotion regulation in patients with major depressive disorder (MDD). 
-**Methods:** Sixty patients with MDD and 66 healthy controls (HC) performed a priming task using unconsciously and consciously presented emotional facial expressions (happy, sad, neutral) performed a priming task using unconsciously and consciously presented emotional facial expressions. Effective connectivity of simultaneously recorded EEG-fMRI data between cortical (bilateral dorsolateral prefrontal cortex and fusiform gyrus) and subcortical regions (bilateral amygdala) was captured using dynamic causal modeling (DCM). Delineate stimulus-related changes in bottom-up and top-down neurophysiological networks across both EEG and fMRI data were estimated in models of unconscious and conscious processing, defined for both groups.
-**Results:** Bayesian model selection favored a bottom-up processing model for both groups and input conditions (conscious and unconscious) in EEG-DCMs. Mixed top-down and bottom-up processing models best represented conscious and unconscious stimulus processing in HC fMRI-DCM, while bottom-up models were most representative for MDD fMRI data. Amygdala activity leads to higher DLPFC activity in conscious, and lower DLPFC activity in unconscious conditions in both groups. 
-**Conclusion:** This study demonstrates the distinct capabilities of EEG and fMRI data through showing that EEG captures early and fast processing (bottom-up) while fMRI reflects both, bottom-up and top-down regulation. Activity reduction of DLPFC through FFA bottom-up connectivity in early processing (EEG-DCM) might inhibit later top-down emotion regulation through the DLPFC in MDD (fMRI-DCM).
+[![Status: Preprint](https://img.shields.io/badge/Status-Preprint-orange.svg)](https://doi.org/10.23668/psycharchives.16417)
 
 
 ---
 
-## 📂 Repository Structure
 
-- `scriüts/` – analysis scripts (EEG-fMRI preprocessing, statistical models, etc.)  
-- `data/` – example datasets or links to external data repositories (if available)  
+Authors: *Julia Schräder<sup>1,2*</sup>, Rebecca Sieberg<sup>1</sup>, Felix Menne<sup>3</sup>, Felix Dörr<sup>3</sup>, Johannes Tröger<sup>3</sup>, Ute Habel<sup>1,4</sup>,  Alexandra König<sup>3,5</sup>, Lisa Wagels<sup>1,2</sup>*  
+
+* <sub><sup>1 Department of Psychiatry, Psychotherapy and Psychosomatics, Faculty of Medicine, RWTH Aachen University, Aachen, Germany  
+* <sub><sup>2 JARA-Translational Brain Medicine, Aachen, Germany  
+* <sub><sup>3 ki:elements GmbH, Saarbrücken, Germany
+* <sub><sup>4 Institute of Neuroscience and Medicine, JARA-Institute Brain Structure Function Relationship (INM 10), Research Center Jülich, Jülich, Germany
+* <sub><sup>5 Université Côte d'Azur, Centre Hospitalier et Universitaire, Clinique Gériatrique du Cerveau et du Mouvement, Centre Mémoire de Ressources et de Recherche, Nice, France
+
+
+Published as a preprint in **PsychArchives** on **May 7, 2025**.  
+DOI: [10.23668/psycharchives.16330](https://doi.org/10.23668/psycharchives.16330) :contentReference[oaicite:1]{index=1}  
 
 ---
 
-## 📑 Citation
+##  Abstract
 
-If you use this repository or build upon it, please cite the preprint:
+*Aim:* Investigating the neural, behavioral, and speech markers of mood-congruent bias in Major Depressive Disorder (MDD), and its relationship with cognitive control deficits.
+
+*Method:* Participants (n = 126; 60 MDD, 66 controls) underwent an fMRI video task with subliminally presented happy/sad facial expressions (16.7 ms) that were either congruent or incongruent with video emotion content. Additionally, participants completed storytelling tasks (positive/negative events) with speech recordings and psychological assessments outside the scanner.
+
+*Results:* Participants detected emotions more accurately and quickly when videos and subliminal primes were congruent. MDD patients performed worse overall, especially when happy videos were paired with sad primes. fMRI revealed increased activation in right inferior and middle occipital and temporal gyri in MDD. Speech–psychological interactions did not significantly differ by group.
+
+*Conclusion:* Neuroimaging suggests compensatory mechanisms in MDD through increased cognitive effort in emotional processing. Through this multimodal approach, the study highlights intertwined emotional and cognitive dynamics that may perpetuate mood-congruent biases and depression severity. 
+
+---
+
+##  Repository Structure
+
+- `data/` – Behavioral data, speech feature datasets, and psychological assessments  
+- `scripts/` – Analysis code for fMRI data, speech processing, statistical models  
+
+---
+
+##  Citation
+
+If you use or reference this repository, please cite the preprint:
 
 ```bibtex
 @article{Schraeder2025MoodBias,
   title   = {Neural, Behavioral, and Speech Indicators of Mood-Congruent Bias in Major Depressive Disorder},
-  author  = {Schräder, Philipp and Wagels, Lisa and ...},
+  author  = {Schräder, Julia and Sieberg, Rebecca and Menne, Felix and Dörr, Felix and Tröger, Johannes and Habel, Ute and König, Alexandra and Wagels, Lisa},
   year    = {2025},
   journal = {PsychArchives},
   doi     = {10.23668/psycharchives.16330}
