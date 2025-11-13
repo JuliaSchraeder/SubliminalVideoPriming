@@ -1,6 +1,6 @@
 # Neural, Behavioral, and Speech Indicators of Mood-Congruent Bias in Major Depressive Disorder
 
-[![DOI](https://img.shields.io/badge/DOI-10.23668/psycharchives.16330-blue)](https://doi.org/10.23668/psycharchives.16330)
+[![OSF DOI](https://img.shields.io/badge/DOI-10.17605/OSF.IO/JV5H2-blue)](10.17605/OSF.IO/JV5H2)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC--BY--4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Status: Preprint](https://img.shields.io/badge/Status-Preprint-orange.svg)](https://doi.org/10.23668/psycharchives.16417)
 
@@ -18,7 +18,7 @@ Authors: *Julia Schräder<sup>1,2*</sup>, Rebecca Sieberg<sup>1</sup>, Felix Men
 
 
 Published as a preprint in **PsychArchives** on **May 7, 2025**.  
-DOI: [10.23668/psycharchives.16330](https://doi.org/10.23668/psycharchives.16330) :contentReference[oaicite:1]{index=1}  
+DOI: [10.23668/psycharchives.16330](https://doi.org/10.23668/psycharchives.16330)
 
 ---
 
