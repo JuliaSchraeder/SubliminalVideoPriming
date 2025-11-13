@@ -8,13 +8,14 @@
 ---
 
 
-Authors: *Julia Schräder<sup>1,2*</sup>, Rebecca Sieberg<sup>1</sup>, Felix Menne<sup>3</sup>, Felix Dörr<sup>3</sup>, Johannes Tröger<sup>3</sup>, Ute Habel<sup>1,4</sup>,  Alexandra König<sup>3,5</sup>, Lisa Wagels<sup>1,2</sup>*  
+Authors: *Julia Schräder<sup>1,2*</sup>, Rebecca Sieberg<sup>1</sup>, Felix Menne<sup>3</sup>, Felix Dörr<sup>3</sup>, Johannes Tröger<sup>3</sup>, Ute Habel<sup>1,4</sup>,  Alexandra König<sup>3,5</sup>, Lisa Wagels<sup>1,2</sup>
 
-* <sub><sup>1 Department of Psychiatry, Psychotherapy and Psychosomatics, Faculty of Medicine, RWTH Aachen University, Aachen, Germany  
-* <sub><sup>2 JARA-Translational Brain Medicine, Aachen, Germany  
-* <sub><sup>3 ki:elements GmbH, Saarbrücken, Germany
-* <sub><sup>4 Institute of Neuroscience and Medicine, JARA-Institute Brain Structure Function Relationship (INM 10), Research Center Jülich, Jülich, Germany
-* <sub><sup>5 Université Côte d'Azur, Centre Hospitalier et Universitaire, Clinique Gériatrique du Cerveau et du Mouvement, Centre Mémoire de Ressources et de Recherche, Nice, France
+<sub><sup>
+1 Department of Psychiatry, Psychotherapy and Psychosomatics, Faculty of Medicine, RWTH Aachen University, Aachen, Germany  <br>
+2 JARA-Translational Brain Medicine, Aachen, Germany  <br>
+3 ki:elements GmbH, Saarbrücken, Germany<br>
+4 Institute of Neuroscience and Medicine, JARA-Institute Brain Structure Function Relationship (INM 10), Research Center Jülich, Jülich, Germany<br>
+5 Université Côte d'Azur, Centre Hospitalier et Universitaire, Clinique Gériatrique du Cerveau et du Mouvement, Centre Mémoire de Ressources et de Recherche, Nice, France<br>
 
 
 Published as a preprint in **PsychArchives** on **May 7, 2025**.  
