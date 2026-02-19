@@ -1,0 +1,10 @@
+Variable;Type;N;Mean ± SD;Median;Range;Level;Count;Percent
+HAMD_Total;numeric;48;18.438 ± 5.907;18.500;5.000, 29.000;—;—;—
+Antidepressant_Use;numeric;48;0.667 ± 0.476;1.000;0.000, 1.000;—;—;—
+Antidepressant_Class;categorical;49;—;—;—;[];27;55.1
+Antidepressant_Class;categorical;49;—;—;—;['SSRI'];8;16.3
+Antidepressant_Class;categorical;49;—;—;—;['SNRI'];6;12.2
+Antidepressant_Class;categorical;49;—;—;—;['SSRI', 'NaSSA'];3;6.1
+Antidepressant_Class;categorical;49;—;—;—;['NDRI'];3;6.1
+Antidepressant_Class;categorical;49;—;—;—;['SNRI', 'NaSSA'];1;2.0
+Antidepressant_Class;categorical;49;—;—;—;['NaSSA'];1;2.0
