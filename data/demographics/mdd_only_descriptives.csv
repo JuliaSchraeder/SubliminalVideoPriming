@@ -1,6 +1,27 @@
 Variable;Type;N;Mean ± SD;Median;Range;Level;Count;Percent
-HAMD_Total;numeric;48;18.438 ± 5.907;18.500;5.000, 29.000;—;—;—
-Antidepressant_Use;numeric;48;0.667 ± 0.476;1.000;0.000, 1.000;—;—;—
+HAMD_Total;categorical;57;—;—;—;18;7;12.3
+HAMD_Total;categorical;57;—;—;—;16;7;12.3
+HAMD_Total;categorical;57;—;—;—;22;6;10.5
+HAMD_Total;categorical;57;—;—;—;20;6;10.5
+HAMD_Total;categorical;57;—;—;—;19;5;8.8
+HAMD_Total;categorical;57;—;—;—;27;3;5.3
+HAMD_Total;categorical;57;—;—;—;8;2;3.5
+HAMD_Total;categorical;57;—;—;—;10;2;3.5
+HAMD_Total;categorical;57;—;—;—;12;2;3.5
+HAMD_Total;categorical;57;—;—;—;13;2;3.5
+HAMD_Total;categorical;57;—;—;—;14;2;3.5
+HAMD_Total;categorical;57;—;—;—;29;2;3.5
+HAMD_Total;categorical;57;—;—;—;28;2;3.5
+HAMD_Total;categorical;57;—;—;—;21;2;3.5
+HAMD_Total;categorical;57;—;—;—;24;2;3.5
+HAMD_Total;categorical;57;—;—;—;23;1;1.8
+HAMD_Total;categorical;57;—;—;—;11;1;1.8
+HAMD_Total;categorical;57;—;—;—;9;1;1.8
+HAMD_Total;categorical;57;—;—;—;25;1;1.8
+HAMD_Total;categorical;57;—;—;—;5;1;1.8
+Antidepressant_Use;categorical;58;—;—;—;1;38;65.5
+Antidepressant_Use;categorical;58;—;—;—;0;18;31.0
+Antidepressant_Use;categorical;58;—;—;—;na;2;3.4
 Antidepressant_Class;categorical;49;—;—;—;[];27;55.1
 Antidepressant_Class;categorical;49;—;—;—;['SSRI'];8;16.3
 Antidepressant_Class;categorical;49;—;—;—;['SNRI'];6;12.2
