@@ -35,11 +35,11 @@ matlabbatch{1}.spm.stats.con.consess{2}.tcon.name = 'happy_sad';
 matlabbatch{1}.spm.stats.con.consess{2}.tcon.convec = [0 0 1];
 matlabbatch{1}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
 
-matlabbatch{1}.spm.stats.con.consess{3}.tcon.name = 'sad_happy'; 
+matlabbatch{1}.spm.stats.con.consess{3}.tcon.name = 'sad_sad'; % war sad_happy benannt, ist aber falsch. Bei Fullfact wieder richtig rum angegeben
 matlabbatch{1}.spm.stats.con.consess{3}.tcon.convec = [0 0 0 0 1];
 matlabbatch{1}.spm.stats.con.consess{3}.tcon.sessrep = 'none';
 
-matlabbatch{1}.spm.stats.con.consess{4}.tcon.name = 'sad_sad'; 
+matlabbatch{1}.spm.stats.con.consess{4}.tcon.name = 'sad_happy'; 
 matlabbatch{1}.spm.stats.con.consess{4}.tcon.convec = [0 0 0 0 0 0 1];
 matlabbatch{1}.spm.stats.con.consess{4}.tcon.sessrep = 'none';
 
