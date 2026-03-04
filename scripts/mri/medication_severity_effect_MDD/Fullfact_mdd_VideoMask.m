@@ -15,8 +15,8 @@ for i = 1:numel(MDD_Subjects)
     subName = MDD_Subjects{i};
     MDD_happy_happy{i,:} = fullfile(Data_Path, subName,'con_0001.nii,1');
     MDD_happy_sad{i,:} = fullfile(Data_Path, subName,'con_0002.nii,1');
-    MDD_sad_happy{i,:} = fullfile(Data_Path, subName,'con_0003.nii,1');
-    MDD_sad_sad{i,:} = fullfile(Data_Path, subName,'con_0004.nii,1');
+    MDD_sad_sad{i,:} = fullfile(Data_Path, subName,'con_0003.nii,1');
+    MDD_sad_happy{i,:} = fullfile(Data_Path, subName,'con_0004.nii,1');
 end
 
 %% Define Design
