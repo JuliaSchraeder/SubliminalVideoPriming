@@ -1,0 +1,75 @@
+---
+title: "Symptom Severity Effect on Task Performance"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Loading and Preprocessing
+
+```{r load-prep}
+library(lme4)
+library(lmerTest)
+library(dplyr)
+library(readr)
+
+# Load data
+df <- read_csv("../../data/behav_data/behavior_and_questionnaires.csv")
+
+# Preprocess: enforce types
+df <- df %>%
+	mutate(
+		ID = as.factor(ID),
+		Group = as.factor(Group),
+		Gender = as.factor(Gender),
+		Condition = as.factor(Condition),
+		Age = as.numeric(Age),
+		`BDI-II` = as.numeric(`BDI-II`),
+		DERS = as.numeric(DERS),
+		STAI1 = as.numeric(STAI1),
+		STAI2 = as.numeric(STAI2),
+		Accuracy = as.numeric(Accuracy),
+		ReactionTime = as.numeric(ReactionTime)
+	)
+```
+
+## Linear Mixed Model: Reaction Time
+
+```{r lmm-rt}
+# Model: RT ~ BDI-II + DERS + STAI1 + STAI2 + (1|ID)
+lmm_rt <- lmer(ReactionTime ~ `BDI-II` + DERS + STAI1 + STAI2 + (1|ID),
+							data = df, REML = TRUE)
+summary(lmm_rt)
+anova(lmm_rt, type = 3)
+```
+
+## Linear Mixed Model: Accuracy
+
+```{r lmm-accuracy}
+# Model: Accuracy ~ BDI-II + DERS + STAI1 + STAI2 + (1|ID)
+lmm_acc <- lmer(Accuracy ~ `BDI-II` + DERS + STAI1 + STAI2 + (1|ID),
+							 data = df, REML = TRUE)
+summary(lmm_acc)
+anova(lmm_acc, type = 3)
+```
+
+## Export Results
+
+```{r export-results, eval=FALSE}
+# Optionally export fixed effects tables
+write.csv(coef(summary(lmm_rt)), "results/lmm_rt_bdi_ders_stai.csv")
+write.csv(coef(summary(lmm_acc)), "results/lmm_accuracy_bdi_ders_stai.csv")
+
+library(readr)
+# Export as semicolon-separated, rounded to 3 decimals
+rt_out <- coef(summary(lmm_rt))
+acc_out <- coef(summary(lmm_acc))
+rt_out <- as.data.frame(rt_out)
+acc_out <- as.data.frame(acc_out)
+rt_out <- dplyr::mutate_if(rt_out, is.numeric, ~round(., 3))
+acc_out <- dplyr::mutate_if(acc_out, is.numeric, ~round(., 3))
+write_delim(rt_out, "results/lmm_rt_bdi_ders_stai.csv", delim = ";")
+write_delim(acc_out, "results/lmm_accuracy_bdi_ders_stai.csv", delim = ";")
+```
