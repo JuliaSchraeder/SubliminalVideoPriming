@@ -18,7 +18,7 @@ clear
 
 %% ---- Settings ------------------------------------------------------------
 firstlevel_path = '/bif/storage/storage1/projects/emocon/FirstLevel/VideoMask/';
-voi_file        = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/MDD/VOI_EOI_MDD.mat';
+voi_file        = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/MDD/VOI_BDI_EOI.mat';
 output_csv      = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/MDD/cluster_betas_MDD.csv';
 
 con_files  = {'con_0001.nii', 'con_0002.nii', 'con_0003.nii', 'con_0004.nii'};

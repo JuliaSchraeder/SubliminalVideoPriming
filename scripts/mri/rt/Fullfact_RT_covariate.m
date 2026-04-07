@@ -17,10 +17,10 @@ clear
 
 %% Paths
 Data_Path  = '/bif/storage/storage1/projects/emocon/FirstLevel/VideoMask/';
-Out_Dir    = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/rt/results_fullfact/';
-Cov_File   = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/rt/rt_fullfact_cov.txt';
-HC_list    = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/rt/HC_subs_rt.txt';
-MDD_list   = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/rt/MDD_subs_rt.txt';
+Out_Dir    = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/RT_FullFact/';
+Cov_File   = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/RT_FullFact/rt_fullfact_cov.txt';
+HC_list    = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/RT_FullFact/HC_subs_rt.txt';
+MDD_list   = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/RT_FullFact/MDD_subs_rt.txt';
 
 %% Read subject lists from txt files
 fid = fopen(HC_list, 'r');

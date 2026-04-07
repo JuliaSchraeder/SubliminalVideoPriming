@@ -12,7 +12,7 @@ clear
 
 %% Paths
 Orig_SPM  = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/original/SPM.mat';
-New_SPM   = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/rt/results_fullfact/SPM.mat';
+New_SPM   = '/bif/storage/storage1/projects/emocon/SecondLevel/VideoMask/RT_FullFact/SPM.mat';
 
 %% Load both SPMs
 orig = load(Orig_SPM);

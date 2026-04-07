@@ -1,0 +1,392 @@
+---
+title: "GLMM – Verbal Fluency & ROI Activation"
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+
+Import modules
+
+```{r}
+library(lme4)         # mixed model package
+library(lmerTest)     # p-values for mixed models
+library(ggplot2)      # graphics
+library(emmeans)      # post-hoc tests
+library(dplyr)
+library(tidyr)
+library(readr)
+library(openxlsx)
+library(broom.mixed)  # tidy() for mixed models
+
+script_dir <- tryCatch(
+  dirname(rstudioapi::getSourceEditorContext()$path),
+  error = function(e) getwd()
+)
+out_dir <- file.path(script_dir, "results")
+if (!dir.exists(out_dir)) dir.create(out_dir)
+```
+
+# Speech–ROI GLMM Analysis
+
+One GLMM per ROI with all speech features as predictors: `mean_contrast ~ word_count_z + speech_ratio_z + pause_rate_z + pause_durations_mean_z + type_token_ratio_z + brunets_index_z + group + age + sex + hemisphere + (1 | subject)`
+
+## Read in dataset
+
+```{r}
+# ---- ROI data ----
+roi_path <- file.path(dirname(script_dir), "new_mri", "ROI", "results",
+                      "roi_condition_values_long.csv")
+roi_raw <- read_csv(roi_path, show_col_types = FALSE)
+roi_raw <- roi_raw[!is.na(roi_raw$mean_contrast), ]
+roi_raw$region <- sub("^[LR]_", "", roi_raw$roi)
+
+# Average across 4 conditions → 1 value per subject × region × hemisphere
+roi_avg <- roi_raw %>%
+  group_by(subject, group, region, hemisphere) %>%
+  summarise(mean_contrast = mean(mean_contrast), .groups = "drop")
+
+# ---- Speech data ----
+speech_raw <- read.csv(file.path(script_dir, "combined_speech_demographic_info.csv"),
+                       sep = ";", stringsAsFactors = FALSE)
+speech_raw$subject <- tolower(speech_raw$bids_number)
+
+fluency_features <- c("word_count", "speech_ratio", "pause_rate",
+                       "pause_durations_mean", "type_token_ratio", "brunets_index")
+
+speech_df <- data.frame(subject = speech_raw$subject)
+for (feat in fluency_features) {
+  pos_vals <- as.numeric(speech_raw[[paste0(feat, "_pos")]])
+  neg_vals <- as.numeric(speech_raw[[paste0(feat, "_neg")]])
+  speech_df[[feat]] <- rowMeans(cbind(pos_vals, neg_vals), na.rm = TRUE)
+}
+
+# ---- Demographics: age & sex ----
+speech_df$age <- as.numeric(speech_raw[["Alter"]])
+speech_df$sex <- factor(speech_raw[["Gender_f1_m2"]], levels = c(1, 2), labels = c("f", "m"))
+```
+
+```{r}
+# ---- Merge & factor coding ----
+merged <- inner_join(roi_avg, speech_df, by = "subject")
+merged$group      <- factor(merged$group, levels = c("HC", "MDD"))
+merged$hemisphere <- factor(merged$hemisphere, levels = c("L", "R"))
+merged$subject    <- factor(merged$subject)
+
+regions    <- sort(unique(merged$region))
+n_models   <- length(regions)   # = 3
+
+# Z-score all speech features
+for (feat in fluency_features) {
+  merged[[paste0(feat, "_z")]] <- scale(merged[[feat]])[, 1]
+}
+feat_z <- paste0(fluency_features, "_z")
+```
+
+```{r}
+# Count unique participants in each group
+merged %>%
+  group_by(group) %>%
+  summarise(Num_Participants = n_distinct(subject))
+```
+
+## Descriptive: Speech Features by Group
+
+```{r}
+speech_subj <- merged %>%
+  select(subject, group, all_of(fluency_features)) %>%
+  distinct()
+
+desc <- speech_subj %>%
+  pivot_longer(all_of(fluency_features), names_to = "feature", values_to = "value") %>%
+  group_by(group, feature) %>%
+  summarise(M = mean(value, na.rm = TRUE), SD = sd(value, na.rm = TRUE), .groups = "drop")
+
+print(desc)
+write.csv(desc, file.path(out_dir, "speech_descriptives_by_group.csv"), row.names = FALSE)
+```
+
+## Estimate GLMMs
+
+### ACC
+
+```{r}
+d_acc <- merged[merged$region == "ACC", ]
+
+model_acc <- lmer(mean_contrast ~ word_count_z + speech_ratio_z + pause_rate_z +
+                    pause_durations_mean_z + type_token_ratio_z + brunets_index_z +
+                    group + age + sex + (1 | subject),
+                  data = d_acc)
+
+anova(model_acc)
+```
+
+```{r}
+coefs_acc <- tidy(model_acc, effects = "fixed", conf.int = TRUE, conf.method = "Wald")
+coefs_acc$p_bonf <- pmin(coefs_acc$p.value * 3, 1)   # Bonferroni × 3 models
+coefs_acc$sig <- ifelse(coefs_acc$p_bonf < .001, "***",
+                 ifelse(coefs_acc$p_bonf < .01, "**",
+                 ifelse(coefs_acc$p_bonf < .05, "*", "")))
+coefs_acc$Region <- "ACC"
+coefs_acc
+```
+
+```{r}
+eff_acc <- emmeans(model_acc, pairwise ~ group, adjust = "bonferroni")
+summary(eff_acc$emmeans)
+summary(eff_acc$contrasts)
+```
+
+### Amy
+
+```{r}
+d_amy <- merged[merged$region == "Amy", ]
+
+model_amy <- lmer(mean_contrast ~ word_count_z + speech_ratio_z + pause_rate_z +
+                    pause_durations_mean_z + type_token_ratio_z + brunets_index_z +
+                    group + age + sex + (1 | subject),
+                  data = d_amy)
+
+anova(model_amy)
+# test significant speech features again with group interaction
+model_amy_2 <- lmer(mean_contrast ~ speech_ratio_z*group + pause_rate_z*group +
+                    pause_durations_mean_z*group + group + age + sex + (1 | subject),
+                  data = d_amy)
+anova(model_amy_2)
+```
+
+```{r}
+coefs_amy <- tidy(model_amy, effects = "fixed", conf.int = TRUE, conf.method = "Wald")
+coefs_amy$p_bonf <- pmin(coefs_amy$p.value * 3, 1)
+coefs_amy$sig <- ifelse(coefs_amy$p_bonf < .001, "***",
+                 ifelse(coefs_amy$p_bonf < .01, "**",
+                 ifelse(coefs_amy$p_bonf < .05, "*", "")))
+coefs_amy$Region <- "Amy"
+coefs_amy
+```
+
+```{r}
+eff_amy <- emmeans(model_amy, pairwise ~ group, adjust = "bonferroni")
+summary(eff_amy$emmeans)
+summary(eff_amy$contrasts)
+```
+
+### DLPFC
+
+```{r}
+d_dlpfc <- merged[merged$region == "DLPFC", ]
+
+model_dlpfc <- lmer(mean_contrast ~ word_count_z + speech_ratio_z + pause_rate_z +
+                      pause_durations_mean_z + type_token_ratio_z + brunets_index_z +
+                      group + age + sex + (1 | subject),
+                    data = d_dlpfc)
+
+anova(model_dlpfc)
+```
+
+```{r}
+coefs_dlpfc <- tidy(model_dlpfc, effects = "fixed", conf.int = TRUE, conf.method = "Wald")
+coefs_dlpfc$p_bonf <- pmin(coefs_dlpfc$p.value * 3, 1)
+coefs_dlpfc$sig <- ifelse(coefs_dlpfc$p_bonf < .001, "***",
+                   ifelse(coefs_dlpfc$p_bonf < .01, "**",
+                   ifelse(coefs_dlpfc$p_bonf < .05, "*", "")))
+coefs_dlpfc$Region <- "DLPFC"
+coefs_dlpfc
+```
+
+```{r}
+eff_dlpfc <- emmeans(model_dlpfc, pairwise ~ group, adjust = "bonferroni")
+summary(eff_dlpfc$emmeans)
+summary(eff_dlpfc$contrasts)
+```
+
+## Combine Results
+
+```{r}
+coef_all <- bind_rows(coefs_acc, coefs_amy, coefs_dlpfc)
+
+sig <- coef_all[coef_all$p_bonf < 0.05, ]
+if (nrow(sig) > 0) {
+  print(sig)
+} else {
+  cat("No significant fixed effects after Bonferroni correction.\n")
+}
+```
+
+```{r}
+# ANOVA tables (Type III, Kenward-Roger)
+anova_acc   <- as.data.frame(anova(model_acc, type = 3, ddf = "Kenward-Roger"))
+anova_acc$Term   <- rownames(anova_acc); anova_acc$Region   <- "ACC"
+
+anova_amy   <- as.data.frame(anova(model_amy, type = 3, ddf = "Kenward-Roger"))
+anova_amy$Term   <- rownames(anova_amy); anova_amy$Region   <- "Amy"
+
+anova_amy2  <- as.data.frame(anova(model_amy_2, type = 3, ddf = "Kenward-Roger"))
+anova_amy2$Term  <- rownames(anova_amy2); anova_amy2$Region  <- "Amy (interaction model)"
+
+anova_dlpfc <- as.data.frame(anova(model_dlpfc, type = 3, ddf = "Kenward-Roger"))
+anova_dlpfc$Term <- rownames(anova_dlpfc); anova_dlpfc$Region <- "DLPFC"
+
+anova_all <- bind_rows(anova_acc, anova_amy, anova_amy2, anova_dlpfc)
+anova_all
+```
+
+```{r}
+fit_all <- data.frame(
+  Region = c("ACC", "Amy", "DLPFC"),
+  AIC    = c(AIC(model_acc), AIC(model_amy), AIC(model_dlpfc)),
+  BIC    = c(BIC(model_acc), BIC(model_amy), BIC(model_dlpfc)),
+  logLik = c(as.numeric(logLik(model_acc)), as.numeric(logLik(model_amy)), as.numeric(logLik(model_dlpfc)))
+)
+fit_all
+```
+
+```{r}
+emmeans_acc   <- as.data.frame(eff_acc$emmeans);   emmeans_acc$Region   <- "ACC"
+emmeans_amy   <- as.data.frame(eff_amy$emmeans);   emmeans_amy$Region   <- "Amy"
+emmeans_dlpfc <- as.data.frame(eff_dlpfc$emmeans); emmeans_dlpfc$Region <- "DLPFC"
+emmeans_all   <- bind_rows(emmeans_acc, emmeans_amy, emmeans_dlpfc)
+emmeans_all
+
+contrasts_acc   <- as.data.frame(eff_acc$contrasts);   contrasts_acc$Region   <- "ACC"
+contrasts_amy   <- as.data.frame(eff_amy$contrasts);   contrasts_amy$Region   <- "Amy"
+contrasts_dlpfc <- as.data.frame(eff_dlpfc$contrasts); contrasts_dlpfc$Region <- "DLPFC"
+contrasts_all   <- bind_rows(contrasts_acc, contrasts_amy, contrasts_dlpfc)
+contrasts_all
+```
+
+## Plot ACC
+
+```{r}
+plot_df <- merged %>%
+  group_by(subject, group, region) %>%
+  summarise(mean_contrast = mean(mean_contrast), .groups = "drop") %>%
+  left_join(speech_subj, by = c("subject", "group"))
+```
+
+```{r}
+d <- plot_df[plot_df$region == "ACC", ]
+for (feat in fluency_features) {
+  p <- ggplot(d, aes(x = .data[[feat]], y = mean_contrast, colour = group)) +
+    geom_point(alpha = 0.6, size = 2) +
+    geom_smooth(method = "lm", se = TRUE, alpha = 0.15) +
+    scale_colour_manual(values = c("HC" = "#56B4E9", "MDD" = "#CC79A7")) +
+    labs(title = sprintf("ACC – %s", feat),
+         x = feat, y = "Mean contrast", colour = "Group") +
+    theme_minimal(base_size = 13)
+  print(p)
+}
+```
+
+## Plot Amy
+
+```{r}
+d <- plot_df[plot_df$region == "Amy", ]
+for (feat in fluency_features) {
+  p <- ggplot(d, aes(x = .data[[feat]], y = mean_contrast, colour = group)) +
+    geom_point(alpha = 0.6, size = 2) +
+    geom_smooth(method = "lm", se = TRUE, alpha = 0.15) +
+    scale_colour_manual(values = c("HC" = "#56B4E9", "MDD" = "#CC79A7")) +
+    labs(title = sprintf("Amy – %s", feat),
+         x = feat, y = "Mean contrast", colour = "Group") +
+    theme_minimal(base_size = 13)
+  print(p)
+}
+```
+
+## Export to Excel
+
+```{r}
+# Save coefficients as CSV
+write.csv(coef_all, file.path(out_dir, "speech_roi_glmm_coefficients.csv"), row.names = FALSE)
+
+# Save all results to Excel
+wb <- createWorkbook()
+
+addWorksheet(wb, "Fixed Effects")
+writeData(wb, "Fixed Effects", coef_all)
+
+addWorksheet(wb, "Significant Effects")
+if (nrow(sig) > 0) {
+  writeData(wb, "Significant Effects", sig)
+} else {
+  writeData(wb, "Significant Effects",
+            data.frame(Note = "No significant effects after Bonferroni correction"))
+}
+
+addWorksheet(wb, "Emmeans")
+writeData(wb, "Emmeans", emmeans_all)
+
+addWorksheet(wb, "Contrasts")
+writeData(wb, "Contrasts", contrasts_all)
+
+addWorksheet(wb, "ANOVA")
+writeData(wb, "ANOVA", anova_all)
+
+addWorksheet(wb, "Model Fit")
+writeData(wb, "Model Fit", fit_all)
+
+addWorksheet(wb, "Descriptives by Group")
+writeData(wb, "Descriptives by Group", desc)
+
+xlsx_path <- file.path(out_dir, "speech_roi_glmm_results.xlsx")
+saveWorkbook(wb, xlsx_path, overwrite = TRUE)
+
+cat(sprintf("Saved to:\n  %s\n", xlsx_path))
+```
+
+```{r}
+# ANOVA tables (Type III, Kenward-Roger)
+anova_acc   <- as.data.frame(anova(model_acc, type = 3, ddf = "Kenward-Roger"))
+anova_acc$Term   <- rownames(anova_acc); anova_acc$Region   <- "ACC"
+
+anova_amy   <- as.data.frame(anova(model_amy, type = 3, ddf = "Kenward-Roger"))
+anova_amy$Term   <- rownames(anova_amy); anova_amy$Region   <- "Amy"
+
+anova_amy2  <- as.data.frame(anova(model_amy_2, type = 3, ddf = "Kenward-Roger"))
+anova_amy2$Term  <- rownames(anova_amy2); anova_amy2$Region  <- "Amy (interaction model)"
+
+anova_dlpfc <- as.data.frame(anova(model_dlpfc, type = 3, ddf = "Kenward-Roger"))
+anova_dlpfc$Term <- rownames(anova_dlpfc); anova_dlpfc$Region <- "DLPFC"
+
+anova_all <- bind_rows(anova_acc, anova_amy, anova_amy2, anova_dlpfc)
+anova_all
+```
+
+```{r}
+# Save coefficients as CSV
+write.csv(coef_all, file.path(out_dir, "speech_roi_glmm_coefficients.csv"), row.names = FALSE)
+
+# Save all results to Excel
+wb <- createWorkbook()
+
+addWorksheet(wb, "Fixed Effects")
+writeData(wb, "Fixed Effects", coef_all)
+
+addWorksheet(wb, "Significant Effects")
+if (nrow(sig) > 0) {
+  writeData(wb, "Significant Effects", sig)
+} else {
+  writeData(wb, "Significant Effects",
+            data.frame(Note = "No significant effects after Bonferroni correction"))
+}
+
+addWorksheet(wb, "Emmeans")
+writeData(wb, "Emmeans", emmeans_all)
+
+addWorksheet(wb, "Contrasts")
+writeData(wb, "Contrasts", contrasts_all)
+
+addWorksheet(wb, "ANOVA")
+writeData(wb, "ANOVA", anova_all)
+
+addWorksheet(wb, "Model Fit")
+writeData(wb, "Model Fit", fit_all)
+
+addWorksheet(wb, "Descriptives by Group")
+writeData(wb, "Descriptives by Group", desc)
+
+xlsx_path <- file.path(out_dir, "speech_roi_glmm_results.xlsx")
+saveWorkbook(wb, xlsx_path, overwrite = TRUE)
+
+cat(sprintf("Saved to:\n  %s\n", xlsx_path))
+```
