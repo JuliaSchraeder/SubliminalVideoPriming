@@ -18,9 +18,6 @@
 --.nii
 --.nii.gz
 .nii
-con_*.nii
-spmT_*.nii
-beta_*.nii
 .DS_Store
 --Thumbs.db
 .ipynb_checkpoints
