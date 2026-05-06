@@ -40,6 +40,8 @@ DOI: [10.23668/psycharchives.16330](https://doi.org/10.23668/psycharchives.16330
 - `data/` – Behavioral data, speech feature datasets, and psychological assessments  
 - `scripts/` – Analysis code for fMRI data, speech processing, statistical models  
 
+To access raw fMRI data, klick [here](https://rwth-aachen.sciebo.de/s/xHNMgH5sZzpSaZH) and enter this password: 3myyizQioc
+
 ---
 
 ##  Citation
